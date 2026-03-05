@@ -11,11 +11,11 @@ export default function PackagesManager() {
   const allPkgs = cruises.flatMap(c => c.packages.map(p => ({ ...p, cruiseName: c.name })));
   const [packages, setPackages] = useState(allPkgs);
   const [editOpen, setEditOpen] = useState(false);
-  const [form, setForm] = useState({ name: "", route: "", price: "", seatType: "Non-AC", cruiseName: "" });
+  const [form, setForm] = useState({ name: "", price: "", duration: "", cruiseName: "" });
 
-  const openNew = () => { setForm({ name: "", route: "", price: "", seatType: "Non-AC", cruiseName: "" }); setEditOpen(true); };
+  const openNew = () => { setForm({ name: "", price: "", duration: "", cruiseName: "" }); setEditOpen(true); };
   const save = () => {
-    setPackages([...packages, { id: `pkg-${Date.now()}`, name: form.name, route: form.route, price: Number(form.price), seatType: form.seatType as any, inclusions: [], cruiseName: form.cruiseName }]);
+    setPackages([...packages, { id: `pkg-${Date.now()}`, name: form.name, price: Number(form.price), duration: form.duration, image: "", cruiseName: form.cruiseName }]);
     setEditOpen(false);
   };
 
@@ -31,7 +31,7 @@ export default function PackagesManager() {
             <CardContent className="p-5">
               <span className="text-xs text-primary font-medium">{p.cruiseName}</span>
               <h3 className="font-bold text-secondary">{p.name}</h3>
-              <p className="text-sm text-muted-foreground">{p.route}</p>
+              <p className="text-sm text-muted-foreground">{p.duration}</p>
               <p className="mt-2 text-lg font-bold text-primary">৳{p.price.toLocaleString()}</p>
               <div className="mt-3 flex gap-1">
                 <Button size="icon" variant="ghost"><Pencil className="h-4 w-4" /></Button>
@@ -48,7 +48,7 @@ export default function PackagesManager() {
           <div className="space-y-3">
             <div><Label>Name</Label><Input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} /></div>
             <div><Label>Cruise</Label><Input value={form.cruiseName} onChange={e => setForm({ ...form, cruiseName: e.target.value })} /></div>
-            <div><Label>Route</Label><Input value={form.route} onChange={e => setForm({ ...form, route: e.target.value })} /></div>
+            <div><Label>Duration</Label><Input value={form.duration} onChange={e => setForm({ ...form, duration: e.target.value })} /></div>
             <div><Label>Price (৳)</Label><Input type="number" value={form.price} onChange={e => setForm({ ...form, price: e.target.value })} /></div>
             <Button onClick={save} className="w-full bg-primary text-primary-foreground hover:bg-primary/90">Save</Button>
           </div>

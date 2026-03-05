@@ -17,7 +17,12 @@ export default function CruiseList() {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
 
-  const results = searchCruises(query, minPrice ? Number(minPrice) : undefined, maxPrice ? Number(maxPrice) : undefined);
+  const allResults = searchCruises(query);
+  const results = allResults.filter(c => {
+    if (minPrice && c.price < Number(minPrice)) return false;
+    if (maxPrice && c.price > Number(maxPrice)) return false;
+    return true;
+  });
   const sorted = [...results].sort((a, b) => {
     if (sort === "price-asc") return a.price - b.price;
     if (sort === "price-desc") return b.price - a.price;
