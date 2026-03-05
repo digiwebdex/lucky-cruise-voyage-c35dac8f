@@ -71,8 +71,8 @@ export default function Index() {
             className="absolute inset-0"
           >
             <img src={slide.image} alt="" className="h-full w-full object-cover" draggable={false} />
-            <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/75 to-secondary/30" />
-            <div className="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-secondary/50" />
+            <div className="absolute inset-0 bg-gradient-to-r from-secondary/80 via-secondary/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-secondary/70 via-transparent to-secondary/20" />
           </motion.div>
         </AnimatePresence>
 
