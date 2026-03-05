@@ -34,6 +34,8 @@ import silver7 from "@/assets/cruises/silver-7.jpeg";
 import silver8 from "@/assets/cruises/silver-8.jpeg";
 import silver9 from "@/assets/cruises/silver-9.jpeg";
 import silver10 from "@/assets/cruises/silver-10.jpeg";
+import silver11 from "@/assets/cruises/silver-11.jpeg";
+import silver12 from "@/assets/cruises/silver-12.jpeg";
 
 export interface Cruise {
   id: string;
@@ -384,6 +386,7 @@ export const cruises: Cruise[] = [
     images: [
       silver1, silver2, silver3, silver4, silver5,
       silver6, silver7, silver8, silver9, silver10,
+      silver11, silver12,
     ],
     price: 22000,
     priceLabel: "Per Person (Bangladeshi)",
