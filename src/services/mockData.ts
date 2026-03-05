@@ -79,6 +79,10 @@ import flamingo17 from "@/assets/cruises/flamingo-17.jpg";
 import flamingo18 from "@/assets/cruises/flamingo-18.jpg";
 import flamingo19 from "@/assets/cruises/flamingo-19.jpg";
 import flamingo20 from "@/assets/cruises/flamingo-20.jpg";
+import flamingo21 from "@/assets/cruises/flamingo-21.jpg";
+import flamingo22 from "@/assets/cruises/flamingo-22.jpg";
+import flamingo23 from "@/assets/cruises/flamingo-23.jpg";
+import flamingo24 from "@/assets/cruises/flamingo-24.jpg";
 
 export interface Cruise {
   id: string;
@@ -817,10 +821,11 @@ export const cruises: Cruise[] = [
     subtitle: "Luxury Cruise with Banquet Hall – Khulna",
     description: "MV Flamingo offers superior accommodation with central air-conditioning, a grand Banquet Hall, stunning Top Deck, and impeccable service that will make your Sundarban tour comfortable, enjoyable, and memorable. With 25 cabins and capacity for 50 tourists, experience modern luxury on the waters of the Sundarbans.",
     images: [
-      flamingo1, flamingo2, flamingo3, flamingo4, flamingo5,
-      flamingo6, flamingo7, flamingo8, flamingo9, flamingo10,
-      flamingo11, flamingo12, flamingo13, flamingo14, flamingo15,
-      flamingo16, flamingo17, flamingo18, flamingo19, flamingo20,
+      flamingo23, flamingo24, flamingo1, flamingo2, flamingo3,
+      flamingo4, flamingo5, flamingo6, flamingo7, flamingo8,
+      flamingo9, flamingo10, flamingo14, flamingo12, flamingo18,
+      flamingo11, flamingo13, flamingo15, flamingo16, flamingo17,
+      flamingo19, flamingo20, flamingo21, flamingo22,
     ],
     price: 22000,
     priceLabel: "Per Person (Bangladeshi)",
