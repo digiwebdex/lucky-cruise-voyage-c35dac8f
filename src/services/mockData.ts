@@ -108,6 +108,7 @@ import jolSafari6 from "@/assets/cruises/jol-safari-6.jpg";
 import jolSafari7 from "@/assets/cruises/jol-safari-7.jpg";
 import jolSafari8 from "@/assets/cruises/jol-safari-8.jpg";
 import jolSafari9 from "@/assets/cruises/jol-safari-9.jpg";
+import jolSafariSeatplan from "@/assets/cruises/jol-safari-seatplan.jpg";
 
 export interface Cruise {
   id: string;
@@ -1325,28 +1326,40 @@ export const cruises: Cruise[] = [
     packages: [],
     seatPlan: [
       {
-        name: "Level 1 – AC Cabins (101-108)",
-        capacity: 24,
+        name: "First Floor – 12 Cabins (30 Beds)",
+        capacity: 30,
         rows: [
-          { label: "AC Cabin (Attached Toilet)", cabins: Array.from({ length: 8 }, (_, i) => ({ id: `${101 + i}`, type: "Twin" as const, persons: 3, available: true, bedType: "Triple Bed" })) },
+          { label: "Port Side", cabins: [
+            { id: "101", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+            { id: "103", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+            { id: "105", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+            { id: "107", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed (2+1)" },
+            { id: "109", type: "VIP Family" as const, persons: 4, available: true, bedType: "4 Bed (2+2)" },
+            { id: "111", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+          ]},
+          { label: "Starboard", cabins: [
+            { id: "102", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+            { id: "104", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+            { id: "106", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+            { id: "108", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed (2+1)" },
+            { id: "110", type: "VIP Family" as const, persons: 4, available: true, bedType: "4 Bed (2+2)" },
+            { id: "112", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+          ]},
         ],
       },
       {
-        name: "Level 2 – Couple & Family Cabins",
-        capacity: 12,
+        name: "Top Floor – 3 Cabins (10 Beds) + Dining & Seating Zone",
+        capacity: 10,
         rows: [
-          { label: "Couple Cabin", cabins: Array.from({ length: 4 }, (_, i) => ({ id: `${201 + i}`, type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" })) },
-          { label: "Family Suite", cabins: [{ id: "205", type: "VIP Family" as const, persons: 4, available: true, bedType: "Family Suite" }] },
-        ],
-      },
-      {
-        name: "Level 3 – Twin Cabins & Food Court",
-        capacity: 4,
-        rows: [
-          { label: "Twin Cabin", cabins: Array.from({ length: 2 }, (_, i) => ({ id: `${301 + i}`, type: "Twin" as const, persons: 2, available: true, bedType: "Twin Bed" })) },
+          { label: "Cabins", cabins: [
+            { id: "201", type: "VIP Family" as const, persons: 4, available: true, bedType: "4 Bed (2+2)" },
+            { id: "202", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed (2+1)" },
+            { id: "203", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed (2+1)" },
+          ]},
         ],
       },
     ],
+    seatPlanImage: jolSafariSeatplan,
     featured: false,
   },
 ];
