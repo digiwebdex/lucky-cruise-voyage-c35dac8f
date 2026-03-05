@@ -75,7 +75,7 @@ export default function CruiseDetail() {
               {cruise.images.length > 1 && (
                 <div className="mt-3 flex gap-2 overflow-x-auto pb-2">
                   {cruise.images.map((img, i) => (
-                    <button key={i} onClick={() => setSelectedImg(i)} className={`h-18 w-26 flex-shrink-0 overflow-hidden rounded-xl border-2 transition-all ${i === selectedImg ? "border-primary shadow-glow scale-105" : "border-transparent opacity-60 hover:opacity-100 hover:border-border"}`}>
+                    <button key={i} onClick={() => setSelectedImg(i)} className={`h-16 w-24 flex-shrink-0 overflow-hidden rounded-xl border-2 transition-all ${i === selectedImg ? "border-primary shadow-glow scale-105" : "border-transparent opacity-60 hover:opacity-100 hover:border-border"}`}>
                       <img src={img} alt="" className="h-full w-full object-cover" draggable={false} />
                     </button>
                   ))}
