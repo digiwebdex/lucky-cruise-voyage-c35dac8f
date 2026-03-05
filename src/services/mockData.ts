@@ -129,6 +129,16 @@ import magpie17 from "@/assets/cruises/magpie-17.jpg";
 import magpie18 from "@/assets/cruises/magpie-18.jpg";
 import magpie19 from "@/assets/cruises/magpie-19.jpg";
 import magpieSeatplan from "@/assets/cruises/magpie-seatplan.jpg";
+import pearl3_1 from "@/assets/cruises/pearl3-1.jpeg";
+import pearl3_2 from "@/assets/cruises/pearl3-2.jpeg";
+import pearl3_3 from "@/assets/cruises/pearl3-3.jpeg";
+import pearl3_4 from "@/assets/cruises/pearl3-4.jpeg";
+import pearl3_5 from "@/assets/cruises/pearl3-5.jpeg";
+import pearl3_6 from "@/assets/cruises/pearl3-6.jpeg";
+import pearl3_7 from "@/assets/cruises/pearl3-7.jpeg";
+import pearl3_8 from "@/assets/cruises/pearl3-8.jpeg";
+import pearl3_9 from "@/assets/cruises/pearl3-9.jpeg";
+import pearl3_10 from "@/assets/cruises/pearl3-10.jpeg";
 export interface Cruise {
   id: string;
   name: string;
@@ -1575,6 +1585,194 @@ export const cruises: Cruise[] = [
       },
     ],
     seatPlanImage: magpieSeatplan,
+    featured: false,
+  },
+  {
+    id: "mv-sea-pearl-3",
+    name: "MV Sea Pearl Cruise 3",
+    subtitle: "KHULNA-SUNDARBAN-KHULNA Cruise Ship",
+    description: "3 decked standard cruiser. The first deck has 8 air-conditioned/non-air-conditioned cabins, the second deck has 14 air-conditioned/non-air-conditioned cabins, the sky deck has 3 cabins, master sleeping room and is open for 360° panoramic view of the magnificent Sundarbans.",
+    images: [pearl3_1, pearl3_2, pearl3_3, pearl3_4, pearl3_5, pearl3_6, pearl3_7, pearl3_8, pearl3_9, pearl3_10],
+    price: 22000,
+    priceLabel: "Per Person",
+    duration: "3 Days / 2 Nights",
+    route: "Khulna → Sundarban → Khulna",
+    capacity: "54",
+    cabins: "25",
+    facilities: [
+      "Air-conditioned / non-air-conditioned cabins",
+      "With / without attached bathroom",
+      "Restaurant with a buffet station",
+      "Open deck with 70+ sitting capacity",
+      "360° panoramic sky deck view",
+    ],
+    touristSpots: [
+      "Harbaria",
+      "Andarmanik",
+      "Katka Jamtola Sea Beach",
+      "Katka Office Par",
+      "Kochikhali / Hironpoint",
+      "Dimerchor / Dublar Char",
+      "Koromjol",
+    ],
+    additionalCosts: [
+      { label: "Entrance fees for Foreign national", amount: "10,500 BDT" },
+      { label: "Entrance fee for Bangladesh national", amount: "1,050 BDT" },
+    ],
+    itinerary: [
+      {
+        day: "১ম দিন",
+        title: "খুলনা → আন্দারমানিক → কটকা",
+        activities: [
+          "সকাল ৭:০০ টায় খুলনা জেলখানা ঘাট থেকে গাইড রিসিভ করে শীপে নিয়ে যাবে।",
+          "রুপসা ও পশুর নদী ধরে খুলনা শিপইয়ার্ড, রুপসা ব্রিজ, রামপাল তাপ বিদ্যুৎ কেন্দ্র ও মংলা বন্দর পাশে রেখে আন্দারমানিকের উদ্দেশ্যে যাত্রা।",
+          "দুপুরের খাবার খেয়ে আন্দারমানিক ইকো-ট্যুরিজম কেন্দ্রে নামবো।",
+          "প্রায় ১ মাইল ফুট ট্রেইল ঘুরে ওয়াচ টাওয়ারে বিশ্রাম।",
+          "বিকালের নাস্তার পর শীপ চলবে কটকা অভয়ারণ্যের উদ্দেশ্যে।",
+        ],
+      },
+      {
+        day: "২য় দিন",
+        title: "কটকা → জামতলা সী বীচ → কচিখালি → ডিমের চর",
+        activities: [
+          "সকালে দেশী নৌকায় ক্যানেল ক্রুজিং ও বনের নিস্তব্ধতা উপভোগ।",
+          "জামতলা সী বীচে যাত্রা — সুন্দরবন ও বঙ্গোপসাগরের মিলন স্থান।",
+          "কটকা অফিস পাড়া পরিদর্শন ও হরিণের পাল দর্শন।",
+          "কচিখালি — বাঘের ডাইনিং খ্যাত ছন বনে ট্রেকিং।",
+          "ডিমের চর সী বীচে সন্ধ্যা পর্যন্ত অবস্থান।",
+          "শীপ চলবে করমজল এর উদ্দেশ্যে।",
+        ],
+      },
+      {
+        day: "৩য় দিন",
+        title: "করমজল → খুলনা",
+        activities: [
+          "করমজল — নোনা পানির বাংলাদেশের একমাত্র কুমির প্রজনন কেন্দ্র।",
+          "ছোট বড় কুমির, বিলুপ্ত প্রায় প্রজাতির কচ্ছপ দর্শন।",
+          "বানরের পালের বাদরামি ও হরিণকে ঘাস খাওয়ানোর অভিজ্ঞতা।",
+          "সবকিছু উপভোগ করে খুলনা / মংলার উদ্দেশ্যে যাত্রা।",
+        ],
+      },
+    ],
+    menu: [
+      {
+        day: "১ম দিন",
+        meals: [
+          { name: "ব্রেকফাস্ট (BREAKFAST)", items: "পাউরুটি, পরোটা, সবজি, ডাল, ডিম অমলেট, মাখন, জেলি, মধু, কলা, ডেজার্ট (সুজি/পায়েস), চা-কফি।" },
+          { name: "স্ন্যাকস (SNACKS)", items: "কেক, বিস্কুট, চা-কফি।" },
+          { name: "লাঞ্চ (LUNCH)", items: "সাদা ভাত, পারশে মাছ, মুরগি, ভর্তা, ডাল, সালাদ, ডেজার্ট, চা-কফি।" },
+          { name: "স্ন্যাকস (SNACKS)", items: "থাই স্যুপ, ফ্রেঞ্চ ফ্রাই, চা-কফি।" },
+          { name: "ডিনার (DINNER)", items: "এগ ফ্রাইড রাইস, চিকেন ফ্রাই, চাইনিজ সবজি, চিংড়ি মালাই-কারি, ক্যাশুনাট সালাদ, সফট ড্রিংকস।" },
+        ],
+      },
+      {
+        day: "২য় দিন",
+        meals: [
+          { name: "মর্নিং-স্ন্যাকস (MORNING SNACKS)", items: "ড্রাই কেক/বিস্কুট, চা-কফি।" },
+          { name: "ব্রেকফাস্ট (BREAKFAST)", items: "খিচুড়ি, ডিম মালাই-কারি, সামুদ্রিক মাছ ফ্রাই, বেগুন ভাজা, আচার, চা-কফি।" },
+          { name: "স্ন্যাকস (SNACKS)", items: "পেয়ারা, লেবুর শরবত, চা-কফি।" },
+          { name: "লাঞ্চ (LUNCH)", items: "সাদা ভাত, কোরাল মাছ, হাঁস ভুনা, সবজি, ভর্তা, ডাল, সালাদ, ফিরনি, চা-কফি।" },
+          { name: "স্ন্যাকস (SNACKS)", items: "নুডলস, চা-কফি।" },
+          { name: "ডিনার (DINNER)", items: "এগ ফ্রাইড রাইস, পরোটা, চিকেন বার.বি.বি.কিউ., ফিশ বি.বি.কিউ., চাইনিজ সবজি, ছোলার ডাল, ভুনা, রাশিয়ান সালাদ, সফট ড্রিংকস।" },
+        ],
+      },
+      {
+        day: "৩য় দিন",
+        meals: [
+          { name: "ব্রেকফাস্ট (BREAKFAST)", items: "সাদা ভাত, বিভিন্ন ভর্তা, ডিম অমলেট, ঘি, ডাল, সালাদ, চা-কফি।" },
+          { name: "স্ন্যাকস (SNACKS)", items: "কমলা, বিস্কুট, চা-কফি।" },
+          { name: "লাঞ্চ (LUNCH)", items: "প্লেইন পোলাও, মাটন রেজালা, সি-ফিশ, ডিম মালাই-কারি, মুরিঘন্টো, সালাদ, দই।" },
+        ],
+      },
+    ],
+    safetyInfo: [
+      "আপনাদের নিরাপত্তার জন্য সার্বক্ষণিক নিয়োজিত থাকবে বাংলাদেশ বনবিভাগের দুই জন সশস্ত্র নিরাপত্তা কর্মী।",
+      "আবহাওয়া এবং অন্য যে কোন প্রয়োজনে VSF এর মাধ্যমে ফরেস্ট, কোষ্ট গার্ড এবং নৌ-বাহিনীর সাথে সার্বক্ষণিক যোগাযোগ রাখা হবে।",
+    ],
+    travelTips: [
+      "উজ্জ্বল রঙের কাপড় পরিহার করা। হালকা রঙের এবং ঢিলেঢালা ফুল স্লিভ পোশাক পরা।",
+      "কোন প্রকার সুগন্ধি ব্যবহার না করা।",
+      "পিছনে বেল্ট আছে এবং পানিতে ভিজলে নষ্ট হবে না এমন সেন্ডেল / কেডস সাথে নিতে হবে।",
+      "এডভেঞ্চার ট্যুরে লাগেজের সাইজ ছোট হওয়াই ভালো।",
+      "জঙ্গলে নামার পর উচ্চ স্বরে কথা বলা যাবে না।",
+      "পানি অপচয় না করা (নদীর পানি নোনা)।",
+      "সু-শৃঙ্খল ভাবে হাঁটতে হবে এবং দলছুট হওয়া যাবে না।",
+      "গাছের ডাল, পাতা বা লতায় হাত দেওয়া বা ছেঁড়া যাবে না।",
+      "পরিবেশের ক্ষতি হয় এমন কোন কাজ করা যাবে না।",
+      "গাইড এবং নিরাপত্তা রক্ষীদের নির্দেশনা মেনে চলা।",
+    ],
+    packageIncludes: [
+      "All meals during the trip",
+      "All activities inside the forest as per itinerary",
+      "Mineral water (Jar) for drinking during the trip",
+      "Forest fees & permission",
+      "Armed forest guard from the forest department",
+      "An accompanied experience Guide during the trip",
+    ],
+    thingsToCarry: [
+      "Regular Medicine",
+      "Snicker shoes for walking",
+      "Hat/Cap for sun protection",
+      "Sun protection lotion & insects spray",
+      "Binoculars, Flash light, Camera",
+      "Towel, Bath Soap/Shampoo, Toothpaste & Tooth Brush",
+    ],
+    packages: [],
+    seatPlan: [
+      {
+        name: "1st Deck – 8 Cabins (AC/Non-AC)",
+        capacity: 16,
+        rows: [
+          { label: "Port Side", cabins: [
+            { id: "101", type: "VIP Family" as const, persons: 2, available: true, bedType: "Double Bed" },
+            { id: "102", type: "VIP Family" as const, persons: 2, available: true, bedType: "Double Bed" },
+            { id: "103", type: "VIP Family" as const, persons: 2, available: true, bedType: "Double Bed" },
+            { id: "104", type: "VIP Family" as const, persons: 2, available: true, bedType: "Double Bed" },
+          ]},
+          { label: "Starboard", cabins: [
+            { id: "105", type: "VIP Family" as const, persons: 2, available: true, bedType: "Double Bed" },
+            { id: "106", type: "VIP Family" as const, persons: 2, available: true, bedType: "Double Bed" },
+            { id: "107", type: "VIP Family" as const, persons: 2, available: true, bedType: "Double Bed" },
+            { id: "108", type: "VIP Family" as const, persons: 2, available: true, bedType: "Double Bed" },
+          ]},
+        ],
+      },
+      {
+        name: "2nd Deck – 14 Cabins (AC/Non-AC)",
+        capacity: 28,
+        rows: [
+          { label: "Port Side", cabins: [
+            { id: "201", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
+            { id: "202", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
+            { id: "203", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
+            { id: "204", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
+            { id: "205", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
+            { id: "206", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
+            { id: "207", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
+          ]},
+          { label: "Starboard", cabins: [
+            { id: "208", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
+            { id: "209", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
+            { id: "210", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
+            { id: "211", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
+            { id: "212", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
+            { id: "213", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
+            { id: "214", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
+          ]},
+        ],
+      },
+      {
+        name: "Sky Deck – 3 Cabins + Master Room",
+        capacity: 10,
+        rows: [
+          { label: "Sky Deck", cabins: [
+            { id: "301", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Master Suite" },
+            { id: "302", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Deluxe Cabin" },
+            { id: "303", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Deluxe Cabin" },
+          ]},
+        ],
+      },
+    ],
     featured: false,
   },
 ];
