@@ -2,20 +2,17 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Upload, Trash2 } from "lucide-react";
-import { galleryImages } from "@/services/mockData";
+import { cruises } from "@/services/mockData";
 
 export default function MediaLibrary() {
-  const [images, setImages] = useState(galleryImages);
-
-  const simulateUpload = () => {
-    setImages([...images, `https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&t=${Date.now()}`]);
-  };
+  const allImages = cruises.flatMap(c => c.images);
+  const [images, setImages] = useState(allImages);
 
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold text-secondary">Media Library</h1>
-        <Button onClick={simulateUpload} className="gap-1 bg-primary text-primary-foreground hover:bg-primary/90"><Upload className="h-4 w-4" /> Upload Image</Button>
+        <span className="text-sm text-muted-foreground">{images.length} images</span>
       </div>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
         {images.map((img, i) => (
