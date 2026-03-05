@@ -73,18 +73,21 @@ export interface CruisePackage {
 
 export interface Deck {
   name: string;
-  rows: SeatRow[];
+  capacity: number;
+  rows: CabinRow[];
 }
 
-export interface SeatRow {
+export interface CabinRow {
   label: string;
-  seats: Seat[];
+  cabins: Cabin[];
 }
 
-export interface Seat {
+export interface Cabin {
   id: string;
-  type: 'AC' | 'Non-AC';
+  type: 'VIP Couple' | 'VIP Family' | 'Twin' | 'Single' | 'Bunk';
+  persons: number;
   available: boolean;
+  bedType: string;
 }
 
 export interface Booking {
@@ -115,24 +118,46 @@ export interface TeamMember {
 
 const makeSeatPlan = (): Deck[] => [
   {
-    name: "Deck 1 – Standard Cabins",
+    name: "Deck 1 – VIP Cabins",
+    capacity: 28,
     rows: [
-      { label: "A", seats: [{ id: "A1", type: "AC", available: true }, { id: "A2", type: "AC", available: true }, { id: "A3", type: "AC", available: false }, { id: "A4", type: "AC", available: true }] },
-      { label: "B", seats: [{ id: "B1", type: "AC", available: true }, { id: "B2", type: "AC", available: true }, { id: "B3", type: "AC", available: true }, { id: "B4", type: "AC", available: false }] },
-      { label: "C", seats: [{ id: "C1", type: "AC", available: true }, { id: "C2", type: "AC", available: false }, { id: "C3", type: "AC", available: true }, { id: "C4", type: "AC", available: true }] },
+      { label: "Port Side", cabins: [
+        { id: "101", type: "VIP Family", persons: 3, available: true, bedType: "Family Bed" },
+        { id: "102", type: "VIP Family", persons: 3, available: true, bedType: "Family Bed" },
+        { id: "103", type: "VIP Family", persons: 3, available: false, bedType: "Family Bed" },
+        { id: "104", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "105", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+      ]},
+      { label: "Starboard", cabins: [
+        { id: "106", type: "VIP Family", persons: 3, available: true, bedType: "Family Bed" },
+        { id: "107", type: "VIP Family", persons: 3, available: true, bedType: "Family Bed" },
+        { id: "108", type: "VIP Family", persons: 3, available: true, bedType: "Family Bed" },
+        { id: "109", type: "VIP Couple", persons: 2, available: false, bedType: "Couple Bed" },
+        { id: "110", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "111", type: "Bunk", persons: 2, available: true, bedType: "2 Bed Bunk" },
+      ]},
     ],
   },
   {
     name: "Deck 2 – Premium Cabins",
+    capacity: 22,
     rows: [
-      { label: "D", seats: [{ id: "D1", type: "AC", available: true }, { id: "D2", type: "AC", available: true }, { id: "D3", type: "AC", available: false }, { id: "D4", type: "AC", available: true }] },
-      { label: "E", seats: [{ id: "E1", type: "AC", available: true }, { id: "E2", type: "AC", available: false }, { id: "E3", type: "AC", available: true }, { id: "E4", type: "AC", available: true }] },
-    ],
-  },
-  {
-    name: "Observation Deck",
-    rows: [
-      { label: "F", seats: [{ id: "F1", type: "AC", available: true }, { id: "F2", type: "AC", available: true }, { id: "F3", type: "AC", available: true }, { id: "F4", type: "AC", available: true }] },
+      { label: "Port Side", cabins: [
+        { id: "201", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "202", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "203", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
+        { id: "204", type: "Single", persons: 1, available: true, bedType: "Single Bed" },
+        { id: "205", type: "Twin", persons: 2, available: false, bedType: "Twin Bed" },
+        { id: "206", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+      ]},
+      { label: "Starboard", cabins: [
+        { id: "207", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "208", type: "VIP Couple", persons: 2, available: false, bedType: "Couple Bed" },
+        { id: "209", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
+        { id: "210", type: "Single", persons: 1, available: true, bedType: "Single Bed" },
+        { id: "211", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
+        { id: "212", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+      ]},
     ],
   },
 ];
