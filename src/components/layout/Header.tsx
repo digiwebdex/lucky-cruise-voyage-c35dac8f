@@ -30,7 +30,7 @@ export default function Header() {
       <div className="container flex h-16 items-center justify-between md:h-18">
         <Link to="/" className="flex items-center gap-3 group">
           <img src={logo} alt="Lucky Tours & Travels" className="h-10 w-auto transition-transform group-hover:scale-105" />
-          <span className="text-lg font-display font-black tracking-wide text-primary uppercase" style={{ fontStyle: 'italic', letterSpacing: '0.08em' }}>Lucky Tours & Travels</span>
+          <span className="text-lg font-black tracking-wide text-primary" style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '0.05em' }}>Lucky Tours & Travels</span>
         </Link>
 
         {/* Desktop Nav */}
