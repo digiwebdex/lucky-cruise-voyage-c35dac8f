@@ -107,6 +107,7 @@ import jolSafari5 from "@/assets/cruises/jol-safari-5.jpg";
 import jolSafari6 from "@/assets/cruises/jol-safari-6.jpg";
 import jolSafari7 from "@/assets/cruises/jol-safari-7.jpg";
 import jolSafari8 from "@/assets/cruises/jol-safari-8.jpg";
+import jolSafari9 from "@/assets/cruises/jol-safari-9.jpg";
 
 export interface Cruise {
   id: string;
@@ -1195,7 +1196,7 @@ export const cruises: Cruise[] = [
     name: "MV Jol Safari (এম.ভি জল সাফারি)",
     subtitle: "AC Tourist Ship Mangrove Forest Sundarban",
     description: "MV Jol Safari have been built with enclosed and spacious open air observation decks, keeping in mind your entertainment and adventurous needs.",
-    images: [jolSafari1, jolSafari2, jolSafari3, jolSafari4, jolSafari5, jolSafari6, jolSafari7, jolSafari8],
+    images: [jolSafari1, jolSafari2, jolSafari3, jolSafari4, jolSafari5, jolSafari6, jolSafari7, jolSafari8, jolSafari9],
     price: 15000,
     priceLabel: "Per Person (Bangladeshi)",
     route: "Khulna – Sundarban – Khulna",
