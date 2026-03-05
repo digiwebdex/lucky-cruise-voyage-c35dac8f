@@ -2,97 +2,105 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
 @layer base {
   :root {
-    --background: 40 33% 98%;
-    --foreground: 220 40% 13%;
+    --background: 210 20% 98%;
+    --foreground: 215 35% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 40% 13%;
+    --card-foreground: 215 35% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 40% 13%;
+    --popover-foreground: 215 35% 12%;
 
-    --primary: 30 95% 50%;
+    --primary: 28 100% 52%;
     --primary-foreground: 0 0% 100%;
+    --primary-glow: 35 100% 60%;
 
-    --secondary: 220 60% 20%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 215 55% 14%;
+    --secondary-foreground: 210 20% 96%;
 
-    --muted: 40 20% 94%;
-    --muted-foreground: 220 10% 46%;
+    --muted: 210 15% 93%;
+    --muted-foreground: 215 12% 48%;
 
-    --accent: 220 60% 20%;
+    --accent: 170 65% 40%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 15% 88%;
-    --input: 30 15% 88%;
-    --ring: 30 95% 50%;
+    --border: 210 12% 89%;
+    --input: 210 12% 89%;
+    --ring: 28 100% 52%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 220 60% 15%;
-    --sidebar-foreground: 220 20% 90%;
-    --sidebar-primary: 30 95% 50%;
+    --sidebar-background: 215 55% 11%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 28 100% 52%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 50% 22%;
-    --sidebar-accent-foreground: 220 20% 90%;
-    --sidebar-border: 220 40% 25%;
-    --sidebar-ring: 30 95% 50%;
+    --sidebar-accent: 215 45% 18%;
+    --sidebar-accent-foreground: 210 20% 90%;
+    --sidebar-border: 215 40% 20%;
+    --sidebar-ring: 28 100% 52%;
 
     --gold: 38 92% 55%;
     --gold-foreground: 0 0% 100%;
-    --navy: 220 60% 20%;
+    --navy: 215 55% 14%;
     --navy-foreground: 0 0% 100%;
-    --warm-bg: 40 33% 96%;
+    --warm-bg: 35 30% 96%;
+    --emerald: 170 65% 40%;
+    --emerald-foreground: 0 0% 100%;
   }
 
   .dark {
-    --background: 220 40% 7%;
-    --foreground: 40 20% 94%;
+    --background: 215 45% 6%;
+    --foreground: 210 20% 94%;
 
-    --card: 220 40% 10%;
-    --card-foreground: 40 20% 94%;
+    --card: 215 40% 9%;
+    --card-foreground: 210 20% 94%;
 
-    --popover: 220 40% 10%;
-    --popover-foreground: 40 20% 94%;
+    --popover: 215 40% 9%;
+    --popover-foreground: 210 20% 94%;
 
-    --primary: 30 95% 50%;
+    --primary: 28 100% 52%;
     --primary-foreground: 0 0% 100%;
+    --primary-glow: 35 100% 60%;
 
-    --secondary: 220 50% 30%;
+    --secondary: 215 50% 25%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 30% 15%;
-    --muted-foreground: 220 15% 60%;
+    --muted: 215 30% 14%;
+    --muted-foreground: 215 15% 55%;
 
-    --accent: 30 80% 45%;
+    --accent: 170 60% 38%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 30% 18%;
-    --input: 220 30% 18%;
-    --ring: 30 95% 50%;
+    --border: 215 30% 16%;
+    --input: 215 30% 16%;
+    --ring: 28 100% 52%;
 
-    --sidebar-background: 220 50% 8%;
-    --sidebar-foreground: 220 20% 85%;
-    --sidebar-primary: 30 95% 50%;
+    --sidebar-background: 215 50% 7%;
+    --sidebar-foreground: 210 20% 85%;
+    --sidebar-primary: 28 100% 52%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 40% 15%;
-    --sidebar-accent-foreground: 220 20% 85%;
-    --sidebar-border: 220 30% 18%;
-    --sidebar-ring: 30 95% 50%;
+    --sidebar-accent: 215 40% 14%;
+    --sidebar-accent-foreground: 210 20% 85%;
+    --sidebar-border: 215 30% 16%;
+    --sidebar-ring: 28 100% 52%;
 
     --gold: 38 92% 55%;
     --gold-foreground: 0 0% 100%;
-    --navy: 220 50% 35%;
+    --navy: 215 50% 30%;
     --navy-foreground: 0 0% 100%;
-    --warm-bg: 220 40% 9%;
+    --warm-bg: 215 40% 8%;
+    --emerald: 170 55% 35%;
+    --emerald-foreground: 0 0% 100%;
   }
 }
 
@@ -100,8 +108,43 @@
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+  }
+}
+
+@layer components {
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(28 100% 52%), hsl(35 100% 60%));
+  }
+  .gradient-navy {
+    background: linear-gradient(135deg, hsl(215 55% 14%), hsl(215 45% 22%));
+  }
+  .gradient-hero {
+    background: linear-gradient(160deg, hsl(215 55% 10%) 0%, hsl(215 45% 18%) 40%, hsl(28 80% 25%) 100%);
+  }
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(28 100% 52%), hsl(35 100% 60%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .glass-card {
+    background: hsl(var(--card) / 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+  .shadow-glow {
+    box-shadow: 0 0 40px -10px hsl(28 100% 52% / 0.3);
+  }
+  .shadow-elevated {
+    box-shadow: 0 20px 60px -15px hsl(215 55% 14% / 0.15), 0 8px 20px -8px hsl(28 100% 52% / 0.08);
   }
 }
 
@@ -135,4 +178,24 @@
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
   pointer-events: none;
   z-index: 10;
+}
+
+/* WhatsApp floating button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5);
 }

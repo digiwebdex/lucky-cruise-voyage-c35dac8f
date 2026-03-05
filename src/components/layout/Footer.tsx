@@ -1,48 +1,108 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Ship, ExternalLink } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border bg-secondary text-secondary-foreground">
-      <div className="container py-12">
-        <div className="grid gap-8 md:grid-cols-4">
-          <div>
-            <h3 className="mb-4 text-lg font-bold text-primary">Lucky Tours & Travels</h3>
-            <p className="text-sm text-secondary-foreground/80">
-              Your trusted cruise tour partner in Bangladesh. Explore rivers, coasts, and the majestic Sundarbans with us.
-            </p>
-          </div>
-          <div>
-            <h4 className="mb-4 font-semibold">Quick Links</h4>
-            <ul className="space-y-2 text-sm text-secondary-foreground/80">
-              <li><Link to="/" className="hover:text-primary">Home</Link></li>
-              <li><Link to="/cruises" className="hover:text-primary">Cruises</Link></li>
-              <li><Link to="/packages" className="hover:text-primary">Packages</Link></li>
-              <li><Link to="/gallery" className="hover:text-primary">Gallery</Link></li>
-              <li><Link to="/about" className="hover:text-primary">About Us</Link></li>
-              <li><Link to="/contact" className="hover:text-primary">Contact</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="mb-4 font-semibold">Contact Info</h4>
-            <ul className="space-y-3 text-sm text-secondary-foreground/80">
-              <li className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /> 01711871072</li>
-              <li className="flex items-center gap-2"><Mail className="h-4 w-4 text-primary" /> info@luckytoursbd.com</li>
-              <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 text-primary" /> Dhaka, Bangladesh</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="mb-4 font-semibold">Business Hours</h4>
-            <ul className="space-y-2 text-sm text-secondary-foreground/80">
-              <li>Saturday – Thursday</li>
-              <li>9:00 AM – 8:00 PM</li>
-              <li className="text-primary font-medium">Friday: Closed</li>
-            </ul>
+    <footer className="relative overflow-hidden">
+      {/* Wave separator */}
+      <div className="absolute top-0 left-0 right-0 h-1 gradient-primary" />
+      
+      <div className="gradient-navy text-secondary-foreground">
+        <div className="container py-16">
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+            {/* Brand */}
+            <div className="lg:col-span-1">
+              <div className="flex items-center gap-2 mb-4">
+                <Ship className="h-8 w-8 text-primary" />
+                <div>
+                  <h3 className="text-xl font-display font-bold text-primary">Lucky Tours</h3>
+                  <p className="text-xs text-secondary-foreground/50 font-medium -mt-0.5">& Travels</p>
+                </div>
+              </div>
+              <p className="text-sm text-secondary-foreground/60 leading-relaxed">
+                Your trusted cruise tour partner in Bangladesh. Explore rivers, coasts, and the majestic Sundarbans with us.
+              </p>
+              <div className="mt-4 flex gap-3">
+                <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary hover:bg-primary/25 transition-colors">
+                  <Phone className="h-4 w-4" />
+                </a>
+                <a href="mailto:info@luckytoursbd.com" className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary hover:bg-primary/25 transition-colors">
+                  <Mail className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="mb-5 font-display font-bold text-sm uppercase tracking-wider text-primary/80">Quick Links</h4>
+              <ul className="space-y-3">
+                {[
+                  { to: "/", label: "Home" },
+                  { to: "/cruises", label: "Our Cruises" },
+                  { to: "/packages", label: "Tour Packages" },
+                  { to: "/gallery", label: "Photo Gallery" },
+                  { to: "/about", label: "About Us" },
+                  { to: "/contact", label: "Contact" },
+                ].map(link => (
+                  <li key={link.to}>
+                    <Link to={link.to} className="flex items-center gap-2 text-sm text-secondary-foreground/60 hover:text-primary transition-colors group">
+                      <ExternalLink className="h-3 w-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact Info */}
+            <div>
+              <h4 className="mb-5 font-display font-bold text-sm uppercase tracking-wider text-primary/80">Contact</h4>
+              <ul className="space-y-4">
+                <li className="flex items-center gap-3 text-sm text-secondary-foreground/60">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 flex-shrink-0">
+                    <Phone className="h-4 w-4 text-primary" />
+                  </div>
+                  <span>01711-871072</span>
+                </li>
+                <li className="flex items-center gap-3 text-sm text-secondary-foreground/60">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 flex-shrink-0">
+                    <Mail className="h-4 w-4 text-primary" />
+                  </div>
+                  <span>info@luckytoursbd.com</span>
+                </li>
+                <li className="flex items-start gap-3 text-sm text-secondary-foreground/60">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 flex-shrink-0">
+                    <MapPin className="h-4 w-4 text-primary" />
+                  </div>
+                  <span>Dhaka, Bangladesh</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Hours */}
+            <div>
+              <h4 className="mb-5 font-display font-bold text-sm uppercase tracking-wider text-primary/80">Business Hours</h4>
+              <div className="rounded-xl border border-secondary-foreground/10 p-4 space-y-3">
+                <div className="flex justify-between text-sm">
+                  <span className="text-secondary-foreground/50">Sat – Thu</span>
+                  <span className="font-semibold text-secondary-foreground/80">9AM – 8PM</span>
+                </div>
+                <div className="h-px bg-secondary-foreground/10" />
+                <div className="flex justify-between text-sm">
+                  <span className="text-secondary-foreground/50">Friday</span>
+                  <span className="font-semibold text-primary">Closed</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="border-t border-secondary-foreground/10 py-4 text-center text-xs text-secondary-foreground/60">
-        © {new Date().getFullYear()} Lucky Tours & Travels. All rights reserved.
+
+        <div className="border-t border-secondary-foreground/8 py-5">
+          <div className="container flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-secondary-foreground/40">
+            <span>© {new Date().getFullYear()} Lucky Tours & Travels. All rights reserved.</span>
+            <span>Designed with ❤️ for Sundarban lovers</span>
+          </div>
+        </div>
       </div>
     </footer>
   );
