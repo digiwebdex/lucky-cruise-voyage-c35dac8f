@@ -18,6 +18,12 @@ import utshab17 from "@/assets/cruises/utshab-17.jpeg";
 import utshab18 from "@/assets/cruises/utshab-18.jpeg";
 import utshab19 from "@/assets/cruises/utshab-19.jpeg";
 import utshab20 from "@/assets/cruises/utshab-20.jpeg";
+import utshab21 from "@/assets/cruises/utshab-21.jpeg";
+import utshab22 from "@/assets/cruises/utshab-22.jpeg";
+import utshab23 from "@/assets/cruises/utshab-23.jpeg";
+import utshab24 from "@/assets/cruises/utshab-24.jpeg";
+import utshab25 from "@/assets/cruises/utshab-25.jpeg";
+import utshab26 from "@/assets/cruises/utshab-26.jpeg";
 
 export interface Cruise {
   id: string;
@@ -142,6 +148,7 @@ export const cruises: Cruise[] = [
       utshab6, utshab7, utshab8, utshab9, utshab10,
       utshab11, utshab12, utshab13, utshab14, utshab15,
       utshab16, utshab17, utshab18, utshab19, utshab20,
+      utshab21, utshab22, utshab23, utshab24, utshab25, utshab26,
     ],
     price: 22000,
     priceLabel: "Per Person (Bangladeshi)",
