@@ -36,6 +36,8 @@ import silver9 from "@/assets/cruises/silver-9.jpeg";
 import silver10 from "@/assets/cruises/silver-10.jpeg";
 import silver11 from "@/assets/cruises/silver-11.jpeg";
 import silver12 from "@/assets/cruises/silver-12.jpeg";
+import utshabSeatplan from "@/assets/cruises/utshab-seatplan.jpeg";
+import silverSeatplan from "@/assets/cruises/silver-seatplan.jpeg";
 
 export interface Cruise {
   id: string;
@@ -52,6 +54,7 @@ export interface Cruise {
   facilities: string[];
   packages: CruisePackage[];
   seatPlan: Deck[];
+  seatPlanImage?: string;
   featured: boolean;
   itinerary?: ItineraryDay[];
   menu?: MenuDay[];
@@ -176,41 +179,49 @@ const makeSeatPlan = (): Deck[] => [
 
 const makeSilverSeatPlan = (): Deck[] => [
   {
-    name: "Deck 1 – VIP Cabins",
-    capacity: 24,
+    name: "Level 1 – Triple & Family Cabins",
+    capacity: 22,
     rows: [
       { label: "Port Side", cabins: [
-        { id: "S101", type: "VIP Family", persons: 3, available: true, bedType: "Family Bed" },
-        { id: "S102", type: "VIP Family", persons: 3, available: true, bedType: "Family Bed" },
-        { id: "S103", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
-        { id: "S104", type: "VIP Couple", persons: 2, available: false, bedType: "Couple Bed" },
-        { id: "S105", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "S101", type: "VIP Family", persons: 4, available: true, bedType: "Family Quad Room" },
+        { id: "S103", type: "VIP Family", persons: 3, available: true, bedType: "Triple Bed" },
+        { id: "S105", type: "VIP Family", persons: 3, available: true, bedType: "Triple Bed" },
+        { id: "S107", type: "VIP Family", persons: 3, available: true, bedType: "Triple Bed" },
       ]},
       { label: "Starboard", cabins: [
-        { id: "S106", type: "VIP Family", persons: 3, available: true, bedType: "Family Bed" },
-        { id: "S107", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
-        { id: "S108", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
-        { id: "S109", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
-        { id: "S110", type: "Bunk", persons: 2, available: true, bedType: "2 Bed Bunk" },
+        { id: "S102", type: "VIP Family", persons: 3, available: true, bedType: "Triple Bed" },
+        { id: "S104", type: "VIP Family", persons: 3, available: false, bedType: "Triple Bed" },
+        { id: "S106", type: "VIP Couple", persons: 2, available: true, bedType: "Owners Room" },
       ]},
     ],
   },
   {
-    name: "Deck 2 – Premium Cabins",
-    capacity: 22,
+    name: "Level 2 – Couple & Twin Cabins",
+    capacity: 20,
     rows: [
       { label: "Port Side", cabins: [
-        { id: "S201", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
-        { id: "S202", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
-        { id: "S203", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
-        { id: "S204", type: "Single", persons: 1, available: true, bedType: "Single Bed" },
-        { id: "S205", type: "VIP Couple", persons: 2, available: false, bedType: "Couple Bed" },
+        { id: "S202", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "S204", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "S206", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
+        { id: "S208", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
+        { id: "S210", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
       ]},
       { label: "Starboard", cabins: [
-        { id: "S206", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "S201", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "S203", type: "VIP Couple", persons: 2, available: false, bedType: "Couple Bed" },
+        { id: "S205", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
         { id: "S207", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
-        { id: "S208", type: "Single", persons: 1, available: true, bedType: "Single Bed" },
-        { id: "S209", type: "Bunk", persons: 2, available: true, bedType: "2 Bed Bunk" },
+        { id: "S209", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
+      ]},
+    ],
+  },
+  {
+    name: "Level 3 – Deck & Food Court",
+    capacity: 4,
+    rows: [
+      { label: "Deck Cabins", cabins: [
+        { id: "SS1", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
+        { id: "SS2", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
       ]},
     ],
   },
@@ -376,6 +387,7 @@ export const cruises: Cruise[] = [
       },
     ],
     seatPlan: makeSeatPlan(),
+    seatPlanImage: utshabSeatplan,
     featured: true,
   },
   {
@@ -535,6 +547,7 @@ export const cruises: Cruise[] = [
       },
     ],
     seatPlan: makeSilverSeatPlan(),
+    seatPlanImage: silverSeatplan,
     featured: true,
   },
 ];
