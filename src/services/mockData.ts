@@ -128,6 +128,7 @@ import magpie16 from "@/assets/cruises/magpie-16.jpg";
 import magpie17 from "@/assets/cruises/magpie-17.jpg";
 import magpie18 from "@/assets/cruises/magpie-18.jpg";
 import magpie19 from "@/assets/cruises/magpie-19.jpg";
+import magpieSeatplan from "@/assets/cruises/magpie-seatplan.jpg";
 export interface Cruise {
   id: string;
   name: string;
@@ -1524,47 +1525,56 @@ export const cruises: Cruise[] = [
     packages: [],
     seatPlan: [
       {
-        name: "Deck 1 – Cabins",
-        capacity: 42,
+        name: "1st Floor – 8 Rooms (24 Beds)",
+        capacity: 24,
         rows: [
           { label: "Port Side", cabins: [
-            { id: "101", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
-            { id: "102", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
-            { id: "103", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
-            { id: "104", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
-            { id: "105", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
-            { id: "106", type: "VIP Family" as const, persons: 3, available: true, bedType: "Bunk Bed (2+1)" },
-            { id: "107", type: "VIP Family" as const, persons: 3, available: true, bedType: "Bunk Bed (2+1)" },
+            { id: "101", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Room" },
+            { id: "102", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Room" },
+            { id: "103", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Room" },
+            { id: "104", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Room" },
           ]},
           { label: "Starboard", cabins: [
-            { id: "108", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
-            { id: "109", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
-            { id: "110", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
-            { id: "111", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
-            { id: "112", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
-            { id: "113", type: "VIP Family" as const, persons: 3, available: true, bedType: "Bunk Bed (2+1)" },
-            { id: "114", type: "VIP Family" as const, persons: 3, available: true, bedType: "Bunk Bed (2+1)" },
+            { id: "105", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Room" },
+            { id: "106", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Room" },
+            { id: "107", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Room" },
+            { id: "108", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Room" },
           ]},
         ],
       },
       {
-        name: "Deck 2 – Upper Cabins",
-        capacity: 20,
+        name: "2nd Floor – 12 Rooms (36 Beds) + Attach Bath",
+        capacity: 36,
         rows: [
           { label: "Port Side", cabins: [
-            { id: "201", type: "VIP Family" as const, persons: 3, available: true, bedType: "Bunk Bed (2+1)" },
-            { id: "202", type: "VIP Family" as const, persons: 3, available: true, bedType: "Bunk Bed (2+1)" },
-            { id: "203", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+            { id: "201", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Attach Bath" },
+            { id: "202", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Attach Bath" },
+            { id: "203", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Attach Bath" },
+            { id: "204", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Attach Bath" },
+            { id: "205", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Attach Bath" },
+            { id: "206", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Attach Bath" },
           ]},
           { label: "Starboard", cabins: [
-            { id: "204", type: "VIP Family" as const, persons: 3, available: true, bedType: "Bunk Bed (2+1)" },
-            { id: "205", type: "VIP Family" as const, persons: 3, available: true, bedType: "Bunk Bed (2+1)" },
-            { id: "206", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
-            { id: "207", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+            { id: "207", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Attach Bath" },
+            { id: "208", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Attach Bath" },
+            { id: "209", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Attach Bath" },
+            { id: "210", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Attach Bath" },
+            { id: "211", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Attach Bath" },
+            { id: "212", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed Attach Bath" },
+          ]},
+        ],
+      },
+      {
+        name: "3rd Floor – VIP Cabin + Dining & BBQ Zone",
+        capacity: 2,
+        rows: [
+          { label: "VIP", cabins: [
+            { id: "VIP", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Attach Bath" },
           ]},
         ],
       },
     ],
+    seatPlanImage: magpieSeatplan,
     featured: false,
   },
 ];
