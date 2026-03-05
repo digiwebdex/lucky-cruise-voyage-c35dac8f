@@ -29,7 +29,7 @@ export default function Header() {
     <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "bg-secondary/98 backdrop-blur-lg shadow-lg shadow-secondary/10" : "bg-secondary/90 backdrop-blur-md"}`}>
       <div className="container flex h-16 items-center justify-between md:h-18">
         <Link to="/" className="flex items-center gap-3 group">
-          <img src={logo} alt="Lucky Tours & Travels" className="h-10 w-auto transition-transform group-hover:scale-105" />
+          <img src={logo} alt="Lucky Tours & Travels" className="h-14 w-auto transition-transform group-hover:scale-105" />
           <span className="text-lg font-black tracking-wide text-primary" style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '0.05em' }}>Lucky Tours & Travels</span>
         </Link>
 
