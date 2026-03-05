@@ -59,6 +59,16 @@ import pearl20 from "@/assets/cruises/pearl-20.jpeg";
 import utshabSeatplan from "@/assets/cruises/utshab-seatplan.jpeg";
 import silverSeatplan from "@/assets/cruises/silver-seatplan.jpeg";
 import pearlSeatplan from "@/assets/cruises/pearl-seatplan.jpeg";
+import flamingo1 from "@/assets/cruises/flamingo-1.jpg";
+import flamingo2 from "@/assets/cruises/flamingo-2.jpg";
+import flamingo3 from "@/assets/cruises/flamingo-3.jpg";
+import flamingo4 from "@/assets/cruises/flamingo-4.jpg";
+import flamingo5 from "@/assets/cruises/flamingo-5.jpg";
+import flamingo6 from "@/assets/cruises/flamingo-6.jpg";
+import flamingo7 from "@/assets/cruises/flamingo-7.jpg";
+import flamingo8 from "@/assets/cruises/flamingo-8.jpg";
+import flamingo9 from "@/assets/cruises/flamingo-9.jpg";
+import flamingo10 from "@/assets/cruises/flamingo-10.jpg";
 
 export interface Cruise {
   id: string;
@@ -789,6 +799,165 @@ export const cruises: Cruise[] = [
     ],
     seatPlan: makePearlSeatPlan(),
     seatPlanImage: pearlSeatplan,
+    featured: true,
+  },
+  {
+    id: "mv-flamingo",
+    name: "MV Flamingo",
+    subtitle: "Luxury Cruise with Banquet Hall – Khulna",
+    description: "MV Flamingo offers superior accommodation with central air-conditioning, a grand Banquet Hall, stunning Top Deck, and impeccable service that will make your Sundarban tour comfortable, enjoyable, and memorable. With 25 cabins and capacity for 50 tourists, experience modern luxury on the waters of the Sundarbans.",
+    images: [
+      flamingo1, flamingo2, flamingo3, flamingo4, flamingo5,
+      flamingo6, flamingo7, flamingo8, flamingo9, flamingo10,
+    ],
+    price: 22000,
+    priceLabel: "Per Person (Bangladeshi)",
+    route: "Khulna – Sundarban – Khulna",
+    duration: "3 Days / 2 Nights",
+    capacity: "50 Tourists",
+    cabins: "25 Cabins",
+    facilities: [
+      "Spacious Rooms with Modern Interior",
+      "High Room Height Clearance",
+      "Central Air Conditioning",
+      "Comfortable Beds with Sofa",
+      "Mirror & Storage Cabinets",
+      "Luggage Space",
+      "Banquet Hall",
+      "Top Deck with Panoramic Views",
+    ],
+    touristSpots: [
+      "Harbaria",
+      "Andarmanik Eco-Tourism Centre",
+      "Katka Jamtola Sea Beach",
+      "Katka Office Par",
+      "Kochikhali / Hironpoint",
+      "Dimerchor / Dublar Char",
+      "Koromjol Crocodile Breeding Centre",
+    ],
+    additionalCosts: [
+      { label: "Entrance fee (Foreign National)", amount: "10,500 BDT" },
+      { label: "Entrance fee (Bangladeshi National)", amount: "1,050 BDT" },
+    ],
+    itinerary: [
+      {
+        day: "Day 1",
+        title: "Khulna → Andarmanik",
+        activities: [
+          "7:00 AM – Board at Khulna Jailkhana Ghat, our guide will receive you",
+          "Cruise along Rupsha & Pashur River – pass Khulna Shipyard, Rupsha Bridge, Rampal Power Plant, Mongla Port",
+          "Lunch on board the ship",
+          "Visit Andarmanik Eco-Tourism Centre – guided forest trek with armed guards",
+          "Walk through dense mangrove forest – Sundari, Golpata, Gewa trees",
+          "Climb the Watch Tower for panoramic views, then return to ship",
+          "Evening snacks on board",
+          "Ship sails toward Katka Sanctuary at the edge of the Bay of Bengal",
+        ],
+      },
+      {
+        day: "Day 2",
+        title: "Katka → Kochikhali → Dimerchor",
+        activities: [
+          "Early morning canal cruising by country boat – enjoy forest silence",
+          "Trek through Tiger Tree bushes and deer grazing fields",
+          "Walk 2.5 km to Jamtola Sea Beach – where the Sundarbans meets the Bay of Bengal",
+          "Visit Katka Office Par – walk through mud, breathing roots & dense Goran forest",
+          "Spot deer herds up close along the trail",
+          "Ship sails to Kochikhali – walk through the eerie grasslands known as 'Tiger's Dining Room'",
+          "Ship sails to Dimerchor – relax at the beautiful sea beach until evening",
+          "Return to ship, sail toward Koromjol",
+        ],
+      },
+      {
+        day: "Day 3",
+        title: "Koromjol → Return",
+        activities: [
+          "Visit Koromjol – Bangladesh's only saltwater crocodile breeding centre",
+          "See crocodiles of all sizes, endangered turtles, and playful monkeys",
+          "Feed deer by hand – a unique experience",
+          "Return to ship, sail back to Khulna / Mongla",
+          "Lunch on board during return journey",
+        ],
+      },
+    ],
+    menu: [
+      {
+        day: "Day 1",
+        meals: [
+          { name: "Breakfast", items: "Bread, Paratha, Vegetables, Dal, Egg Omelette, Butter, Jelly, Honey, Banana, Dessert (Suji/Payesh), Tea-Coffee" },
+          { name: "Snacks", items: "Cake, Biscuit, Tea-Coffee" },
+          { name: "Lunch", items: "White Rice, Parshe Fish, Chicken, Bharta, Dal, Salad, Dessert, Tea-Coffee" },
+          { name: "Evening Snacks", items: "Thai Soup, French Fries, Tea-Coffee" },
+          { name: "Dinner", items: "Egg Fried Rice, Chicken Fry, Chinese Vegetables, Shrimp Malai Curry, Cashew Nut Salad, Soft Drinks" },
+        ],
+      },
+      {
+        day: "Day 2",
+        meals: [
+          { name: "Morning Snacks", items: "Dry Cake/Biscuit, Tea-Coffee" },
+          { name: "Breakfast", items: "Khichuri, Egg Malai Curry, Sea Fish Fry, Eggplant Fry, Pickle, Tea-Coffee" },
+          { name: "Snacks", items: "Guava, Lemon Juice, Tea-Coffee" },
+          { name: "Lunch", items: "White Rice, Koral Fish, Duck Bhuna, Vegetables, Bharta, Dal, Salad, Firni, Tea-Coffee" },
+          { name: "Evening Snacks", items: "Noodles, Tea-Coffee" },
+          { name: "Dinner", items: "Egg Fried Rice, Paratha, Chicken Bar-B-Q, Fish Bar-B-Q, Chinese Vegetables, Cholar Dal Bhuna, Russian Salad, Soft Drinks" },
+        ],
+      },
+      {
+        day: "Day 3",
+        meals: [
+          { name: "Breakfast", items: "White Rice, Various Bharta, Egg Omelette, Ghee, Dal, Salad, Tea-Coffee" },
+          { name: "Snacks", items: "Orange, Biscuit, Tea-Coffee" },
+          { name: "Lunch", items: "Plain Polao, Mutton Rezala, Sea Fish, Egg Malai Curry, Muri Ghonto, Salad, Doi" },
+        ],
+      },
+    ],
+    safetyInfo: [
+      "Two armed forest guards from Bangladesh Forest Department will accompany you at all times",
+      "Constant communication with Forest, Coast Guard & Navy via VSF for weather and emergencies",
+      "All necessary safety measures will be taken based on weather and other conditions",
+    ],
+    travelTips: [
+      "Avoid bright colored clothing – wear light, loose full-sleeve clothing instead",
+      "Do not use any perfume or fragrance",
+      "Wear waterproof sandals/sneakers with back straps – no shoes or high heels",
+      "Pack light luggage for the adventure tour",
+      "Maintain silence in the forest and avoid unnecessary talking during tracking",
+      "Conserve water – river water is salty, and drinking water is limited",
+      "Walk in an organized manner and never stray from the group",
+      "Do not touch tree branches, leaves, or vines",
+      "Do not litter – protect the environment from plastic and packaging waste",
+      "Respect local communities and fellow travelers",
+      "Follow your guide and security personnel's instructions at all times",
+    ],
+    thingsToCarry: [
+      "Regular Medicines & First Aid Kit",
+      "Sneaker Shoes for Walking",
+      "Hat / Cap for Sun Protection",
+      "Sun Protection Lotion & Insect Spray",
+      "Binoculars & Flash Light",
+      "Camera",
+      "Towel, Bath Soap & Shampoo",
+      "Toothpaste & Tooth Brush",
+    ],
+    packageIncludes: [
+      "All meals during the trip",
+      "All activities inside the forest as per itinerary",
+      "Mineral water (Jar) for drinking during the trip",
+      "Forest fees & permission",
+      "Armed forest guard from the forest department",
+      "Experienced guide during the trip",
+    ],
+    packages: [
+      {
+        id: "flamingo-1",
+        name: "Sundarban Explorer",
+        route: "Khulna – Sundarban – Khulna",
+        price: 22000,
+        inclusions: ["All Meals (3 Days)", "AC Cabin", "Forest Guide", "Armed Guard", "Forest Fees", "Mineral Water"],
+        seatType: "AC",
+      },
+    ],
+    seatPlan: makeSeatPlan(),
     featured: true,
   },
 ];
