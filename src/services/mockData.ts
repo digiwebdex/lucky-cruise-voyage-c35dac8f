@@ -99,6 +99,14 @@ import forest13 from "@/assets/cruises/forest-13.jpg";
 import forest14 from "@/assets/cruises/forest-14.jpg";
 import forest15 from "@/assets/cruises/forest-15.jpg";
 import forestSeatplan from "@/assets/cruises/forest-seatplan.jpg";
+import jolSafari1 from "@/assets/cruises/jol-safari-1.jpg";
+import jolSafari2 from "@/assets/cruises/jol-safari-2.jpg";
+import jolSafari3 from "@/assets/cruises/jol-safari-3.jpg";
+import jolSafari4 from "@/assets/cruises/jol-safari-4.jpg";
+import jolSafari5 from "@/assets/cruises/jol-safari-5.jpg";
+import jolSafari6 from "@/assets/cruises/jol-safari-6.jpg";
+import jolSafari7 from "@/assets/cruises/jol-safari-7.jpg";
+import jolSafari8 from "@/assets/cruises/jol-safari-8.jpg";
 
 export interface Cruise {
   id: string;
@@ -1181,6 +1189,164 @@ export const cruises: Cruise[] = [
     ],
     seatPlanImage: forestSeatplan,
     featured: true,
+  },
+  {
+    id: "mv-jol-safari",
+    name: "MV Jol Safari (এম.ভি জল সাফারি)",
+    subtitle: "AC Tourist Ship Mangrove Forest Sundarban",
+    description: "MV Jol Safari have been built with enclosed and spacious open air observation decks, keeping in mind your entertainment and adventurous needs.",
+    images: [jolSafari1, jolSafari2, jolSafari3, jolSafari4, jolSafari5, jolSafari6, jolSafari7, jolSafari8],
+    price: 15000,
+    priceLabel: "Per Person (Bangladeshi)",
+    route: "Khulna – Sundarban – Khulna",
+    duration: "3 Days / 2 Nights",
+    capacity: "40 Tourists",
+    cabins: "15 Cabins",
+    facilities: [
+      "Spacious Rooms with Modern Interior Decoration",
+      "High Room Height Clearance",
+      "Individual Air Condition in Each Room with Control",
+      "Comfortable Beds",
+      "Sofa and Mirror",
+      "Cabinets for Storage",
+      "Space for Luggage Keeping",
+      "Enclosed and Spacious Open Air Observation Decks",
+    ],
+    touristSpots: [
+      "Harbaria",
+      "Andarmanik Eco-Tourism Centre",
+      "Katka Jamtola Sea Beach",
+      "Katka Office Par",
+      "Kochikhali / Hironpoint",
+      "Dimerchor / Dublar Char",
+      "Koromjol Crocodile Breeding Centre",
+    ],
+    additionalCosts: [
+      { label: "Entrance fee (Foreign National)", amount: "10,500 BDT" },
+      { label: "Entrance fee (Bangladeshi National)", amount: "1,050 BDT" },
+    ],
+    itinerary: [
+      {
+        day: "Day 1",
+        title: "খুলনা → আন্দারমানিক → কটকা",
+        activities: [
+          "সকাল ৭:০০ টায় খুলনা জেলখানা ঘাট থেকে আমাদের গাইড আপনাকে রিসিভ করে শীপে নিয়ে যাবে। রুপসা এবং পশুর নদী ধরে খুলনা শিপইয়ার্ড, রুপসা ব্রিজ, রামপাল তাপ বিদ্যুৎ কেন্দ্র এবং মংলা বন্দর পাশে রেখে আমাদের শীপ চলবে আন্দারমানিকের উদ্দেশ্যে।",
+          "দুপুরের খাবার খেয়ে নামবো \"আন্দারমানিক ইকো-ট্যুরিজম কেন্দ্রে\"। আগে পিছে গান ম্যান রেখে সারিবদ্ধ ভাবে যাবো নির্ধারিত ফুট ট্রেইল ধরে। মিষ্টি পানির পুকুর পার হয়ে ঢুকবো গভীর বনে।",
+          "কাঁকড়ার পাল ছুটে লুকাবে আপনার চলার শব্দে। প্রায় ১ মাইল ট্রেইল ঘুরে ওয়াচ টাওয়ারে বিশ্রাম নিয়ে শীপে ফিরে আসবো।",
+          "এরপর শীপ চলবে সাগরের মোহনায় অবস্থিত \"কটকা অভয়ারণ্য\" এর উদ্দেশ্যে।",
+        ],
+      },
+      {
+        day: "Day 2",
+        title: "কটকা → জামতলা সী বীচ → কচিখালি → ডিমের চর → করমজল",
+        activities: [
+          "খুব সকালে দেশী নৌকায় ক্যানেল ক্রুজিং এবং বনের নিস্তব্ধতা উপভোগ।",
+          "টাইগার ট্রি'র ঝোপ, হরিণের বিচরণের মাঠ এবং গভীর বন পেরিয়ে আড়াই কিলোমিটার দূরের জামতলা সী বীচে যাবো।",
+          "কটকা অফিস পাড়ার উদ্দেশ্যে যাত্রা। যাওয়ার পথে খুব কাছ থেকে হরিণের পাল দেখা যাবে।",
+          "কচিখালি গা ছমছমে ছন বনের ভিতর দিয়ে হাঁটবো। হরিণের পাল মাথা উঁচু করে আপনাকে দেখেই ছুটে পালাবে।",
+          "ডিমের চরের মনোরম সুন্দর সী বীচে থাকবো সন্ধ্যা পর্যন্ত। তারপর শীপ চলবে করমজল এর উদ্দেশ্যে।",
+        ],
+      },
+      {
+        day: "Day 3",
+        title: "করমজল → খুলনা/মংলা",
+        activities: [
+          "করমজল এ রয়েছে নোনা পানির বাংলাদেশের একমাত্র কুমির প্রজনন কেন্দ্র।",
+          "এখানে দেখতে পাবেন— ছোট বড় কুমির, বিলুপ্ত প্রায় প্রজাতির কচ্ছপ, বানরের পালের বাদরামি, হরিণকে হাত থেকে ঘাস খাওয়ানোর অভিজ্ঞতা।",
+          "সবকিছু উপভোগ করে শীপে ফিরে খুলনা / মংলার উদ্দেশ্যে যাত্রা করবো।",
+        ],
+      },
+    ],
+    menu: [
+      {
+        day: "Day 1",
+        meals: [
+          { name: "Breakfast", items: "পাউরুটি, পরোটা, সবজি, ডাল, ডিম অমলেট, মাখন, জেলি, মধু, কলা, ডেজার্ট (সুজি/পায়েস), চা-কফি।" },
+          { name: "Snacks", items: "কেক, বিস্কুট, চা-কফি।" },
+          { name: "Lunch", items: "সাদা ভাত, পারশে মাছ, মুরগি, ভর্তা, ডাল, সালাদ, ডেজার্ট, চা-কফি।" },
+          { name: "Evening Snacks", items: "থাই স্যুপ, ফ্রেঞ্চ ফ্রাই, চা-কফি।" },
+          { name: "Dinner", items: "এগ ফ্রাইড রাইস, চিকেন ফ্রাই, চাইনিজ সবজি, চিংড়ি মালাই-কারি, ক্যাশুনাট সালাদ, সফট ড্রিংকস।" },
+        ],
+      },
+      {
+        day: "Day 2",
+        meals: [
+          { name: "Morning Snacks", items: "ড্রাই কেক/বিস্কুট, চা-কফি।" },
+          { name: "Breakfast", items: "খিচুড়ি, ডিম মালাই-কারি, সামুদ্রিক মাছ ফ্রাই, বেগুন ভাজা, আচার, চা-কফি।" },
+          { name: "Snacks", items: "পেয়ারা, লেবুর শরবত, চা-কফি।" },
+          { name: "Lunch", items: "সাদা ভাত, কোরাল মাছ, হাঁস ভুনা, সবজি, ভর্তা, ডাল, সালাদ, ফিরনি, চা-কফি।" },
+          { name: "Evening Snacks", items: "নুডলস, চা-কফি।" },
+          { name: "Dinner", items: "এগ ফ্রাইড রাইস, পরোটা, চিকেন বার-বি-কিউ, ফিশ বি.বি.কিউ., চাইনিজ সবজি, ছোলার ডাল, ভুনা, রাশিয়ান সালাদ, সফট ড্রিংকস।" },
+        ],
+      },
+      {
+        day: "Day 3",
+        meals: [
+          { name: "Breakfast", items: "সাদা ভাত, বিভিন্ন ভর্তা, ডিম অমলেট, ঘি, ডাল, সালাদ, চা-কফি।" },
+          { name: "Snacks", items: "কমলা, বিস্কুট, চা-কফি।" },
+          { name: "Lunch", items: "প্লেইন পোলাও, মাটন রেজালা, সি-ফিশ, ডিম মালাই-কারি, মুরিঘন্টো, সালাদ, দই।" },
+        ],
+      },
+    ],
+    safetyInfo: [
+      "নিরাপত্তার ব্যাপারে আমাদের কোন আপোস নেই।",
+      "আপনাদের নিরাপত্তার জন্য সার্বক্ষণিক নিয়োজিত থাকবে বাংলাদেশ বনবিভাগের দুই জন সশস্ত্র নিরাপত্তা কর্মী।",
+      "আবহাওয়া এবং অন্য যে কোন প্রয়োজনে VSF এর মাধ্যমে ফরেস্ট, কোষ্ট গার্ড এবং নৌ-বাহিনীর সাথে সার্বক্ষণিক যোগাযোগ রাখা হবে।",
+    ],
+    travelTips: [
+      "উজ্জ্বল রঙের কাপড় পরিহার করা। হালকা রঙের এবং ঢিলেঢালা ফুল স্লিভ পোশাক পরা।",
+      "কোন প্রকার সুগন্ধি ব্যবহার না করা।",
+      "পিছনে বেল্ট আছে এবং পানিতে ভিজলে নষ্ট হবে না এমন সেন্ডেল / কেডস সাথে নিতে হবে।",
+      "এডভেঞ্চার ট্যুরে লাগেজের সাইজ ছোট হওয়াই ভালো।",
+      "জঙ্গলে নামার পর কোন অবস্থাতে উচ্চ স্বরে কথা বলা যাবে না।",
+      "পানি অপচয় না করা (নদীর পানি নোনা)।",
+      "জঙ্গলে নামার পর সু-শৃঙ্খল ভাবে হাঁটতে হবে এবং কোন অবস্থাতে দলছুট হওয়া যাবে না।",
+      "গাছের ডাল, পাতা বা লতায় হাত দেওয়া বা ছেঁড়া যাবে না।",
+      "পরিবেশের ক্ষতি হয় এমন কোন কাজ করা যাবে না।",
+      "গাইড এবং নিরাপত্তা রক্ষীদের নির্দেশনা মেনে চলা।",
+    ],
+    thingsToCarry: [
+      "Regular Medicine.",
+      "Snicker shoes for walking.",
+      "Hat/Cap for sun protection.",
+      "Sun protection lotion & insects spray.",
+      "Binoculars, Flash light, Camera.",
+      "Towel, Bath Soap/Shampoo, Toothpaste & Tooth Brush.",
+    ],
+    packageIncludes: [
+      "All meals during the trip.",
+      "All activities inside the forest as per itinerary.",
+      "Mineral water (Jar) for drinking during the trip.",
+      "Forest fees & permission.",
+      "Armed forest guard from the forest department.",
+      "An accompanied experience Guide during the trip.",
+    ],
+    packages: [],
+    seatPlan: [
+      {
+        name: "Level 1 – AC Cabins (101-108)",
+        capacity: 24,
+        rows: [
+          { label: "AC Cabin (Attached Toilet)", cabins: Array.from({ length: 8 }, (_, i) => ({ id: `${101 + i}`, type: "Twin" as const, persons: 3, available: true, bedType: "Triple Bed" })) },
+        ],
+      },
+      {
+        name: "Level 2 – Couple & Family Cabins",
+        capacity: 12,
+        rows: [
+          { label: "Couple Cabin", cabins: Array.from({ length: 4 }, (_, i) => ({ id: `${201 + i}`, type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" })) },
+          { label: "Family Suite", cabins: [{ id: "205", type: "VIP Family" as const, persons: 4, available: true, bedType: "Family Suite" }] },
+        ],
+      },
+      {
+        name: "Level 3 – Twin Cabins & Food Court",
+        capacity: 4,
+        rows: [
+          { label: "Twin Cabin", cabins: Array.from({ length: 2 }, (_, i) => ({ id: `${301 + i}`, type: "Twin" as const, persons: 2, available: true, bedType: "Twin Bed" })) },
+        ],
+      },
+    ],
+    featured: false,
   },
 ];
 
