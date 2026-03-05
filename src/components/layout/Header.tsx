@@ -30,10 +30,7 @@ export default function Header() {
       <div className="container flex h-16 items-center justify-between md:h-18">
         <Link to="/" className="flex items-center gap-3 group">
           <img src={logo} alt="Lucky Tours & Travels" className="h-10 w-auto transition-transform group-hover:scale-105" />
-          <div className="hidden sm:block">
-            <span className="text-lg font-display font-bold text-primary">Lucky Tours</span>
-            <span className="text-xs block text-secondary-foreground/60 font-medium -mt-0.5">& Travels</span>
-          </div>
+          <span className="text-lg font-display font-black tracking-tight text-primary italic">Lucky Tours <span className="text-secondary-foreground/60 not-italic font-semibold text-sm">& Travels</span></span>
         </Link>
 
         {/* Desktop Nav */}
