@@ -1,3 +1,14 @@
+import utshab1 from "@/assets/cruises/utshab-1.jpeg";
+import utshab2 from "@/assets/cruises/utshab-2.jpeg";
+import utshab3 from "@/assets/cruises/utshab-3.jpeg";
+import utshab4 from "@/assets/cruises/utshab-4.jpeg";
+import utshab5 from "@/assets/cruises/utshab-5.jpeg";
+import utshab6 from "@/assets/cruises/utshab-6.jpeg";
+import utshab7 from "@/assets/cruises/utshab-7.jpeg";
+import utshab8 from "@/assets/cruises/utshab-8.jpeg";
+import utshab9 from "@/assets/cruises/utshab-9.jpeg";
+import utshab10 from "@/assets/cruises/utshab-10.jpeg";
+
 export interface Cruise {
   id: string;
   name: string;
@@ -117,9 +128,8 @@ export const cruises: Cruise[] = [
     subtitle: "Luxurious AC Cruise Ship – Khulna",
     description: "MV Utshab has been built with enclosed and spacious open air observation decks, keeping in mind your entertainment and adventurous needs. Experience the breathtaking beauty of the Sundarbans — the world's largest mangrove forest — on this luxurious 23-cabin AC cruise ship with a capacity of 50 tourists.",
     images: [
-      "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=800",
-      "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800",
-      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800",
+      utshab1, utshab2, utshab3, utshab4, utshab5,
+      utshab6, utshab7, utshab8, utshab9, utshab10,
     ],
     price: 22000,
     priceLabel: "Per Person (Bangladeshi)",
