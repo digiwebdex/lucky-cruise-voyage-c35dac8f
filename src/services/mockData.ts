@@ -109,7 +109,15 @@ import jolSafari7 from "@/assets/cruises/jol-safari-7.jpg";
 import jolSafari8 from "@/assets/cruises/jol-safari-8.jpg";
 import jolSafari9 from "@/assets/cruises/jol-safari-9.jpg";
 import jolSafariSeatplan from "@/assets/cruises/jol-safari-seatplan.jpg";
-
+import magpie1 from "@/assets/cruises/magpie-1.jpg";
+import magpie2 from "@/assets/cruises/magpie-2.jpg";
+import magpie3 from "@/assets/cruises/magpie-3.jpg";
+import magpie4 from "@/assets/cruises/magpie-4.jpg";
+import magpie5 from "@/assets/cruises/magpie-5.jpg";
+import magpie6 from "@/assets/cruises/magpie-6.jpg";
+import magpie7 from "@/assets/cruises/magpie-7.jpg";
+import magpie8 from "@/assets/cruises/magpie-8.jpg";
+import magpie9 from "@/assets/cruises/magpie-9.jpg";
 export interface Cruise {
   id: string;
   name: string;
@@ -1360,6 +1368,193 @@ export const cruises: Cruise[] = [
       },
     ],
     seatPlanImage: jolSafariSeatplan,
+    featured: false,
+  },
+  {
+    id: "mv-royal-magpie",
+    name: "MV Royal Magpie",
+    subtitle: "Tourist Ship – Mangrove Forest Sundarban",
+    description: "MV Royal Magpie has been built with enclosed and spacious open air observation decks, keeping in mind your entertainment and adventurous needs. Experience the wild Sundarbans aboard this beautifully designed cruise with elegant interiors, comfortable cabins, and top-tier hospitality.",
+    images: [magpie1, magpie2, magpie3, magpie4, magpie5, magpie6, magpie7, magpie8, magpie9],
+    price: 22000,
+    priceLabel: "per person (Bangladeshi)",
+    route: "Khulna → Sundarban → Khulna",
+    duration: "3 Days / 2 Nights",
+    capacity: "62 Passengers",
+    cabins: "21 Cabins",
+    facilities: [
+      "Elegant spacious rooms",
+      "Modern interior decoration",
+      "High room height clearance",
+      "Comfortable beds",
+      "Sofa and Mirror in cabins",
+      "Cabinets for storage",
+      "Space for luggage keeping",
+      "Open air observation deck",
+      "BBQ Zone on top deck",
+      "Dining area with seating",
+    ],
+    touristSpots: [
+      "Harbaria",
+      "Andarmanik",
+      "Katka Jamtola Sea Beach",
+      "Katka Office Par",
+      "Kochikhali / Hironpoint",
+      "Dimerchor / Dublar Char",
+      "Koromjol",
+    ],
+    itinerary: [
+      {
+        day: "Day 1",
+        title: "Khulna → Andarmanik → Katka",
+        activities: [
+          "7:00 AM – Depart from Khulna Jailkhana Ghat; our guide will receive you and escort you to the ship.",
+          "Cruise along the Rupsha & Poshur rivers, passing Khulna Shipyard, Rupsha Bridge, Rampal Power Plant, and Mongla Port.",
+          "After lunch, visit Andarmanik Eco-Tourism Centre – walk the designated foot trail with armed forest guards.",
+          "Explore dense mangrove vegetation – Sundari, Golpata, Gewa trees; spot crabs scurrying away.",
+          "Walk ~1 mile trail, rest at the Watch Tower, then return to the ship.",
+          "Evening tea/snacks on board; ship sails towards Katka Sanctuary.",
+        ],
+      },
+      {
+        day: "Day 2",
+        title: "Katka → Kochikhali → Dimerchor → Koromjol",
+        activities: [
+          "Early morning canal cruising by desi boat – enjoy the serene silence of the forest.",
+          "Trek 2.5 km through Tiger Tree bushes and deer fields to Jamtola Sea Beach.",
+          "Experience the meeting point of the Sundarbans and the Bay of Bengal.",
+          "Visit Katka Office Par – walk through mud, aerial roots, and dense Goran forest; spot deer herds up close.",
+          "Return to ship; sail to Kochikhali – walk through eerie grasslands where tigers hunt deer.",
+          "Sail to Dimerchor – spend time on the beautiful sea beach until sunset.",
+          "Return to ship; sail towards Koromjol.",
+        ],
+      },
+      {
+        day: "Day 3",
+        title: "Koromjol → Return to Khulna",
+        activities: [
+          "Visit Koromjol – Bangladesh's only saltwater crocodile breeding centre.",
+          "See small & large crocodiles, endangered turtle species, mischievous monkey troops.",
+          "Feed deer grass by hand – a unique hands-on experience.",
+          "Return to ship; depart for Khulna/Mongla.",
+        ],
+      },
+    ],
+    menu: [
+      {
+        day: "Day 1",
+        meals: [
+          { name: "Breakfast (8:30 AM)", items: "Bread, Porota, Vegetables, Dal, Egg Omelette, Butter, Jelly, Honey, Banana, Dessert (Suji/Payesh), Tea/Coffee" },
+          { name: "Snacks (11:00 AM)", items: "Cake, Biscuit, Tea/Coffee" },
+          { name: "Lunch (1:30 PM)", items: "Plain Rice, Parshe Fish, Chicken, Bhorta, Dal, Salad, Dessert, Tea/Coffee" },
+          { name: "Snacks (5:00 PM)", items: "Thai Soup, French Fry, Tea/Coffee" },
+          { name: "Dinner (9:00 PM)", items: "Egg Fried Rice, Chicken Fry, Chinese Vegetables, Chingri Malai Curry, Cashew Nut Salad, Soft Drinks" },
+        ],
+      },
+      {
+        day: "Day 2",
+        meals: [
+          { name: "Morning Snacks", items: "Dry Cake/Biscuit, Tea/Coffee" },
+          { name: "Breakfast (8:30 AM)", items: "Khichuri, Egg Malai Curry, Sea Fish Fry, Begun Bhaji, Achar, Tea/Coffee" },
+          { name: "Snacks", items: "Guava, Lemon Juice, Tea/Coffee" },
+          { name: "Lunch (2:00 PM)", items: "Plain Rice, Coral Fish, Duck Bhuna, Vegetables, Bhorta, Dal, Salad, Firni, Tea/Coffee" },
+          { name: "Snacks (5:00 PM)", items: "Noodles, Tea/Coffee" },
+          { name: "Dinner (9:00 PM)", items: "Egg Fried Rice, Porota, Chicken BBQ, Fish BBQ, Chinese Vegetables, Cholar Dal Bhuna, Russian Salad, Soft Drinks" },
+        ],
+      },
+      {
+        day: "Day 3",
+        meals: [
+          { name: "Breakfast (8:30 AM)", items: "Plain Rice, Various Bhorta, Egg Omelette, Ghee, Dal, Salad, Tea/Coffee" },
+          { name: "Snacks", items: "Orange, Biscuit, Tea/Coffee" },
+          { name: "Lunch (1:30 PM)", items: "Plain Polao, Mutton Rezala, Sea Fish, Egg Malai Curry, Murighonto, Salad, Doi" },
+        ],
+      },
+    ],
+    safetyInfo: [
+      "Two armed security guards from Bangladesh Forest Department at all times.",
+      "Constant VHF communication with Forest Dept, Coast Guard & Navy for weather and emergencies.",
+      "Life jackets available for all passengers.",
+      "GPS tracking and fire safety equipment on board.",
+      "Experienced crew trained for emergency situations.",
+    ],
+    travelTips: [
+      "Avoid wearing bright-colored clothing that is visible from far away. Wear light-colored, loose-fitting full-sleeve clothes.",
+      "Do not use any perfume or fragrance.",
+      "Bring sandals/sneakers with back straps that won't get ruined if wet. Do not bring shoes or high heels.",
+      "Keep luggage size small for adventure tours.",
+      "Do not speak loudly after entering the jungle. Minimize talking while trekking.",
+      "Do not waste water (river water is saline). Do not use drinking water for other purposes.",
+      "Walk in an orderly manner in the jungle. Never stray from the group.",
+      "Do not touch or break tree branches, leaves, or vines.",
+      "Do not do anything harmful to the environment. Do not litter plastic or packaging anywhere.",
+      "Show respect to local people and other tourist groups.",
+      "Follow the instructions of the guide and security guards.",
+    ],
+    thingsToCarry: [
+      "Regular Medicine.",
+      "Snicker shoes for walking.",
+      "Hat/Cap for sun protection.",
+      "Sun protection lotion & insects spray.",
+      "Binoculars, Flash light, Camera.",
+      "Towel, Bath Soap/Shampoo, Toothpaste & Tooth Brush.",
+    ],
+    packageIncludes: [
+      "All meals during the trip.",
+      "All activities inside the forest as per itinerary.",
+      "Mineral water (Jar) for drinking during the trip.",
+      "Forest fees & permission.",
+      "Armed forest guard from the forest department.",
+      "An accompanied experience Guide during the trip.",
+    ],
+    additionalCosts: [
+      { label: "Forest entrance (Foreign)", amount: "৳10,500" },
+      { label: "Forest entrance (Bangladeshi)", amount: "৳1,050" },
+    ],
+    packages: [],
+    seatPlan: [
+      {
+        name: "Deck 1 – Cabins",
+        capacity: 42,
+        rows: [
+          { label: "Port Side", cabins: [
+            { id: "101", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+            { id: "102", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+            { id: "103", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+            { id: "104", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+            { id: "105", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+            { id: "106", type: "VIP Family" as const, persons: 3, available: true, bedType: "Bunk Bed (2+1)" },
+            { id: "107", type: "VIP Family" as const, persons: 3, available: true, bedType: "Bunk Bed (2+1)" },
+          ]},
+          { label: "Starboard", cabins: [
+            { id: "108", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+            { id: "109", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+            { id: "110", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+            { id: "111", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+            { id: "112", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+            { id: "113", type: "VIP Family" as const, persons: 3, available: true, bedType: "Bunk Bed (2+1)" },
+            { id: "114", type: "VIP Family" as const, persons: 3, available: true, bedType: "Bunk Bed (2+1)" },
+          ]},
+        ],
+      },
+      {
+        name: "Deck 2 – Upper Cabins",
+        capacity: 20,
+        rows: [
+          { label: "Port Side", cabins: [
+            { id: "201", type: "VIP Family" as const, persons: 3, available: true, bedType: "Bunk Bed (2+1)" },
+            { id: "202", type: "VIP Family" as const, persons: 3, available: true, bedType: "Bunk Bed (2+1)" },
+            { id: "203", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+          ]},
+          { label: "Starboard", cabins: [
+            { id: "204", type: "VIP Family" as const, persons: 3, available: true, bedType: "Bunk Bed (2+1)" },
+            { id: "205", type: "VIP Family" as const, persons: 3, available: true, bedType: "Bunk Bed (2+1)" },
+            { id: "206", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+            { id: "207", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed" },
+          ]},
+        ],
+      },
+    ],
     featured: false,
   },
 ];
