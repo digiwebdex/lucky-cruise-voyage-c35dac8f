@@ -58,6 +58,7 @@ import pearl19 from "@/assets/cruises/pearl-19.png";
 import pearl20 from "@/assets/cruises/pearl-20.jpeg";
 import utshabSeatplan from "@/assets/cruises/utshab-seatplan.jpeg";
 import silverSeatplan from "@/assets/cruises/silver-seatplan.jpeg";
+import pearlSeatplan from "@/assets/cruises/pearl-seatplan.jpeg";
 
 export interface Cruise {
   id: string;
@@ -249,69 +250,58 @@ const makeSilverSeatPlan = (): Deck[] => [
 
 const makePearlSeatPlan = (): Deck[] => [
   {
-    name: "Under Deck – Executive Lounge",
-    capacity: 20,
+    name: "Ground Floor – Conference Room",
+    capacity: 0,
     rows: [
-      { label: "Meeting & Lounge", cabins: [
-        { id: "UG1", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
-        { id: "UG2", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
-        { id: "UG3", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
-        { id: "UG4", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
-        { id: "UG5", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
-        { id: "UG6", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
-        { id: "UG7", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
-        { id: "UG8", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
-        { id: "UG9", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
-        { id: "UG10", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
-      ]},
+      { label: "Facilities", cabins: [] },
     ],
   },
   {
-    name: "Deck 1 – Deluxe & Family Cabins",
-    capacity: 24,
+    name: "1st Floor – Couple & Family Cabins",
+    capacity: 30,
     rows: [
       { label: "Port Side", cabins: [
-        { id: "P101", type: "VIP Family", persons: 3, available: true, bedType: "Family Room" },
-        { id: "P102", type: "VIP Family", persons: 3, available: true, bedType: "Family Room" },
-        { id: "P103", type: "VIP Couple", persons: 2, available: true, bedType: "Deluxe Couple" },
-        { id: "P104", type: "VIP Couple", persons: 2, available: true, bedType: "Super Deluxe Couple" },
-        { id: "P105", type: "VIP Couple", persons: 2, available: true, bedType: "Deluxe Couple" },
-        { id: "P106", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
+        { id: "108", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "109", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "110", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "111", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "112", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "113", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
       ]},
       { label: "Starboard", cabins: [
-        { id: "P107", type: "VIP Family", persons: 3, available: true, bedType: "Family Room" },
-        { id: "P108", type: "VIP Couple", persons: 2, available: false, bedType: "Deluxe Couple" },
-        { id: "P109", type: "VIP Couple", persons: 2, available: true, bedType: "Super Deluxe Couple" },
-        { id: "P110", type: "VIP Couple", persons: 2, available: true, bedType: "Deluxe Couple" },
-        { id: "P111", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
-        { id: "P112", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
+        { id: "106+107", type: "VIP Family", persons: 4, available: true, bedType: "4-Bed Family Cabin (Attached Toilet)" },
+        { id: "105", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "104", type: "VIP Couple", persons: 2, available: false, bedType: "Couple Bed" },
+        { id: "103", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "102", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "114", type: "Bunk", persons: 2, available: false, bedType: "2 Bed (Out of Order)" },
       ]},
     ],
   },
   {
-    name: "Deck 2 – Standard Cabins",
-    capacity: 16,
+    name: "2nd Floor – Triple & Bunk Cabins",
+    capacity: 22,
     rows: [
       { label: "Port Side", cabins: [
-        { id: "P201", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
-        { id: "P202", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
-        { id: "P203", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
-        { id: "P204", type: "Single", persons: 1, available: true, bedType: "Single Bed" },
+        { id: "205", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
+        { id: "206", type: "VIP Family", persons: 3, available: true, bedType: "3 Bed" },
+        { id: "207", type: "VIP Family", persons: 3, available: true, bedType: "3 Bed" },
+        { id: "208", type: "Bunk", persons: 3, available: true, bedType: "2 Bed Bunk + 1 Single" },
       ]},
       { label: "Starboard", cabins: [
-        { id: "P205", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
-        { id: "P206", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
-        { id: "P207", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
-        { id: "P208", type: "Single", persons: 1, available: true, bedType: "Single Bed" },
+        { id: "204", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
+        { id: "203", type: "VIP Family", persons: 3, available: true, bedType: "3 Bed" },
+        { id: "202", type: "VIP Family", persons: 3, available: true, bedType: "3 Bed" },
+        { id: "201", type: "Bunk", persons: 3, available: true, bedType: "2 Bed Bunk + 1 Single" },
       ]},
     ],
   },
   {
-    name: "Sky Deck – Premier Cabin",
+    name: "3rd Floor – Sky Deck & Premier Cabin",
     capacity: 2,
     rows: [
       { label: "Panoramic View", cabins: [
-        { id: "SK1", type: "VIP Couple", persons: 2, available: true, bedType: "Premier Suite 360°" },
+        { id: "301", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed (AC)" },
       ]},
     ],
   },
@@ -724,30 +714,30 @@ export const cruises: Cruise[] = [
       {
         day: "Day 1",
         meals: [
-          { name: "Breakfast", items: "Bread, Paratha, Vegetables, Dal, Egg Omelette, Butter, Jelly, Honey, Banana, Dessert (Suji/Payesh), Tea-Coffee" },
-          { name: "Snacks", items: "Cake, Biscuit, Tea-Coffee" },
-          { name: "Lunch", items: "White Rice, Parshe Fish, Chicken, Bharta, Dal, Salad, Dessert, Tea-Coffee" },
-          { name: "Evening Snacks", items: "Thai Soup, French Fries, Tea-Coffee" },
-          { name: "Dinner", items: "Egg Fried Rice, Chicken Fry, Chinese Vegetables, Shrimp Malai Curry, Cashew Nut Salad, Soft Drinks" },
+          { name: "Breakfast", items: "Plain Paratha, Vegetables, Thick Mug Dal, Fried Egg, Banana, Bread + Jam-Jelly, Sundarbans Honey, Tea-Coffee" },
+          { name: "Morning Snacks", items: "Fruit Cake, Banana/Orange/Apple, Tea-Coffee" },
+          { name: "Buffet Lunch", items: "Plain Rice, Bharta, Vegetables, Koral Fish Dopeyaza, Mutton Curry, Thick Dal, Mixed Salad, Shandesh" },
+          { name: "Afternoon Snacks", items: "Aloo Puri, Tea-Coffee" },
+          { name: "Buffet Dinner", items: "Chicken Soup, Fried Rice, Chinese Vegetables, Fried Chicken, Prawn Chili Onion, Salad, Papaya" },
         ],
       },
       {
         day: "Day 2",
         meals: [
-          { name: "Morning Snacks", items: "Dry Cake/Biscuit, Tea-Coffee" },
-          { name: "Breakfast", items: "Khichuri, Egg Malai Curry, Sea Fish Fry, Eggplant Fry, Pickle, Tea-Coffee" },
-          { name: "Snacks", items: "Guava, Lemon Juice, Tea-Coffee" },
-          { name: "Lunch", items: "White Rice, Koral Fish, Duck Bhuna, Vegetables, Bharta, Dal, Salad, Firni, Tea-Coffee" },
-          { name: "Evening Snacks", items: "Noodles, Tea-Coffee" },
-          { name: "Dinner", items: "Egg Fried Rice, Paratha, Chicken Bar-B-Q, Fish Bar-B-Q, Chinese Vegetables, Cholar Dal Bhuna, Russian Salad, Soft Drinks" },
+          { name: "Breakfast", items: "Bhuna Khichuri, Begun Bhaja, Egg Fry, Mixed Salad, Pickles, Tea-Coffee" },
+          { name: "Morning Snacks", items: "Orange/Apple, Cookies, Tea-Coffee" },
+          { name: "Buffet Lunch", items: "Plain Rice, Bharta (Kola/Mocha), Vegetables, Parshe Fish Fry, Duck Bhuna, Dal, Mixed Salad, Chamcham" },
+          { name: "Afternoon Snacks", items: "Vegetable Pakora, Tea-Coffee" },
+          { name: "Buffet Dinner", items: "Plain Paratha, Fried Rice, Chicken BBQ, Koral Fish BBQ, Solar Dal, Russian Salad, Soft Drinks" },
         ],
       },
       {
         day: "Day 3",
         meals: [
-          { name: "Breakfast", items: "White Rice, Various Bharta, Egg Omelette, Ghee, Dal, Salad, Tea-Coffee" },
-          { name: "Snacks", items: "Orange, Biscuit, Tea-Coffee" },
-          { name: "Lunch", items: "Plain Polao, Mutton Rezala, Sea Fish, Egg Malai Curry, Muri Ghonto, Salad, Doi" },
+          { name: "Breakfast", items: "Ruti, Mixed Vegetables, Fried Egg, Sujir Halua, Tea-Coffee" },
+          { name: "Morning Snacks", items: "Dry Cake/Cookies, Banana, Tea-Coffee" },
+          { name: "Buffet Lunch", items: "Plain Polao, Chinese Vegetables, Prawn Dopeyaza, Mutton Curry, Mixed Salad, Yogurt" },
+          { name: "Afternoon Snacks", items: "Chowmein, Soft Drinks, Tea-Coffee" },
         ],
       },
     ],
@@ -798,6 +788,7 @@ export const cruises: Cruise[] = [
       },
     ],
     seatPlan: makePearlSeatPlan(),
+    seatPlanImage: pearlSeatplan,
     featured: true,
   },
 ];
