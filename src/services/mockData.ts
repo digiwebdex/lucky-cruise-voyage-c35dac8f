@@ -93,6 +93,11 @@ import forest7 from "@/assets/cruises/forest-7.jpg";
 import forest8 from "@/assets/cruises/forest-8.jpg";
 import forest9 from "@/assets/cruises/forest-9.jpg";
 import forest10 from "@/assets/cruises/forest-10.jpg";
+import forest11 from "@/assets/cruises/forest-11.jpg";
+import forest12 from "@/assets/cruises/forest-12.jpg";
+import forest13 from "@/assets/cruises/forest-13.jpg";
+import forest14 from "@/assets/cruises/forest-14.jpg";
+import forest15 from "@/assets/cruises/forest-15.jpg";
 
 export interface Cruise {
   id: string;
@@ -993,8 +998,9 @@ export const cruises: Cruise[] = [
     subtitle: "Floating Luxury on Sundarban",
     description: "MV Forest Cruise is a newly built luxurious cruise vessel designed for comfortable Sundarban adventures. Featuring captivating interior design, live BBQ corner, dual engines for safe travel, dual generators for 24/7 electricity, IPS backup lighting, modern GPS, VHF & Echo Sounder systems, and experienced chefs preparing delicious meals — all for an unforgettable wilderness experience.",
     images: [
-      forest1, forest2, forest3, forest4, forest5,
-      forest6, forest7, forest8, forest9, forest10,
+      forest11, forest1, forest2, forest3, forest4, forest5,
+      forest6, forest12, forest13, forest14, forest15,
+      forest7, forest8, forest9, forest10,
     ],
     price: 22000,
     priceLabel: "Per Person (Bangladeshi)",
