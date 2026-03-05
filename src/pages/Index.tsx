@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Ship, Shield, Star, Clock, MapPin, Phone, ChevronRight, Anchor, Waves, ArrowRight, Users } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Ship, Shield, Star, Clock, MapPin, Phone, ChevronRight, Anchor, Waves, ArrowRight, Users, ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { cruises, testimonials } from "@/services/mockData";
@@ -10,80 +11,122 @@ const fadeLeft = { hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0 }
 const fadeRight = { hidden: { opacity: 0, x: 40 }, visible: { opacity: 1, x: 0 } };
 const scaleIn = { hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } };
 
+// Pick best hero images from different cruises
+const heroSlides = [
+  { image: cruises[0]?.images[0], title: "Explore the Wild", highlight: "Sundarbans", subtitle: "Premium cruise through the world's largest mangrove forest" },
+  { image: cruises[1]?.images[0], title: "Luxury Awaits on", highlight: "Every Voyage", subtitle: "AC cabins, gourmet cuisine, and breathtaking wildlife encounters" },
+  { image: cruises[2]?.images[0], title: "Adventure Meets", highlight: "Comfort", subtitle: "Modern fleet with top-tier safety and unforgettable experiences" },
+  { image: cruises[3]?.images[1], title: "Discover Hidden", highlight: "Treasures", subtitle: "Royal Bengal Tigers, spotted deer, and exotic birds in their natural habitat" },
+  { image: cruises[4]?.images[0], title: "Set Sail Into", highlight: "The Unknown", subtitle: "Guided tours through mysterious waterways and enchanting forests" },
+];
+
 export default function Index() {
   const featured = cruises.filter(c => c.featured).slice(0, 4);
   const allCruises = cruises.slice(0, 6);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(1);
+
+  const goToSlide = useCallback((idx: number) => {
+    setDirection(idx > currentSlide ? 1 : -1);
+    setCurrentSlide(idx);
+  }, [currentSlide]);
+
+  const nextSlide = useCallback(() => {
+    setDirection(1);
+    setCurrentSlide(prev => (prev + 1) % heroSlides.length);
+  }, []);
+
+  const prevSlide = useCallback(() => {
+    setDirection(-1);
+    setCurrentSlide(prev => (prev - 1 + heroSlides.length) % heroSlides.length);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 5000);
+    return () => clearInterval(timer);
+  }, [nextSlide]);
+
+  const slideVariants = {
+    enter: (dir: number) => ({ x: dir > 0 ? "100%" : "-100%", opacity: 0, scale: 1.1 }),
+    center: { x: 0, opacity: 1, scale: 1 },
+    exit: (dir: number) => ({ x: dir > 0 ? "-50%" : "50%", opacity: 0, scale: 0.95 }),
+  };
+
+  const slide = heroSlides[currentSlide];
 
   return (
     <div className="overflow-hidden">
-      {/* ============ HERO ============ */}
-      <section className="relative min-h-[90vh] flex items-center gradient-hero overflow-hidden">
-        {/* Background image */}
-        <div className="absolute inset-0">
-          <img src={cruises[0]?.images[0]} alt="" className="h-full w-full object-cover opacity-20" draggable={false} />
-          <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/80 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-secondary/40" />
+      {/* ============ HERO SLIDER ============ */}
+      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
+        {/* Sliding backgrounds */}
+        <AnimatePresence initial={false} custom={direction} mode="popLayout">
+          <motion.div
+            key={currentSlide}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="absolute inset-0"
+          >
+            <img src={slide.image} alt="" className="h-full w-full object-cover" draggable={false} />
+            <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/75 to-secondary/30" />
+            <div className="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-secondary/50" />
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Decorative */}
+        <div className="absolute top-20 right-10 opacity-[0.07] hidden lg:block pointer-events-none">
+          <Anchor className="h-48 w-48 text-primary animate-float" />
         </div>
-        
-        {/* Decorative elements */}
-        <div className="absolute top-20 right-10 opacity-10 hidden lg:block">
-          <Anchor className="h-40 w-40 text-primary animate-float" />
-        </div>
-        <div className="absolute bottom-20 left-10 opacity-5 hidden lg:block">
-          <Waves className="h-60 w-60 text-primary" />
+        <div className="absolute bottom-10 left-10 opacity-[0.04] hidden lg:block pointer-events-none">
+          <Waves className="h-64 w-64 text-primary" />
         </div>
 
+        {/* Content */}
         <div className="container relative z-10 py-20">
           <div className="max-w-3xl">
             <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6 }}>
-              <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary mb-6">
+              <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm px-4 py-1.5 text-sm font-semibold text-primary mb-6">
                 <Ship className="h-4 w-4" /> Bangladesh's Premium Cruise Experience
               </span>
             </motion.div>
 
-            <motion.h1
-              initial="hidden" animate="visible" variants={fadeUp}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="font-display text-5xl md:text-7xl font-black leading-[1.05] text-secondary-foreground mb-6"
-            >
-              Explore the Wild
-              <br />
-              <span className="text-gradient">Sundarbans</span>
-              <br />
-              <span className="text-3xl md:text-5xl font-bold text-secondary-foreground/70">By Luxury Cruise</span>
-            </motion.h1>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+              >
+                <h1 className="font-display text-5xl md:text-7xl font-black leading-[1.05] text-secondary-foreground mb-4">
+                  {slide.title}
+                  <br />
+                  <span className="text-gradient">{slide.highlight}</span>
+                </h1>
+                <p className="text-lg md:text-xl text-secondary-foreground/60 max-w-xl mb-10 leading-relaxed">
+                  {slide.subtitle}
+                </p>
+              </motion.div>
+            </AnimatePresence>
 
-            <motion.p
-              initial="hidden" animate="visible" variants={fadeUp}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-lg md:text-xl text-secondary-foreground/60 max-w-xl mb-10 leading-relaxed"
-            >
-              Journey through the world's largest mangrove forest aboard our premium fleet. Unforgettable adventures, authentic cuisine, and breathtaking wildlife await.
-            </motion.p>
-
-            <motion.div
-              initial="hidden" animate="visible" variants={fadeUp}
-              transition={{ duration: 0.7, delay: 0.35 }}
-              className="flex flex-wrap gap-4"
-            >
+            <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.35 }} className="flex flex-wrap gap-4">
               <Link to="/cruises">
                 <Button size="lg" className="gradient-primary text-primary-foreground font-bold text-base px-8 h-14 rounded-xl shadow-glow hover:scale-105 transition-transform gap-2">
                   Explore Cruises <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>
               <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" variant="outline" className="border-2 border-primary/40 text-primary font-bold text-base px-8 h-14 rounded-xl hover:bg-primary hover:text-primary-foreground transition-all gap-2">
+                <Button size="lg" variant="outline" className="border-2 border-primary/40 text-primary font-bold text-base px-8 h-14 rounded-xl hover:bg-primary hover:text-primary-foreground transition-all gap-2 backdrop-blur-sm">
                   <Phone className="h-5 w-5" /> Book via WhatsApp
                 </Button>
               </a>
             </motion.div>
 
-            {/* Quick Stats */}
-            <motion.div
-              initial="hidden" animate="visible" variants={fadeUp}
-              transition={{ duration: 0.7, delay: 0.5 }}
-              className="mt-14 flex flex-wrap gap-8"
-            >
+            {/* Stats */}
+            <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.5 }} className="mt-14 flex flex-wrap gap-8">
               {[
                 { value: "6+", label: "Cruise Ships" },
                 { value: "5000+", label: "Happy Travellers" },
@@ -96,6 +139,32 @@ export default function Index() {
               ))}
             </motion.div>
           </div>
+        </div>
+
+        {/* Slider Controls */}
+        <div className="absolute bottom-8 right-8 z-20 flex items-center gap-3">
+          <button onClick={prevSlide} className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary/60 backdrop-blur-md text-secondary-foreground/70 hover:bg-primary hover:text-primary-foreground transition-all border border-secondary-foreground/10">
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <div className="flex gap-2">
+            {heroSlides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goToSlide(i)}
+                className={`h-2.5 rounded-full transition-all duration-500 ${i === currentSlide ? "w-8 bg-primary" : "w-2.5 bg-secondary-foreground/30 hover:bg-secondary-foreground/50"}`}
+              />
+            ))}
+          </div>
+          <button onClick={nextSlide} className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary/60 backdrop-blur-md text-secondary-foreground/70 hover:bg-primary hover:text-primary-foreground transition-all border border-secondary-foreground/10">
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
+
+        {/* Slide counter */}
+        <div className="absolute bottom-8 left-8 z-20 hidden md:flex items-center gap-3">
+          <span className="text-4xl font-display font-black text-primary">0{currentSlide + 1}</span>
+          <span className="text-secondary-foreground/30 text-sm">/</span>
+          <span className="text-sm text-secondary-foreground/40 font-medium">0{heroSlides.length}</span>
         </div>
       </section>
 
