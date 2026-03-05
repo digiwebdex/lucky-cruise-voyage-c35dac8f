@@ -98,6 +98,7 @@ import forest12 from "@/assets/cruises/forest-12.jpg";
 import forest13 from "@/assets/cruises/forest-13.jpg";
 import forest14 from "@/assets/cruises/forest-14.jpg";
 import forest15 from "@/assets/cruises/forest-15.jpg";
+import forestSeatplan from "@/assets/cruises/forest-seatplan.jpg";
 
 export interface Cruise {
   id: string;
@@ -1149,30 +1150,36 @@ export const cruises: Cruise[] = [
     ],
     seatPlan: [
       {
-        name: "Ground Floor – Executive Triple Rooms",
-        capacity: 18,
+        name: "Level 1 – Engine & Water Tank",
+        capacity: 0,
+        rows: [],
+      },
+      {
+        name: "Level 2 – Triple Rooms (101-108)",
+        capacity: 24,
         rows: [
-          { label: "Executive Triple Room (Attached Toilet)", cabins: Array.from({ length: 6 }, (_, i) => ({ id: `gf-et-${i + 1}`, type: "Twin" as const, persons: 3, available: true, bedType: "Triple Bed" })) },
+          { label: "Triple Room (Attached Toilet)", cabins: Array.from({ length: 8 }, (_, i) => ({ id: `l2-${101 + i}`, type: "Twin" as const, persons: 3, available: true, bedType: "Triple Bed" })) },
         ],
       },
       {
-        name: "1st Floor – Couple & Family Rooms",
+        name: "Level 3 – Couple, Family & Twin Rooms",
         capacity: 16,
         rows: [
-          { label: "Deluxe Couple Room (Attached Toilet)", cabins: Array.from({ length: 4 }, (_, i) => ({ id: `1f-dc-${i + 1}`, type: "VIP Couple" as const, persons: 2, available: true, bedType: "Double Bed" })) },
-          { label: "Family Suite (Attached Toilet)", cabins: [{ id: "1f-fs-1", type: "VIP Family" as const, persons: 4, available: true, bedType: "Family Suite" }] },
-          { label: "Standard Twin Room (Private Toilet)", cabins: Array.from({ length: 2 }, (_, i) => ({ id: `1f-st-${i + 1}`, type: "Twin" as const, persons: 2, available: true, bedType: "Twin Bed" })) },
+          { label: "Couple Room (201-204)", cabins: Array.from({ length: 4 }, (_, i) => ({ id: `l3-${201 + i}`, type: "VIP Couple" as const, persons: 2, available: true, bedType: "Double Bed" })) },
+          { label: "Family Suite (205)", cabins: [{ id: "l3-205", type: "VIP Family" as const, persons: 4, available: true, bedType: "Family Suite" }] },
+          { label: "Twin Bed Room (206-207)", cabins: Array.from({ length: 2 }, (_, i) => ({ id: `l3-${206 + i}`, type: "Twin" as const, persons: 2, available: true, bedType: "Twin Bed" })) },
         ],
       },
       {
-        name: "2nd Floor – Bunk Rooms & Top Deck",
+        name: "Level 4 – Top Deck, Bunk & Food Court",
         capacity: 7,
         rows: [
-          { label: "Triple Bunk Bed Room (Common Toilet)", cabins: [{ id: "2f-tb-1", type: "Bunk" as const, persons: 3, available: true, bedType: "Bunk Bed" }] },
-          { label: "Four Bunk Bed Room (Common Toilet)", cabins: [{ id: "2f-fb-1", type: "Bunk" as const, persons: 4, available: true, bedType: "Bunk Bed" }] },
+          { label: "Four Bunk Room (301)", cabins: [{ id: "l4-301", type: "Bunk" as const, persons: 4, available: true, bedType: "Bunk Bed" }] },
+          { label: "Master Suite (302)", cabins: [{ id: "l4-302", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Master Suite" }] },
         ],
       },
     ],
+    seatPlanImage: forestSeatplan,
     featured: true,
   },
 ];
