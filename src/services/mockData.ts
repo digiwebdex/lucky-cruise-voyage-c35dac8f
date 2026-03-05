@@ -1,15 +1,38 @@
 export interface Cruise {
   id: string;
   name: string;
+  subtitle: string;
   description: string;
   images: string[];
   price: number;
+  priceLabel: string;
   route: string;
   duration: string;
+  capacity: string;
+  cabins: string;
   facilities: string[];
   packages: CruisePackage[];
   seatPlan: Deck[];
   featured: boolean;
+  itinerary?: ItineraryDay[];
+  menu?: MenuDay[];
+  safetyInfo?: string[];
+  travelTips?: string[];
+  thingsToCarry?: string[];
+  packageIncludes?: string[];
+  touristSpots?: string[];
+  additionalCosts?: { label: string; amount: string }[];
+}
+
+export interface ItineraryDay {
+  day: string;
+  title: string;
+  activities: string[];
+}
+
+export interface MenuDay {
+  day: string;
+  meals: { name: string; items: string }[];
 }
 
 export interface CruisePackage {
@@ -65,181 +88,187 @@ export interface TeamMember {
 
 const makeSeatPlan = (): Deck[] => [
   {
-    name: "Deck 1 - Standard",
+    name: "Deck 1 – Standard Cabins",
     rows: [
-      { label: "A", seats: [{ id: "A1", type: "Non-AC", available: true }, { id: "A2", type: "Non-AC", available: true }, { id: "A3", type: "Non-AC", available: false }, { id: "A4", type: "Non-AC", available: true }] },
-      { label: "B", seats: [{ id: "B1", type: "Non-AC", available: true }, { id: "B2", type: "Non-AC", available: true }, { id: "B3", type: "Non-AC", available: true }, { id: "B4", type: "Non-AC", available: false }] },
+      { label: "A", seats: [{ id: "A1", type: "AC", available: true }, { id: "A2", type: "AC", available: true }, { id: "A3", type: "AC", available: false }, { id: "A4", type: "AC", available: true }] },
+      { label: "B", seats: [{ id: "B1", type: "AC", available: true }, { id: "B2", type: "AC", available: true }, { id: "B3", type: "AC", available: true }, { id: "B4", type: "AC", available: false }] },
+      { label: "C", seats: [{ id: "C1", type: "AC", available: true }, { id: "C2", type: "AC", available: false }, { id: "C3", type: "AC", available: true }, { id: "C4", type: "AC", available: true }] },
     ],
   },
   {
-    name: "Deck 2 - Premium",
+    name: "Deck 2 – Premium Cabins",
     rows: [
-      { label: "C", seats: [{ id: "C1", type: "AC", available: true }, { id: "C2", type: "AC", available: true }, { id: "C3", type: "AC", available: false }, { id: "C4", type: "AC", available: true }] },
-      { label: "D", seats: [{ id: "D1", type: "AC", available: true }, { id: "D2", type: "AC", available: false }, { id: "D3", type: "AC", available: true }, { id: "D4", type: "AC", available: true }] },
+      { label: "D", seats: [{ id: "D1", type: "AC", available: true }, { id: "D2", type: "AC", available: true }, { id: "D3", type: "AC", available: false }, { id: "D4", type: "AC", available: true }] },
+      { label: "E", seats: [{ id: "E1", type: "AC", available: true }, { id: "E2", type: "AC", available: false }, { id: "E3", type: "AC", available: true }, { id: "E4", type: "AC", available: true }] },
+    ],
+  },
+  {
+    name: "Observation Deck",
+    rows: [
+      { label: "F", seats: [{ id: "F1", type: "AC", available: true }, { id: "F2", type: "AC", available: true }, { id: "F3", type: "AC", available: true }, { id: "F4", type: "AC", available: true }] },
     ],
   },
 ];
 
 export const cruises: Cruise[] = [
   {
-    id: "sundarban-explorer",
-    name: "Sundarban Explorer",
-    description: "Experience the breathtaking beauty of the Sundarbans, the world's largest mangrove forest. Spot Royal Bengal Tigers, exotic birds, and explore the mystical waterways on this unforgettable cruise adventure.",
-    images: ["https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=800", "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800", "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800"],
-    price: 5500,
+    id: "mv-utshab",
+    name: "MV UTSHAB",
+    subtitle: "Luxurious AC Cruise Ship – Khulna",
+    description: "MV Utshab has been built with enclosed and spacious open air observation decks, keeping in mind your entertainment and adventurous needs. Experience the breathtaking beauty of the Sundarbans — the world's largest mangrove forest — on this luxurious 23-cabin AC cruise ship with a capacity of 50 tourists.",
+    images: [
+      "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=800",
+      "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800",
+      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800",
+    ],
+    price: 22000,
+    priceLabel: "Per Person (Bangladeshi)",
     route: "Khulna – Sundarban – Khulna",
     duration: "3 Days / 2 Nights",
-    facilities: ["AC Cabins", "Restaurant", "Open Deck", "WiFi", "Life Jackets", "Guide"],
+    capacity: "50 Tourists",
+    cabins: "23 Cabins",
+    facilities: [
+      "Spacious Rooms with Modern Interior",
+      "High Room Height Clearance",
+      "Individual AC with Control",
+      "Comfortable Beds",
+      "Sofa & Mirror",
+      "Storage Cabinets",
+      "Luggage Space",
+      "Open Air Observation Deck",
+      "Enclosed Deck",
+    ],
+    touristSpots: [
+      "Harbaria",
+      "Andarmanik Eco-Tourism Centre",
+      "Katka Jamtola Sea Beach",
+      "Katka Office Par",
+      "Kochikhali / Hironpoint",
+      "Dimerchor / Dublar Char",
+      "Koromjol Crocodile Breeding Centre",
+    ],
+    additionalCosts: [
+      { label: "Entrance fee (Foreign National)", amount: "10,500 BDT" },
+      { label: "Entrance fee (Bangladeshi National)", amount: "1,050 BDT" },
+    ],
+    itinerary: [
+      {
+        day: "Day 1",
+        title: "Khulna → Andarmanik",
+        activities: [
+          "7:00 AM – Board at Khulna Jailkhana Ghat, our guide will receive you",
+          "Cruise along Rupsha & Pashur River – pass Khulna Shipyard, Rupsha Bridge, Rampal Power Plant, Mongla Port",
+          "Lunch on board the ship",
+          "Visit Andarmanik Eco-Tourism Centre – guided forest trek with armed guards",
+          "Walk through dense mangrove forest – Sundari, Golpata, Gewa trees",
+          "Climb the Watch Tower for panoramic views, then return to ship",
+          "Evening snacks on board",
+          "Ship sails toward Katka Sanctuary at the edge of the Bay of Bengal",
+        ],
+      },
+      {
+        day: "Day 2",
+        title: "Katka → Kochikhali → Dimerchor",
+        activities: [
+          "Early morning canal cruising by country boat – enjoy forest silence",
+          "Trek through Tiger Tree bushes and deer grazing fields",
+          "Walk 2.5 km to Jamtola Sea Beach – where the Sundarbans meets the Bay of Bengal",
+          "Visit Katka Office Par – walk through mud, breathing roots & dense Goran forest",
+          "Spot deer herds up close along the trail",
+          "Ship sails to Kochikhali – walk through the eerie grasslands known as 'Tiger's Dining Room'",
+          "Ship sails to Dimerchor – relax at the beautiful sea beach until evening",
+          "Return to ship, sail toward Koromjol",
+        ],
+      },
+      {
+        day: "Day 3",
+        title: "Koromjol → Return",
+        activities: [
+          "Visit Koromjol – Bangladesh's only saltwater crocodile breeding centre",
+          "See crocodiles of all sizes, endangered turtles, and playful monkeys",
+          "Feed deer by hand – a unique experience",
+          "Return to ship, sail back to Khulna / Mongla",
+          "Lunch on board during return journey",
+        ],
+      },
+    ],
+    menu: [
+      {
+        day: "Day 1",
+        meals: [
+          { name: "Breakfast", items: "Bread, Paratha, Vegetables, Dal, Egg Omelette, Butter, Jelly, Honey, Banana, Dessert (Suji/Payesh), Tea-Coffee" },
+          { name: "Snacks", items: "Cake, Biscuit, Tea-Coffee" },
+          { name: "Lunch", items: "White Rice, Parshe Fish, Chicken, Bharta, Dal, Salad, Dessert, Tea-Coffee" },
+          { name: "Evening Snacks", items: "Thai Soup, French Fries, Tea-Coffee" },
+          { name: "Dinner", items: "Egg Fried Rice, Chicken Fry, Chinese Vegetables, Shrimp Malai Curry, Cashew Nut Salad, Soft Drinks" },
+        ],
+      },
+      {
+        day: "Day 2",
+        meals: [
+          { name: "Morning Snacks", items: "Dry Cake/Biscuit, Tea-Coffee" },
+          { name: "Breakfast", items: "Khichuri, Egg Malai Curry, Sea Fish Fry, Eggplant Fry, Pickle, Tea-Coffee" },
+          { name: "Snacks", items: "Guava, Lemon Juice, Tea-Coffee" },
+          { name: "Lunch", items: "White Rice, Koral Fish, Duck Bhuna, Vegetables, Bharta, Dal, Salad, Firni, Tea-Coffee" },
+          { name: "Evening Snacks", items: "Noodles, Tea-Coffee" },
+          { name: "Dinner", items: "Egg Fried Rice, Paratha, Chicken Bar-B-Q, Fish Bar-B-Q, Chinese Vegetables, Cholar Dal Bhuna, Russian Salad, Soft Drinks" },
+        ],
+      },
+      {
+        day: "Day 3",
+        meals: [
+          { name: "Breakfast", items: "White Rice, Various Bharta, Egg Omelette, Ghee, Dal, Salad, Tea-Coffee" },
+          { name: "Snacks", items: "Orange, Biscuit, Tea-Coffee" },
+          { name: "Lunch", items: "Plain Polao, Mutton Rezala, Sea Fish, Egg Malai Curry, Muri Ghonto, Salad, Doi" },
+        ],
+      },
+    ],
+    safetyInfo: [
+      "Two armed forest guards from Bangladesh Forest Department will accompany you at all times",
+      "Constant communication with Forest, Coast Guard & Navy via VSF for weather and emergencies",
+      "All necessary safety measures will be taken based on weather and other conditions",
+    ],
+    travelTips: [
+      "Avoid bright-colored clothes – wear light, loose, full-sleeve clothing",
+      "Do not use any perfume or strong scents",
+      "Bring sandals/sneakers with back strap that can get wet – no shoes or high heels",
+      "Keep luggage size small for adventure tours",
+      "Do not speak loudly in the forest – trek silently unless necessary",
+      "Do not waste drinking water (river water is saline)",
+      "Walk in an orderly manner – never separate from the group",
+      "Do not touch or break tree branches, leaves, or vines",
+      "Do not litter – no polythene or packaging waste in the forest",
+      "Show respect to local and other tourist groups",
+      "Follow guide and security guard instructions at all times",
+    ],
+    thingsToCarry: [
+      "Regular Medicine",
+      "Sneaker shoes for walking",
+      "Hat/Cap for sun protection",
+      "Sunscreen lotion & insect spray",
+      "Binoculars, Flashlight, Camera",
+      "Towel, Bath Soap/Shampoo, Toothpaste & Toothbrush",
+    ],
+    packageIncludes: [
+      "All meals during the trip",
+      "All activities inside the forest as per itinerary",
+      "Mineral water (Jar) for drinking during the trip",
+      "Forest fees & permission",
+      "Armed forest guard from the forest department",
+      "Experienced guide during the trip",
+    ],
     packages: [
-      { id: "se-1", name: "Economy", route: "Khulna – Sundarban – Khulna", price: 5500, inclusions: ["Non-AC Cabin", "3 Meals/Day", "Guide"], seatType: "Non-AC" },
-      { id: "se-2", name: "Premium", route: "Khulna – Sundarban – Khulna", price: 8500, inclusions: ["AC Cabin", "3 Meals/Day", "Guide", "Snacks"], seatType: "AC" },
-      { id: "se-3", name: "Luxury", route: "Khulna – Sundarban – Khulna", price: 12000, inclusions: ["Deluxe AC Cabin", "All Meals", "Guide", "Photography Session"], seatType: "AC" },
+      {
+        id: "utshab-1",
+        name: "Sundarban Explorer",
+        route: "Khulna – Sundarban – Khulna",
+        price: 22000,
+        inclusions: ["All Meals (3 Days)", "AC Cabin", "Forest Guide", "Armed Guard", "Forest Fees", "Mineral Water"],
+        seatType: "AC",
+      },
     ],
     seatPlan: makeSeatPlan(),
     featured: true,
-  },
-  {
-    id: "river-paradise",
-    name: "River Paradise",
-    description: "Sail through the majestic rivers of Bangladesh and witness the stunning riverside landscapes, villages, and sunsets that will take your breath away.",
-    images: ["https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800", "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=800"],
-    price: 4000,
-    route: "Dhaka – Barishal – Dhaka",
-    duration: "2 Days / 1 Night",
-    facilities: ["AC Cabins", "Restaurant", "Open Deck", "Life Jackets"],
-    packages: [
-      { id: "rp-1", name: "Standard", route: "Dhaka – Barishal – Dhaka", price: 4000, inclusions: ["Non-AC Cabin", "2 Meals/Day"], seatType: "Non-AC" },
-      { id: "rp-2", name: "Comfort", route: "Dhaka – Barishal – Dhaka", price: 6500, inclusions: ["AC Cabin", "All Meals", "Snacks"], seatType: "AC" },
-    ],
-    seatPlan: makeSeatPlan(),
-    featured: true,
-  },
-  {
-    id: "coastal-dream",
-    name: "Coastal Dream",
-    description: "Discover the beauty of the Bay of Bengal coastline. From Cox's Bazar to Saint Martin, this cruise takes you on an unforgettable marine journey.",
-    images: ["https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800", "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=800"],
-    price: 9000,
-    route: "Cox's Bazar – Saint Martin – Cox's Bazar",
-    duration: "4 Days / 3 Nights",
-    facilities: ["AC Cabins", "Restaurant", "Swimming Pool", "Open Deck", "WiFi", "Guide"],
-    packages: [
-      { id: "cd-1", name: "Explorer", route: "Cox's Bazar – Saint Martin – Cox's Bazar", price: 9000, inclusions: ["Non-AC Cabin", "All Meals", "Guide"], seatType: "Non-AC" },
-      { id: "cd-2", name: "Premium Explorer", route: "Cox's Bazar – Saint Martin – Cox's Bazar", price: 14000, inclusions: ["AC Cabin", "All Meals", "Guide", "Snorkeling Gear"], seatType: "AC" },
-    ],
-    seatPlan: makeSeatPlan(),
-    featured: true,
-  },
-  {
-    id: "heritage-cruise",
-    name: "Heritage Cruise",
-    description: "Travel through the historical waterways of Bangladesh, visiting ancient temples, mosques, and heritage sites along the riverbanks.",
-    images: ["https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800"],
-    price: 3500,
-    route: "Dhaka – Sonargaon – Dhaka",
-    duration: "1 Day",
-    facilities: ["Open Deck", "Restaurant", "Guide"],
-    packages: [
-      { id: "hc-1", name: "Day Trip", route: "Dhaka – Sonargaon – Dhaka", price: 3500, inclusions: ["Lunch", "Guide", "Entry Fees"], seatType: "Non-AC" },
-    ],
-    seatPlan: makeSeatPlan(),
-    featured: false,
-  },
-  {
-    id: "moonlight-cruise",
-    name: "Moonlight Cruise",
-    description: "A romantic evening cruise under the stars. Enjoy dinner, live music, and the shimmering moonlight reflecting off calm waters.",
-    images: ["https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=800"],
-    price: 2500,
-    route: "Dhaka River Cruise",
-    duration: "Evening (6 Hours)",
-    facilities: ["Open Deck", "Restaurant", "Live Music", "Bar"],
-    packages: [
-      { id: "mc-1", name: "Couple", route: "Dhaka River Cruise", price: 2500, inclusions: ["Dinner for 2", "Live Music"], seatType: "Non-AC" },
-      { id: "mc-2", name: "Family", route: "Dhaka River Cruise", price: 5000, inclusions: ["Dinner for 4", "Live Music", "Kids Menu"], seatType: "Non-AC" },
-    ],
-    seatPlan: makeSeatPlan(),
-    featured: false,
-  },
-  {
-    id: "adventure-rapids",
-    name: "Adventure Rapids",
-    description: "For the thrill-seekers! Navigate through exciting rapids and explore untouched natural beauty of the hill tracts by water.",
-    images: ["https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800"],
-    price: 7000,
-    route: "Rangamati – Kaptai – Rangamati",
-    duration: "2 Days / 1 Night",
-    facilities: ["Life Jackets", "Camping Gear", "Guide", "Meals"],
-    packages: [
-      { id: "ar-1", name: "Adventure Basic", route: "Rangamati – Kaptai – Rangamati", price: 7000, inclusions: ["Tent", "All Meals", "Guide"], seatType: "Non-AC" },
-      { id: "ar-2", name: "Adventure Premium", route: "Rangamati – Kaptai – Rangamati", price: 10000, inclusions: ["Premium Tent", "All Meals", "Guide", "Photography"], seatType: "Non-AC" },
-    ],
-    seatPlan: makeSeatPlan(),
-    featured: true,
-  },
-  {
-    id: "delta-discovery",
-    name: "Delta Discovery",
-    description: "Explore the vast river delta of southern Bangladesh. Witness dolphins, migratory birds, and the incredible biodiversity of the delta ecosystem.",
-    images: ["https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800"],
-    price: 6000,
-    route: "Barisal – Kuakata – Barisal",
-    duration: "3 Days / 2 Nights",
-    facilities: ["AC Cabins", "Restaurant", "Open Deck", "Binoculars", "Guide"],
-    packages: [
-      { id: "dd-1", name: "Nature Lover", route: "Barisal – Kuakata – Barisal", price: 6000, inclusions: ["Non-AC Cabin", "All Meals", "Bird Watching Tour"], seatType: "Non-AC" },
-      { id: "dd-2", name: "Nature Premium", route: "Barisal – Kuakata – Barisal", price: 9500, inclusions: ["AC Cabin", "All Meals", "Private Guide"], seatType: "AC" },
-    ],
-    seatPlan: makeSeatPlan(),
-    featured: false,
-  },
-  {
-    id: "royal-bengal",
-    name: "Royal Bengal Expedition",
-    description: "The ultimate Sundarban experience. A 5-day expedition deep into tiger territory with expert naturalists and luxury accommodations.",
-    images: ["https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=800", "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?w=800"],
-    price: 18000,
-    route: "Mongla – Deep Sundarban – Mongla",
-    duration: "5 Days / 4 Nights",
-    facilities: ["Luxury AC Cabins", "Fine Dining", "Spa", "Open Deck", "WiFi", "Expert Naturalist"],
-    packages: [
-      { id: "rb-1", name: "Royal Standard", route: "Mongla – Deep Sundarban – Mongla", price: 18000, inclusions: ["AC Cabin", "All Meals", "Naturalist Guide", "Safari"], seatType: "AC" },
-      { id: "rb-2", name: "Royal Suite", route: "Mongla – Deep Sundarban – Mongla", price: 28000, inclusions: ["Suite Cabin", "Fine Dining", "Private Naturalist", "Safari", "Spa"], seatType: "AC" },
-    ],
-    seatPlan: makeSeatPlan(),
-    featured: true,
-  },
-  {
-    id: "island-hopper",
-    name: "Island Hopper",
-    description: "Hop between the beautiful islands of the southern coast. Crystal clear waters, sandy beaches, and fresh seafood await.",
-    images: ["https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800"],
-    price: 11000,
-    route: "Teknaf – St. Martin – Chhera – Teknaf",
-    duration: "3 Days / 2 Nights",
-    facilities: ["AC Cabins", "Restaurant", "Snorkeling", "Beach BBQ"],
-    packages: [
-      { id: "ih-1", name: "Island Basic", route: "Teknaf – St. Martin – Chhera – Teknaf", price: 11000, inclusions: ["Shared Cabin", "Meals", "Snorkeling"], seatType: "Non-AC" },
-      { id: "ih-2", name: "Island Deluxe", route: "Teknaf – St. Martin – Chhera – Teknaf", price: 16000, inclusions: ["Private AC Cabin", "All Meals", "Water Sports", "Beach BBQ"], seatType: "AC" },
-    ],
-    seatPlan: makeSeatPlan(),
-    featured: false,
-  },
-  {
-    id: "sunset-voyage",
-    name: "Sunset Voyage",
-    description: "A short but magical cruise designed to capture the most stunning sunsets over the Padma River. Perfect for photography enthusiasts.",
-    images: ["https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=800"],
-    price: 1800,
-    route: "Mawa – Padma River – Mawa",
-    duration: "Half Day (4 Hours)",
-    facilities: ["Open Deck", "Snacks", "Photography Points"],
-    packages: [
-      { id: "sv-1", name: "Solo Explorer", route: "Mawa – Padma River – Mawa", price: 1800, inclusions: ["Snacks", "Tea/Coffee"], seatType: "Non-AC" },
-      { id: "sv-2", name: "Group Package", route: "Mawa – Padma River – Mawa", price: 1500, inclusions: ["Snacks", "Tea/Coffee", "Group Discount"], seatType: "Non-AC" },
-    ],
-    seatPlan: makeSeatPlan(),
-    featured: false,
   },
 ];
 
@@ -247,7 +276,7 @@ export const testimonials: Testimonial[] = [
   { id: "1", name: "Rahim Ahmed", text: "Best cruise experience in Bangladesh! The Sundarban tour was absolutely magical. The crew was professional and the food was amazing.", rating: 5, avatar: "RA" },
   { id: "2", name: "Fatima Khatun", text: "We had an unforgettable family trip. The kids loved the river cruise and the sunset views were breathtaking.", rating: 5, avatar: "FK" },
   { id: "3", name: "Kamal Hossain", text: "Very well organized tour. The booking through WhatsApp was super convenient. Will definitely book again!", rating: 4, avatar: "KH" },
-  { id: "4", name: "Nasreen Akter", text: "The Coastal Dream cruise exceeded all our expectations. Crystal clear waters and incredible marine life!", rating: 5, avatar: "NA" },
+  { id: "4", name: "Nasreen Akter", text: "The MV Utshab cruise exceeded all our expectations. Luxurious cabins and incredible food!", rating: 5, avatar: "NA" },
   { id: "5", name: "Jamal Uddin", text: "Professional service from start to finish. The seat plan feature helped us choose the best spots on the deck.", rating: 4, avatar: "JU" },
 ];
 
@@ -274,10 +303,8 @@ export const teamMembers: TeamMember[] = [
 ];
 
 export const mockBookings: Booking[] = [
-  { id: "BK001", name: "Abdul Karim", phone: "01712345678", cruiseName: "Sundarban Explorer", travelDate: "2026-03-15", persons: 4, packageName: "Premium", seatType: "AC", createdAt: "2026-03-01" },
-  { id: "BK002", name: "Reshma Begum", phone: "01898765432", cruiseName: "River Paradise", travelDate: "2026-03-20", persons: 2, packageName: "Standard", seatType: "Non-AC", createdAt: "2026-03-02" },
-  { id: "BK003", name: "Faruk Ahmed", phone: "01611223344", cruiseName: "Coastal Dream", travelDate: "2026-04-01", persons: 6, packageName: "Premium Explorer", seatType: "AC", createdAt: "2026-03-03" },
-  { id: "BK004", name: "Mina Akter", phone: "01555667788", cruiseName: "Moonlight Cruise", travelDate: "2026-03-25", persons: 2, packageName: "Couple", seatType: "Non-AC", createdAt: "2026-03-04" },
+  { id: "BK001", name: "Abdul Karim", phone: "01712345678", cruiseName: "MV UTSHAB", travelDate: "2026-03-15", persons: 4, packageName: "Sundarban Explorer", seatType: "AC", createdAt: "2026-03-01" },
+  { id: "BK002", name: "Reshma Begum", phone: "01898765432", cruiseName: "MV UTSHAB", travelDate: "2026-03-20", persons: 2, packageName: "Sundarban Explorer", seatType: "AC", createdAt: "2026-03-02" },
 ];
 
 export function getCruiseById(id: string): Cruise | undefined {
