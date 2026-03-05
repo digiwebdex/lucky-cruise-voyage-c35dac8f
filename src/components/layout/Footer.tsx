@@ -100,7 +100,7 @@ export default function Footer() {
         <div className="border-t border-secondary-foreground/8 py-5">
           <div className="container flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-secondary-foreground/40">
             <span>© {new Date().getFullYear()} Lucky Tours & Travels. All rights reserved.</span>
-            <span>Designed with ❤️ for Sundarban lovers</span>
+            <span>Design & Developed by <a href="https://digiwebdex.com/bn" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors font-medium">DigiWebDex</a></span>
           </div>
         </div>
       </div>
