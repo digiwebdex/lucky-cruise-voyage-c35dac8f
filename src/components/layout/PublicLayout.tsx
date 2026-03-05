@@ -1,22 +1,17 @@
 import { Outlet } from "react-router-dom";
-import { useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import WhatsAppFloat from "@/components/WhatsAppFloat";
 
 export default function PublicLayout() {
-  useEffect(() => {
-    const handler = (e: MouseEvent) => e.preventDefault();
-    document.addEventListener("contextmenu", handler);
-    return () => document.removeEventListener("contextmenu", handler);
-  }, []);
-
   return (
-    <div className="copy-protected flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
         <Outlet />
       </main>
       <Footer />
+      <WhatsAppFloat />
     </div>
   );
 }
