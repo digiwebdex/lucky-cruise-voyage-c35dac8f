@@ -2,10 +2,11 @@ import { useState } from "react";
 import type { Deck } from "@/services/mockData";
 import { Users, BedDouble, BedSingle, Eye } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import seatPlanImg from "@/assets/cruises/utshab-seatplan.jpeg";
 
 interface SeatPlanViewerProps {
   seatPlan: Deck[];
+  seatPlanImage?: string;
+  shipName?: string;
 }
 
 const cabinColors: Record<string, string> = {
@@ -24,7 +25,7 @@ const cabinDots: Record<string, string> = {
   "Bunk": "bg-purple-500",
 };
 
-export default function SeatPlanViewer({ seatPlan }: SeatPlanViewerProps) {
+export default function SeatPlanViewer({ seatPlan, seatPlanImage, shipName = "Ship" }: SeatPlanViewerProps) {
   const [showImage, setShowImage] = useState(false);
 
   const totalCabins = seatPlan.reduce(
@@ -32,6 +33,18 @@ export default function SeatPlanViewer({ seatPlan }: SeatPlanViewerProps) {
     0
   );
   const totalCapacity = seatPlan.reduce((sum, d) => sum + d.capacity, 0);
+
+  // Dynamically compute cabin summary
+  const cabinSummary: Record<string, { count: number; persons: number }> = {};
+  seatPlan.forEach((deck) =>
+    deck.rows.forEach((row) =>
+      row.cabins.forEach((cabin) => {
+        if (!cabinSummary[cabin.type]) cabinSummary[cabin.type] = { count: 0, persons: 0 };
+        cabinSummary[cabin.type].count++;
+        cabinSummary[cabin.type].persons += cabin.persons;
+      })
+    )
+  );
 
   return (
     <div className="space-y-6">
@@ -72,7 +85,6 @@ export default function SeatPlanViewer({ seatPlan }: SeatPlanViewerProps) {
       {/* Deck Layouts */}
       {seatPlan.map((deck) => (
         <div key={deck.name} className="rounded-2xl border border-border overflow-hidden">
-          {/* Deck Header */}
           <div className="bg-secondary px-5 py-3 flex items-center justify-between">
             <div>
               <h4 className="font-bold text-secondary-foreground">{deck.name}</h4>
@@ -82,8 +94,6 @@ export default function SeatPlanViewer({ seatPlan }: SeatPlanViewerProps) {
               <Users className="h-3 w-3 mr-1" /> {deck.capacity}
             </Badge>
           </div>
-
-          {/* Cabin Grid */}
           <div className="p-4 space-y-4">
             {deck.rows.map((row) => (
               <div key={row.label}>
@@ -136,32 +146,39 @@ export default function SeatPlanViewer({ seatPlan }: SeatPlanViewerProps) {
           <h4 className="font-bold text-secondary text-sm">Cabin Summary</h4>
         </div>
         <div className="divide-y divide-border">
-          <SummaryRow label="Attached Bath Couple Rooms" count={10} persons={20} color="bg-primary" />
-          <SummaryRow label="Attached Bath Three Bed Rooms" count={6} persons={18} color="bg-amber-500" />
-          <SummaryRow label="Twin Rooms" count={5} persons={10} color="bg-blue-500" />
-          <SummaryRow label="Single Rooms" count={2} persons={2} color="bg-emerald-500" />
+          {Object.entries(cabinSummary).map(([type, data]) => (
+            <SummaryRow
+              key={type}
+              label={type}
+              count={data.count}
+              persons={data.persons}
+              color={cabinDots[type] || "bg-muted"}
+            />
+          ))}
         </div>
         <div className="bg-primary/10 px-5 py-3 flex justify-between items-center">
           <span className="font-bold text-secondary text-sm">Total</span>
-          <span className="font-extrabold text-primary text-lg">23 Cabins = 50 Persons</span>
+          <span className="font-extrabold text-primary text-lg">{totalCabins} Cabins = {totalCapacity} Persons</span>
         </div>
       </div>
 
       {/* Floor Plan Image Toggle */}
-      <div>
-        <button
-          onClick={() => setShowImage(!showImage)}
-          className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors mb-3"
-        >
-          <Eye className="h-4 w-4" />
-          {showImage ? "Hide Floor Plan" : "View Original Floor Plan"}
-        </button>
-        {showImage && (
-          <div className="watermark-container rounded-2xl overflow-hidden border border-border shadow-lg">
-            <img src={seatPlanImg} alt="MV UTSHAB Floor Plan" className="w-full h-auto" draggable={false} />
-          </div>
-        )}
-      </div>
+      {seatPlanImage && (
+        <div>
+          <button
+            onClick={() => setShowImage(!showImage)}
+            className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors mb-3"
+          >
+            <Eye className="h-4 w-4" />
+            {showImage ? "Hide Floor Plan" : "View Original Floor Plan"}
+          </button>
+          {showImage && (
+            <div className="watermark-container rounded-2xl overflow-hidden border border-border shadow-lg">
+              <img src={seatPlanImage} alt={`${shipName} Floor Plan`} className="w-full h-auto" draggable={false} />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
