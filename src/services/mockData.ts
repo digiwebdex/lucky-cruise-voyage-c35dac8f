@@ -573,8 +573,6 @@ export const galleryImages = [
   "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600",
   "https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=600",
   "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=600",
-  utshabSeatplan,
-  silverSeatplan,
 ];
 
 export const teamMembers: TeamMember[] = [
