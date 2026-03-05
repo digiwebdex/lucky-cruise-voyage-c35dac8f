@@ -118,6 +118,16 @@ import magpie6 from "@/assets/cruises/magpie-6.jpg";
 import magpie7 from "@/assets/cruises/magpie-7.jpg";
 import magpie8 from "@/assets/cruises/magpie-8.jpg";
 import magpie9 from "@/assets/cruises/magpie-9.jpg";
+import magpie10 from "@/assets/cruises/magpie-10.jpg";
+import magpie11 from "@/assets/cruises/magpie-11.jpg";
+import magpie12 from "@/assets/cruises/magpie-12.jpg";
+import magpie13 from "@/assets/cruises/magpie-13.jpg";
+import magpie14 from "@/assets/cruises/magpie-14.jpg";
+import magpie15 from "@/assets/cruises/magpie-15.jpg";
+import magpie16 from "@/assets/cruises/magpie-16.jpg";
+import magpie17 from "@/assets/cruises/magpie-17.jpg";
+import magpie18 from "@/assets/cruises/magpie-18.jpg";
+import magpie19 from "@/assets/cruises/magpie-19.jpg";
 export interface Cruise {
   id: string;
   name: string;
@@ -1375,7 +1385,7 @@ export const cruises: Cruise[] = [
     name: "MV Royal Magpie",
     subtitle: "Tourist Ship – Mangrove Forest Sundarban",
     description: "MV Royal Magpie has been built with enclosed and spacious open air observation decks, keeping in mind your entertainment and adventurous needs. Experience the wild Sundarbans aboard this beautifully designed cruise with elegant interiors, comfortable cabins, and top-tier hospitality.",
-    images: [magpie1, magpie2, magpie3, magpie4, magpie5, magpie6, magpie7, magpie8, magpie9],
+    images: [magpie1, magpie11, magpie2, magpie3, magpie4, magpie10, magpie5, magpie6, magpie7, magpie8, magpie9, magpie12, magpie13, magpie14, magpie15, magpie16, magpie17, magpie18, magpie19],
     price: 22000,
     priceLabel: "per person (Bangladeshi)",
     route: "Khulna → Sundarban → Khulna",
