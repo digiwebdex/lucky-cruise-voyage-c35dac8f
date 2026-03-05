@@ -159,6 +159,7 @@ import pearl3_27 from "@/assets/cruises/pearl3-27.jpeg";
 import pearl3_28 from "@/assets/cruises/pearl3-28.jpeg";
 import pearl3_29 from "@/assets/cruises/pearl3-29.jpeg";
 import pearl3Menu from "@/assets/cruises/pearl3-menu.jpeg";
+import pearl3Seatplan from "@/assets/cruises/pearl3-seatplan.jpeg";
 export interface Cruise {
   id: string;
   name: string;
@@ -1742,59 +1743,66 @@ export const cruises: Cruise[] = [
     packages: [],
     seatPlan: [
       {
-        name: "1st Deck – 8 Cabins (AC/Non-AC)",
-        capacity: 16,
+        name: "Ground Floor – 10 Cabins (AC, Attach Toilet)",
+        capacity: 22,
         rows: [
           { label: "Port Side", cabins: [
-            { id: "101", type: "VIP Family" as const, persons: 2, available: true, bedType: "Double Bed" },
-            { id: "102", type: "VIP Family" as const, persons: 2, available: true, bedType: "Double Bed" },
-            { id: "103", type: "VIP Family" as const, persons: 2, available: true, bedType: "Double Bed" },
-            { id: "104", type: "VIP Family" as const, persons: 2, available: true, bedType: "Double Bed" },
+            { id: "101", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed AC, Attach Toilet" },
+            { id: "102", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed AC, Attach Toilet" },
+            { id: "103", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed AC, Attach Toilet" },
+            { id: "104", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed AC, Attach Toilet" },
+            { id: "105", type: "VIP Couple" as const, persons: 2, available: false, bedType: "Couple Bed AC (Out of Order)" },
           ]},
           { label: "Starboard", cabins: [
-            { id: "105", type: "VIP Family" as const, persons: 2, available: true, bedType: "Double Bed" },
-            { id: "106", type: "VIP Family" as const, persons: 2, available: true, bedType: "Double Bed" },
-            { id: "107", type: "VIP Family" as const, persons: 2, available: true, bedType: "Double Bed" },
-            { id: "108", type: "VIP Family" as const, persons: 2, available: true, bedType: "Double Bed" },
+            { id: "110", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed AC, Attach Toilet" },
+            { id: "109", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed AC, Attach Toilet" },
+            { id: "108", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed AC, Attach Toilet" },
+            { id: "107", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed AC, Attach Toilet" },
+            { id: "106", type: "VIP Couple" as const, persons: 2, available: false, bedType: "Couple Bed AC (Out of Order)" },
           ]},
         ],
       },
       {
-        name: "2nd Deck – 14 Cabins (AC/Non-AC)",
-        capacity: 28,
+        name: "1st Floor – 18 Cabins (AC/Non-AC)",
+        capacity: 26,
         rows: [
           { label: "Port Side", cabins: [
-            { id: "201", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
-            { id: "202", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
-            { id: "203", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
-            { id: "204", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
-            { id: "205", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
-            { id: "206", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
-            { id: "207", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
+            { id: "210", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed AC, Attach Toilet" },
+            { id: "211", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Twin Bed Non-AC" },
+            { id: "212", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Twin Bed Non-AC" },
+            { id: "213", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Twin Bed Non-AC" },
+            { id: "214", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Twin Bed Non-AC" },
+            { id: "215", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Twin Bed Non-AC" },
+            { id: "216", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Twin Bed Non-AC" },
+            { id: "217", type: "VIP Couple" as const, persons: 2, available: false, bedType: "Twin Bed (Out of Order)" },
+            { id: "218", type: "VIP Couple" as const, persons: 2, available: false, bedType: "Twin Bed (Out of Order)" },
           ]},
           { label: "Starboard", cabins: [
-            { id: "208", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
-            { id: "209", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
-            { id: "210", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
-            { id: "211", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
-            { id: "212", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
-            { id: "213", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
-            { id: "214", type: "VIP Family" as const, persons: 2, available: true, bedType: "Bunk Bed" },
+            { id: "209", type: "VIP Family" as const, persons: 3, available: true, bedType: "3 Bed AC, Attach Toilet" },
+            { id: "208", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Twin Bed Non-AC" },
+            { id: "207", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Twin Bed Non-AC" },
+            { id: "206", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Twin Bed Non-AC" },
+            { id: "205", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Twin Bed Non-AC" },
+            { id: "204", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Twin Bed Non-AC" },
+            { id: "203", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Twin Bed Non-AC" },
+            { id: "202", type: "VIP Couple" as const, persons: 2, available: false, bedType: "Twin Bed (Out of Order)" },
+            { id: "201", type: "VIP Couple" as const, persons: 2, available: false, bedType: "Twin Bed (Out of Order)" },
           ]},
         ],
       },
       {
-        name: "Sky Deck – 3 Cabins + Master Room",
-        capacity: 10,
+        name: "2nd Floor – Couple Bed AC + Open Lounge",
+        capacity: 6,
         rows: [
           { label: "Sky Deck", cabins: [
-            { id: "301", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Master Suite" },
-            { id: "302", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Deluxe Cabin" },
-            { id: "303", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Deluxe Cabin" },
+            { id: "S1", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed AC" },
+            { id: "S2", type: "VIP Couple" as const, persons: 2, available: true, bedType: "Couple Bed AC" },
+            { id: "S3", type: "VIP Couple" as const, persons: 2, available: false, bedType: "Couple Bed (Out of Order)" },
           ]},
         ],
       },
     ],
+    seatPlanImage: pearl3Seatplan,
     featured: false,
   },
 ];
