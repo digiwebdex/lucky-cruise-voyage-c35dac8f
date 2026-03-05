@@ -139,6 +139,16 @@ import pearl3_7 from "@/assets/cruises/pearl3-7.jpeg";
 import pearl3_8 from "@/assets/cruises/pearl3-8.jpeg";
 import pearl3_9 from "@/assets/cruises/pearl3-9.jpeg";
 import pearl3_10 from "@/assets/cruises/pearl3-10.jpeg";
+import pearl3_11 from "@/assets/cruises/pearl3-11.jpeg";
+import pearl3_12 from "@/assets/cruises/pearl3-12.jpeg";
+import pearl3_13 from "@/assets/cruises/pearl3-13.jpeg";
+import pearl3_14 from "@/assets/cruises/pearl3-14.jpeg";
+import pearl3_15 from "@/assets/cruises/pearl3-15.jpeg";
+import pearl3_16 from "@/assets/cruises/pearl3-16.jpeg";
+import pearl3_17 from "@/assets/cruises/pearl3-17.jpeg";
+import pearl3_18 from "@/assets/cruises/pearl3-18.jpeg";
+import pearl3_19 from "@/assets/cruises/pearl3-19.jpeg";
+import pearl3_20 from "@/assets/cruises/pearl3-20.jpeg";
 export interface Cruise {
   id: string;
   name: string;
@@ -1592,7 +1602,7 @@ export const cruises: Cruise[] = [
     name: "MV Sea Pearl Cruise 3",
     subtitle: "KHULNA-SUNDARBAN-KHULNA Cruise Ship",
     description: "3 decked standard cruiser. The first deck has 8 air-conditioned/non-air-conditioned cabins, the second deck has 14 air-conditioned/non-air-conditioned cabins, the sky deck has 3 cabins, master sleeping room and is open for 360° panoramic view of the magnificent Sundarbans.",
-    images: [pearl3_1, pearl3_2, pearl3_3, pearl3_4, pearl3_5, pearl3_6, pearl3_7, pearl3_8, pearl3_9, pearl3_10],
+    images: [pearl3_1, pearl3_2, pearl3_3, pearl3_13, pearl3_4, pearl3_5, pearl3_6, pearl3_7, pearl3_8, pearl3_9, pearl3_10, pearl3_11, pearl3_12, pearl3_14, pearl3_15, pearl3_16, pearl3_17, pearl3_18, pearl3_19, pearl3_20],
     price: 22000,
     priceLabel: "Per Person",
     duration: "3 Days / 2 Nights",
