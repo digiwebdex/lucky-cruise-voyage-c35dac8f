@@ -36,6 +36,16 @@ import silver9 from "@/assets/cruises/silver-9.jpeg";
 import silver10 from "@/assets/cruises/silver-10.jpeg";
 import silver11 from "@/assets/cruises/silver-11.jpeg";
 import silver12 from "@/assets/cruises/silver-12.jpeg";
+import pearl1 from "@/assets/cruises/pearl-1.jpeg";
+import pearl2 from "@/assets/cruises/pearl-2.jpeg";
+import pearl3 from "@/assets/cruises/pearl-3.jpeg";
+import pearl4 from "@/assets/cruises/pearl-4.jpeg";
+import pearl5 from "@/assets/cruises/pearl-5.jpeg";
+import pearl6 from "@/assets/cruises/pearl-6.jpeg";
+import pearl7 from "@/assets/cruises/pearl-7.jpeg";
+import pearl8 from "@/assets/cruises/pearl-8.jpeg";
+import pearl9 from "@/assets/cruises/pearl-9.jpeg";
+import pearl10 from "@/assets/cruises/pearl-10.jpeg";
 import utshabSeatplan from "@/assets/cruises/utshab-seatplan.jpeg";
 import silverSeatplan from "@/assets/cruises/silver-seatplan.jpeg";
 
@@ -222,6 +232,76 @@ const makeSilverSeatPlan = (): Deck[] => [
       { label: "Deck Cabins", cabins: [
         { id: "SS1", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
         { id: "SS2", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
+      ]},
+    ],
+  },
+];
+
+const makePearlSeatPlan = (): Deck[] => [
+  {
+    name: "Under Deck – Executive Lounge",
+    capacity: 20,
+    rows: [
+      { label: "Meeting & Lounge", cabins: [
+        { id: "UG1", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
+        { id: "UG2", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
+        { id: "UG3", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
+        { id: "UG4", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
+        { id: "UG5", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
+        { id: "UG6", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
+        { id: "UG7", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
+        { id: "UG8", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
+        { id: "UG9", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
+        { id: "UG10", type: "VIP Couple", persons: 2, available: true, bedType: "Lounge Seating" },
+      ]},
+    ],
+  },
+  {
+    name: "Deck 1 – Deluxe & Family Cabins",
+    capacity: 24,
+    rows: [
+      { label: "Port Side", cabins: [
+        { id: "P101", type: "VIP Family", persons: 3, available: true, bedType: "Family Room" },
+        { id: "P102", type: "VIP Family", persons: 3, available: true, bedType: "Family Room" },
+        { id: "P103", type: "VIP Couple", persons: 2, available: true, bedType: "Deluxe Couple" },
+        { id: "P104", type: "VIP Couple", persons: 2, available: true, bedType: "Super Deluxe Couple" },
+        { id: "P105", type: "VIP Couple", persons: 2, available: true, bedType: "Deluxe Couple" },
+        { id: "P106", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
+      ]},
+      { label: "Starboard", cabins: [
+        { id: "P107", type: "VIP Family", persons: 3, available: true, bedType: "Family Room" },
+        { id: "P108", type: "VIP Couple", persons: 2, available: false, bedType: "Deluxe Couple" },
+        { id: "P109", type: "VIP Couple", persons: 2, available: true, bedType: "Super Deluxe Couple" },
+        { id: "P110", type: "VIP Couple", persons: 2, available: true, bedType: "Deluxe Couple" },
+        { id: "P111", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
+        { id: "P112", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
+      ]},
+    ],
+  },
+  {
+    name: "Deck 2 – Standard Cabins",
+    capacity: 16,
+    rows: [
+      { label: "Port Side", cabins: [
+        { id: "P201", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "P202", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
+        { id: "P203", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
+        { id: "P204", type: "Single", persons: 1, available: true, bedType: "Single Bed" },
+      ]},
+      { label: "Starboard", cabins: [
+        { id: "P205", type: "VIP Couple", persons: 2, available: true, bedType: "Couple Bed" },
+        { id: "P206", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
+        { id: "P207", type: "Twin", persons: 2, available: true, bedType: "Twin Bed" },
+        { id: "P208", type: "Single", persons: 1, available: true, bedType: "Single Bed" },
+      ]},
+    ],
+  },
+  {
+    name: "Sky Deck – Premier Cabin",
+    capacity: 2,
+    rows: [
+      { label: "Panoramic View", cabins: [
+        { id: "SK1", type: "VIP Couple", persons: 2, available: true, bedType: "Premier Suite 360°" },
       ]},
     ],
   },
@@ -548,6 +628,165 @@ export const cruises: Cruise[] = [
     ],
     seatPlan: makeSilverSeatPlan(),
     seatPlanImage: silverSeatplan,
+    featured: true,
+  },
+  {
+    id: "mv-sea-pearl",
+    name: "MV Sea Pearl",
+    subtitle: "4-Deck Luxury Cruiser – Khulna",
+    description: "MV Sea Pearl is a magnificent 4-deck luxury cruiser featuring an executive meeting lounge, fully air-conditioned deluxe & super deluxe cabins, and a stunning open-air panoramic sky deck. With capacity for 50 tourists across 22 cabins, experience unparalleled comfort while exploring the magnificent Sundarbans.",
+    images: [
+      pearl1, pearl2, pearl3, pearl4, pearl5,
+      pearl6, pearl7, pearl8, pearl9, pearl10,
+    ],
+    price: 22000,
+    priceLabel: "Per Person (Bangladeshi)",
+    route: "Khulna – Sundarban – Khulna",
+    duration: "3 Days / 2 Nights",
+    capacity: "50 Tourists",
+    cabins: "22 Cabins",
+    facilities: [
+      "Fully Air-Conditioned",
+      "Deluxe & Super Deluxe Cabins",
+      "With / Without Attached Bathroom",
+      "Restaurant with Buffet Station",
+      "Conference Room",
+      "Movie Theatre",
+      "Executive Meeting Lounge (20 persons)",
+      "360° Panoramic Sky Deck",
+    ],
+    touristSpots: [
+      "Harbaria",
+      "Andarmanik Eco-Tourism Centre",
+      "Katka Jamtola Sea Beach",
+      "Katka Office Par",
+      "Kochikhali / Hironpoint",
+      "Dimerchor / Dublar Char",
+      "Koromjol Crocodile Breeding Centre",
+    ],
+    additionalCosts: [
+      { label: "Entrance fee (Foreign National)", amount: "10,500 BDT" },
+      { label: "Entrance fee (Bangladeshi National)", amount: "1,050 BDT" },
+    ],
+    itinerary: [
+      {
+        day: "Day 1",
+        title: "Khulna → Andarmanik",
+        activities: [
+          "7:00 AM – Board at Khulna Jailkhana Ghat, our guide will receive you",
+          "Cruise along Rupsha & Pashur River – pass Khulna Shipyard, Rupsha Bridge, Rampal Power Plant, Mongla Port",
+          "Lunch on board the ship",
+          "Visit Andarmanik Eco-Tourism Centre – guided forest trek with armed guards",
+          "Walk through dense mangrove forest – Sundari, Golpata, Gewa trees",
+          "Climb the Watch Tower for panoramic views, then return to ship",
+          "Evening snacks on board",
+          "Ship sails toward Katka Sanctuary at the edge of the Bay of Bengal",
+        ],
+      },
+      {
+        day: "Day 2",
+        title: "Katka → Kochikhali → Dimerchor",
+        activities: [
+          "Early morning canal cruising by country boat – enjoy forest silence",
+          "Trek through Tiger Tree bushes and deer grazing fields",
+          "Walk 2.5 km to Jamtola Sea Beach – where the Sundarbans meets the Bay of Bengal",
+          "Visit Katka Office Par – walk through mud, breathing roots & dense Goran forest",
+          "Spot deer herds up close along the trail",
+          "Ship sails to Kochikhali – walk through the eerie grasslands known as 'Tiger's Dining Room'",
+          "Ship sails to Dimerchor – relax at the beautiful sea beach until evening",
+          "Return to ship, sail toward Koromjol",
+        ],
+      },
+      {
+        day: "Day 3",
+        title: "Koromjol → Return",
+        activities: [
+          "Visit Koromjol – Bangladesh's only saltwater crocodile breeding centre",
+          "See crocodiles of all sizes, endangered turtles, and playful monkeys",
+          "Feed deer by hand – a unique experience",
+          "Return to ship, sail back to Khulna / Mongla",
+          "Lunch on board during return journey",
+        ],
+      },
+    ],
+    menu: [
+      {
+        day: "Day 1",
+        meals: [
+          { name: "Breakfast", items: "Bread, Paratha, Vegetables, Dal, Egg Omelette, Butter, Jelly, Honey, Banana, Dessert (Suji/Payesh), Tea-Coffee" },
+          { name: "Snacks", items: "Cake, Biscuit, Tea-Coffee" },
+          { name: "Lunch", items: "White Rice, Parshe Fish, Chicken, Bharta, Dal, Salad, Dessert, Tea-Coffee" },
+          { name: "Evening Snacks", items: "Thai Soup, French Fries, Tea-Coffee" },
+          { name: "Dinner", items: "Egg Fried Rice, Chicken Fry, Chinese Vegetables, Shrimp Malai Curry, Cashew Nut Salad, Soft Drinks" },
+        ],
+      },
+      {
+        day: "Day 2",
+        meals: [
+          { name: "Morning Snacks", items: "Dry Cake/Biscuit, Tea-Coffee" },
+          { name: "Breakfast", items: "Khichuri, Egg Malai Curry, Sea Fish Fry, Eggplant Fry, Pickle, Tea-Coffee" },
+          { name: "Snacks", items: "Guava, Lemon Juice, Tea-Coffee" },
+          { name: "Lunch", items: "White Rice, Koral Fish, Duck Bhuna, Vegetables, Bharta, Dal, Salad, Firni, Tea-Coffee" },
+          { name: "Evening Snacks", items: "Noodles, Tea-Coffee" },
+          { name: "Dinner", items: "Egg Fried Rice, Paratha, Chicken Bar-B-Q, Fish Bar-B-Q, Chinese Vegetables, Cholar Dal Bhuna, Russian Salad, Soft Drinks" },
+        ],
+      },
+      {
+        day: "Day 3",
+        meals: [
+          { name: "Breakfast", items: "White Rice, Various Bharta, Egg Omelette, Ghee, Dal, Salad, Tea-Coffee" },
+          { name: "Snacks", items: "Orange, Biscuit, Tea-Coffee" },
+          { name: "Lunch", items: "Plain Polao, Mutton Rezala, Sea Fish, Egg Malai Curry, Muri Ghonto, Salad, Doi" },
+        ],
+      },
+    ],
+    safetyInfo: [
+      "Two armed forest guards from Bangladesh Forest Department will accompany you at all times",
+      "Constant communication with Forest, Coast Guard & Navy via VSF for weather and emergencies",
+      "All necessary safety measures will be taken based on weather and other conditions",
+    ],
+    travelTips: [
+      "Avoid bright colored clothing – wear light, loose full-sleeve clothing instead",
+      "Do not use any perfume or fragrance",
+      "Wear waterproof sandals/sneakers with back straps – no shoes or high heels",
+      "Pack light luggage for the adventure tour",
+      "Maintain silence in the forest and avoid unnecessary talking during tracking",
+      "Conserve water – river water is salty, and drinking water is limited",
+      "Walk in an organized manner and never stray from the group",
+      "Do not touch tree branches, leaves, or vines",
+      "Do not litter – protect the environment from plastic and packaging waste",
+      "Respect local communities and fellow travelers",
+      "Follow your guide and security personnel's instructions at all times",
+    ],
+    thingsToCarry: [
+      "Regular Medicines & First Aid Kit",
+      "Sneaker Shoes for Walking",
+      "Hat / Cap for Sun Protection",
+      "Sun Protection Lotion & Insect Spray",
+      "Binoculars & Flash Light",
+      "Camera",
+      "Towel, Bath Soap & Shampoo",
+      "Toothpaste & Tooth Brush",
+    ],
+    packageIncludes: [
+      "All meals during the trip",
+      "All activities inside the forest as per itinerary",
+      "Mineral water (Jar) for drinking during the trip",
+      "Forest fees & permission",
+      "Armed forest guard from the forest department",
+      "Experienced guide during the trip",
+    ],
+    packages: [
+      {
+        id: "pearl-1",
+        name: "Sundarban Explorer",
+        route: "Khulna – Sundarban – Khulna",
+        price: 22000,
+        inclusions: ["All Meals (3 Days)", "AC Cabin", "Forest Guide", "Armed Guard", "Forest Fees", "Mineral Water"],
+        seatType: "AC",
+      },
+    ],
+    seatPlan: makePearlSeatPlan(),
     featured: true,
   },
 ];
