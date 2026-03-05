@@ -69,6 +69,16 @@ import flamingo7 from "@/assets/cruises/flamingo-7.jpg";
 import flamingo8 from "@/assets/cruises/flamingo-8.jpg";
 import flamingo9 from "@/assets/cruises/flamingo-9.jpg";
 import flamingo10 from "@/assets/cruises/flamingo-10.jpg";
+import flamingo11 from "@/assets/cruises/flamingo-11.jpg";
+import flamingo12 from "@/assets/cruises/flamingo-12.jpg";
+import flamingo13 from "@/assets/cruises/flamingo-13.jpg";
+import flamingo14 from "@/assets/cruises/flamingo-14.jpg";
+import flamingo15 from "@/assets/cruises/flamingo-15.jpg";
+import flamingo16 from "@/assets/cruises/flamingo-16.jpg";
+import flamingo17 from "@/assets/cruises/flamingo-17.jpg";
+import flamingo18 from "@/assets/cruises/flamingo-18.jpg";
+import flamingo19 from "@/assets/cruises/flamingo-19.jpg";
+import flamingo20 from "@/assets/cruises/flamingo-20.jpg";
 
 export interface Cruise {
   id: string;
@@ -809,6 +819,8 @@ export const cruises: Cruise[] = [
     images: [
       flamingo1, flamingo2, flamingo3, flamingo4, flamingo5,
       flamingo6, flamingo7, flamingo8, flamingo9, flamingo10,
+      flamingo11, flamingo12, flamingo13, flamingo14, flamingo15,
+      flamingo16, flamingo17, flamingo18, flamingo19, flamingo20,
     ],
     price: 22000,
     priceLabel: "Per Person (Bangladeshi)",
