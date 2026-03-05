@@ -46,6 +46,16 @@ import pearl7 from "@/assets/cruises/pearl-7.jpeg";
 import pearl8 from "@/assets/cruises/pearl-8.jpeg";
 import pearl9 from "@/assets/cruises/pearl-9.jpeg";
 import pearl10 from "@/assets/cruises/pearl-10.jpeg";
+import pearl11 from "@/assets/cruises/pearl-11.jpeg";
+import pearl12 from "@/assets/cruises/pearl-12.jpeg";
+import pearl13 from "@/assets/cruises/pearl-13.jpeg";
+import pearl14 from "@/assets/cruises/pearl-14.jpeg";
+import pearl15 from "@/assets/cruises/pearl-15.jpeg";
+import pearl16 from "@/assets/cruises/pearl-16.jpeg";
+import pearl17 from "@/assets/cruises/pearl-17.png";
+import pearl18 from "@/assets/cruises/pearl-18.png";
+import pearl19 from "@/assets/cruises/pearl-19.png";
+import pearl20 from "@/assets/cruises/pearl-20.jpeg";
 import utshabSeatplan from "@/assets/cruises/utshab-seatplan.jpeg";
 import silverSeatplan from "@/assets/cruises/silver-seatplan.jpeg";
 
@@ -636,8 +646,9 @@ export const cruises: Cruise[] = [
     subtitle: "4-Deck Luxury Cruiser – Khulna",
     description: "MV Sea Pearl is a magnificent 4-deck luxury cruiser featuring an executive meeting lounge, fully air-conditioned deluxe & super deluxe cabins, and a stunning open-air panoramic sky deck. With capacity for 50 tourists across 22 cabins, experience unparalleled comfort while exploring the magnificent Sundarbans.",
     images: [
-      pearl1, pearl2, pearl3, pearl4, pearl5,
+      pearl15, pearl16, pearl20, pearl1, pearl2, pearl3, pearl4, pearl5,
       pearl6, pearl7, pearl8, pearl9, pearl10,
+      pearl11, pearl12, pearl13, pearl14, pearl17, pearl18, pearl19,
     ],
     price: 22000,
     priceLabel: "Per Person (Bangladeshi)",
