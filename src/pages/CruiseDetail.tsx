@@ -125,7 +125,7 @@ export default function CruiseDetail() {
                 {cruise.itinerary?.map((day, i) => (
                   <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.08 }}>
                     <Card className="border-l-4 border-l-primary overflow-hidden border-border/50 bg-card">
-                      <CardContent className="p-6">
+                       <CardContent className="p-4 sm:p-6">
                         <div className="flex items-center gap-3 mb-4">
                           <span className="flex h-11 w-11 items-center justify-center rounded-xl gradient-primary text-primary-foreground font-display font-black text-sm">{day.day.replace("Day ", "")}</span>
                           <div>
