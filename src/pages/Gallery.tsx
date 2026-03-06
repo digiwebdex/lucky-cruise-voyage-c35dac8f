@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ImageZoom from "@/components/ImageZoom";
-import { motion } from "framer-motion";
-import { ZoomIn, ChevronLeft, ChevronRight, Ship } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ZoomIn, ChevronLeft, ChevronRight, Ship, ChevronDown, ChevronUp } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { getCruises } from "@/services/cmsStore";
@@ -13,6 +13,7 @@ export default function Gallery() {
   const { t } = useLanguage();
   const cruises = getCruises();
   const [activeCruise, setActiveCruise] = useState<string | null>(null);
+  const [expandedSections, setExpandedSections] = useState<Set<string>>(() => new Set(cruises.map(c => c.id)));
   const [lightbox, setLightbox] = useState<{ img: string; images: string[]; idx: number } | null>(null);
 
   const filteredCruises = activeCruise
@@ -77,33 +78,55 @@ export default function Gallery() {
               viewport={{ once: true }}
               variants={fadeUp}
             >
-              <div className="mb-6 flex items-center gap-3">
+              <button
+                className="mb-4 flex items-center gap-3 w-full text-left hover:opacity-80 transition-opacity"
+                onClick={() => {
+                  const next = new Set(expandedSections);
+                  next.has(cruise.id) ? next.delete(cruise.id) : next.add(cruise.id);
+                  setExpandedSections(next);
+                }}
+              >
                 <div className="h-1 w-8 rounded-full bg-primary" />
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">
                   {cruise.name}
                 </h2>
                 <span className="text-sm text-muted-foreground">({cruise.images.length} photos)</span>
-              </div>
+                <div className="ml-auto">
+                  {expandedSections.has(cruise.id) ? <ChevronUp className="h-5 w-5 text-muted-foreground" /> : <ChevronDown className="h-5 w-5 text-muted-foreground" />}
+                </div>
+              </button>
 
-              <div className="columns-2 gap-4 md:columns-3 lg:columns-4">
-                {cruise.images.map((img, i) => (
+              <AnimatePresence initial={false}>
+                {expandedSections.has(cruise.id) && (
                   <motion.div
-                    key={i}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    variants={fadeUp}
-                    transition={{ delay: (i % 8) * 0.04 }}
-                    className="watermark-container mb-4 cursor-pointer overflow-hidden rounded-xl break-inside-avoid group relative"
-                    onClick={() => setLightbox({ img, images: cruise.images, idx: i })}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
                   >
-                    <img src={img} alt={`${cruise.name} ${i + 1}`} className="w-full object-cover transition-transform duration-500 group-hover:scale-110" draggable={false} />
-                    <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/40 transition-all duration-300 flex items-center justify-center">
-                      <ZoomIn className="h-8 w-8 text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="columns-2 gap-4 md:columns-3 lg:columns-4">
+                      {cruise.images.map((img, i) => (
+                        <motion.div
+                          key={i}
+                          initial="hidden"
+                          whileInView="visible"
+                          viewport={{ once: true }}
+                          variants={fadeUp}
+                          transition={{ delay: (i % 8) * 0.04 }}
+                          className="watermark-container mb-4 cursor-pointer overflow-hidden rounded-xl break-inside-avoid group relative"
+                          onClick={() => setLightbox({ img, images: cruise.images, idx: i })}
+                        >
+                          <img src={img} alt={`${cruise.name} ${i + 1}`} className="w-full object-cover transition-transform duration-500 group-hover:scale-110" draggable={false} />
+                          <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/40 transition-all duration-300 flex items-center justify-center">
+                            <ZoomIn className="h-8 w-8 text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </div>
+                        </motion.div>
+                      ))}
                     </div>
                   </motion.div>
-                ))}
-              </div>
+                )}
+              </AnimatePresence>
             </motion.div>
           ))}
         </div>
