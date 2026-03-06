@@ -4,6 +4,7 @@ import enTranslations from "@/locales/en.json";
 
 export type Language = "bn" | "en";
 
+// Force type refresh from updated JSON
 type TranslationData = typeof bnTranslations;
 
 interface LanguageContextType {
