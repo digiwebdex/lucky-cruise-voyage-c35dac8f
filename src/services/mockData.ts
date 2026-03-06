@@ -293,6 +293,7 @@ import oceanPearl13 from "@/assets/cruises/ocean-pearl-13.jpg";
 import oceanPearl14 from "@/assets/cruises/ocean-pearl-14.jpg";
 import oceanPearl15 from "@/assets/cruises/ocean-pearl-15.jpg";
 import oceanPearl16 from "@/assets/cruises/ocean-pearl-16.jpg";
+import oceanPearlSeatplan from "@/assets/cruises/ocean-pearl-seatplan.jpg";
 
 // ===== Types =====
 export interface Cabin {
@@ -1564,6 +1565,7 @@ export const cruises: Cruise[] = [
       { id: "op-presidential-suite", name: "Presidential Royal Suite (04 জন)", price: 22000, duration: "3 Days / 2 Nights" },
     ],
     seatPlan: [],
+    seatPlanImage: oceanPearlSeatplan,
   },
 ];
 // ===== Testimonials =====
