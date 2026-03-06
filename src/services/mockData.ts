@@ -287,6 +287,12 @@ import oceanPearl7 from "@/assets/cruises/ocean-pearl-7.jpg";
 import oceanPearl8 from "@/assets/cruises/ocean-pearl-8.jpg";
 import oceanPearl9 from "@/assets/cruises/ocean-pearl-9.jpg";
 import oceanPearl10 from "@/assets/cruises/ocean-pearl-10.jpg";
+import oceanPearl11 from "@/assets/cruises/ocean-pearl-11.jpg";
+import oceanPearl12 from "@/assets/cruises/ocean-pearl-12.jpg";
+import oceanPearl13 from "@/assets/cruises/ocean-pearl-13.jpg";
+import oceanPearl14 from "@/assets/cruises/ocean-pearl-14.jpg";
+import oceanPearl15 from "@/assets/cruises/ocean-pearl-15.jpg";
+import oceanPearl16 from "@/assets/cruises/ocean-pearl-16.jpg";
 
 // ===== Types =====
 export interface Cabin {
@@ -1526,7 +1532,7 @@ export const cruises: Cruise[] = [
     price: 22000,
     priceLabel: "per person (Bangladeshi)",
     featured: true,
-    images: [oceanPearl1, oceanPearl2, oceanPearl3, oceanPearl4, oceanPearl5, oceanPearl6, oceanPearl7, oceanPearl8, oceanPearl9, oceanPearl10],
+    images: [oceanPearl1, oceanPearl2, oceanPearl3, oceanPearl4, oceanPearl5, oceanPearl6, oceanPearl7, oceanPearl8, oceanPearl9, oceanPearl10, oceanPearl11, oceanPearl12, oceanPearl13, oceanPearl14, oceanPearl15, oceanPearl16],
     facilities: [
       "২৪ ঘন্টা Starlink ইন্টারনেট সুবিধা",
       "প্রতিটি রুমের সাথে বারান্দা",
