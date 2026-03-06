@@ -66,7 +66,7 @@ export default function Index() {
   return (
     <div className="overflow-hidden">
       {/* ============ HERO SLIDER ============ */}
-      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[75vh] sm:min-h-[92vh] flex items-center overflow-hidden">
         <AnimatePresence initial={false} custom={direction} mode="popLayout">
           <motion.div
             key={currentSlide}
