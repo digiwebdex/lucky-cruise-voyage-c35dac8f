@@ -685,7 +685,7 @@ export const cruises: Cruise[] = [
     additionalCosts: commonAdditionalCosts,
     packageIncludes: commonPackageIncludes,
     packages: [
-      { id: "magpie-standard", name: "Standard Package", price: 17000, duration: "3 Days / 2 Nights" },
+      { id: "magpie-standard", name: "Standard Package", price: 17000, oldPrice: 20000, isOffer: true, duration: "3 Days / 2 Nights" },
       { id: "magpie-premium", name: "Premium AC Package", price: 21000, duration: "3 Days / 2 Nights" },
     ],
     seatPlan: [
@@ -739,7 +739,7 @@ export const cruises: Cruise[] = [
     additionalCosts: commonAdditionalCosts,
     packageIncludes: commonPackageIncludes,
     packages: [
-      { id: "pearl-standard", name: "Standard Package", price: 20000, duration: "3 Days / 2 Nights" },
+      { id: "pearl-standard", name: "Standard Package", price: 20000, oldPrice: 24000, isOffer: true, duration: "3 Days / 2 Nights" },
       { id: "pearl-premium", name: "Premium VIP Package", price: 25000, duration: "3 Days / 2 Nights" },
     ],
     seatPlan: [
@@ -892,7 +892,7 @@ export const cruises: Cruise[] = [
     additionalCosts: commonAdditionalCosts,
     packageIncludes: commonPackageIncludes,
     packages: [
-      { id: "utshab-standard", name: "Standard Package", price: 19000, duration: "3 Days / 2 Nights" },
+      { id: "utshab-standard", name: "Standard Package", price: 19000, oldPrice: 23000, isOffer: true, duration: "3 Days / 2 Nights" },
       { id: "utshab-premium", name: "Premium AC Package", price: 24000, duration: "3 Days / 2 Nights" },
     ],
     seatPlan: [
