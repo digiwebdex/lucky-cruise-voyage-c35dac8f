@@ -247,7 +247,7 @@ export default function Index() {
         <div className="container relative">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-14">
             <span className="text-sm font-bold uppercase tracking-widest text-primary">{t.whyUs.sectionLabel}</span>
-            <h2 className="mt-3 font-display text-4xl md:text-5xl font-black text-foreground">
+            <h2 className="mt-3 font-display text-2xl sm:text-4xl md:text-5xl font-black text-foreground">
               {t.whyUs.title} <span className="text-gradient">{t.whyUs.titleHighlight}</span>
             </h2>
           </motion.div>
