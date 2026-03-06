@@ -146,21 +146,21 @@ export default function Index() {
           </div>
         </div>
 
-        <div className="absolute bottom-8 right-8 z-20 flex items-center gap-3">
-          <button onClick={prevSlide} className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary/60 backdrop-blur-md text-secondary-foreground/70 hover:bg-primary hover:text-primary-foreground transition-all border border-secondary-foreground/10">
-            <ChevronLeft className="h-5 w-5" />
+        <div className="absolute bottom-4 sm:bottom-8 right-4 sm:right-8 z-20 flex items-center gap-2 sm:gap-3">
+          <button onClick={prevSlide} className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-secondary/60 backdrop-blur-md text-secondary-foreground/70 hover:bg-primary hover:text-primary-foreground transition-all border border-secondary-foreground/10">
+            <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
           </button>
-          <div className="flex gap-2">
+          <div className="flex gap-1.5 sm:gap-2">
             {heroSlides.map((_, i) => (
               <button
                 key={i}
                 onClick={() => goToSlide(i)}
-                className={`h-2.5 rounded-full transition-all duration-500 ${i === currentSlide ? "w-8 bg-primary" : "w-2.5 bg-secondary-foreground/30 hover:bg-secondary-foreground/50"}`}
+                className={`h-2 sm:h-2.5 rounded-full transition-all duration-500 ${i === currentSlide ? "w-6 sm:w-8 bg-primary" : "w-2 sm:w-2.5 bg-secondary-foreground/30 hover:bg-secondary-foreground/50"}`}
               />
             ))}
           </div>
-          <button onClick={nextSlide} className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary/60 backdrop-blur-md text-secondary-foreground/70 hover:bg-primary hover:text-primary-foreground transition-all border border-secondary-foreground/10">
-            <ChevronRight className="h-5 w-5" />
+          <button onClick={nextSlide} className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-secondary/60 backdrop-blur-md text-secondary-foreground/70 hover:bg-primary hover:text-primary-foreground transition-all border border-secondary-foreground/10">
+            <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
           </button>
         </div>
 
