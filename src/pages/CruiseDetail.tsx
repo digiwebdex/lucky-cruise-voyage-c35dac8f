@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import ImageZoom from "@/components/ImageZoom";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -68,8 +69,8 @@ export default function CruiseDetail() {
             {/* Image Gallery */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
               <div className="watermark-container aspect-[16/10] overflow-hidden rounded-2xl shadow-elevated cursor-pointer group relative" onClick={() => setLightbox(true)}>
-                <img src={cruise.images[selectedImg]} alt={cruise.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" draggable={false} />
-                <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/20 transition-all flex items-center justify-center">
+                <ImageZoom src={cruise.images[selectedImg]} alt={cruise.name} className="h-full w-full" zoomScale={2.5} />
+                <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/20 transition-all flex items-center justify-center pointer-events-none">
                   <ZoomIn className="h-10 w-10 text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
               </div>
