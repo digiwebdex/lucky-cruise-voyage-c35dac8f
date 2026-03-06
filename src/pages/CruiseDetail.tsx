@@ -209,7 +209,7 @@ export default function CruiseDetail() {
                 )}
                 {cruise.thingsToCarry && (
                   <Card className="border-border/50 bg-card">
-                    <CardContent className="p-6">
+                    <CardContent className="p-4 sm:p-6">
                       <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2"><Backpack className="h-5 w-5 text-primary" /> {t.cruiseDetail.thingsToCarry}</h3>
                       <div className="grid gap-2 sm:grid-cols-2">
                         {cruise.thingsToCarry.map((item, i) => (
