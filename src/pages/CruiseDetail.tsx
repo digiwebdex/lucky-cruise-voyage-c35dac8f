@@ -177,7 +177,7 @@ export default function CruiseDetail() {
 
               <TabsContent value="safety" className="mt-6 space-y-4">
                 <Card className="border-l-4 border-l-emerald border-border/50 bg-card">
-                  <CardContent className="p-6">
+                   <CardContent className="p-4 sm:p-6">
                     <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2"><Shield className="h-5 w-5 text-emerald" /> {t.cruiseDetail.securityMeasures}</h3>
                     <ul className="space-y-3">
                       {cruise.safetyInfo?.map((info, i) => (
