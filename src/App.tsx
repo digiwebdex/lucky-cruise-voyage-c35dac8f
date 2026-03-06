@@ -18,13 +18,14 @@ import AdminLogin from "./pages/admin/Login";
 import AdminDashboard from "./pages/admin/Dashboard";
 import CruiseManager from "./pages/admin/CruiseManager";
 import PackagesManager from "./pages/admin/PackagesManager";
-import BookingsPage from "./pages/admin/Bookings";
 import MediaLibrary from "./pages/admin/MediaLibrary";
 import SeatPlanManager from "./pages/admin/SeatPlanManager";
 import PagesCMS from "./pages/admin/PagesCMS";
 import SEOManager from "./pages/admin/SEOManager";
 import UsersPage from "./pages/admin/Users";
 import SettingsPage from "./pages/admin/Settings";
+import TestimonialsManager from "./pages/admin/TestimonialsManager";
+import TeamManager from "./pages/admin/TeamManager";
 
 const queryClient = new QueryClient();
 
@@ -52,7 +53,8 @@ const App = () => (
               <Route index element={<AdminDashboard />} />
               <Route path="cruises" element={<CruiseManager />} />
               <Route path="packages" element={<PackagesManager />} />
-              <Route path="bookings" element={<BookingsPage />} />
+              <Route path="testimonials" element={<TestimonialsManager />} />
+              <Route path="team" element={<TeamManager />} />
               <Route path="media" element={<MediaLibrary />} />
               <Route path="seat-plans" element={<SeatPlanManager />} />
               <Route path="pages" element={<PagesCMS />} />

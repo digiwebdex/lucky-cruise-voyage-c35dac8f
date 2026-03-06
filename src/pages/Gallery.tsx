@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { X, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { cruises } from "@/services/mockData";
+import { getCruises } from "@/services/cmsStore";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
@@ -12,6 +12,7 @@ const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 export default function Gallery() {
   const { t } = useLanguage();
   const [lightbox, setLightbox] = useState<{ img: string; idx: number } | null>(null);
+  const cruises = getCruises();
   const allImages = cruises.flatMap(c => c.images);
 
   const navigate = (dir: number) => {

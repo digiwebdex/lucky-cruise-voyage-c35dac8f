@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Ship, Package, BookOpen, Image, Grid3X3, FileText, Search, Users, Settings, LogOut, Menu, X, ExternalLink } from "lucide-react";
+import { LayoutDashboard, Ship, Package, Image, Grid3X3, FileText, Search, Users, Settings, LogOut, Menu, X, ExternalLink, MessageSquare, UserCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const sidebarLinks = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { to: "/admin/cruises", label: "Cruises", icon: Ship },
   { to: "/admin/packages", label: "Packages", icon: Package },
-  
+  { to: "/admin/testimonials", label: "Testimonials", icon: MessageSquare },
+  { to: "/admin/team", label: "Team Members", icon: UserCheck },
   { to: "/admin/media", label: "Media Library", icon: Image },
   { to: "/admin/seat-plans", label: "Seat Plans", icon: Grid3X3 },
   { to: "/admin/pages", label: "Pages CMS", icon: FileText },
@@ -23,10 +24,8 @@ export default function AdminLayout() {
 
   return (
     <div className="flex min-h-screen bg-background">
-      {/* Sidebar overlay for mobile */}
       {sidebarOpen && <div className="fixed inset-0 z-40 bg-foreground/40 backdrop-blur-sm md:hidden" onClick={() => setSidebarOpen(false)} />}
 
-      {/* Sidebar */}
       <aside className={`fixed inset-y-0 left-0 z-50 w-72 transform transition-transform duration-300 md:relative md:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="flex h-full flex-col gradient-navy text-secondary-foreground">
           <div className="flex h-16 items-center justify-between border-b border-secondary-foreground/10 px-5">
@@ -72,7 +71,6 @@ export default function AdminLayout() {
         </div>
       </aside>
 
-      {/* Main */}
       <div className="flex flex-1 flex-col min-w-0">
         <header className="flex h-16 items-center gap-4 border-b border-border/50 bg-card px-6">
           <button className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors" onClick={() => setSidebarOpen(true)}>

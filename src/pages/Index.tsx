@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Ship, Shield, Star, Clock, MapPin, Phone, ChevronRight, Anchor, Waves, ArrowRight, Users, ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { cruises, testimonials } from "@/services/mockData";
+import { getCruises, getTestimonials } from "@/services/cmsStore";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const fadeUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } };
@@ -14,6 +14,8 @@ const scaleIn = { hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, sca
 
 export default function Index() {
   const { t } = useLanguage();
+  const cruises = getCruises();
+  const testimonials = getTestimonials();
   const featured = cruises.filter(c => c.featured).slice(0, 4);
   const allCruises = cruises.slice(0, 6);
   const [currentSlide, setCurrentSlide] = useState(0);

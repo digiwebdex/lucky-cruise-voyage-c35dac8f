@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { cruises } from "@/services/mockData";
+import { getCruises } from "@/services/cmsStore";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -11,6 +11,7 @@ const scaleIn = { hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, sc
 
 export default function Packages() {
   const { t } = useLanguage();
+  const cruises = getCruises();
   const allPackages = cruises.flatMap(c => c.packages.map(p => ({ ...p, cruiseName: c.name, cruiseId: c.id })));
 
   return (
