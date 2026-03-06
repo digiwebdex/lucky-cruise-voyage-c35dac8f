@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ImageZoom from "@/components/ImageZoom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ZoomIn, ChevronLeft, ChevronRight, Ship, ChevronDown, ChevronUp } from "lucide-react";
+import { ZoomIn, ChevronLeft, ChevronRight, Ship, Plus, Minus } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { getCruises } from "@/services/cmsStore";
@@ -91,8 +91,8 @@ export default function Gallery() {
                   {cruise.name}
                 </h2>
                 <span className="text-sm text-muted-foreground">({cruise.images.length} photos)</span>
-                <div className="ml-auto">
-                  {expandedSections.has(cruise.id) ? <ChevronUp className="h-5 w-5 text-muted-foreground" /> : <ChevronDown className="h-5 w-5 text-muted-foreground" />}
+                <div className="ml-auto flex h-7 w-7 items-center justify-center rounded-full border border-border">
+                  {expandedSections.has(cruise.id) ? <Minus className="h-4 w-4 text-muted-foreground" /> : <Plus className="h-4 w-4 text-primary" />}
                 </div>
               </button>
 
