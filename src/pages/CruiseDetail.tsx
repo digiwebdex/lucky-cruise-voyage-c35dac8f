@@ -114,11 +114,11 @@ export default function CruiseDetail() {
             )}
 
             <Tabs defaultValue="itinerary" className="w-full">
-              <TabsList className="grid w-full grid-cols-4 bg-muted/50 rounded-xl h-12 p-1">
-                <TabsTrigger value="itinerary" className="gap-1.5 text-xs sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><Calendar className="h-4 w-4 hidden sm:block" /> {t.cruiseDetail.itinerary}</TabsTrigger>
-                <TabsTrigger value="menu" className="gap-1.5 text-xs sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><UtensilsCrossed className="h-4 w-4 hidden sm:block" /> {t.cruiseDetail.menu}</TabsTrigger>
-                <TabsTrigger value="safety" className="gap-1.5 text-xs sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><Shield className="h-4 w-4 hidden sm:block" /> {t.cruiseDetail.safety}</TabsTrigger>
-                <TabsTrigger value="tips" className="gap-1.5 text-xs sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><Backpack className="h-4 w-4 hidden sm:block" /> {t.cruiseDetail.tips}</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-4 bg-muted/50 rounded-xl h-10 sm:h-12 p-1">
+                <TabsTrigger value="itinerary" className="gap-1 sm:gap-1.5 text-[10px] sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4 hidden xs:block" /> {t.cruiseDetail.itinerary}</TabsTrigger>
+                <TabsTrigger value="menu" className="gap-1 sm:gap-1.5 text-[10px] sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><UtensilsCrossed className="h-3.5 w-3.5 sm:h-4 sm:w-4 hidden xs:block" /> {t.cruiseDetail.menu}</TabsTrigger>
+                <TabsTrigger value="safety" className="gap-1 sm:gap-1.5 text-[10px] sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><Shield className="h-3.5 w-3.5 sm:h-4 sm:w-4 hidden xs:block" /> {t.cruiseDetail.safety}</TabsTrigger>
+                <TabsTrigger value="tips" className="gap-1 sm:gap-1.5 text-[10px] sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><Backpack className="h-3.5 w-3.5 sm:h-4 sm:w-4 hidden xs:block" /> {t.cruiseDetail.tips}</TabsTrigger>
               </TabsList>
 
               <TabsContent value="itinerary" className="mt-6 space-y-6">
