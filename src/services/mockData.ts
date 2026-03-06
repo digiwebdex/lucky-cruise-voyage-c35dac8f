@@ -314,6 +314,7 @@ import rezab15 from "@/assets/cruises/rezab-15.jpg";
 import rezab16 from "@/assets/cruises/rezab-16.jpg";
 import rezab17 from "@/assets/cruises/rezab-17.jpg";
 import rezab18 from "@/assets/cruises/rezab-18.jpg";
+import rezabSeatplan from "@/assets/cruises/rezab-seatplan.jpg";
 export interface Cabin {
   id: string;
   type: "VIP Couple" | "VIP Family" | "Twin" | "Single" | "Bunk";
@@ -1685,38 +1686,81 @@ export const cruises: Cruise[] = [
     ],
     seatPlan: [
       {
-        name: "1st Floor (AC)",
-        capacity: 24,
+        name: "Ground Floor",
+        capacity: 18,
         rows: [
           {
-            label: "AC Cabins",
-            cabins: Array.from({ length: 9 }, (_, i) => ({
-              id: `1F-${i + 1}`,
-              type: "Twin" as const,
-              bedType: "Twin Bed AC",
-              persons: 2,
-              available: true,
-            })),
+            label: "Couple Bed Cabins",
+            cabins: [
+              { id: "101", type: "VIP Couple" as const, bedType: "Couple Bed", persons: 2, available: true },
+              { id: "107", type: "VIP Couple" as const, bedType: "Couple Bed", persons: 2, available: true },
+            ],
+          },
+          {
+            label: "3 Bed Bunk Cabins",
+            cabins: [
+              { id: "102", type: "Bunk" as const, bedType: "3 Bed Bunk", persons: 3, available: true },
+              { id: "106", type: "Bunk" as const, bedType: "3 Bed Bunk", persons: 3, available: true },
+            ],
+          },
+          {
+            label: "Twin Bed Cabin",
+            cabins: [
+              { id: "103", type: "Twin" as const, bedType: "Twin Bed", persons: 2, available: true },
+            ],
+          },
+          {
+            label: "Family 3 Bed Cabins",
+            cabins: [
+              { id: "104", type: "VIP Family" as const, bedType: "Family 3 Bed", persons: 3, available: true },
+              { id: "105", type: "VIP Family" as const, bedType: "Family 3 Bed", persons: 3, available: true },
+            ],
           },
         ],
       },
       {
-        name: "2nd Floor (Non-AC)",
-        capacity: 18,
+        name: "First Floor",
+        capacity: 24,
         rows: [
           {
-            label: "Non-AC Cabins",
-            cabins: Array.from({ length: 8 }, (_, i) => ({
-              id: `2F-${i + 1}`,
-              type: "Twin" as const,
-              bedType: "Twin Bed Non-AC",
-              persons: 2,
-              available: true,
-            })),
+            label: "Couple Bed Cabins",
+            cabins: [
+              { id: "205", type: "VIP Couple" as const, bedType: "Couple Bed", persons: 2, available: true },
+              { id: "206", type: "VIP Couple" as const, bedType: "Couple Bed", persons: 2, available: true },
+              { id: "207", type: "VIP Couple" as const, bedType: "Couple Bed", persons: 2, available: true },
+              { id: "208", type: "VIP Couple" as const, bedType: "Couple Bed", persons: 2, available: true },
+              { id: "210", type: "VIP Couple" as const, bedType: "Couple Bed", persons: 2, available: true },
+            ],
+          },
+          {
+            label: "3 Bed Bunk Cabins",
+            cabins: [
+              { id: "201", type: "Bunk" as const, bedType: "3 Bed (2+1)", persons: 3, available: true },
+              { id: "202", type: "Bunk" as const, bedType: "3 Bed Bunk", persons: 3, available: true },
+              { id: "203", type: "Bunk" as const, bedType: "3 Bed Bunk", persons: 3, available: true },
+              { id: "204", type: "Bunk" as const, bedType: "3 Bed Bunk", persons: 3, available: true },
+            ],
+          },
+          {
+            label: "Twin Bed Cabin",
+            cabins: [
+              { id: "209", type: "Twin" as const, bedType: "Twin Bed", persons: 2, available: true },
+            ],
+          },
+        ],
+      },
+      {
+        name: "Top Floor",
+        capacity: 0,
+        rows: [
+          {
+            label: "Dining Room, Open Space, Master Cabin, Guide Room",
+            cabins: [],
           },
         ],
       },
     ],
+    seatPlanImage: rezabSeatplan,
   },
 ];
 // ===== Testimonials =====
