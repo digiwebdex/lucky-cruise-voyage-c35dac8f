@@ -295,7 +295,17 @@ import oceanPearl15 from "@/assets/cruises/ocean-pearl-15.jpg";
 import oceanPearl16 from "@/assets/cruises/ocean-pearl-16.jpg";
 import oceanPearlSeatplan from "@/assets/cruises/ocean-pearl-seatplan.jpg";
 
-// ===== Types =====
+// ===== Image Imports: Rezab =====
+import rezab1 from "@/assets/cruises/rezab-1.jpg";
+import rezab2 from "@/assets/cruises/rezab-2.jpg";
+import rezab3 from "@/assets/cruises/rezab-3.jpg";
+import rezab4 from "@/assets/cruises/rezab-4.jpg";
+import rezab5 from "@/assets/cruises/rezab-5.jpg";
+import rezab6 from "@/assets/cruises/rezab-6.jpg";
+import rezab7 from "@/assets/cruises/rezab-7.jpg";
+import rezab8 from "@/assets/cruises/rezab-8.jpg";
+import rezab9 from "@/assets/cruises/rezab-9.jpg";
+import rezab10 from "@/assets/cruises/rezab-10.jpg";
 export interface Cabin {
   id: string;
   type: "VIP Couple" | "VIP Family" | "Twin" | "Single" | "Bunk";
@@ -1566,6 +1576,139 @@ export const cruises: Cruise[] = [
     ],
     seatPlan: [],
     seatPlanImage: oceanPearlSeatplan,
+  },
+  // ===== M.V REZAB =====
+  {
+    id: "mv-rezab",
+    name: "M.V REZAB",
+    subtitle: "এসি ট্যুরিস্ট ক্রুজ শিপ — সুন্দরবন ম্যানগ্রোভ ফরেস্ট",
+    description: "বিশ্বের সবচেয়ে বড় ম্যানগ্রোভ বন \"সুন্দরবন\" ভ্রমণ করুন নতুন এয়ার কন্ডিশন্ড ক্রুজ শিপ M.V REZAB-এর সাথে। আধুনিক ইন্টেরিয়র ডেকোরেশন, প্রশস্ত রুম, উঁচু সিলিং, আলাদা নিয়ন্ত্রণসহ এয়ার কন্ডিশন এবং আরামদায়ক বিছানা সহ সকল সুবিধা।",
+    route: "Khulna → Sundarban → Khulna",
+    duration: "3 Days / 2 Nights",
+    capacity: "42 Tourists",
+    cabins: "17 Cabins",
+    price: 22000,
+    priceLabel: "per person (Bangladeshi)",
+    featured: true,
+    images: [rezab1, rezab2, rezab3, rezab4, rezab5, rezab6, rezab7, rezab8, rezab9, rezab10],
+    facilities: [
+      "আধুনিক ইন্টেরিয়র ডেকোরেশনসহ প্রশস্ত রুম",
+      "উঁচু সিলিং (High room height clearance)",
+      "প্রতিটি রুমে আলাদা নিয়ন্ত্রণসহ এয়ার কন্ডিশন",
+      "আরামদায়ক বিছানা",
+      "সোফা ও আয়না",
+      "সংরক্ষণের জন্য ক্যাবিনেট",
+      "লাগেজ রাখার আলাদা জায়গা",
+      "All Attached Washroom",
+    ],
+    touristSpots: commonTouristSpots,
+    itinerary: sundarbanItinerary,
+    menu: [
+      {
+        day: "Day 1",
+        meals: [
+          { name: "Breakfast", items: "পাউরুটি, পরোটা, সবজি, ডাল, ডিম অমলেট, মাখন, জেলি, মধু, কলা, সুজি/পায়েস, চা-কফি" },
+          { name: "Snacks", items: "কেক, বিস্কুট, চা-কফি" },
+          { name: "Lunch", items: "সাদা ভাত, পারশে মাছ, মুরগি, ভর্তা, ডাল, সালাদ, ডেজার্ট" },
+          { name: "Evening Snacks", items: "থাই স্যুপ, ফ্রেঞ্চ ফ্রাই" },
+          { name: "Dinner", items: "এগ ফ্রাইড রাইস, চিকেন ফ্রাই, চাইনিজ সবজি, চিংড়ি মালাইকারি, ক্যাশুনাট সালাদ, সফট ড্রিংকস" },
+        ],
+      },
+      {
+        day: "Day 2",
+        meals: [
+          { name: "Morning Snacks", items: "ড্রাই কেক / বিস্কুট, চা-কফি" },
+          { name: "Breakfast", items: "খিচুড়ি, ডিম মালাই কারি, সামুদ্রিক মাছ ফ্রাই, বেগুন ভাজা" },
+          { name: "Snacks", items: "পেয়ারা, লেবুর শরবত" },
+          { name: "Lunch", items: "সাদা ভাত, কোরাল মাছ, হাঁস ভুনা, সবজি, ভর্তা, ডাল, সালাদ, ফিরনি" },
+          { name: "Evening Snacks", items: "নুডলস" },
+          { name: "Dinner", items: "এগ ফ্রাইড রাইস, পরোটা, চিকেন BBQ, ফিশ BBQ, চাইনিজ সবজি, ছোলার ডাল, রাশিয়ান সালাদ" },
+        ],
+      },
+      {
+        day: "Day 3",
+        meals: [
+          { name: "Breakfast", items: "সাদা ভাত, বিভিন্ন ভর্তা, ডিম অমলেট, ঘি, ডাল, সালাদ" },
+          { name: "Snacks", items: "কমলা, বিস্কুট" },
+          { name: "Lunch", items: "পোলাও, মাটন রেজালা, সি-ফিশ, ডিম মালাই কারি, মুড়িঘন্ট, সালাদ, দই" },
+        ],
+      },
+    ],
+    safetyInfo: [
+      "বাংলাদেশ বনবিভাগের ২ জন সশস্ত্র নিরাপত্তা কর্মী",
+      "আবহাওয়া বা জরুরি প্রয়োজনে VSF এর মাধ্যমে ফরেস্ট, কোস্ট গার্ড ও নৌবাহিনীর সাথে যোগাযোগ",
+      "Life jackets and life buoys available for all passengers.",
+      "Fire extinguisher systems installed throughout the ship.",
+    ],
+    travelTips: [
+      "উজ্জ্বল রঙের কাপড় পরবেন না",
+      "হালকা রঙের ফুল স্লিভ পোশাক পরুন",
+      "সুগন্ধি ব্যবহার করবেন না",
+      "পানি নষ্ট করবেন না",
+      "দলছুট হবেন না",
+      "জোরে কথা বলবেন না",
+      "গাছের ডাল বা পাতা ছিঁড়বেন না",
+      "পরিবেশ দূষণ করবেন না",
+      "গাইডের নির্দেশনা মেনে চলবেন",
+    ],
+    thingsToCarry: [
+      "প্রয়োজনীয় ওষুধ",
+      "হাঁটার জন্য স্নিকার জুতা",
+      "টুপি / ক্যাপ",
+      "সানস্ক্রিন ও ইনসেক্ট স্প্রে",
+      "দূরবীন, টর্চ লাইট, ক্যামেরা",
+      "তোয়ালে, সাবান, শ্যাম্পু",
+      "টুথপেস্ট ও টুথব্রাশ",
+    ],
+    additionalCosts: [
+      { label: "বিদেশি নাগরিকদের প্রবেশ ফি", amount: "৳10,500" },
+      { label: "বাংলাদেশি নাগরিকদের প্রবেশ ফি", amount: "৳1,050" },
+    ],
+    packageIncludes: [
+      "ট্যুর চলাকালীন সব খাবার",
+      "বনভিত্তিক সব কার্যক্রম",
+      "মিনারেল পানির ব্যবস্থা",
+      "বন বিভাগের অনুমতি ও ফি",
+      "সশস্ত্র বনরক্ষী",
+      "অভিজ্ঞ গাইড",
+    ],
+    packages: [
+      { id: "rezab-standard", name: "Standard Package", price: 22000, duration: "3 Days / 2 Nights" },
+    ],
+    seatPlan: [
+      {
+        name: "1st Floor (AC)",
+        capacity: 24,
+        rows: [
+          {
+            label: "AC Cabins",
+            cabins: Array.from({ length: 9 }, (_, i) => ({
+              id: `1F-${i + 1}`,
+              type: "Twin" as const,
+              bedType: "Twin Bed AC",
+              persons: 2,
+              available: true,
+            })),
+          },
+        ],
+      },
+      {
+        name: "2nd Floor (Non-AC)",
+        capacity: 18,
+        rows: [
+          {
+            label: "Non-AC Cabins",
+            cabins: Array.from({ length: 8 }, (_, i) => ({
+              id: `2F-${i + 1}`,
+              type: "Twin" as const,
+              bedType: "Twin Bed Non-AC",
+              persons: 2,
+              available: true,
+            })),
+          },
+        ],
+      },
+    ],
   },
 ];
 // ===== Testimonials =====
