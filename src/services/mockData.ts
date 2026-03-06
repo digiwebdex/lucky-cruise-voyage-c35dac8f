@@ -247,6 +247,16 @@ import crown7 from "@/assets/cruises/crown-7.jpeg";
 import crown8 from "@/assets/cruises/crown-8.jpeg";
 import crown9 from "@/assets/cruises/crown-9.jpeg";
 import crown10 from "@/assets/cruises/crown-10.jpeg";
+import crown11 from "@/assets/cruises/crown-11.jpeg";
+import crown12 from "@/assets/cruises/crown-12.jpeg";
+import crown13 from "@/assets/cruises/crown-13.jpeg";
+import crown14 from "@/assets/cruises/crown-14.jpeg";
+import crown15 from "@/assets/cruises/crown-15.jpeg";
+import crown16 from "@/assets/cruises/crown-16.jpeg";
+import crown17 from "@/assets/cruises/crown-17.jpeg";
+import crown18 from "@/assets/cruises/crown-18.jpeg";
+import crown19 from "@/assets/cruises/crown-19.jpeg";
+import crown20 from "@/assets/cruises/crown-20.jpeg";
 // ===== Types =====
 export interface Cabin {
   id: string;
@@ -1153,7 +1163,7 @@ export const cruises: Cruise[] = [
     price: 22000,
     priceLabel: "per person (Bangladeshi)",
     featured: true,
-    images: [crown1, crown2, crown3, crown4, crown5, crown6, crown7, crown8, crown9, crown10],
+    images: [crown1, crown2, crown3, crown4, crown5, crown6, crown7, crown8, crown9, crown10, crown11, crown12, crown13, crown14, crown15, crown16, crown17, crown18, crown19, crown20],
     facilities: [
       "28 elegant spacious cabins with modern interior décor",
       "High ceiling clearance in rooms",
