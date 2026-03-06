@@ -105,6 +105,15 @@ export default function CruiseList() {
                           <ArrowRight className="h-5 w-5" />
                         </div>
                       </div>
+                      <a
+                        href={`https://wa.me/8801711871072?text=${encodeURIComponent(`আমি ${cruise.name} ক্রুজ সম্পর্কে জানতে চাই`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-emerald/10 border border-emerald/20 px-4 py-2.5 text-sm font-bold text-emerald hover:bg-emerald hover:text-emerald-foreground transition-all duration-300"
+                      >
+                        <Phone className="h-4 w-4" /> {t.hero.bookViaWhatsApp}
+                      </a>
                     </CardContent>
                   </Card>
                 </Link>
