@@ -86,15 +86,10 @@ export default function Footer() {
             {/* Hours */}
             <div>
               <h4 className="mb-5 font-display font-bold text-sm uppercase tracking-wider text-primary/80">{t.footer.businessHours}</h4>
-              <div className="rounded-xl border border-secondary-foreground/10 p-4 space-y-3">
+              <div className="rounded-xl border border-secondary-foreground/10 p-4">
                 <div className="flex justify-between text-sm">
-                  <span className="text-secondary-foreground/50">{t.footer.satThu}</span>
-                  <span className="font-semibold text-secondary-foreground/80">9AM – 8PM</span>
-                </div>
-                <div className="h-px bg-secondary-foreground/10" />
-                <div className="flex justify-between text-sm">
-                  <span className="text-secondary-foreground/50">{t.footer.friday}</span>
-                  <span className="font-semibold text-primary">{t.footer.closed}</span>
+                  <span className="text-secondary-foreground/50">{t.footer.everyday}</span>
+                  <span className="font-semibold text-primary">{t.footer.alwaysOpen}</span>
                 </div>
               </div>
             </div>

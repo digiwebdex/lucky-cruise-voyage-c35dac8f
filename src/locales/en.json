@@ -196,9 +196,8 @@
     "contactLink": "Contact",
     "contactTitle": "Contact",
     "businessHours": "Business Hours",
-    "satThu": "Sat – Thu",
-    "friday": "Friday",
-    "closed": "Closed",
+    "everyday": "Everyday",
+    "alwaysOpen": "24/7 Open",
     "allRights": "All rights reserved.",
     "designBy": "Design & Developed by"
   },
