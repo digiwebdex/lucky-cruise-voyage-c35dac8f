@@ -45,7 +45,7 @@ export default function CruiseDetail() {
           <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/70 to-secondary/20" />
           <div className="absolute inset-0 bg-gradient-to-r from-secondary/60 to-transparent" />
         </div>
-        <div className="container relative z-10 pb-12 pt-28">
+        <div className="container relative z-10 pb-8 sm:pb-12 pt-20 sm:pt-28">
           <Link to="/cruises" className="mb-5 inline-flex items-center gap-2 rounded-xl bg-secondary/50 backdrop-blur-sm px-4 py-2 text-sm font-medium text-secondary-foreground/70 hover:text-primary transition-colors">
             <ArrowLeft className="h-4 w-4" /> {t.cruiseDetail.backToCruises}
           </Link>
