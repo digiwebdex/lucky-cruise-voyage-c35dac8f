@@ -20,7 +20,7 @@ export default function Footer() {
       
       <div className="gradient-navy text-secondary-foreground">
         <div className="container py-16">
-          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 sm:gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {/* Brand */}
             <div className="lg:col-span-1">
               <div className="flex items-center gap-2 mb-4">
