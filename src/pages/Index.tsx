@@ -313,7 +313,7 @@ export default function Index() {
                   <tr key={c.id} className={`border-t border-border/30 hover:bg-primary/3 transition-colors ${i % 2 === 0 ? 'bg-card' : 'bg-muted/30'}`}>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <img src={c.images[0]} alt={c.name} className="h-12 w-16 rounded-lg object-cover" />
+                        <img src={c.images[0]} alt={c.name} loading="lazy" className="h-12 w-16 rounded-lg object-cover" />
                         <div>
                           <p className="font-display font-bold text-foreground text-sm">{c.name}</p>
                           <p className="text-xs text-muted-foreground">{c.route}</p>
