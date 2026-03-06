@@ -151,7 +151,7 @@ export default function CruiseDetail() {
                 {cruise.menu?.map((day, i) => (
                   <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.08 }}>
                     <Card className="overflow-hidden border-border/50 bg-card">
-                      <CardContent className="p-6">
+                       <CardContent className="p-4 sm:p-6">
                         <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
                           <UtensilsCrossed className="h-5 w-5 text-primary" /> {day.day}
                         </h3>
