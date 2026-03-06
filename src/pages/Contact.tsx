@@ -84,7 +84,7 @@ export default function Contact() {
 
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.1 }}>
               <Card className="border-border/50 shadow-elevated bg-card">
-                <CardContent className="p-8">
+                <CardContent className="p-5 sm:p-8">
                   <h2 className="mb-2 font-display text-2xl font-bold text-foreground">{t.contact.sendMessage}</h2>
                   <p className="mb-6 text-sm text-muted-foreground">{t.contact.messageSentVia}</p>
                   <form onSubmit={handleSubmit} className="space-y-5">

@@ -32,9 +32,10 @@ export default function Header() {
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "bg-secondary/98 backdrop-blur-lg shadow-lg shadow-secondary/10" : "bg-secondary/90 backdrop-blur-md"}`}>
       <div className="container flex h-16 items-center justify-between md:h-18">
-        <Link to="/" className="flex items-center gap-3 group">
-          <img src={logo} alt="Lucky Tours & Travels" className="h-14 w-auto transition-transform group-hover:scale-105" />
-          <span className="text-lg font-black tracking-wide text-primary" style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '0.05em' }}>Lucky Tours & Travels</span>
+        <Link to="/" className="flex items-center gap-2 sm:gap-3 group min-w-0">
+          <img src={logo} alt="Lucky Tours & Travels" className="h-10 sm:h-14 w-auto flex-shrink-0 transition-transform group-hover:scale-105" />
+          <span className="hidden sm:inline text-lg font-black tracking-wide text-primary" style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '0.05em' }}>Lucky Tours & Travels</span>
+          <span className="sm:hidden text-xs font-black tracking-wide text-primary leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>Lucky<br/>Tours</span>
         </Link>
 
         {/* Desktop Nav */}
@@ -68,16 +69,10 @@ export default function Header() {
           {/* Language Toggle */}
           <button
             onClick={toggleLang}
-            className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition-all border border-primary/30 bg-primary/5 text-primary hover:bg-primary/15"
+            className="flex items-center gap-1 sm:gap-1.5 rounded-lg px-2 sm:px-3 py-1.5 text-xs font-bold transition-all border border-primary/30 bg-primary/5 text-primary hover:bg-primary/15"
           >
-            <Globe className="h-3.5 w-3.5" />
-            <span className={lang === "bn" ? "opacity-50" : ""}>{lang === "bn" ? "EN" : ""}</span>
-            {lang === "bn" ? "" : <span className="opacity-50">বাং</span>}
-            {lang === "bn" ? (
-              <span>বাংলা → EN</span>
-            ) : (
-              <span>English → বাং</span>
-            )}
+            <Globe className="h-3.5 w-3.5 hidden sm:block" />
+            <span>{lang === "bn" ? "EN" : "বাং"}</span>
           </button>
 
           <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer">

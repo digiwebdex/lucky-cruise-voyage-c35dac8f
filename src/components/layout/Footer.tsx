@@ -20,7 +20,7 @@ export default function Footer() {
       
       <div className="gradient-navy text-secondary-foreground">
         <div className="container py-16">
-          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 sm:gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {/* Brand */}
             <div className="lg:col-span-1">
               <div className="flex items-center gap-2 mb-4">
@@ -72,7 +72,7 @@ export default function Footer() {
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 flex-shrink-0">
                     <Mail className="h-4 w-4 text-primary" />
                   </div>
-                  <span>luckytoursandtravels70@gmail.com</span>
+                  <span className="break-all">luckytoursandtravels70@gmail.com</span>
                 </li>
                 <li className="flex items-start gap-3 text-sm text-secondary-foreground/60">
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 flex-shrink-0">

@@ -66,7 +66,7 @@ export default function Index() {
   return (
     <div className="overflow-hidden">
       {/* ============ HERO SLIDER ============ */}
-      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[75vh] sm:min-h-[92vh] flex items-center overflow-hidden">
         <AnimatePresence initial={false} custom={direction} mode="popLayout">
           <motion.div
             key={currentSlide}
@@ -91,7 +91,7 @@ export default function Index() {
           <Waves className="h-64 w-64 text-primary" />
         </div>
 
-        <div className="container relative z-10 py-20">
+        <div className="container relative z-10 py-12 sm:py-20">
           <div className="max-w-3xl">
             <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6 }}>
               <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm px-4 py-1.5 text-sm font-semibold text-primary mb-6">
@@ -107,60 +107,60 @@ export default function Index() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
               >
-                <h1 className="font-display text-5xl md:text-7xl font-black leading-[1.05] text-secondary-foreground mb-4">
+                <h1 className="font-display text-3xl sm:text-5xl md:text-7xl font-black leading-[1.05] text-secondary-foreground mb-3 sm:mb-4">
                   {slideText.title}
                   <br />
                   <span className="text-gradient">{slideText.highlight}</span>
                 </h1>
-                <p className="text-lg md:text-xl text-secondary-foreground/60 max-w-xl mb-10 leading-relaxed">
+                <p className="text-sm sm:text-lg md:text-xl text-secondary-foreground/60 max-w-xl mb-6 sm:mb-10 leading-relaxed">
                   {slideText.subtitle}
                 </p>
               </motion.div>
             </AnimatePresence>
 
-            <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.35 }} className="flex flex-wrap gap-4">
+            <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.35 }} className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
               <Link to="/cruises">
-                <Button size="lg" className="gradient-primary text-primary-foreground font-bold text-base px-8 h-14 rounded-xl shadow-glow hover:scale-105 transition-transform gap-2">
+                <Button size="lg" className="w-full sm:w-auto gradient-primary text-primary-foreground font-bold text-sm sm:text-base px-6 sm:px-8 h-12 sm:h-14 rounded-xl shadow-glow hover:scale-105 transition-transform gap-2">
                   {t.hero.exploreCruises} <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>
               <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" variant="outline" className="border-2 border-primary/40 text-primary font-bold text-base px-8 h-14 rounded-xl hover:bg-primary hover:text-primary-foreground transition-all gap-2 backdrop-blur-sm">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto border-2 border-primary/40 text-primary font-bold text-sm sm:text-base px-6 sm:px-8 h-12 sm:h-14 rounded-xl hover:bg-primary hover:text-primary-foreground transition-all gap-2 backdrop-blur-sm">
                   <Phone className="h-5 w-5" /> {t.hero.bookViaWhatsApp}
                 </Button>
               </a>
             </motion.div>
 
-            <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.5 }} className="mt-14 flex flex-wrap gap-8">
+            <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.5 }} className="mt-8 sm:mt-14 flex flex-wrap gap-6 sm:gap-8">
               {[
                 { value: "6+", label: t.hero.cruiseShips },
                 { value: "5000+", label: t.hero.happyTravellers },
                 { value: "15+", label: t.hero.yearsExperience },
               ].map((stat, i) => (
                 <div key={i} className="text-left">
-                  <div className="text-3xl font-display font-black text-primary">{stat.value}</div>
-                  <div className="text-sm text-secondary-foreground/50 font-medium">{stat.label}</div>
+                  <div className="text-2xl sm:text-3xl font-display font-black text-primary">{stat.value}</div>
+                  <div className="text-xs sm:text-sm text-secondary-foreground/50 font-medium">{stat.label}</div>
                 </div>
               ))}
             </motion.div>
           </div>
         </div>
 
-        <div className="absolute bottom-8 right-8 z-20 flex items-center gap-3">
-          <button onClick={prevSlide} className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary/60 backdrop-blur-md text-secondary-foreground/70 hover:bg-primary hover:text-primary-foreground transition-all border border-secondary-foreground/10">
-            <ChevronLeft className="h-5 w-5" />
+        <div className="absolute bottom-4 sm:bottom-8 right-4 sm:right-8 z-20 flex items-center gap-2 sm:gap-3">
+          <button onClick={prevSlide} className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-secondary/60 backdrop-blur-md text-secondary-foreground/70 hover:bg-primary hover:text-primary-foreground transition-all border border-secondary-foreground/10">
+            <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
           </button>
-          <div className="flex gap-2">
+          <div className="flex gap-1.5 sm:gap-2">
             {heroSlides.map((_, i) => (
               <button
                 key={i}
                 onClick={() => goToSlide(i)}
-                className={`h-2.5 rounded-full transition-all duration-500 ${i === currentSlide ? "w-8 bg-primary" : "w-2.5 bg-secondary-foreground/30 hover:bg-secondary-foreground/50"}`}
+                className={`h-2 sm:h-2.5 rounded-full transition-all duration-500 ${i === currentSlide ? "w-6 sm:w-8 bg-primary" : "w-2 sm:w-2.5 bg-secondary-foreground/30 hover:bg-secondary-foreground/50"}`}
               />
             ))}
           </div>
-          <button onClick={nextSlide} className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary/60 backdrop-blur-md text-secondary-foreground/70 hover:bg-primary hover:text-primary-foreground transition-all border border-secondary-foreground/10">
-            <ChevronRight className="h-5 w-5" />
+          <button onClick={nextSlide} className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-secondary/60 backdrop-blur-md text-secondary-foreground/70 hover:bg-primary hover:text-primary-foreground transition-all border border-secondary-foreground/10">
+            <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
           </button>
         </div>
 
@@ -176,7 +176,7 @@ export default function Index() {
         <div className="container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-14">
             <span className="text-sm font-bold uppercase tracking-widest text-primary">{t.featured.ourFleet}</span>
-            <h2 className="mt-3 font-display text-4xl md:text-5xl font-black text-foreground">
+            <h2 className="mt-3 font-display text-2xl sm:text-4xl md:text-5xl font-black text-foreground">
               {t.featured.title} <span className="text-gradient">{t.featured.titleHighlight}</span>
             </h2>
             <p className="mt-4 text-muted-foreground max-w-lg mx-auto">{t.featured.subtitle}</p>
@@ -247,7 +247,7 @@ export default function Index() {
         <div className="container relative">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-14">
             <span className="text-sm font-bold uppercase tracking-widest text-primary">{t.whyUs.sectionLabel}</span>
-            <h2 className="mt-3 font-display text-4xl md:text-5xl font-black text-foreground">
+            <h2 className="mt-3 font-display text-2xl sm:text-4xl md:text-5xl font-black text-foreground">
               {t.whyUs.title} <span className="text-gradient">{t.whyUs.titleHighlight}</span>
             </h2>
           </motion.div>
@@ -280,7 +280,7 @@ export default function Index() {
         <div className="container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-14">
             <span className="text-sm font-bold uppercase tracking-widest text-primary">{t.compare.sectionLabel}</span>
-            <h2 className="mt-3 font-display text-4xl md:text-5xl font-black text-foreground">
+            <h2 className="mt-3 font-display text-2xl sm:text-4xl md:text-5xl font-black text-foreground">
               {t.compare.title} <span className="text-gradient">{t.compare.titleHighlight}</span>
             </h2>
             <p className="mt-4 text-muted-foreground max-w-lg mx-auto">{t.compare.subtitle}</p>
@@ -339,7 +339,7 @@ export default function Index() {
         <div className="container relative">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-14">
             <span className="text-sm font-bold uppercase tracking-widest text-primary">{t.testimonials.sectionLabel}</span>
-            <h2 className="mt-3 font-display text-4xl md:text-5xl font-black text-foreground">
+            <h2 className="mt-3 font-display text-2xl sm:text-4xl md:text-5xl font-black text-foreground">
               {t.testimonials.title} <span className="text-gradient">{t.testimonials.titleHighlight}</span>
             </h2>
           </motion.div>
@@ -378,7 +378,7 @@ export default function Index() {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyem0wLTRWMjhIMjR2MmgxMnptLTQtMjh2MmgtNHYtMmg0em0wIDR2MmgtNHYtMmg0em0tOCA4djJoLTR2LTJoNHptMCA0djJoLTR2LTJoNHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-50" />
         <div className="container relative z-10 text-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            <h2 className="font-display text-4xl md:text-6xl font-black text-secondary-foreground mb-6">
+            <h2 className="font-display text-2xl sm:text-4xl md:text-6xl font-black text-secondary-foreground mb-6">
               {t.cta.title} <span className="text-gradient">{t.cta.titleHighlight}</span>
             </h2>
             <p className="mx-auto max-w-xl text-lg text-secondary-foreground/60 mb-10">

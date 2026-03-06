@@ -49,15 +49,17 @@ export default function CruiseList() {
       <section className="py-10">
         <div className="container">
           <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ delay: 0.1 }} className="mb-8 rounded-2xl border border-border/50 bg-card p-5 shadow-sm">
-            <div className="flex flex-wrap items-end gap-3">
-              <div className="relative flex-1 min-w-[200px]">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-end gap-3">
+              <div className="relative flex-1 min-w-0 sm:min-w-[200px]">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input placeholder={t.cruiseList.searchPlaceholder} className="pl-9 rounded-xl h-11" value={query} onChange={e => setQuery(e.target.value)} />
               </div>
-              <Input className="w-28 rounded-xl h-11" placeholder={t.cruiseList.minPrice} type="number" value={minPrice} onChange={e => setMinPrice(e.target.value)} />
-              <Input className="w-28 rounded-xl h-11" placeholder={t.cruiseList.maxPrice} type="number" value={maxPrice} onChange={e => setMaxPrice(e.target.value)} />
+              <div className="flex gap-3">
+                <Input className="flex-1 sm:w-28 rounded-xl h-11" placeholder={t.cruiseList.minPrice} type="number" value={minPrice} onChange={e => setMinPrice(e.target.value)} />
+                <Input className="flex-1 sm:w-28 rounded-xl h-11" placeholder={t.cruiseList.maxPrice} type="number" value={maxPrice} onChange={e => setMaxPrice(e.target.value)} />
+              </div>
               <Select onValueChange={setSort}>
-                <SelectTrigger className="w-44 rounded-xl h-11">
+                <SelectTrigger className="w-full sm:w-44 rounded-xl h-11">
                   <SlidersHorizontal className="h-4 w-4 mr-1" />
                   <SelectValue placeholder={t.cruiseList.sortBy} />
                 </SelectTrigger>
