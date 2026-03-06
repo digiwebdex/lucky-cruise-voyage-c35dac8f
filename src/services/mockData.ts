@@ -640,7 +640,7 @@ export const cruises: Cruise[] = [
     additionalCosts: commonAdditionalCosts,
     packageIncludes: commonPackageIncludes,
     packages: [
-      { id: "jol-standard", name: "Standard Package", price: 15000, duration: "3 Days / 2 Nights" },
+      { id: "jol-standard", name: "Standard Package", price: 15000, oldPrice: 20000, isOffer: true, duration: "3 Days / 2 Nights" }, // 25% off
     ],
     seatPlan: [
       {
@@ -844,7 +844,7 @@ export const cruises: Cruise[] = [
     additionalCosts: commonAdditionalCosts,
     packageIncludes: commonPackageIncludes,
     packages: [
-      { id: "silver-standard", name: "Standard Package", price: 16500, duration: "3 Days / 2 Nights" },
+      { id: "silver-standard", name: "Standard Package", price: 13200, oldPrice: 16500, isOffer: true, duration: "3 Days / 2 Nights" }, // 20% off
     ],
     seatPlan: [
       {
@@ -960,7 +960,7 @@ export const cruises: Cruise[] = [
     additionalCosts: commonAdditionalCosts,
     packageIncludes: commonPackageIncludes,
     packages: [
-      { id: "khayapar-standard", name: "Standard Package", price: 22000, duration: "3 Days / 2 Nights" },
+      { id: "khayapar-standard", name: "Standard Package", price: 15400, oldPrice: 22000, isOffer: true, duration: "3 Days / 2 Nights" }, // 30% off
       { id: "khayapar-vip", name: "VIP Package", price: 28000, duration: "3 Days / 2 Nights" },
     ],
     seatPlan: [
@@ -1098,7 +1098,7 @@ export const cruises: Cruise[] = [
     additionalCosts: commonAdditionalCosts,
     packageIncludes: commonPackageIncludes,
     packages: [
-      { id: "mohammadi2-standard", name: "Standard Non-AC Package", price: 22000, duration: "3 Days / 2 Nights" },
+      { id: "mohammadi2-standard", name: "Standard Non-AC Package", price: 11000, oldPrice: 22000, isOffer: true, duration: "3 Days / 2 Nights" }, // 50% off
     ],
     seatPlanImage: mohammadi2Seatplan,
     seatPlan: [
