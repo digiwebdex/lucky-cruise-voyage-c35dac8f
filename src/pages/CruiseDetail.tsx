@@ -225,7 +225,7 @@ export default function CruiseDetail() {
 
             <section>
               <h2 className="mb-6 font-display text-2xl font-black text-foreground">{t.cruiseDetail.seatPlan}</h2>
-              <SeatPlanViewer seatPlan={cruise.seatPlan} seatPlanImage={cruise.seatPlanImage} shipName={cruise.name} />
+              <SeatPlanViewer seatPlanImage={cruise.seatPlanImage} shipName={cruise.name} />
             </section>
           </div>
 

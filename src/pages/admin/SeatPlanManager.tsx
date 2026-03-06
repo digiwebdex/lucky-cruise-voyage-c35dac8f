@@ -11,7 +11,7 @@ export default function SeatPlanManager() {
           <Card key={cruise.id} className="border-border">
             <CardContent className="p-5">
               <h2 className="mb-4 text-lg font-bold text-secondary">{cruise.name}</h2>
-              <SeatPlanViewer seatPlan={cruise.seatPlan} seatPlanImage={cruise.seatPlanImage} shipName={cruise.name} />
+              <SeatPlanViewer seatPlanImage={cruise.seatPlanImage} shipName={cruise.name} />
             </CardContent>
           </Card>
         ))}
