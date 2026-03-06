@@ -131,15 +131,15 @@ export default function Index() {
               </a>
             </motion.div>
 
-            <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.5 }} className="mt-14 flex flex-wrap gap-8">
+            <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.5 }} className="mt-8 sm:mt-14 flex flex-wrap gap-6 sm:gap-8">
               {[
                 { value: "6+", label: t.hero.cruiseShips },
                 { value: "5000+", label: t.hero.happyTravellers },
                 { value: "15+", label: t.hero.yearsExperience },
               ].map((stat, i) => (
                 <div key={i} className="text-left">
-                  <div className="text-3xl font-display font-black text-primary">{stat.value}</div>
-                  <div className="text-sm text-secondary-foreground/50 font-medium">{stat.label}</div>
+                  <div className="text-2xl sm:text-3xl font-display font-black text-primary">{stat.value}</div>
+                  <div className="text-xs sm:text-sm text-secondary-foreground/50 font-medium">{stat.label}</div>
                 </div>
               ))}
             </motion.div>
