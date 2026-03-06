@@ -53,11 +53,11 @@ export default function CruiseDetail() {
             <Badge className="mb-3 rounded-full gradient-primary text-primary-foreground font-bold border-0 px-4 py-1">{cruise.duration}</Badge>
             <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-secondary-foreground leading-tight">{cruise.name}</h1>
             <p className="mt-2 text-lg font-semibold text-primary">{cruise.subtitle}</p>
-            <div className="mt-5 flex flex-wrap gap-4 text-sm text-secondary-foreground/70">
-              <span className="flex items-center gap-2 bg-secondary/40 backdrop-blur-sm rounded-lg px-3 py-1.5"><MapPin className="h-4 w-4 text-primary" /> {cruise.route}</span>
-              <span className="flex items-center gap-2 bg-secondary/40 backdrop-blur-sm rounded-lg px-3 py-1.5"><Clock className="h-4 w-4 text-primary" /> {cruise.duration}</span>
-              <span className="flex items-center gap-2 bg-secondary/40 backdrop-blur-sm rounded-lg px-3 py-1.5"><Users className="h-4 w-4 text-primary" /> {cruise.capacity}</span>
-              <span className="flex items-center gap-2 bg-secondary/40 backdrop-blur-sm rounded-lg px-3 py-1.5"><DoorOpen className="h-4 w-4 text-primary" /> {cruise.cabins}</span>
+            <div className="mt-4 sm:mt-5 flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm text-secondary-foreground/70">
+              <span className="flex items-center gap-1.5 sm:gap-2 bg-secondary/40 backdrop-blur-sm rounded-lg px-2.5 sm:px-3 py-1 sm:py-1.5"><MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" /> {cruise.route}</span>
+              <span className="flex items-center gap-1.5 sm:gap-2 bg-secondary/40 backdrop-blur-sm rounded-lg px-2.5 sm:px-3 py-1 sm:py-1.5"><Clock className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" /> {cruise.duration}</span>
+              <span className="flex items-center gap-1.5 sm:gap-2 bg-secondary/40 backdrop-blur-sm rounded-lg px-2.5 sm:px-3 py-1 sm:py-1.5"><Users className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" /> {cruise.capacity}</span>
+              <span className="flex items-center gap-1.5 sm:gap-2 bg-secondary/40 backdrop-blur-sm rounded-lg px-2.5 sm:px-3 py-1 sm:py-1.5"><DoorOpen className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" /> {cruise.cabins}</span>
             </div>
           </motion.div>
         </div>
