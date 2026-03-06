@@ -5,10 +5,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
 export default function Contact() {
+  const { t } = useLanguage();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
@@ -25,9 +28,9 @@ export default function Contact() {
         <div className="container relative">
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
             <h1 className="font-display text-4xl md:text-5xl font-black text-secondary-foreground">
-              Contact <span className="text-gradient">Us</span>
+              {t.contact.title} <span className="text-gradient">{t.contact.titleHighlight}</span>
             </h1>
-            <p className="mt-3 text-secondary-foreground/60 max-w-md mx-auto">We'd love to hear from you. Get in touch today!</p>
+            <p className="mt-3 text-secondary-foreground/60 max-w-md mx-auto">{t.contact.subtitle}</p>
           </motion.div>
         </div>
       </section>
@@ -35,19 +38,18 @@ export default function Contact() {
       <section className="py-12 md:py-16">
         <div className="container">
           <div className="grid gap-10 lg:grid-cols-2">
-            {/* Contact Info */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="space-y-6">
               <div>
-                <span className="text-sm font-bold uppercase tracking-widest text-primary">Get in Touch</span>
-                <h2 className="mt-2 font-display text-3xl font-black text-foreground">Let's Plan Your <span className="text-gradient">Adventure</span></h2>
+                <span className="text-sm font-bold uppercase tracking-widest text-primary">{t.contact.getInTouch}</span>
+                <h2 className="mt-2 font-display text-3xl font-black text-foreground">{t.contact.planAdventure} <span className="text-gradient">{t.contact.adventureHighlight}</span></h2>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2">
                 {[
-                  { icon: Phone, label: "Phone", value: "01711-871072", color: "bg-primary/10 text-primary" },
-                  { icon: MessageCircle, label: "WhatsApp", value: "01711-871072", link: "https://wa.me/8801711871072", color: "bg-emerald/10 text-emerald" },
-                  { icon: Mail, label: "Email", value: "info@luckytoursbd.com", color: "bg-gold/10 text-gold" },
-                  { icon: MapPin, label: "Address", value: "Dhaka, Bangladesh", color: "bg-accent/10 text-accent" },
+                  { icon: Phone, label: t.contact.phone, value: "01711-871072", color: "bg-primary/10 text-primary" },
+                  { icon: MessageCircle, label: t.contact.whatsapp, value: "01711-871072", link: "https://wa.me/8801711871072", color: "bg-emerald/10 text-emerald" },
+                  { icon: Mail, label: t.contact.email, value: "info@luckytoursbd.com", color: "bg-gold/10 text-gold" },
+                  { icon: MapPin, label: t.contact.address, value: "Dhaka, Bangladesh", color: "bg-accent/10 text-accent" },
                 ].map((item, i) => (
                   <Card key={i} className="border-border/50 hover:shadow-elevated transition-all duration-300 hover:-translate-y-1 bg-card">
                     <CardContent className="flex items-center gap-4 p-5">
@@ -80,27 +82,26 @@ export default function Contact() {
               </div>
             </motion.div>
 
-            {/* Contact Form */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.1 }}>
               <Card className="border-border/50 shadow-elevated bg-card">
                 <CardContent className="p-8">
-                  <h2 className="mb-2 font-display text-2xl font-bold text-foreground">Send a Message</h2>
-                  <p className="mb-6 text-sm text-muted-foreground">Your message will be sent directly via WhatsApp</p>
+                  <h2 className="mb-2 font-display text-2xl font-bold text-foreground">{t.contact.sendMessage}</h2>
+                  <p className="mb-6 text-sm text-muted-foreground">{t.contact.messageSentVia}</p>
                   <form onSubmit={handleSubmit} className="space-y-5">
                     <div>
-                      <Label htmlFor="name" className="text-sm font-semibold">Name</Label>
-                      <Input id="name" name="name" placeholder="Your name" required className="mt-1.5 rounded-xl h-12" />
+                      <Label htmlFor="name" className="text-sm font-semibold">{t.booking.name}</Label>
+                      <Input id="name" name="name" placeholder={t.contact.yourName} required className="mt-1.5 rounded-xl h-12" />
                     </div>
                     <div>
-                      <Label htmlFor="email" className="text-sm font-semibold">Email</Label>
-                      <Input id="email" name="email" type="email" placeholder="your@email.com" required className="mt-1.5 rounded-xl h-12" />
+                      <Label htmlFor="email" className="text-sm font-semibold">{t.contact.email}</Label>
+                      <Input id="email" name="email" type="email" placeholder={t.contact.yourEmail} required className="mt-1.5 rounded-xl h-12" />
                     </div>
                     <div>
-                      <Label htmlFor="message" className="text-sm font-semibold">Message</Label>
-                      <Textarea id="message" name="message" placeholder="Tell us about your dream Sundarban trip..." rows={5} required className="mt-1.5 rounded-xl" />
+                      <Label htmlFor="message" className="text-sm font-semibold">{t.contact.messageLabel}</Label>
+                      <Textarea id="message" name="message" placeholder={t.contact.messagePlaceholder} rows={5} required className="mt-1.5 rounded-xl" />
                     </div>
                     <Button type="submit" size="lg" className="w-full gradient-primary text-primary-foreground font-bold text-base rounded-xl h-13 gap-2 hover:scale-[1.02] transition-transform">
-                      <Send className="h-5 w-5" /> Send via WhatsApp
+                      <Send className="h-5 w-5" /> {t.contact.sendViaWhatsApp}
                     </Button>
                   </form>
                 </CardContent>
