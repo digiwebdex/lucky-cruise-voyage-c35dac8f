@@ -104,7 +104,7 @@ export default function CruiseDetail() {
 
             {cruise.touristSpots && (
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-                <h2 className="mb-4 font-display text-2xl font-black text-foreground flex items-center gap-2"><MapPinned className="h-6 w-6 text-primary" /> {t.cruiseDetail.touristSpots}</h2>
+                <h2 className="mb-4 font-display text-xl sm:text-2xl font-black text-foreground flex items-center gap-2"><MapPinned className="h-5 w-5 sm:h-6 sm:w-6 text-primary" /> {t.cruiseDetail.touristSpots}</h2>
                 <div className="flex flex-wrap gap-2">
                   {cruise.touristSpots.map(spot => (
                     <Badge key={spot} variant="outline" className="border-primary/30 bg-primary/5 text-foreground px-4 py-2 text-sm font-medium rounded-xl">{spot}</Badge>
