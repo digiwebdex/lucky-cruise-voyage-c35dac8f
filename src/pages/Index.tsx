@@ -107,12 +107,12 @@ export default function Index() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
               >
-                <h1 className="font-display text-5xl md:text-7xl font-black leading-[1.05] text-secondary-foreground mb-4">
+                <h1 className="font-display text-3xl sm:text-5xl md:text-7xl font-black leading-[1.05] text-secondary-foreground mb-3 sm:mb-4">
                   {slideText.title}
                   <br />
                   <span className="text-gradient">{slideText.highlight}</span>
                 </h1>
-                <p className="text-lg md:text-xl text-secondary-foreground/60 max-w-xl mb-10 leading-relaxed">
+                <p className="text-sm sm:text-lg md:text-xl text-secondary-foreground/60 max-w-xl mb-6 sm:mb-10 leading-relaxed">
                   {slideText.subtitle}
                 </p>
               </motion.div>
