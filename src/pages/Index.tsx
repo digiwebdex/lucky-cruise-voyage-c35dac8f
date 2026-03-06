@@ -331,7 +331,7 @@ export default function Index() {
 
           <div className="grid gap-6 md:grid-cols-3">
             {testimonials.slice(0, 3).map((t, i) => (
-              <motion.div key={t.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scaleIn} transition={{ delay: i * 0.1 }}>
+              <motion.div key={t.name} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scaleIn} transition={{ delay: i * 0.1 }}>
                 <Card className="border-border/50 hover:shadow-elevated transition-all duration-500 h-full bg-card">
                   <CardContent className="p-7">
                     <div className="flex gap-1 mb-4">
@@ -342,7 +342,7 @@ export default function Index() {
                     <p className="text-muted-foreground italic leading-relaxed mb-6">"{t.text}"</p>
                     <div className="flex items-center gap-3 border-t border-border/30 pt-4">
                       <div className="flex h-12 w-12 items-center justify-center rounded-xl gradient-primary text-sm font-bold text-primary-foreground">
-                        {t.avatar}
+                        {t.name.split(" ").map(n => n[0]).join("")}
                       </div>
                       <div>
                         <span className="font-display font-bold text-foreground">{t.name}</span>
