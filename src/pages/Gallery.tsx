@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ImageZoom from "@/components/ImageZoom";
 import { motion } from "framer-motion";
 import { X, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -61,7 +62,7 @@ export default function Gallery() {
           {lightbox && (
             <div className="relative">
               <div className="watermark-container">
-                <img src={lightbox.img} alt="Gallery" className="w-full rounded-xl max-h-[80vh] object-contain" draggable={false} />
+                <ImageZoom src={lightbox.img} alt="Gallery" className="w-full rounded-xl max-h-[80vh]" zoomScale={2.5} />
               </div>
               <Button variant="ghost" size="icon" className="absolute left-2 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-secondary/50 text-secondary-foreground hover:bg-primary hover:text-primary-foreground" onClick={(e) => { e.stopPropagation(); navigate(-1); }}>
                 <ChevronLeft className="h-6 w-6" />
