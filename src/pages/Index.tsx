@@ -295,8 +295,9 @@ export default function Index() {
             <p className="mt-4 text-muted-foreground max-w-lg mx-auto">{t.compare.subtitle}</p>
           </motion.div>
 
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="overflow-x-auto rounded-2xl border border-border/50 shadow-elevated bg-card">
-            <table className="w-full min-w-[700px]">
+          {/* Desktop Table */}
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="hidden md:block overflow-x-auto rounded-2xl border border-border/50 shadow-elevated bg-card">
+            <table className="w-full">
               <thead>
                 <tr className="gradient-navy text-secondary-foreground">
                   <th className="px-6 py-4 text-left text-sm font-display font-bold">{t.compare.cruise}</th>
@@ -339,6 +340,31 @@ export default function Index() {
               </tbody>
             </table>
           </motion.div>
+
+          {/* Mobile Cards */}
+          <div className="md:hidden space-y-3">
+            {cruises.map((c, i) => (
+              <motion.div key={c.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scaleIn} transition={{ delay: i * 0.05 }}>
+                <Link to={`/cruises/${c.id}`}>
+                  <Card className={`border-border/50 hover:shadow-md transition-all bg-card ${i % 2 === 0 ? '' : 'bg-muted/20'}`}>
+                    <CardContent className="p-4 flex items-center gap-3">
+                      <img src={c.images[0]} alt={c.name} className="h-16 w-20 rounded-xl object-cover flex-shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <p className="font-display font-bold text-foreground text-sm truncate">{c.name}</p>
+                        <p className="text-xs text-muted-foreground truncate">{c.route}</p>
+                        <div className="mt-1 flex items-center gap-2 flex-wrap">
+                          {c.oldPrice && <span className="text-xs text-muted-foreground line-through">৳{c.oldPrice.toLocaleString()}</span>}
+                          <span className="font-display font-black text-primary text-lg leading-tight">৳{c.price.toLocaleString()}</span>
+                          {c.packages?.some(p => p.isOffer) && <span className="text-xs text-red-500 font-bold">🔥 অফার</span>}
+                        </div>
+                      </div>
+                      <ArrowRight className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                    </CardContent>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
