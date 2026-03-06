@@ -45,14 +45,14 @@ export default function CruiseDetail() {
           <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/70 to-secondary/20" />
           <div className="absolute inset-0 bg-gradient-to-r from-secondary/60 to-transparent" />
         </div>
-        <div className="container relative z-10 pb-12 pt-28">
+        <div className="container relative z-10 pb-8 sm:pb-12 pt-20 sm:pt-28">
           <Link to="/cruises" className="mb-5 inline-flex items-center gap-2 rounded-xl bg-secondary/50 backdrop-blur-sm px-4 py-2 text-sm font-medium text-secondary-foreground/70 hover:text-primary transition-colors">
             <ArrowLeft className="h-4 w-4" /> {t.cruiseDetail.backToCruises}
           </Link>
           <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6 }}>
             <Badge className="mb-3 rounded-full gradient-primary text-primary-foreground font-bold border-0 px-4 py-1">{cruise.duration}</Badge>
             <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-secondary-foreground leading-tight">{cruise.name}</h1>
-            <p className="mt-2 text-lg font-semibold text-primary">{cruise.subtitle}</p>
+            <p className="mt-2 text-sm sm:text-lg font-semibold text-primary">{cruise.subtitle}</p>
             <div className="mt-4 sm:mt-5 flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm text-secondary-foreground/70">
               <span className="flex items-center gap-1.5 sm:gap-2 bg-secondary/40 backdrop-blur-sm rounded-lg px-2.5 sm:px-3 py-1 sm:py-1.5"><MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" /> {cruise.route}</span>
               <span className="flex items-center gap-1.5 sm:gap-2 bg-secondary/40 backdrop-blur-sm rounded-lg px-2.5 sm:px-3 py-1 sm:py-1.5"><Clock className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" /> {cruise.duration}</span>
@@ -63,9 +63,9 @@ export default function CruiseDetail() {
         </div>
       </section>
 
-      <div className="container py-10">
-        <div className="grid gap-10 lg:grid-cols-3">
-          <div className="lg:col-span-2 space-y-10">
+      <div className="container py-6 sm:py-10">
+        <div className="grid gap-8 sm:gap-10 lg:grid-cols-3">
+          <div className="lg:col-span-2 space-y-8 sm:space-y-10 min-w-0">
             {/* Image Gallery */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
               <div className="watermark-container aspect-[16/10] overflow-hidden rounded-2xl shadow-elevated cursor-pointer group relative" onClick={() => setLightbox(true)}>
@@ -86,12 +86,12 @@ export default function CruiseDetail() {
             </motion.div>
 
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              <h2 className="mb-3 font-display text-2xl font-black text-foreground flex items-center gap-2"><Ship className="h-6 w-6 text-primary" /> {t.cruiseDetail.aboutThisCruise}</h2>
-              <p className="text-muted-foreground leading-relaxed text-lg">{cruise.description}</p>
+              <h2 className="mb-3 font-display text-xl sm:text-2xl font-black text-foreground flex items-center gap-2"><Ship className="h-5 w-5 sm:h-6 sm:w-6 text-primary" /> {t.cruiseDetail.aboutThisCruise}</h2>
+              <p className="text-muted-foreground leading-relaxed text-base sm:text-lg">{cruise.description}</p>
             </motion.div>
 
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              <h2 className="mb-4 font-display text-2xl font-black text-foreground">{t.cruiseDetail.shipFacilities}</h2>
+              <h2 className="mb-4 font-display text-xl sm:text-2xl font-black text-foreground">{t.cruiseDetail.shipFacilities}</h2>
               <div className="grid gap-3 sm:grid-cols-2">
                 {cruise.facilities.map(f => (
                   <div key={f} className="flex items-center gap-3 rounded-xl bg-primary/5 border border-primary/10 px-4 py-3.5 text-sm hover:bg-primary/10 transition-colors">
@@ -104,7 +104,7 @@ export default function CruiseDetail() {
 
             {cruise.touristSpots && (
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-                <h2 className="mb-4 font-display text-2xl font-black text-foreground flex items-center gap-2"><MapPinned className="h-6 w-6 text-primary" /> {t.cruiseDetail.touristSpots}</h2>
+                <h2 className="mb-4 font-display text-xl sm:text-2xl font-black text-foreground flex items-center gap-2"><MapPinned className="h-5 w-5 sm:h-6 sm:w-6 text-primary" /> {t.cruiseDetail.touristSpots}</h2>
                 <div className="flex flex-wrap gap-2">
                   {cruise.touristSpots.map(spot => (
                     <Badge key={spot} variant="outline" className="border-primary/30 bg-primary/5 text-foreground px-4 py-2 text-sm font-medium rounded-xl">{spot}</Badge>
@@ -114,23 +114,23 @@ export default function CruiseDetail() {
             )}
 
             <Tabs defaultValue="itinerary" className="w-full">
-              <TabsList className="grid w-full grid-cols-4 bg-muted/50 rounded-xl h-12 p-1">
-                <TabsTrigger value="itinerary" className="gap-1.5 text-xs sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><Calendar className="h-4 w-4 hidden sm:block" /> {t.cruiseDetail.itinerary}</TabsTrigger>
-                <TabsTrigger value="menu" className="gap-1.5 text-xs sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><UtensilsCrossed className="h-4 w-4 hidden sm:block" /> {t.cruiseDetail.menu}</TabsTrigger>
-                <TabsTrigger value="safety" className="gap-1.5 text-xs sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><Shield className="h-4 w-4 hidden sm:block" /> {t.cruiseDetail.safety}</TabsTrigger>
-                <TabsTrigger value="tips" className="gap-1.5 text-xs sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><Backpack className="h-4 w-4 hidden sm:block" /> {t.cruiseDetail.tips}</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-4 bg-muted/50 rounded-xl h-10 sm:h-12 p-1">
+                <TabsTrigger value="itinerary" className="gap-1 sm:gap-1.5 text-[10px] sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4 hidden xs:block" /> {t.cruiseDetail.itinerary}</TabsTrigger>
+                <TabsTrigger value="menu" className="gap-1 sm:gap-1.5 text-[10px] sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><UtensilsCrossed className="h-3.5 w-3.5 sm:h-4 sm:w-4 hidden xs:block" /> {t.cruiseDetail.menu}</TabsTrigger>
+                <TabsTrigger value="safety" className="gap-1 sm:gap-1.5 text-[10px] sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><Shield className="h-3.5 w-3.5 sm:h-4 sm:w-4 hidden xs:block" /> {t.cruiseDetail.safety}</TabsTrigger>
+                <TabsTrigger value="tips" className="gap-1 sm:gap-1.5 text-[10px] sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><Backpack className="h-3.5 w-3.5 sm:h-4 sm:w-4 hidden xs:block" /> {t.cruiseDetail.tips}</TabsTrigger>
               </TabsList>
 
               <TabsContent value="itinerary" className="mt-6 space-y-6">
                 {cruise.itinerary?.map((day, i) => (
                   <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.08 }}>
                     <Card className="border-l-4 border-l-primary overflow-hidden border-border/50 bg-card">
-                      <CardContent className="p-6">
+                       <CardContent className="p-4 sm:p-6">
                         <div className="flex items-center gap-3 mb-4">
-                          <span className="flex h-11 w-11 items-center justify-center rounded-xl gradient-primary text-primary-foreground font-display font-black text-sm">{day.day.replace("Day ", "")}</span>
+                          <span className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-xl gradient-primary text-primary-foreground font-display font-black text-xs sm:text-sm">{day.day.replace("Day ", "")}</span>
                           <div>
                             <p className="text-xs font-bold text-primary uppercase tracking-wider">{day.day}</p>
-                            <h3 className="font-display text-lg font-bold text-foreground">{day.title}</h3>
+                            <h3 className="font-display text-base sm:text-lg font-bold text-foreground">{day.title}</h3>
                           </div>
                         </div>
                         <ul className="space-y-3 ml-1">
@@ -151,13 +151,13 @@ export default function CruiseDetail() {
                 {cruise.menu?.map((day, i) => (
                   <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.08 }}>
                     <Card className="overflow-hidden border-border/50 bg-card">
-                      <CardContent className="p-6">
+                       <CardContent className="p-4 sm:p-6">
                         <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
                           <UtensilsCrossed className="h-5 w-5 text-primary" /> {day.day}
                         </h3>
                         <div className="space-y-3">
                           {day.meals.map((meal, j) => (
-                            <div key={j} className="rounded-xl bg-muted/30 border border-border/30 p-4">
+                            <div key={j} className="rounded-xl bg-muted/30 border border-border/30 p-3 sm:p-4">
                               <p className="font-display font-bold text-sm text-primary mb-1">{meal.name}</p>
                               <p className="text-sm text-muted-foreground leading-relaxed">{meal.items}</p>
                             </div>
@@ -177,7 +177,7 @@ export default function CruiseDetail() {
 
               <TabsContent value="safety" className="mt-6 space-y-4">
                 <Card className="border-l-4 border-l-emerald border-border/50 bg-card">
-                  <CardContent className="p-6">
+                   <CardContent className="p-4 sm:p-6">
                     <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2"><Shield className="h-5 w-5 text-emerald" /> {t.cruiseDetail.securityMeasures}</h3>
                     <ul className="space-y-3">
                       {cruise.safetyInfo?.map((info, i) => (
@@ -194,7 +194,7 @@ export default function CruiseDetail() {
               <TabsContent value="tips" className="mt-6 space-y-6">
                 {cruise.travelTips && (
                   <Card className="border-border/50 bg-card">
-                    <CardContent className="p-6">
+                     <CardContent className="p-4 sm:p-6">
                       <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2"><TreePine className="h-5 w-5 text-emerald" /> {t.cruiseDetail.travelTips}</h3>
                       <ul className="space-y-3">
                         {cruise.travelTips.map((tip, i) => (
@@ -209,7 +209,7 @@ export default function CruiseDetail() {
                 )}
                 {cruise.thingsToCarry && (
                   <Card className="border-border/50 bg-card">
-                    <CardContent className="p-6">
+                    <CardContent className="p-4 sm:p-6">
                       <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2"><Backpack className="h-5 w-5 text-primary" /> {t.cruiseDetail.thingsToCarry}</h3>
                       <div className="grid gap-2 sm:grid-cols-2">
                         {cruise.thingsToCarry.map((item, i) => (
@@ -225,15 +225,15 @@ export default function CruiseDetail() {
             </Tabs>
 
             <section>
-              <h2 className="mb-6 font-display text-2xl font-black text-foreground">{t.cruiseDetail.seatPlan}</h2>
+              <h2 className="mb-4 sm:mb-6 font-display text-xl sm:text-2xl font-black text-foreground">{t.cruiseDetail.seatPlan}</h2>
               <SeatPlanViewer seatPlanImage={cruise.seatPlanImage} shipName={cruise.name} />
             </section>
           </div>
 
           {/* Sidebar */}
           <div className="space-y-6">
-            <Card className="sticky top-24 border-border/50 shadow-elevated overflow-hidden bg-card">
-              <div className="gradient-primary px-6 py-5">
+            <Card className="lg:sticky lg:top-24 border-border/50 shadow-elevated overflow-hidden bg-card">
+              <div className="gradient-primary px-5 sm:px-6 py-4 sm:py-5">
                 <p className="text-primary-foreground/80 text-sm font-medium">{t.cruiseDetail.startingFrom}</p>
                 {cruise.oldPrice && (
                   <p className="text-primary-foreground/60 text-lg font-display font-bold line-through">৳{cruise.oldPrice.toLocaleString()}</p>
@@ -241,7 +241,7 @@ export default function CruiseDetail() {
                 <p className="text-4xl font-display font-black text-primary-foreground">৳{cruise.price.toLocaleString()}</p>
                 <p className="text-primary-foreground/70 text-xs mt-1">{cruise.priceLabel}</p>
               </div>
-              <CardContent className="p-6 space-y-4">
+              <CardContent className="p-4 sm:p-6 space-y-4">
                 <Button size="lg" className="w-full gradient-primary text-primary-foreground font-bold text-base rounded-xl h-13 shadow-glow hover:scale-[1.02] transition-transform" onClick={() => setBookingOpen(true)}>
                   {t.cruiseDetail.bookNow}
                 </Button>
@@ -286,7 +286,7 @@ export default function CruiseDetail() {
             </Card>
 
             <Card className="border-border/50 bg-card">
-              <CardContent className="p-6 text-center">
+              <CardContent className="p-4 sm:p-6 text-center">
                 <p className="font-display font-bold text-foreground mb-2">{t.cruiseDetail.sundarbanBooking}</p>
                 <a href="tel:+8801711871072" className="text-2xl font-display font-black text-primary hover:underline">+880 1711-871072</a>
                 <p className="text-xs text-muted-foreground mt-2">{t.cruiseDetail.callOrWhatsApp}</p>
