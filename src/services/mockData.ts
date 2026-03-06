@@ -92,7 +92,18 @@ import khayapar33 from "@/assets/cruises/khayapar-33.jpg";
 import khayapar34 from "@/assets/cruises/khayapar-34.jpg";
 import khayaparSeatplan from "@/assets/cruises/khayapar-seatplan.jpg";
 
-// ===== Image Imports: Magpie =====
+// ===== Image Imports: Mohammadi 2 =====
+import mohammadi2_1 from "@/assets/cruises/mohammadi2-1.jpg";
+import mohammadi2_2 from "@/assets/cruises/mohammadi2-2.jpg";
+import mohammadi2_3 from "@/assets/cruises/mohammadi2-3.jpg";
+import mohammadi2_4 from "@/assets/cruises/mohammadi2-4.jpg";
+import mohammadi2_5 from "@/assets/cruises/mohammadi2-5.jpg";
+import mohammadi2_6 from "@/assets/cruises/mohammadi2-6.jpg";
+import mohammadi2_7 from "@/assets/cruises/mohammadi2-7.jpg";
+import mohammadi2_8 from "@/assets/cruises/mohammadi2-8.jpg";
+import mohammadi2_9 from "@/assets/cruises/mohammadi2-9.jpg";
+import mohammadi2_10 from "@/assets/cruises/mohammadi2-10.jpg";
+
 import magpie1 from "@/assets/cruises/magpie-1.jpg";
 import magpie2 from "@/assets/cruises/magpie-2.jpg";
 import magpie3 from "@/assets/cruises/magpie-3.jpg";
@@ -990,6 +1001,99 @@ export const cruises: Cruise[] = [
       },
     ],
     seatPlanImage: khayaparSeatplan,
+  },
+
+  // ===== 10. MV Mohammadi 2 =====
+  {
+    id: "mv-mohammadi-2",
+    name: "M.V Mohammadi 2",
+    subtitle: "Non-AC Cruise Vessel — Mangrove Forest Sundarban",
+    description: "এম.ভি মোহাম্মাদী ২ is a brand new, colorfully designed Non-AC cruise vessel built for an affordable yet memorable Sundarban adventure. Featuring captivating interior design, live BBQ corner, dual engines for safe travel, dual generators for 24/7 electricity, IPS lighting system, and modern GPS/VHF/Echo Sounder navigation. An experienced chef prepares delicious meals on board.",
+    route: "Khulna → Sundarban → Khulna",
+    duration: "3 Days / 2 Nights",
+    capacity: "75 Tourists",
+    cabins: "35 Cabins",
+    price: 22000,
+    priceLabel: "per person (Bangladeshi)",
+    featured: false,
+    images: [
+      mohammadi2_1, mohammadi2_2, mohammadi2_3, mohammadi2_4, mohammadi2_5,
+      mohammadi2_6, mohammadi2_7, mohammadi2_8, mohammadi2_9, mohammadi2_10,
+    ],
+    facilities: [
+      "Brand new tourist vessel",
+      "Captivating & aesthetic interior design",
+      "Live Bar-B-Q corner",
+      "Fresh water reserve",
+      "Dual engine for safe travel",
+      "Dual generator for 24/7 electricity",
+      "IPS system for constant lighting",
+      "Modern GPS, VHF & Echo Sounder",
+      "Life jacket for every guest",
+      "Life buoys and fire extinguisher systems",
+      "Experienced chef for delicious meals",
+    ],
+    touristSpots: commonTouristSpots,
+    itinerary: sundarbanItinerary,
+    menu: khayaparMenu,
+    safetyInfo: commonSafetyInfo,
+    travelTips: commonTravelTips,
+    thingsToCarry: commonThingsToCarry,
+    additionalCosts: commonAdditionalCosts,
+    packageIncludes: commonPackageIncludes,
+    packages: [
+      { id: "mohammadi2-standard", name: "Standard Non-AC Package", price: 22000, duration: "3 Days / 2 Nights" },
+    ],
+    seatPlan: [
+      {
+        name: "Ground Floor",
+        capacity: 25,
+        rows: [
+          {
+            label: "Non-AC Cabins",
+            cabins: Array.from({ length: 12 }, (_, i) => ({
+              id: `G${i + 1}`,
+              type: "VIP Couple" as const,
+              bedType: "Couple Bed Non-AC",
+              persons: 2,
+              available: true,
+            })),
+          },
+        ],
+      },
+      {
+        name: "1st Floor",
+        capacity: 35,
+        rows: [
+          {
+            label: "Non-AC Cabins",
+            cabins: Array.from({ length: 15 }, (_, i) => ({
+              id: `1F-${i + 1}`,
+              type: "Twin" as const,
+              bedType: "Twin Bed Non-AC",
+              persons: 2,
+              available: true,
+            })),
+          },
+        ],
+      },
+      {
+        name: "Top Floor",
+        capacity: 15,
+        rows: [
+          {
+            label: "Non-AC Cabins",
+            cabins: Array.from({ length: 8 }, (_, i) => ({
+              id: `T${i + 1}`,
+              type: "Twin" as const,
+              bedType: "Twin Bed Non-AC",
+              persons: 2,
+              available: true,
+            })),
+          },
+        ],
+      },
+    ],
   },
 ];
 
