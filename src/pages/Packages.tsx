@@ -4,11 +4,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cruises } from "@/services/mockData";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 const scaleIn = { hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } };
 
 export default function Packages() {
+  const { t } = useLanguage();
   const allPackages = cruises.flatMap(c => c.packages.map(p => ({ ...p, cruiseName: c.name, cruiseId: c.id })));
 
   return (
@@ -17,9 +19,9 @@ export default function Packages() {
         <div className="container relative">
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
             <h1 className="font-display text-4xl md:text-5xl font-black text-secondary-foreground">
-              Tour <span className="text-gradient">Packages</span>
+              {t.packages.title} <span className="text-gradient">{t.packages.titleHighlight}</span>
             </h1>
-            <p className="mt-3 text-secondary-foreground/60 max-w-md mx-auto">Choose the perfect package for your journey</p>
+            <p className="mt-3 text-secondary-foreground/60 max-w-md mx-auto">{t.packages.subtitle}</p>
           </motion.div>
         </div>
       </section>
@@ -28,15 +30,15 @@ export default function Packages() {
         <div className="container">
           {allPackages.length === 0 ? (
             <motion.div initial="hidden" animate="visible" variants={fadeUp} className="text-center py-20">
-              <h2 className="font-display text-2xl font-bold text-foreground mb-4">Custom Packages Available</h2>
-              <p className="text-muted-foreground mb-6 max-w-md mx-auto">We offer tailored cruise packages for every group size and budget. Contact us to get a custom quote.</p>
+              <h2 className="font-display text-2xl font-bold text-foreground mb-4">{t.packages.customAvailable}</h2>
+              <p className="text-muted-foreground mb-6 max-w-md mx-auto">{t.packages.customDesc}</p>
               <div className="flex flex-wrap justify-center gap-4">
                 <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer">
-                  <Button size="lg" className="gradient-primary text-primary-foreground font-bold rounded-xl gap-2">Request Package</Button>
+                  <Button size="lg" className="gradient-primary text-primary-foreground font-bold rounded-xl gap-2">{t.packages.requestPackage}</Button>
                 </a>
                 <Link to="/cruises">
                   <Button size="lg" variant="outline" className="border-2 border-primary/30 text-primary rounded-xl font-bold gap-2">
-                    View Cruises <ArrowRight className="h-4 w-4" />
+                    {t.packages.viewCruises} <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
               </div>
@@ -53,11 +55,11 @@ export default function Packages() {
                       <div className="mt-6 flex items-center justify-between border-t border-border/50 pt-5">
                         <div>
                           <span className="text-2xl font-display font-black text-primary">৳{pkg.price.toLocaleString()}</span>
-                          <span className="text-xs text-muted-foreground block">per person</span>
+                          <span className="text-xs text-muted-foreground block">{t.packages.perPerson}</span>
                         </div>
                         <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer">
                           <Button className="gradient-primary text-primary-foreground font-bold rounded-xl gap-1">
-                            Book <ArrowRight className="h-4 w-4" />
+                            {t.packages.book} <ArrowRight className="h-4 w-4" />
                           </Button>
                         </a>
                       </div>

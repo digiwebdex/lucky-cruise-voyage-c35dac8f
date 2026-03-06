@@ -1,10 +1,21 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Ship, ExternalLink } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Footer() {
+  const { t } = useLanguage();
+
+  const footerLinks = [
+    { to: "/", label: t.footer.home },
+    { to: "/cruises", label: t.footer.ourCruises },
+    { to: "/packages", label: t.footer.tourPackages },
+    { to: "/gallery", label: t.footer.photoGallery },
+    { to: "/about", label: t.footer.aboutUs },
+    { to: "/contact", label: t.footer.contactLink },
+  ];
+
   return (
     <footer className="relative overflow-hidden">
-      {/* Wave separator */}
       <div className="absolute top-0 left-0 right-0 h-1 gradient-primary" />
       
       <div className="gradient-navy text-secondary-foreground">
@@ -20,7 +31,7 @@ export default function Footer() {
                 </div>
               </div>
               <p className="text-sm text-secondary-foreground/60 leading-relaxed">
-                Your trusted cruise tour partner in Bangladesh. Explore rivers, coasts, and the majestic Sundarbans with us.
+                {t.footer.tagline}
               </p>
               <div className="mt-4 flex gap-3">
                 <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary hover:bg-primary/25 transition-colors">
@@ -34,16 +45,9 @@ export default function Footer() {
 
             {/* Quick Links */}
             <div>
-              <h4 className="mb-5 font-display font-bold text-sm uppercase tracking-wider text-primary/80">Quick Links</h4>
+              <h4 className="mb-5 font-display font-bold text-sm uppercase tracking-wider text-primary/80">{t.footer.quickLinks}</h4>
               <ul className="space-y-3">
-                {[
-                  { to: "/", label: "Home" },
-                  { to: "/cruises", label: "Our Cruises" },
-                  { to: "/packages", label: "Tour Packages" },
-                  { to: "/gallery", label: "Photo Gallery" },
-                  { to: "/about", label: "About Us" },
-                  { to: "/contact", label: "Contact" },
-                ].map(link => (
+                {footerLinks.map(link => (
                   <li key={link.to}>
                     <Link to={link.to} className="flex items-center gap-2 text-sm text-secondary-foreground/60 hover:text-primary transition-colors group">
                       <ExternalLink className="h-3 w-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all" />
@@ -56,7 +60,7 @@ export default function Footer() {
 
             {/* Contact Info */}
             <div>
-              <h4 className="mb-5 font-display font-bold text-sm uppercase tracking-wider text-primary/80">Contact</h4>
+              <h4 className="mb-5 font-display font-bold text-sm uppercase tracking-wider text-primary/80">{t.footer.contactTitle}</h4>
               <ul className="space-y-4">
                 <li className="flex items-center gap-3 text-sm text-secondary-foreground/60">
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 flex-shrink-0">
@@ -81,16 +85,16 @@ export default function Footer() {
 
             {/* Hours */}
             <div>
-              <h4 className="mb-5 font-display font-bold text-sm uppercase tracking-wider text-primary/80">Business Hours</h4>
+              <h4 className="mb-5 font-display font-bold text-sm uppercase tracking-wider text-primary/80">{t.footer.businessHours}</h4>
               <div className="rounded-xl border border-secondary-foreground/10 p-4 space-y-3">
                 <div className="flex justify-between text-sm">
-                  <span className="text-secondary-foreground/50">Sat – Thu</span>
+                  <span className="text-secondary-foreground/50">{t.footer.satThu}</span>
                   <span className="font-semibold text-secondary-foreground/80">9AM – 8PM</span>
                 </div>
                 <div className="h-px bg-secondary-foreground/10" />
                 <div className="flex justify-between text-sm">
-                  <span className="text-secondary-foreground/50">Friday</span>
-                  <span className="font-semibold text-primary">Closed</span>
+                  <span className="text-secondary-foreground/50">{t.footer.friday}</span>
+                  <span className="font-semibold text-primary">{t.footer.closed}</span>
                 </div>
               </div>
             </div>
@@ -99,8 +103,8 @@ export default function Footer() {
 
         <div className="border-t border-secondary-foreground/8 py-5">
           <div className="container flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-secondary-foreground/40">
-            <span>© {new Date().getFullYear()} Lucky Tours & Travels. All rights reserved.</span>
-            <span>Design & Developed by <a href="https://digiwebdex.com/bn" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors font-medium">DigiWebDex</a></span>
+            <span>© {new Date().getFullYear()} Lucky Tours & Travels. {t.footer.allRights}</span>
+            <span>{t.footer.designBy} <a href="https://digiwebdex.com/bn" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 transition-colors font-medium">DigiWebDex</a></span>
           </div>
         </div>
       </div>

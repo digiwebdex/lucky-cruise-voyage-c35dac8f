@@ -7,11 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { searchCruises } from "@/services/mockData";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 const scaleIn = { hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } };
 
 export default function CruiseList() {
+  const { t } = useLanguage();
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState("default");
   const [minPrice, setMinPrice] = useState("");
@@ -32,46 +34,44 @@ export default function CruiseList() {
 
   return (
     <div>
-      {/* Hero */}
       <section className="gradient-hero py-16 md:py-20 text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyem0wLTRWMjhIMjR2MmgxMnptLTQtMjh2MmgtNHYtMmg0em0wIDR2MmgtNHYtMmg0em0tOCA4djJoLTR2LTJoNHptMCA0djJoLTR2LTJoNHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-50" />
         <div className="container relative">
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
             <h1 className="font-display text-4xl md:text-5xl font-black text-secondary-foreground">
-              Our <span className="text-gradient">Cruises</span>
+              {t.cruiseList.title} <span className="text-gradient">{t.cruiseList.titleHighlight}</span>
             </h1>
-            <p className="mt-3 text-secondary-foreground/60 max-w-md mx-auto">Find your perfect cruise adventure in the Sundarbans</p>
+            <p className="mt-3 text-secondary-foreground/60 max-w-md mx-auto">{t.cruiseList.subtitle}</p>
           </motion.div>
         </div>
       </section>
 
       <section className="py-10">
         <div className="container">
-          {/* Filters */}
           <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ delay: 0.1 }} className="mb-8 rounded-2xl border border-border/50 bg-card p-5 shadow-sm">
             <div className="flex flex-wrap items-end gap-3">
               <div className="relative flex-1 min-w-[200px]">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input placeholder="Search cruises, routes..." className="pl-9 rounded-xl h-11" value={query} onChange={e => setQuery(e.target.value)} />
+                <Input placeholder={t.cruiseList.searchPlaceholder} className="pl-9 rounded-xl h-11" value={query} onChange={e => setQuery(e.target.value)} />
               </div>
-              <Input className="w-28 rounded-xl h-11" placeholder="Min ৳" type="number" value={minPrice} onChange={e => setMinPrice(e.target.value)} />
-              <Input className="w-28 rounded-xl h-11" placeholder="Max ৳" type="number" value={maxPrice} onChange={e => setMaxPrice(e.target.value)} />
+              <Input className="w-28 rounded-xl h-11" placeholder={t.cruiseList.minPrice} type="number" value={minPrice} onChange={e => setMinPrice(e.target.value)} />
+              <Input className="w-28 rounded-xl h-11" placeholder={t.cruiseList.maxPrice} type="number" value={maxPrice} onChange={e => setMaxPrice(e.target.value)} />
               <Select onValueChange={setSort}>
                 <SelectTrigger className="w-44 rounded-xl h-11">
                   <SlidersHorizontal className="h-4 w-4 mr-1" />
-                  <SelectValue placeholder="Sort by" />
+                  <SelectValue placeholder={t.cruiseList.sortBy} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="default">Default</SelectItem>
-                  <SelectItem value="price-asc">Price: Low → High</SelectItem>
-                  <SelectItem value="price-desc">Price: High → Low</SelectItem>
-                  <SelectItem value="name">Name</SelectItem>
+                  <SelectItem value="default">{t.cruiseList.default}</SelectItem>
+                  <SelectItem value="price-asc">{t.cruiseList.priceLowHigh}</SelectItem>
+                  <SelectItem value="price-desc">{t.cruiseList.priceHighLow}</SelectItem>
+                  <SelectItem value="name">{t.cruiseList.name}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </motion.div>
 
-          <p className="mb-6 text-sm text-muted-foreground font-medium">{sorted.length} cruise{sorted.length !== 1 ? "s" : ""} found</p>
+          <p className="mb-6 text-sm text-muted-foreground font-medium">{sorted.length} {t.cruiseList.cruisesFound}</p>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {sorted.map((cruise, i) => (
@@ -83,7 +83,7 @@ export default function CruiseList() {
                       <div className="absolute inset-0 bg-gradient-to-t from-secondary/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       {cruise.featured && (
                         <div className="absolute top-3 left-3">
-                          <span className="inline-flex items-center gap-1 rounded-full gradient-primary px-3 py-1 text-xs font-bold text-primary-foreground">⭐ Featured</span>
+                          <span className="inline-flex items-center gap-1 rounded-full gradient-primary px-3 py-1 text-xs font-bold text-primary-foreground">{t.featured.featured}</span>
                         </div>
                       )}
                     </div>
@@ -97,7 +97,7 @@ export default function CruiseList() {
                       <div className="mt-4 flex items-center justify-between border-t border-border/50 pt-4">
                         <div>
                           <span className="text-2xl font-display font-black text-primary">৳{cruise.price.toLocaleString()}</span>
-                          <span className="text-xs text-muted-foreground block">per person</span>
+                          <span className="text-xs text-muted-foreground block">{t.featured.perPerson}</span>
                         </div>
                         <div className="flex h-10 w-10 items-center justify-center rounded-xl gradient-primary text-primary-foreground group-hover:scale-110 transition-transform">
                           <ArrowRight className="h-5 w-5" />

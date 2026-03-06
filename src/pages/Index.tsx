@@ -5,26 +5,27 @@ import { Ship, Shield, Star, Clock, MapPin, Phone, ChevronRight, Anchor, Waves, 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { cruises, testimonials } from "@/services/mockData";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const fadeUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } };
 const fadeLeft = { hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0 } };
 const fadeRight = { hidden: { opacity: 0, x: 40 }, visible: { opacity: 1, x: 0 } };
 const scaleIn = { hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } };
 
-// Pick best hero images from different cruises
-const heroSlides = [
-  { image: cruises[0]?.images[0], title: "Explore the Wild", highlight: "Sundarbans", subtitle: "Premium cruise through the world's largest mangrove forest" },
-  { image: cruises[1]?.images[0], title: "Luxury Awaits on", highlight: "Every Voyage", subtitle: "AC cabins, gourmet cuisine, and breathtaking wildlife encounters" },
-  { image: cruises[2]?.images[0], title: "Adventure Meets", highlight: "Comfort", subtitle: "Modern fleet with top-tier safety and unforgettable experiences" },
-  { image: cruises[3]?.images[1], title: "Discover Hidden", highlight: "Treasures", subtitle: "Royal Bengal Tigers, spotted deer, and exotic birds in their natural habitat" },
-  { image: cruises[4]?.images[0], title: "Set Sail Into", highlight: "The Unknown", subtitle: "Guided tours through mysterious waterways and enchanting forests" },
-];
-
 export default function Index() {
+  const { t } = useLanguage();
   const featured = cruises.filter(c => c.featured).slice(0, 4);
   const allCruises = cruises.slice(0, 6);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(1);
+
+  const heroSlides = [
+    { image: cruises[0]?.images[0] },
+    { image: cruises[1]?.images[0] },
+    { image: cruises[2]?.images[0] },
+    { image: cruises[3]?.images[1] },
+    { image: cruises[4]?.images[0] },
+  ];
 
   const goToSlide = useCallback((idx: number) => {
     setDirection(idx > currentSlide ? 1 : -1);
@@ -53,12 +54,12 @@ export default function Index() {
   };
 
   const slide = heroSlides[currentSlide];
+  const slideText = t.hero.slides[currentSlide];
 
   return (
     <div className="overflow-hidden">
       {/* ============ HERO SLIDER ============ */}
       <section className="relative min-h-[92vh] flex items-center overflow-hidden">
-        {/* Sliding backgrounds */}
         <AnimatePresence initial={false} custom={direction} mode="popLayout">
           <motion.div
             key={currentSlide}
@@ -76,7 +77,6 @@ export default function Index() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Decorative */}
         <div className="absolute top-20 right-10 opacity-[0.07] hidden lg:block pointer-events-none">
           <Anchor className="h-48 w-48 text-primary animate-float" />
         </div>
@@ -84,12 +84,11 @@ export default function Index() {
           <Waves className="h-64 w-64 text-primary" />
         </div>
 
-        {/* Content */}
         <div className="container relative z-10 py-20">
           <div className="max-w-3xl">
             <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6 }}>
               <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm px-4 py-1.5 text-sm font-semibold text-primary mb-6">
-                <Ship className="h-4 w-4" /> Bangladesh's Premium Cruise Experience
+                <Ship className="h-4 w-4" /> {t.hero.badge}
               </span>
             </motion.div>
 
@@ -102,12 +101,12 @@ export default function Index() {
                 transition={{ duration: 0.5 }}
               >
                 <h1 className="font-display text-5xl md:text-7xl font-black leading-[1.05] text-secondary-foreground mb-4">
-                  {slide.title}
+                  {slideText.title}
                   <br />
-                  <span className="text-gradient">{slide.highlight}</span>
+                  <span className="text-gradient">{slideText.highlight}</span>
                 </h1>
                 <p className="text-lg md:text-xl text-secondary-foreground/60 max-w-xl mb-10 leading-relaxed">
-                  {slide.subtitle}
+                  {slideText.subtitle}
                 </p>
               </motion.div>
             </AnimatePresence>
@@ -115,22 +114,21 @@ export default function Index() {
             <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.35 }} className="flex flex-wrap gap-4">
               <Link to="/cruises">
                 <Button size="lg" className="gradient-primary text-primary-foreground font-bold text-base px-8 h-14 rounded-xl shadow-glow hover:scale-105 transition-transform gap-2">
-                  Explore Cruises <ArrowRight className="h-5 w-5" />
+                  {t.hero.exploreCruises} <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>
               <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer">
                 <Button size="lg" variant="outline" className="border-2 border-primary/40 text-primary font-bold text-base px-8 h-14 rounded-xl hover:bg-primary hover:text-primary-foreground transition-all gap-2 backdrop-blur-sm">
-                  <Phone className="h-5 w-5" /> Book via WhatsApp
+                  <Phone className="h-5 w-5" /> {t.hero.bookViaWhatsApp}
                 </Button>
               </a>
             </motion.div>
 
-            {/* Stats */}
             <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.5 }} className="mt-14 flex flex-wrap gap-8">
               {[
-                { value: "6+", label: "Cruise Ships" },
-                { value: "5000+", label: "Happy Travellers" },
-                { value: "15+", label: "Years Experience" },
+                { value: "6+", label: t.hero.cruiseShips },
+                { value: "5000+", label: t.hero.happyTravellers },
+                { value: "15+", label: t.hero.yearsExperience },
               ].map((stat, i) => (
                 <div key={i} className="text-left">
                   <div className="text-3xl font-display font-black text-primary">{stat.value}</div>
@@ -141,7 +139,6 @@ export default function Index() {
           </div>
         </div>
 
-        {/* Slider Controls */}
         <div className="absolute bottom-8 right-8 z-20 flex items-center gap-3">
           <button onClick={prevSlide} className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary/60 backdrop-blur-md text-secondary-foreground/70 hover:bg-primary hover:text-primary-foreground transition-all border border-secondary-foreground/10">
             <ChevronLeft className="h-5 w-5" />
@@ -160,7 +157,6 @@ export default function Index() {
           </button>
         </div>
 
-        {/* Slide counter */}
         <div className="absolute bottom-8 left-8 z-20 hidden md:flex items-center gap-3">
           <span className="text-4xl font-display font-black text-primary">0{currentSlide + 1}</span>
           <span className="text-secondary-foreground/30 text-sm">/</span>
@@ -172,11 +168,11 @@ export default function Index() {
       <section className="py-20 md:py-28 bg-background relative">
         <div className="container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-14">
-            <span className="text-sm font-bold uppercase tracking-widest text-primary">Our Fleet</span>
+            <span className="text-sm font-bold uppercase tracking-widest text-primary">{t.featured.ourFleet}</span>
             <h2 className="mt-3 font-display text-4xl md:text-5xl font-black text-foreground">
-              Featured <span className="text-gradient">Cruises</span>
+              {t.featured.title} <span className="text-gradient">{t.featured.titleHighlight}</span>
             </h2>
-            <p className="mt-4 text-muted-foreground max-w-lg mx-auto">Handpicked vessels for an unforgettable Sundarban experience</p>
+            <p className="mt-4 text-muted-foreground max-w-lg mx-auto">{t.featured.subtitle}</p>
           </motion.div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -195,7 +191,7 @@ export default function Index() {
                       {cruise.featured && (
                         <div className="absolute top-3 left-3">
                           <span className="inline-flex items-center gap-1 rounded-full gradient-primary px-3 py-1 text-xs font-bold text-primary-foreground">
-                            ⭐ Featured
+                            {t.featured.featured}
                           </span>
                         </div>
                       )}
@@ -207,7 +203,7 @@ export default function Index() {
                       <div className="mt-4 flex items-center justify-between border-t border-border/50 pt-4">
                         <div>
                           <span className="text-2xl font-display font-black text-primary">৳{cruise.price.toLocaleString()}</span>
-                          <span className="text-xs text-muted-foreground block">per person</span>
+                          <span className="text-xs text-muted-foreground block">{t.featured.perPerson}</span>
                         </div>
                         <div className="flex h-10 w-10 items-center justify-center rounded-xl gradient-primary text-primary-foreground group-hover:scale-110 transition-transform">
                           <ArrowRight className="h-5 w-5" />
@@ -223,7 +219,7 @@ export default function Index() {
           <div className="mt-12 text-center">
             <Link to="/cruises">
               <Button variant="outline" size="lg" className="rounded-xl border-2 border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground font-bold gap-2 px-8">
-                View All Cruises <ChevronRight className="h-4 w-4" />
+                {t.featured.viewAll} <ChevronRight className="h-4 w-4" />
               </Button>
             </Link>
           </div>
@@ -235,18 +231,18 @@ export default function Index() {
         <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
         <div className="container relative">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-14">
-            <span className="text-sm font-bold uppercase tracking-widest text-primary">Why Us</span>
+            <span className="text-sm font-bold uppercase tracking-widest text-primary">{t.whyUs.sectionLabel}</span>
             <h2 className="mt-3 font-display text-4xl md:text-5xl font-black text-foreground">
-              Why Choose <span className="text-gradient">Lucky Tours</span>
+              {t.whyUs.title} <span className="text-gradient">{t.whyUs.titleHighlight}</span>
             </h2>
           </motion.div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: Ship, title: "Premium Fleet", desc: "Modern, well-maintained cruise ships with luxurious interiors for your comfort.", color: "bg-primary/10 text-primary" },
-              { icon: Shield, title: "Maximum Safety", desc: "Armed forest guards, life jackets, GPS, VHF radio & fire safety on every trip.", color: "bg-emerald/10 text-emerald" },
-              { icon: Star, title: "All-Inclusive", desc: "Meals, forest fees, guides, and activities — everything included in one price.", color: "bg-gold/10 text-gold" },
-              { icon: Clock, title: "24/7 Support", desc: "Round-the-clock customer support via WhatsApp for bookings & inquiries.", color: "bg-accent/10 text-accent" },
+              { icon: Ship, title: t.whyUs.premiumFleet, desc: t.whyUs.premiumFleetDesc, color: "bg-primary/10 text-primary" },
+              { icon: Shield, title: t.whyUs.maxSafety, desc: t.whyUs.maxSafetyDesc, color: "bg-emerald/10 text-emerald" },
+              { icon: Star, title: t.whyUs.allInclusive, desc: t.whyUs.allInclusiveDesc, color: "bg-gold/10 text-gold" },
+              { icon: Clock, title: t.whyUs.support247, desc: t.whyUs.support247Desc, color: "bg-accent/10 text-accent" },
             ].map((item, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.1 }}>
                 <Card className="border-border/50 hover:shadow-elevated transition-all duration-500 hover:-translate-y-2 h-full text-center group bg-card">
@@ -268,22 +264,22 @@ export default function Index() {
       <section className="py-20 md:py-28 bg-background">
         <div className="container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-14">
-            <span className="text-sm font-bold uppercase tracking-widest text-primary">Compare</span>
+            <span className="text-sm font-bold uppercase tracking-widest text-primary">{t.compare.sectionLabel}</span>
             <h2 className="mt-3 font-display text-4xl md:text-5xl font-black text-foreground">
-              Compare Our <span className="text-gradient">Cruises</span>
+              {t.compare.title} <span className="text-gradient">{t.compare.titleHighlight}</span>
             </h2>
-            <p className="mt-4 text-muted-foreground max-w-lg mx-auto">Find the perfect cruise that matches your budget and preferences</p>
+            <p className="mt-4 text-muted-foreground max-w-lg mx-auto">{t.compare.subtitle}</p>
           </motion.div>
 
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="overflow-x-auto rounded-2xl border border-border/50 shadow-elevated bg-card">
             <table className="w-full min-w-[700px]">
               <thead>
                 <tr className="gradient-navy text-secondary-foreground">
-                  <th className="px-6 py-4 text-left text-sm font-display font-bold">Cruise</th>
-                  <th className="px-6 py-4 text-center text-sm font-display font-bold">Price</th>
-                  <th className="px-6 py-4 text-center text-sm font-display font-bold">Capacity</th>
-                  <th className="px-6 py-4 text-center text-sm font-display font-bold">Cabins</th>
-                  <th className="px-6 py-4 text-center text-sm font-display font-bold">Duration</th>
+                  <th className="px-6 py-4 text-left text-sm font-display font-bold">{t.compare.cruise}</th>
+                  <th className="px-6 py-4 text-center text-sm font-display font-bold">{t.compare.price}</th>
+                  <th className="px-6 py-4 text-center text-sm font-display font-bold">{t.compare.capacity}</th>
+                  <th className="px-6 py-4 text-center text-sm font-display font-bold">{t.compare.cabins}</th>
+                  <th className="px-6 py-4 text-center text-sm font-display font-bold">{t.compare.duration}</th>
                   <th className="px-6 py-4 text-center text-sm font-display font-bold"></th>
                 </tr>
               </thead>
@@ -306,7 +302,7 @@ export default function Index() {
                     <td className="px-6 py-4 text-center">
                       <Link to={`/cruises/${c.id}`}>
                         <Button size="sm" className="gradient-primary text-primary-foreground rounded-lg font-semibold text-xs gap-1">
-                          View <ArrowRight className="h-3 w-3" />
+                          {t.compare.view} <ArrowRight className="h-3 w-3" />
                         </Button>
                       </Link>
                     </td>
@@ -323,30 +319,30 @@ export default function Index() {
         <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
         <div className="container relative">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-14">
-            <span className="text-sm font-bold uppercase tracking-widest text-primary">Testimonials</span>
+            <span className="text-sm font-bold uppercase tracking-widest text-primary">{t.testimonials.sectionLabel}</span>
             <h2 className="mt-3 font-display text-4xl md:text-5xl font-black text-foreground">
-              What Our <span className="text-gradient">Guests Say</span>
+              {t.testimonials.title} <span className="text-gradient">{t.testimonials.titleHighlight}</span>
             </h2>
           </motion.div>
 
           <div className="grid gap-6 md:grid-cols-3">
-            {testimonials.slice(0, 3).map((t, i) => (
-              <motion.div key={t.name} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scaleIn} transition={{ delay: i * 0.1 }}>
+            {testimonials.slice(0, 3).map((testi, i) => (
+              <motion.div key={testi.name} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scaleIn} transition={{ delay: i * 0.1 }}>
                 <Card className="border-border/50 hover:shadow-elevated transition-all duration-500 h-full bg-card">
                   <CardContent className="p-7">
                     <div className="flex gap-1 mb-4">
-                      {Array.from({ length: t.rating }, (_, i) => (
+                      {Array.from({ length: testi.rating }, (_, i) => (
                         <Star key={i} className="h-5 w-5 fill-gold text-gold" />
                       ))}
                     </div>
-                    <p className="text-muted-foreground italic leading-relaxed mb-6">"{t.text}"</p>
+                    <p className="text-muted-foreground italic leading-relaxed mb-6">"{testi.text}"</p>
                     <div className="flex items-center gap-3 border-t border-border/30 pt-4">
                       <div className="flex h-12 w-12 items-center justify-center rounded-xl gradient-primary text-sm font-bold text-primary-foreground">
-                        {t.name.split(" ").map(n => n[0]).join("")}
+                        {testi.name.split(" ").map(n => n[0]).join("")}
                       </div>
                       <div>
-                        <span className="font-display font-bold text-foreground">{t.name}</span>
-                        <p className="text-xs text-muted-foreground">Verified Guest</p>
+                        <span className="font-display font-bold text-foreground">{testi.name}</span>
+                        <p className="text-xs text-muted-foreground">{t.testimonials.verifiedGuest}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -364,20 +360,20 @@ export default function Index() {
         <div className="container relative z-10 text-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <h2 className="font-display text-4xl md:text-6xl font-black text-secondary-foreground mb-6">
-              Ready to <span className="text-gradient">Set Sail?</span>
+              {t.cta.title} <span className="text-gradient">{t.cta.titleHighlight}</span>
             </h2>
             <p className="mx-auto max-w-xl text-lg text-secondary-foreground/60 mb-10">
-              Book your dream Sundarban cruise today. Contact us for custom packages, group tours, and special offers.
+              {t.cta.subtitle}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer">
                 <Button size="lg" className="gradient-primary text-primary-foreground font-bold text-base px-10 h-14 rounded-xl shadow-glow hover:scale-105 transition-transform gap-2 animate-pulse-glow">
-                  <Phone className="h-5 w-5" /> WhatsApp Us Now
+                  <Phone className="h-5 w-5" /> {t.cta.whatsappUs}
                 </Button>
               </a>
               <Link to="/contact">
                 <Button size="lg" variant="outline" className="border-2 border-primary/40 text-primary font-bold text-base px-10 h-14 rounded-xl hover:bg-primary hover:text-primary-foreground transition-all gap-2">
-                  <MapPin className="h-5 w-5" /> Contact Page
+                  <MapPin className="h-5 w-5" /> {t.cta.contactPage}
                 </Button>
               </Link>
             </div>
