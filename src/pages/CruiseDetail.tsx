@@ -194,7 +194,7 @@ export default function CruiseDetail() {
               <TabsContent value="tips" className="mt-6 space-y-6">
                 {cruise.travelTips && (
                   <Card className="border-border/50 bg-card">
-                    <CardContent className="p-6">
+                     <CardContent className="p-4 sm:p-6">
                       <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2"><TreePine className="h-5 w-5 text-emerald" /> {t.cruiseDetail.travelTips}</h3>
                       <ul className="space-y-3">
                         {cruise.travelTips.map((tip, i) => (
