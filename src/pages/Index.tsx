@@ -16,7 +16,12 @@ export default function Index() {
   const { t } = useLanguage();
   const cruises = getCruises();
   const testimonials = getTestimonials();
-  const featured = cruises.filter(c => c.featured).slice(0, 4);
+  const featured = (() => {
+    const allFeatured = cruises.filter(c => c.featured);
+    const rezab = allFeatured.find(c => c.id === "mv-rezab");
+    const rest = allFeatured.filter(c => c.id !== "mv-rezab");
+    return rezab ? [rezab, ...rest].slice(0, 5) : allFeatured.slice(0, 5);
+  })();
   const allCruises = cruises.slice(0, 6);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(1);
