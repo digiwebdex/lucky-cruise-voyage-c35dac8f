@@ -306,6 +306,14 @@ import rezab7 from "@/assets/cruises/rezab-7.jpg";
 import rezab8 from "@/assets/cruises/rezab-8.jpg";
 import rezab9 from "@/assets/cruises/rezab-9.jpg";
 import rezab10 from "@/assets/cruises/rezab-10.jpg";
+import rezab11 from "@/assets/cruises/rezab-11.jpg";
+import rezab12 from "@/assets/cruises/rezab-12.jpg";
+import rezab13 from "@/assets/cruises/rezab-13.jpg";
+import rezab14 from "@/assets/cruises/rezab-14.jpg";
+import rezab15 from "@/assets/cruises/rezab-15.jpg";
+import rezab16 from "@/assets/cruises/rezab-16.jpg";
+import rezab17 from "@/assets/cruises/rezab-17.jpg";
+import rezab18 from "@/assets/cruises/rezab-18.jpg";
 export interface Cabin {
   id: string;
   type: "VIP Couple" | "VIP Family" | "Twin" | "Single" | "Bunk";
@@ -1590,7 +1598,7 @@ export const cruises: Cruise[] = [
     price: 22000,
     priceLabel: "per person (Bangladeshi)",
     featured: true,
-    images: [rezab1, rezab2, rezab3, rezab4, rezab5, rezab6, rezab7, rezab8, rezab9, rezab10],
+    images: [rezab1, rezab2, rezab3, rezab4, rezab5, rezab6, rezab7, rezab8, rezab9, rezab10, rezab11, rezab12, rezab13, rezab14, rezab15, rezab16, rezab17, rezab18],
     facilities: [
       "আধুনিক ইন্টেরিয়র ডেকোরেশনসহ প্রশস্ত রুম",
       "উঁচু সিলিং (High room height clearance)",
