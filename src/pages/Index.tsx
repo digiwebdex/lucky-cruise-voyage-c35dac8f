@@ -118,14 +118,14 @@ export default function Index() {
               </motion.div>
             </AnimatePresence>
 
-            <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.35 }} className="flex flex-wrap gap-4">
+            <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.35 }} className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
               <Link to="/cruises">
-                <Button size="lg" className="gradient-primary text-primary-foreground font-bold text-base px-8 h-14 rounded-xl shadow-glow hover:scale-105 transition-transform gap-2">
+                <Button size="lg" className="w-full sm:w-auto gradient-primary text-primary-foreground font-bold text-sm sm:text-base px-6 sm:px-8 h-12 sm:h-14 rounded-xl shadow-glow hover:scale-105 transition-transform gap-2">
                   {t.hero.exploreCruises} <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>
               <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" variant="outline" className="border-2 border-primary/40 text-primary font-bold text-base px-8 h-14 rounded-xl hover:bg-primary hover:text-primary-foreground transition-all gap-2 backdrop-blur-sm">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto border-2 border-primary/40 text-primary font-bold text-sm sm:text-base px-6 sm:px-8 h-12 sm:h-14 rounded-xl hover:bg-primary hover:text-primary-foreground transition-all gap-2 backdrop-blur-sm">
                   <Phone className="h-5 w-5" /> {t.hero.bookViaWhatsApp}
                 </Button>
               </a>
