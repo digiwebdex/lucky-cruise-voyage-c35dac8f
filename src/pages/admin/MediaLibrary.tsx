@@ -1,33 +1,203 @@
 import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Upload, Trash2 } from "lucide-react";
-import { cruises } from "@/services/mockData";
+import { Input } from "@/components/ui/input";
+import { Ship, Plus, Minus, Trash2, ZoomIn, ChevronLeft, ChevronRight, ImageIcon, Save } from "lucide-react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { getCruises, saveCruises } from "@/services/cmsStore";
+import type { Cruise } from "@/services/mockData";
+import { toast } from "@/hooks/use-toast";
 
 export default function MediaLibrary() {
-  const allImages = cruises.flatMap(c => c.images);
-  const [images, setImages] = useState(allImages);
+  const [cruises, setCruises] = useState<Cruise[]>(() => getCruises());
+  const [activeCruise, setActiveCruise] = useState<string | null>(null);
+  const [expandedSections, setExpandedSections] = useState<Set<string>>(() => new Set(cruises.map(c => c.id)));
+  const [lightbox, setLightbox] = useState<{ img: string; images: string[]; idx: number } | null>(null);
+  const [newUrls, setNewUrls] = useState<Record<string, string>>({});
+  const [hasChanges, setHasChanges] = useState(false);
+
+  const filteredCruises = activeCruise
+    ? cruises.filter(c => c.id === activeCruise)
+    : cruises;
+
+  const totalImages = cruises.reduce((sum, c) => sum + c.images.length, 0);
+
+  const updateCruiseImages = (cruiseId: string, images: string[]) => {
+    setCruises(prev => prev.map(c => c.id === cruiseId ? { ...c, images } : c));
+    setHasChanges(true);
+  };
+
+  const deleteImage = (cruiseId: string, imgIdx: number) => {
+    const cruise = cruises.find(c => c.id === cruiseId);
+    if (!cruise) return;
+    updateCruiseImages(cruiseId, cruise.images.filter((_, j) => j !== imgIdx));
+  };
+
+  const addImage = (cruiseId: string) => {
+    const url = (newUrls[cruiseId] || "").trim();
+    if (!url) return;
+    const cruise = cruises.find(c => c.id === cruiseId);
+    if (!cruise) return;
+    updateCruiseImages(cruiseId, [...cruise.images, url]);
+    setNewUrls(prev => ({ ...prev, [cruiseId]: "" }));
+  };
+
+  const saveAll = () => {
+    saveCruises(cruises);
+    setHasChanges(false);
+    toast({ title: "Gallery saved!" });
+  };
+
+  const navigateLightbox = (dir: number) => {
+    if (!lightbox) return;
+    const { images, idx } = lightbox;
+    const newIdx = (idx + dir + images.length) % images.length;
+    setLightbox({ img: images[newIdx], images, idx: newIdx });
+  };
 
   return (
-    <div>
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-secondary">Media Library</h1>
-        <span className="text-sm text-muted-foreground">{images.length} images</span>
+    <div className="min-h-screen">
+      {/* Sticky Save Bar */}
+      {hasChanges && (
+        <div className="sticky top-0 z-50 bg-primary/10 backdrop-blur-md border-b border-primary/20 px-4 py-3 flex items-center justify-between">
+          <span className="text-sm font-medium text-primary">You have unsaved changes</span>
+          <Button onClick={saveAll} className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
+            <Save className="h-4 w-4" /> Save Gallery
+          </Button>
+        </div>
+      )}
+
+      {/* Header matching public Gallery */}
+      <div className="bg-muted/30 py-10 text-center border-b border-border">
+        <h1 className="font-display text-3xl md:text-4xl font-black text-foreground">
+          ফটো <span className="text-primary">গ্যালারি</span>
+        </h1>
+        <p className="mt-2 text-muted-foreground text-sm">{totalImages} total images across {cruises.length} cruises</p>
       </div>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
-        {images.map((img, i) => (
-          <Card key={i} className="group relative overflow-hidden border-border">
-            <CardContent className="p-0">
-              <div className="watermark-container aspect-square">
-                <img src={img} alt={`Media ${i}`} className="h-full w-full object-cover" draggable={false} />
-              </div>
-              <Button size="icon" variant="destructive" className="absolute right-1 top-1 h-7 w-7 opacity-0 transition-opacity group-hover:opacity-100" onClick={() => setImages(images.filter((_, j) => j !== i))}>
-                <Trash2 className="h-3 w-3" />
+
+      {/* Cruise Filter Tabs */}
+      <div className="py-4 border-b border-border sticky top-0 z-30 bg-background/95 backdrop-blur-md">
+        <div className="px-4">
+          <div className="flex flex-wrap gap-2 justify-center">
+            <Button
+              variant={activeCruise === null ? "default" : "outline"}
+              size="sm"
+              onClick={() => setActiveCruise(null)}
+              className="gap-1.5"
+            >
+              <Ship className="h-4 w-4" />
+              সব ক্রুজ
+            </Button>
+            {cruises.map(c => (
+              <Button
+                key={c.id}
+                variant={activeCruise === c.id ? "default" : "outline"}
+                size="sm"
+                onClick={() => setActiveCruise(c.id)}
+              >
+                {c.name}
               </Button>
-            </CardContent>
-          </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Gallery by Cruise */}
+      <div className="p-4 md:p-6 space-y-10">
+        {filteredCruises.map(cruise => (
+          <div key={cruise.id}>
+            {/* Cruise header - collapsible */}
+            <button
+              className="mb-4 flex items-center gap-3 w-full text-left hover:opacity-80 transition-opacity"
+              onClick={() => {
+                const next = new Set(expandedSections);
+                next.has(cruise.id) ? next.delete(cruise.id) : next.add(cruise.id);
+                setExpandedSections(next);
+              }}
+            >
+              <div className="h-1 w-8 rounded-full bg-primary" />
+              <h2 className="font-display text-xl md:text-2xl font-bold text-foreground">
+                {cruise.name}
+              </h2>
+              <span className="text-sm text-muted-foreground">({cruise.images.length} photos)</span>
+              <div className="ml-auto flex h-7 w-7 items-center justify-center rounded-full border border-border">
+                {expandedSections.has(cruise.id) ? <Minus className="h-4 w-4 text-muted-foreground" /> : <Plus className="h-4 w-4 text-primary" />}
+              </div>
+            </button>
+
+            {expandedSections.has(cruise.id) && (
+              <div>
+                {/* Add image input */}
+                <div className="mb-4 flex gap-2 items-center max-w-lg">
+                  <Input
+                    placeholder="Paste image URL..."
+                    value={newUrls[cruise.id] || ""}
+                    onChange={e => setNewUrls(prev => ({ ...prev, [cruise.id]: e.target.value }))}
+                    onKeyDown={e => { if (e.key === "Enter") addImage(cruise.id); }}
+                  />
+                  <Button variant="outline" size="sm" onClick={() => addImage(cruise.id)} className="gap-1 flex-shrink-0">
+                    <Plus className="h-4 w-4" /> Add
+                  </Button>
+                </div>
+
+                {cruise.images.length > 0 ? (
+                  <div className="columns-2 gap-3 md:columns-3 lg:columns-4 xl:columns-5">
+                    {cruise.images.map((img, i) => (
+                      <div
+                        key={i}
+                        className="mb-3 break-inside-avoid overflow-hidden rounded-xl group relative"
+                      >
+                        <img
+                          src={img}
+                          alt={`${cruise.name} ${i + 1}`}
+                          className="w-full object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105"
+                          draggable={false}
+                          onClick={() => setLightbox({ img, images: cruise.images, idx: i })}
+                        />
+                        {/* Overlay with actions */}
+                        <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/40 transition-all duration-300 flex items-center justify-center gap-2 pointer-events-none">
+                          <ZoomIn className="h-6 w-6 text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); deleteImage(cruise.id, i); }}
+                          className="absolute top-2 right-2 bg-destructive text-destructive-foreground rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg z-10"
+                        >
+                          <Trash2 className="h-3.5 w-3.5" />
+                        </button>
+                        <span className="absolute bottom-2 left-2 bg-secondary/70 text-secondary-foreground text-xs px-2 py-0.5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
+                          {i + 1}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="rounded-2xl border-2 border-dashed border-border/50 bg-muted/30 p-10 text-center">
+                    <ImageIcon className="h-12 w-12 mx-auto mb-3 text-muted-foreground/30" />
+                    <p className="text-muted-foreground text-sm">No images yet — add one above</p>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         ))}
       </div>
+
+      {/* Lightbox */}
+      <Dialog open={!!lightbox} onOpenChange={() => setLightbox(null)}>
+        <DialogContent className="max-w-5xl border-none bg-secondary/95 backdrop-blur-xl p-2 sm:p-4 shadow-2xl">
+          {lightbox && (
+            <div className="relative">
+              <img src={lightbox.img} alt="Gallery" className="w-full rounded-xl max-h-[80vh] object-contain" draggable={false} />
+              <Button variant="ghost" size="icon" className="absolute left-2 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-secondary/50 text-secondary-foreground hover:bg-primary hover:text-primary-foreground" onClick={(e) => { e.stopPropagation(); navigateLightbox(-1); }}>
+                <ChevronLeft className="h-6 w-6" />
+              </Button>
+              <Button variant="ghost" size="icon" className="absolute right-2 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-secondary/50 text-secondary-foreground hover:bg-primary hover:text-primary-foreground" onClick={(e) => { e.stopPropagation(); navigateLightbox(1); }}>
+                <ChevronRight className="h-6 w-6" />
+              </Button>
+              <div className="text-center mt-2 text-sm text-secondary-foreground/50">{lightbox.idx + 1} / {lightbox.images.length}</div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
