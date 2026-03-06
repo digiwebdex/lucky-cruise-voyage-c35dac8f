@@ -103,6 +103,15 @@ import mohammadi2_7 from "@/assets/cruises/mohammadi2-7.jpg";
 import mohammadi2_8 from "@/assets/cruises/mohammadi2-8.jpg";
 import mohammadi2_9 from "@/assets/cruises/mohammadi2-9.jpg";
 import mohammadi2_10 from "@/assets/cruises/mohammadi2-10.jpg";
+import mohammadi2_11 from "@/assets/cruises/mohammadi2-11.jpg";
+import mohammadi2_12 from "@/assets/cruises/mohammadi2-12.jpg";
+import mohammadi2_13 from "@/assets/cruises/mohammadi2-13.jpg";
+import mohammadi2_14 from "@/assets/cruises/mohammadi2-14.jpg";
+import mohammadi2_15 from "@/assets/cruises/mohammadi2-15.jpg";
+import mohammadi2_16 from "@/assets/cruises/mohammadi2-16.jpg";
+import mohammadi2_17 from "@/assets/cruises/mohammadi2-17.jpg";
+import mohammadi2_18 from "@/assets/cruises/mohammadi2-18.jpg";
+import mohammadi2_19 from "@/assets/cruises/mohammadi2-19.jpg";
 
 import magpie1 from "@/assets/cruises/magpie-1.jpg";
 import magpie2 from "@/assets/cruises/magpie-2.jpg";
@@ -1019,6 +1028,8 @@ export const cruises: Cruise[] = [
     images: [
       mohammadi2_1, mohammadi2_2, mohammadi2_3, mohammadi2_4, mohammadi2_5,
       mohammadi2_6, mohammadi2_7, mohammadi2_8, mohammadi2_9, mohammadi2_10,
+      mohammadi2_11, mohammadi2_12, mohammadi2_13, mohammadi2_14, mohammadi2_15,
+      mohammadi2_16, mohammadi2_17, mohammadi2_18, mohammadi2_19,
     ],
     facilities: [
       "Brand new tourist vessel",
