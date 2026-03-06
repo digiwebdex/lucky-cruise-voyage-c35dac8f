@@ -259,6 +259,7 @@ import crown19 from "@/assets/cruises/crown-19.jpeg";
 import crown20 from "@/assets/cruises/crown-20.jpeg";
 import crown21 from "@/assets/cruises/crown-21.jpeg";
 import crown22 from "@/assets/cruises/crown-22.jpeg";
+import crownSeatplan from "@/assets/cruises/crown-seatplan.jpeg";
 // ===== Types =====
 export interface Cabin {
   id: string;
@@ -1261,60 +1262,55 @@ export const cruises: Cruise[] = [
     packages: [
       { id: "crown-standard", name: "Standard AC Package", price: 22000, duration: "3 Days / 2 Nights" },
     ],
+    seatPlanImage: crownSeatplan,
     seatPlan: [
       {
-        name: "Ground Floor",
-        capacity: 20,
-        rows: [
-          {
-            label: "AC Cabins",
-            cabins: Array.from({ length: 10 }, (_, i) => ({
-              id: `G${i + 1}`,
-              type: "Twin" as const,
-              bedType: "Twin Bed AC",
-              persons: 2,
-              available: true,
-            })),
-          },
-        ],
-      },
-      {
         name: "1st Floor",
-        capacity: 30,
+        capacity: 38,
         rows: [
           {
             label: "AC Cabins",
-            cabins: Array.from({ length: 10 }, (_, i) => ({
-              id: `1F-${i + 1}`,
-              type: "Twin" as const,
-              bedType: "Twin Bed AC",
-              persons: 2,
-              available: true,
-            })),
+            cabins: [
+              { id: "201", type: "VIP Family" as const, bedType: "3 Bed AC", persons: 3, available: true },
+              { id: "202", type: "Twin" as const, bedType: "2 Bed AC", persons: 2, available: true },
+              { id: "203", type: "Twin" as const, bedType: "2 Bed AC", persons: 2, available: true },
+              { id: "204", type: "Twin" as const, bedType: "2 Bed AC", persons: 2, available: true },
+              { id: "205", type: "Twin" as const, bedType: "2 Bed AC", persons: 2, available: true },
+              { id: "206", type: "Twin" as const, bedType: "2 Bed AC", persons: 2, available: true },
+              { id: "207", type: "VIP Family" as const, bedType: "4 Bed AC", persons: 4, available: true },
+              { id: "208", type: "VIP Family" as const, bedType: "4 Bed AC", persons: 4, available: true },
+              { id: "209", type: "Twin" as const, bedType: "2 Bed AC", persons: 2, available: true },
+              { id: "210", type: "Twin" as const, bedType: "2 Bed AC", persons: 2, available: true },
+              { id: "211", type: "Twin" as const, bedType: "2 Bed AC", persons: 2, available: true },
+              { id: "212", type: "Twin" as const, bedType: "2 Bed AC", persons: 2, available: true },
+              { id: "213", type: "Twin" as const, bedType: "2 Bed AC", persons: 2, available: true },
+              { id: "214", type: "VIP Family" as const, bedType: "4 Bed AC", persons: 4, available: true },
+              { id: "215", type: "VIP Family" as const, bedType: "4 Bed AC", persons: 4, available: true },
+            ],
           },
         ],
       },
       {
-        name: "2nd Floor (VIP)",
-        capacity: 25,
+        name: "2nd Floor",
+        capacity: 37,
         rows: [
           {
-            label: "VIP & Family Cabins",
+            label: "AC Cabins",
             cabins: [
-              ...Array.from({ length: 5 }, (_, i) => ({
-                id: `V${i + 1}`,
-                type: "VIP Couple" as const,
-                bedType: "Double Bed AC VIP",
-                persons: 2,
-                available: true,
-              })),
-              ...Array.from({ length: 4 }, (_, i) => ({
-                id: `VF${i + 1}`,
-                type: "VIP Family" as const,
-                bedType: "Triple Bed AC VIP",
-                persons: 3,
-                available: true,
-              })),
+              { id: "301", type: "Twin" as const, bedType: "2 Bed AC", persons: 2, available: true },
+              { id: "302", type: "Twin" as const, bedType: "2 Bed AC", persons: 2, available: true },
+              { id: "303", type: "VIP Family" as const, bedType: "3 Bed AC", persons: 3, available: true },
+              { id: "304", type: "VIP Family" as const, bedType: "3 Bed AC", persons: 3, available: true },
+              { id: "305", type: "Twin" as const, bedType: "2 Bed AC", persons: 2, available: true },
+              { id: "306", type: "VIP Family" as const, bedType: "4 Bed AC", persons: 4, available: true },
+              { id: "307", type: "Twin" as const, bedType: "2 Bed AC", persons: 2, available: true },
+              { id: "307B", type: "Twin" as const, bedType: "2 Bed AC", persons: 2, available: true },
+              { id: "309", type: "Twin" as const, bedType: "2 Bed AC", persons: 2, available: true },
+              { id: "310", type: "VIP Family" as const, bedType: "3 Bed AC", persons: 3, available: true },
+              { id: "311", type: "VIP Family" as const, bedType: "3 Bed AC", persons: 3, available: true },
+              { id: "312", type: "Twin" as const, bedType: "2 Bed AC", persons: 2, available: true },
+              { id: "313", type: "VIP Family" as const, bedType: "4 Bed AC", persons: 4, available: true },
+              { id: "314", type: "Twin" as const, bedType: "2 Bed AC", persons: 2, available: true },
             ],
           },
         ],
