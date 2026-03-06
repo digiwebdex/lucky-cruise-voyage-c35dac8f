@@ -15,7 +15,7 @@ export default function PackagesManager() {
 
   const openNew = () => { setForm({ name: "", price: "", duration: "", cruiseName: "" }); setEditOpen(true); };
   const save = () => {
-    setPackages([...packages, { id: `pkg-${Date.now()}`, name: form.name, price: Number(form.price), duration: form.duration, image: "", cruiseName: form.cruiseName }]);
+    setPackages([...packages, { id: `pkg-${Date.now()}`, name: form.name, price: Number(form.price), duration: form.duration, cruiseName: form.cruiseName }]);
     setEditOpen(false);
   };
 
