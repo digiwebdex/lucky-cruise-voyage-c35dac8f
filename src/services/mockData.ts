@@ -485,6 +485,7 @@ export const cruises: Cruise[] = [
     capacity: "60 Tourists",
     cabins: "24 Cabins",
     price: 18000,
+    oldPrice: 22000,
     priceLabel: "per person (Bangladeshi)",
     featured: true,
     images: [flamingo1, flamingo2, flamingo3, flamingo4, flamingo5, flamingo6, flamingo7, flamingo8, flamingo9, flamingo10, flamingo11, flamingo12, flamingo13, flamingo14, flamingo15, flamingo16, flamingo17, flamingo18, flamingo19, flamingo20, flamingo21, flamingo22, flamingo23, flamingo24],
@@ -502,8 +503,8 @@ export const cruises: Cruise[] = [
     additionalCosts: commonAdditionalCosts,
     packageIncludes: commonPackageIncludes,
     packages: [
-      { id: "flamingo-standard", name: "Standard Package", price: 18000, duration: "3 Days / 2 Nights" },
-      { id: "flamingo-premium", name: "Premium AC Package", price: 22000, duration: "3 Days / 2 Nights" },
+      { id: "flamingo-standard", name: "Standard Package", price: 18000, oldPrice: 22000, isOffer: true, duration: "3 Days / 2 Nights" },
+      { id: "flamingo-premium", name: "Premium AC Package", price: 22000, oldPrice: 25000, isOffer: true, duration: "3 Days / 2 Nights" },
     ],
     seatPlan: [
       {
@@ -594,8 +595,8 @@ export const cruises: Cruise[] = [
     additionalCosts: commonAdditionalCosts,
     packageIncludes: commonPackageIncludes,
     packages: [
-      { id: "forest-standard", name: "Standard Package", price: 16000, duration: "3 Days / 2 Nights" },
-      { id: "forest-premium", name: "Premium AC Package", price: 20000, duration: "3 Days / 2 Nights" },
+      { id: "forest-standard", name: "Standard Package", price: 16000, oldPrice: 19000, isOffer: true, duration: "3 Days / 2 Nights" },
+      { id: "forest-premium", name: "Premium AC Package", price: 20000, oldPrice: 23000, isOffer: true, duration: "3 Days / 2 Nights" },
     ],
     seatPlan: [
       {
