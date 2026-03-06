@@ -157,7 +157,7 @@ export default function CruiseDetail() {
                         </h3>
                         <div className="space-y-3">
                           {day.meals.map((meal, j) => (
-                            <div key={j} className="rounded-xl bg-muted/30 border border-border/30 p-4">
+                            <div key={j} className="rounded-xl bg-muted/30 border border-border/30 p-3 sm:p-4">
                               <p className="font-display font-bold text-sm text-primary mb-1">{meal.name}</p>
                               <p className="text-sm text-muted-foreground leading-relaxed">{meal.items}</p>
                             </div>
