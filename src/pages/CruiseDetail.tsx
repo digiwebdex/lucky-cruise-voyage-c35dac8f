@@ -63,9 +63,9 @@ export default function CruiseDetail() {
         </div>
       </section>
 
-      <div className="container py-10">
-        <div className="grid gap-10 lg:grid-cols-3">
-          <div className="lg:col-span-2 space-y-10">
+      <div className="container py-6 sm:py-10">
+        <div className="grid gap-8 sm:gap-10 lg:grid-cols-3">
+          <div className="lg:col-span-2 space-y-8 sm:space-y-10 min-w-0">
             {/* Image Gallery */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
               <div className="watermark-container aspect-[16/10] overflow-hidden rounded-2xl shadow-elevated cursor-pointer group relative" onClick={() => setLightbox(true)}>
