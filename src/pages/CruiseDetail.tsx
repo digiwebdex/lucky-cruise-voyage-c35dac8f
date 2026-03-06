@@ -51,7 +51,7 @@ export default function CruiseDetail() {
           </Link>
           <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6 }}>
             <Badge className="mb-3 rounded-full gradient-primary text-primary-foreground font-bold border-0 px-4 py-1">{cruise.duration}</Badge>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-black text-secondary-foreground leading-tight">{cruise.name}</h1>
+            <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-secondary-foreground leading-tight">{cruise.name}</h1>
             <p className="mt-2 text-lg font-semibold text-primary">{cruise.subtitle}</p>
             <div className="mt-5 flex flex-wrap gap-4 text-sm text-secondary-foreground/70">
               <span className="flex items-center gap-2 bg-secondary/40 backdrop-blur-sm rounded-lg px-3 py-1.5"><MapPin className="h-4 w-4 text-primary" /> {cruise.route}</span>
