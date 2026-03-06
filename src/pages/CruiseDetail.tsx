@@ -241,7 +241,7 @@ export default function CruiseDetail() {
                 <p className="text-4xl font-display font-black text-primary-foreground">৳{cruise.price.toLocaleString()}</p>
                 <p className="text-primary-foreground/70 text-xs mt-1">{cruise.priceLabel}</p>
               </div>
-              <CardContent className="p-6 space-y-4">
+              <CardContent className="p-4 sm:p-6 space-y-4">
                 <Button size="lg" className="w-full gradient-primary text-primary-foreground font-bold text-base rounded-xl h-13 shadow-glow hover:scale-[1.02] transition-transform" onClick={() => setBookingOpen(true)}>
                   {t.cruiseDetail.bookNow}
                 </Button>
