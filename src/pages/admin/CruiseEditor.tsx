@@ -4,8 +4,9 @@ import {
   ArrowLeft, Clock, MapPin, Check, Users, DoorOpen, Ship,
   UtensilsCrossed, Shield, TreePine, Backpack, Calendar,
   ChevronRight, Phone, Banknote, MapPinned, Plus, Trash2, X, Save,
-  Star, Image as ImageIcon, Flame
+  Star, Image as ImageIcon, Flame, Grid3X3
 } from "lucide-react";
+import SeatPlanViewer from "@/components/SeatPlanViewer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -324,6 +325,42 @@ export default function CruiseEditor() {
                   </Card>
                 ))}
                 <Button variant="outline" className="gap-1 border-dashed" onClick={() => updateField("packages", [...form.packages, { id: `pkg-${Date.now()}`, name: "", price: 0, duration: "", isOffer: false }])}><Plus className="h-4 w-4" /> Add Package</Button>
+              </div>
+            </div>
+
+            {/* Seat Plan */}
+            <div>
+              <h2 className="mb-4 font-display text-2xl font-black text-foreground flex items-center gap-2"><Grid3X3 className="h-6 w-6 text-primary" /> Seat Plan</h2>
+              {form.seatPlanImage ? (
+                <div className="relative group">
+                  <SeatPlanViewer seatPlanImage={form.seatPlanImage} shipName={form.name} />
+                  <button
+                    onClick={() => updateField("seatPlanImage", undefined)}
+                    className="absolute top-3 right-3 bg-destructive text-destructive-foreground rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg z-10"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </div>
+              ) : (
+                <div className="rounded-2xl border-2 border-dashed border-border/50 bg-muted/30 p-10 text-center">
+                  <Grid3X3 className="h-12 w-12 mx-auto mb-3 text-muted-foreground/30" />
+                  <p className="text-muted-foreground text-sm">No seat plan image added yet</p>
+                </div>
+              )}
+              <div className="mt-3 flex gap-2 items-center">
+                <Input
+                  placeholder="Paste seat plan image URL..."
+                  className="flex-1"
+                  onKeyDown={e => {
+                    if (e.key === "Enter") {
+                      const v = (e.target as HTMLInputElement).value.trim();
+                      if (v) { updateField("seatPlanImage", v); (e.target as HTMLInputElement).value = ""; }
+                    }
+                  }}
+                />
+                <Button variant="outline" size="sm" onClick={() => { const url = prompt("Enter seat plan image URL:"); if (url) updateField("seatPlanImage", url); }}>
+                  <Plus className="h-4 w-4 mr-1" /> Add Seat Plan
+                </Button>
               </div>
             </div>
           </div>
