@@ -34,8 +34,7 @@ export default function Header() {
       <div className="container flex h-16 items-center justify-between md:h-18">
         <Link to="/" className="flex items-center gap-2 sm:gap-3 group min-w-0">
           <img src={logo} alt="Lucky Tours & Travels" className="h-10 sm:h-14 w-auto flex-shrink-0 transition-transform group-hover:scale-105" />
-          <span className="hidden sm:inline text-lg font-black tracking-wide text-primary" style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '0.05em' }}>Lucky Tours & Travels</span>
-          <span className="sm:hidden text-xs font-black tracking-wide text-primary leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>Lucky<br/>Tours</span>
+          <span className="text-xs sm:text-lg font-black tracking-wide text-primary whitespace-nowrap" style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '0.05em' }}>Lucky Tours & Travels</span>
         </Link>
 
         {/* Desktop Nav */}
