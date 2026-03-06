@@ -90,6 +90,20 @@ const KEYS = {
   teamMembers: "cms_teamMembers",
 } as const;
 
+// Bump this version whenever mockData defaults change to bust localStorage cache
+const DATA_VERSION = "v2";
+const VERSION_KEY = "cms_data_version";
+
+function initVersionCheck() {
+  const storedVersion = localStorage.getItem(VERSION_KEY);
+  if (storedVersion !== DATA_VERSION) {
+    // Clear all CMS caches so fresh defaults are loaded
+    Object.values(KEYS).forEach(k => localStorage.removeItem(k));
+    localStorage.setItem(VERSION_KEY, DATA_VERSION);
+  }
+}
+initVersionCheck();
+
 function getStore<T>(key: string, defaults: T): T {
   try {
     const raw = localStorage.getItem(key);
