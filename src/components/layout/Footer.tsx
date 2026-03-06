@@ -72,7 +72,7 @@ export default function Footer() {
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 flex-shrink-0">
                     <Mail className="h-4 w-4 text-primary" />
                   </div>
-                  <span>luckytoursandtravels70@gmail.com</span>
+                  <span className="break-all">luckytoursandtravels70@gmail.com</span>
                 </li>
                 <li className="flex items-start gap-3 text-sm text-secondary-foreground/60">
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 flex-shrink-0">

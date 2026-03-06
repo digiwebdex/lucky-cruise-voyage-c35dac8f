@@ -39,7 +39,7 @@ export default function CruiseDetail() {
   return (
     <div>
       {/* Hero Banner */}
-      <section className="relative flex min-h-[55vh] items-end overflow-hidden">
+      <section className="relative flex min-h-[40vh] sm:min-h-[55vh] items-end overflow-hidden">
         <div className="absolute inset-0">
           <img src={cruise.images[selectedImg]} alt={cruise.name} className="h-full w-full object-cover" draggable={false} />
           <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/70 to-secondary/20" />

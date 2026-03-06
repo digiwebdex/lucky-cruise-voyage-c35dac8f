@@ -91,7 +91,7 @@ export default function Index() {
           <Waves className="h-64 w-64 text-primary" />
         </div>
 
-        <div className="container relative z-10 py-20">
+        <div className="container relative z-10 py-12 sm:py-20">
           <div className="max-w-3xl">
             <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6 }}>
               <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm px-4 py-1.5 text-sm font-semibold text-primary mb-6">

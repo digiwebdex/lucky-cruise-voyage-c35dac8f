@@ -69,16 +69,10 @@ export default function Header() {
           {/* Language Toggle */}
           <button
             onClick={toggleLang}
-            className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition-all border border-primary/30 bg-primary/5 text-primary hover:bg-primary/15"
+            className="flex items-center gap-1 sm:gap-1.5 rounded-lg px-2 sm:px-3 py-1.5 text-xs font-bold transition-all border border-primary/30 bg-primary/5 text-primary hover:bg-primary/15"
           >
-            <Globe className="h-3.5 w-3.5" />
-            <span className={lang === "bn" ? "opacity-50" : ""}>{lang === "bn" ? "EN" : ""}</span>
-            {lang === "bn" ? "" : <span className="opacity-50">বাং</span>}
-            {lang === "bn" ? (
-              <span>বাংলা → EN</span>
-            ) : (
-              <span>English → বাং</span>
-            )}
+            <Globe className="h-3.5 w-3.5 hidden sm:block" />
+            <span>{lang === "bn" ? "EN" : "বাং"}</span>
           </button>
 
           <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer">

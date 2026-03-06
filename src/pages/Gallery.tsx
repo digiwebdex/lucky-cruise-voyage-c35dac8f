@@ -105,7 +105,7 @@ export default function Gallery() {
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="columns-2 gap-4 md:columns-3 lg:columns-4">
+                    <div className="columns-2 gap-2 sm:gap-4 md:columns-3 lg:columns-4">
                       {cruise.images.map((img, i) => (
                         <motion.div
                           key={i}
