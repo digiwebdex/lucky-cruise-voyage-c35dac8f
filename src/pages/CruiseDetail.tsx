@@ -12,7 +12,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { getCruiseById } from "@/services/mockData";
+import { getCruiseById } from "@/services/cmsStore";
 import SeatPlanViewer from "@/components/SeatPlanViewer";
 import BookingModal from "@/components/BookingModal";
 import { useLanguage } from "@/contexts/LanguageContext";

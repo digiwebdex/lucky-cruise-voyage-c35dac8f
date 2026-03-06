@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Shield, Heart, Target, Users, Ship, Award, Globe, Compass } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { teamMembers } from "@/services/mockData";
+import { getTeamMembers } from "@/services/cmsStore";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
@@ -9,6 +9,7 @@ const scaleIn = { hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, sca
 
 export default function About() {
   const { t } = useLanguage();
+  const teamMembers = getTeamMembers();
 
   return (
     <div className="overflow-hidden">
