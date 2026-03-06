@@ -7,7 +7,7 @@ const sidebarLinks = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { to: "/admin/cruises", label: "Cruises", icon: Ship },
   { to: "/admin/packages", label: "Packages", icon: Package },
-  { to: "/admin/bookings", label: "Bookings", icon: BookOpen },
+  
   { to: "/admin/media", label: "Media Library", icon: Image },
   { to: "/admin/seat-plans", label: "Seat Plans", icon: Grid3X3 },
   { to: "/admin/pages", label: "Pages CMS", icon: FileText },
