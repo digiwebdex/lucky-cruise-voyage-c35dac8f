@@ -86,8 +86,8 @@ export default function CruiseDetail() {
             </motion.div>
 
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              <h2 className="mb-3 font-display text-2xl font-black text-foreground flex items-center gap-2"><Ship className="h-6 w-6 text-primary" /> {t.cruiseDetail.aboutThisCruise}</h2>
-              <p className="text-muted-foreground leading-relaxed text-lg">{cruise.description}</p>
+              <h2 className="mb-3 font-display text-xl sm:text-2xl font-black text-foreground flex items-center gap-2"><Ship className="h-5 w-5 sm:h-6 sm:w-6 text-primary" /> {t.cruiseDetail.aboutThisCruise}</h2>
+              <p className="text-muted-foreground leading-relaxed text-base sm:text-lg">{cruise.description}</p>
             </motion.div>
 
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
