@@ -348,7 +348,7 @@ export default function Index() {
                 <Link to={`/cruises/${c.id}`}>
                   <Card className={`border-border/50 hover:shadow-md transition-all bg-card ${i % 2 === 0 ? '' : 'bg-muted/20'}`}>
                     <CardContent className="p-4 flex items-center gap-3">
-                      <img src={c.images[0]} alt={c.name} className="h-16 w-20 rounded-xl object-cover flex-shrink-0" />
+                      <img src={c.images[0]} alt={c.name} loading="lazy" className="h-16 w-20 rounded-xl object-cover flex-shrink-0" />
                       <div className="flex-1 min-w-0">
                         <p className="font-display font-bold text-foreground text-sm truncate">{c.name}</p>
                         <p className="text-xs text-muted-foreground truncate">{c.route}</p>
