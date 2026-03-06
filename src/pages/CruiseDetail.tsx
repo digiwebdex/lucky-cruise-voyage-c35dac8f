@@ -127,7 +127,7 @@ export default function CruiseDetail() {
                     <Card className="border-l-4 border-l-primary overflow-hidden border-border/50 bg-card">
                        <CardContent className="p-4 sm:p-6">
                         <div className="flex items-center gap-3 mb-4">
-                          <span className="flex h-11 w-11 items-center justify-center rounded-xl gradient-primary text-primary-foreground font-display font-black text-sm">{day.day.replace("Day ", "")}</span>
+                          <span className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-xl gradient-primary text-primary-foreground font-display font-black text-xs sm:text-sm">{day.day.replace("Day ", "")}</span>
                           <div>
                             <p className="text-xs font-bold text-primary uppercase tracking-wider">{day.day}</p>
                             <h3 className="font-display text-lg font-bold text-foreground">{day.title}</h3>
