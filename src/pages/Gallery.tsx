@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ImageZoom from "@/components/ImageZoom";
 import { motion } from "framer-motion";
-import { X, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
+import { ZoomIn, ChevronLeft, ChevronRight, Ship } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { getCruises } from "@/services/cmsStore";
@@ -11,14 +11,19 @@ const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
 export default function Gallery() {
   const { t } = useLanguage();
-  const [lightbox, setLightbox] = useState<{ img: string; idx: number } | null>(null);
   const cruises = getCruises();
-  const allImages = cruises.flatMap(c => c.images);
+  const [activeCruise, setActiveCruise] = useState<string | null>(null);
+  const [lightbox, setLightbox] = useState<{ img: string; images: string[]; idx: number } | null>(null);
+
+  const filteredCruises = activeCruise
+    ? cruises.filter(c => c.id === activeCruise)
+    : cruises;
 
   const navigate = (dir: number) => {
     if (!lightbox) return;
-    const newIdx = (lightbox.idx + dir + allImages.length) % allImages.length;
-    setLightbox({ img: allImages[newIdx], idx: newIdx });
+    const { images, idx } = lightbox;
+    const newIdx = (idx + dir + images.length) % images.length;
+    setLightbox({ img: images[newIdx], images, idx: newIdx });
   };
 
   return (
@@ -34,27 +39,73 @@ export default function Gallery() {
         </div>
       </section>
 
-      <section className="py-12">
+      {/* Cruise Filter Tabs */}
+      <section className="py-6 border-b border-border sticky top-16 z-30 bg-background/95 backdrop-blur-md">
         <div className="container">
-          <div className="columns-2 gap-4 md:columns-3 lg:columns-4">
-            {allImages.map((img, i) => (
-              <motion.div
-                key={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                transition={{ delay: (i % 8) * 0.04 }}
-                className="watermark-container mb-4 cursor-pointer overflow-hidden rounded-xl break-inside-avoid group relative"
-                onClick={() => setLightbox({ img, idx: i })}
+          <div className="flex flex-wrap gap-2 justify-center">
+            <Button
+              variant={activeCruise === null ? "default" : "outline"}
+              size="sm"
+              onClick={() => setActiveCruise(null)}
+              className="gap-1.5"
+            >
+              <Ship className="h-4 w-4" />
+              সব ক্রুজ
+            </Button>
+            {cruises.map(c => (
+              <Button
+                key={c.id}
+                variant={activeCruise === c.id ? "default" : "outline"}
+                size="sm"
+                onClick={() => setActiveCruise(c.id)}
               >
-                <img src={img} alt={`Gallery ${i + 1}`} className="w-full object-cover transition-transform duration-500 group-hover:scale-110" draggable={false} />
-                <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/40 transition-all duration-300 flex items-center justify-center">
-                  <ZoomIn className="h-8 w-8 text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-              </motion.div>
+                {c.name}
+              </Button>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Gallery by Cruise */}
+      <section className="py-12">
+        <div className="container space-y-16">
+          {filteredCruises.map(cruise => (
+            <motion.div
+              key={cruise.id}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+            >
+              <div className="mb-6 flex items-center gap-3">
+                <div className="h-1 w-8 rounded-full bg-primary" />
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">
+                  {cruise.name}
+                </h2>
+                <span className="text-sm text-muted-foreground">({cruise.images.length} photos)</span>
+              </div>
+
+              <div className="columns-2 gap-4 md:columns-3 lg:columns-4">
+                {cruise.images.map((img, i) => (
+                  <motion.div
+                    key={i}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeUp}
+                    transition={{ delay: (i % 8) * 0.04 }}
+                    className="watermark-container mb-4 cursor-pointer overflow-hidden rounded-xl break-inside-avoid group relative"
+                    onClick={() => setLightbox({ img, images: cruise.images, idx: i })}
+                  >
+                    <img src={img} alt={`${cruise.name} ${i + 1}`} className="w-full object-cover transition-transform duration-500 group-hover:scale-110" draggable={false} />
+                    <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/40 transition-all duration-300 flex items-center justify-center">
+                      <ZoomIn className="h-8 w-8 text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -71,7 +122,7 @@ export default function Gallery() {
               <Button variant="ghost" size="icon" className="absolute right-2 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-secondary/50 text-secondary-foreground hover:bg-primary hover:text-primary-foreground" onClick={(e) => { e.stopPropagation(); navigate(1); }}>
                 <ChevronRight className="h-6 w-6" />
               </Button>
-              <div className="text-center mt-2 text-sm text-secondary-foreground/50">{lightbox.idx + 1} / {allImages.length}</div>
+              <div className="text-center mt-2 text-sm text-secondary-foreground/50">{lightbox.idx + 1} / {lightbox.images.length}</div>
             </div>
           )}
         </DialogContent>
