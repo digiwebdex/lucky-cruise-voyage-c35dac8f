@@ -86,6 +86,10 @@ import khayapar27 from "@/assets/cruises/khayapar-27.jpg";
 import khayapar28 from "@/assets/cruises/khayapar-28.jpg";
 import khayapar29 from "@/assets/cruises/khayapar-29.jpg";
 import khayapar30 from "@/assets/cruises/khayapar-30.jpg";
+import khayapar31 from "@/assets/cruises/khayapar-31.jpg";
+import khayapar32 from "@/assets/cruises/khayapar-32.jpg";
+import khayapar33 from "@/assets/cruises/khayapar-33.jpg";
+import khayapar34 from "@/assets/cruises/khayapar-34.jpg";
 
 // ===== Image Imports: Magpie =====
 import magpie1 from "@/assets/cruises/magpie-1.jpg";
@@ -868,6 +872,7 @@ export const cruises: Cruise[] = [
       khayapar16, khayapar17, khayapar18, khayapar19, khayapar20,
       khayapar21, khayapar22, khayapar23, khayapar24, khayapar25,
       khayapar26, khayapar27, khayapar28, khayapar29, khayapar30,
+      khayapar31, khayapar32, khayapar33, khayapar34,
     ],
     facilities: [
       "Large Conference & Prayer Room",
