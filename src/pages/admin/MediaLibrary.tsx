@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Ship, Plus, Minus, Trash2, ZoomIn, ChevronLeft, ChevronRight, ImageIcon, Save } from "lucide-react";
+import { Ship, Plus, Minus, Trash2, ZoomIn, ChevronLeft, ChevronRight, ImageIcon, Save, GripVertical } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { getCruises, saveCruises } from "@/services/cmsStore";
 import type { Cruise } from "@/services/mockData";
@@ -14,6 +14,36 @@ export default function MediaLibrary() {
   const [lightbox, setLightbox] = useState<{ img: string; images: string[]; idx: number } | null>(null);
   const [newUrls, setNewUrls] = useState<Record<string, string>>({});
   const [hasChanges, setHasChanges] = useState(false);
+  const [dragState, setDragState] = useState<{ cruiseId: string; fromIdx: number } | null>(null);
+  const [dragOverIdx, setDragOverIdx] = useState<number | null>(null);
+
+  const handleDragStart = (cruiseId: string, idx: number) => {
+    setDragState({ cruiseId, fromIdx: idx });
+  };
+
+  const handleDragOver = (e: React.DragEvent, idx: number) => {
+    e.preventDefault();
+    setDragOverIdx(idx);
+  };
+
+  const handleDrop = (cruiseId: string, toIdx: number) => {
+    if (!dragState || dragState.cruiseId !== cruiseId) return;
+    const { fromIdx } = dragState;
+    if (fromIdx === toIdx) { setDragState(null); setDragOverIdx(null); return; }
+    const cruise = cruises.find(c => c.id === cruiseId);
+    if (!cruise) return;
+    const imgs = [...cruise.images];
+    const [moved] = imgs.splice(fromIdx, 1);
+    imgs.splice(toIdx, 0, moved);
+    updateCruiseImages(cruiseId, imgs);
+    setDragState(null);
+    setDragOverIdx(null);
+  };
+
+  const handleDragEnd = () => {
+    setDragState(null);
+    setDragOverIdx(null);
+  };
 
   const filteredCruises = activeCruise
     ? cruises.filter(c => c.id === activeCruise)
@@ -140,21 +170,32 @@ export default function MediaLibrary() {
                 </div>
 
                 {cruise.images.length > 0 ? (
-                  <div className="columns-2 gap-3 md:columns-3 lg:columns-4 xl:columns-5">
+                  <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                     {cruise.images.map((img, i) => (
                       <div
-                        key={i}
-                        className="mb-3 break-inside-avoid overflow-hidden rounded-xl group relative"
+                        key={`${cruise.id}-${i}`}
+                        draggable
+                        onDragStart={() => handleDragStart(cruise.id, i)}
+                        onDragOver={(e) => handleDragOver(e, i)}
+                        onDrop={() => handleDrop(cruise.id, i)}
+                        onDragEnd={handleDragEnd}
+                        className={`overflow-hidden rounded-xl group relative cursor-grab active:cursor-grabbing transition-all duration-200 ${
+                          dragState?.cruiseId === cruise.id && dragOverIdx === i ? "ring-2 ring-primary scale-105" : ""
+                        } ${dragState?.cruiseId === cruise.id && dragState.fromIdx === i ? "opacity-40" : ""}`}
                       >
                         <img
                           src={img}
                           alt={`${cruise.name} ${i + 1}`}
-                          className="w-full object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105"
+                          className="w-full aspect-square object-cover transition-transform duration-300 group-hover:scale-105"
                           draggable={false}
                           onClick={() => setLightbox({ img, images: cruise.images, idx: i })}
                         />
-                        {/* Overlay with actions */}
-                        <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/40 transition-all duration-300 flex items-center justify-center gap-2 pointer-events-none">
+                        {/* Drag handle indicator */}
+                        <div className="absolute top-2 left-2 bg-secondary/70 text-secondary-foreground rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                          <GripVertical className="h-3.5 w-3.5" />
+                        </div>
+                        {/* Overlay */}
+                        <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/40 transition-all duration-300 flex items-center justify-center pointer-events-none">
                           <ZoomIn className="h-6 w-6 text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                         </div>
                         <button
