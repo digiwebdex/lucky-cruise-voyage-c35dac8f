@@ -190,13 +190,18 @@ export default function Index() {
                           <Users className="h-3 w-3" /> {cruise.capacity}
                         </span>
                       </div>
-                      {cruise.featured && (
-                        <div className="absolute top-3 left-3">
+                      <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+                        {cruise.featured && (
                           <span className="inline-flex items-center gap-1 rounded-full gradient-primary px-3 py-1 text-xs font-bold text-primary-foreground">
                             {t.featured.featured}
                           </span>
-                        </div>
-                      )}
+                        )}
+                        {cruise.packages?.some(p => p.isOffer) && (
+                          <span className="inline-flex items-center gap-1 rounded-full bg-red-500 px-3 py-1 text-xs font-bold text-white animate-pulse">
+                            🔥 অফার
+                          </span>
+                        )}
+                      </div>
                     </div>
                     <CardContent className="p-5">
                       <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">{cruise.name}</h3>
@@ -204,6 +209,9 @@ export default function Index() {
                       <p className="mt-0.5 text-xs text-muted-foreground/70 flex items-center gap-1"><Clock className="h-3 w-3" />{cruise.duration}</p>
                       <div className="mt-4 flex items-center justify-between border-t border-border/50 pt-4">
                         <div>
+                          {cruise.oldPrice && (
+                            <span className="text-sm text-muted-foreground line-through mr-2">৳{cruise.oldPrice.toLocaleString()}</span>
+                          )}
                           <span className="text-2xl font-display font-black text-primary">৳{cruise.price.toLocaleString()}</span>
                           <span className="text-xs text-muted-foreground block">{t.featured.perPerson}</span>
                         </div>
@@ -297,7 +305,11 @@ export default function Index() {
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-center font-display font-black text-primary text-lg">৳{c.price.toLocaleString()}</td>
+                    <td className="px-6 py-4 text-center">
+                      {c.oldPrice && <span className="text-xs text-muted-foreground line-through block">৳{c.oldPrice.toLocaleString()}</span>}
+                      <span className="font-display font-black text-primary text-lg">৳{c.price.toLocaleString()}</span>
+                      {c.packages?.some(p => p.isOffer) && <span className="text-xs text-red-500 font-bold block">🔥 অফার</span>}
+                    </td>
                     <td className="px-6 py-4 text-center text-sm text-muted-foreground">{c.capacity}</td>
                     <td className="px-6 py-4 text-center text-sm text-muted-foreground">{c.cabins}</td>
                     <td className="px-6 py-4 text-center text-sm text-muted-foreground">{c.duration}</td>
