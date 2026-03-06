@@ -48,7 +48,7 @@ export default function Contact() {
                 {[
                   { icon: Phone, label: t.contact.phone, value: "01711-871072", color: "bg-primary/10 text-primary" },
                   { icon: MessageCircle, label: t.contact.whatsapp, value: "01711-871072", link: "https://wa.me/8801711871072", color: "bg-emerald/10 text-emerald" },
-                  { icon: Mail, label: t.contact.email, value: "info@luckytoursbd.com", color: "bg-gold/10 text-gold" },
+                  { icon: Mail, label: t.contact.email, value: "luckytoursandtravels70@gmail.com", color: "bg-gold/10 text-gold" },
                   { icon: MapPin, label: t.contact.address, value: "Dhaka, Bangladesh", color: "bg-accent/10 text-accent" },
                 ].map((item, i) => (
                   <Card key={i} className="border-border/50 hover:shadow-elevated transition-all duration-300 hover:-translate-y-1 bg-card">
