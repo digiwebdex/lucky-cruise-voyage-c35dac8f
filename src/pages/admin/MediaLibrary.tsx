@@ -2,7 +2,7 @@ import { useState, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Ship, Plus, Minus, Trash2, ZoomIn, ChevronLeft, ChevronRight, ImageIcon, Save, GripVertical, CheckSquare, X } from "lucide-react";
+import { Ship, Plus, Minus, Trash2, ZoomIn, ChevronLeft, ChevronRight, ImageIcon, Save, GripVertical, CheckSquare, X, Upload } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { getCruises, saveCruises } from "@/services/cmsStore";
 import type { Cruise } from "@/services/mockData";
@@ -101,6 +101,25 @@ export default function MediaLibrary() {
     setNewUrls(prev => ({ ...prev, [cruiseId]: "" }));
   };
 
+  const fileInputRefs = useRef<Record<string, HTMLInputElement | null>>({});
+
+  const handleFileUpload = (cruiseId: string, files: FileList | null) => {
+    if (!files || files.length === 0) return;
+    const cruise = cruises.find(c => c.id === cruiseId);
+    if (!cruise) return;
+
+    const promises = Array.from(files).map(file => new Promise<string>((resolve) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.readAsDataURL(file);
+    }));
+
+    Promise.all(promises).then(dataUrls => {
+      updateCruiseImages(cruiseId, [...cruise.images, ...dataUrls]);
+      toast({ title: `${dataUrls.length} image(s) added` });
+    });
+  };
+
   const saveAll = () => {
     saveCruises(cruises);
     setHasChanges(false);
@@ -196,9 +215,20 @@ export default function MediaLibrary() {
                       onKeyDown={e => { if (e.key === "Enter") addImage(cruise.id); }}
                     />
                     <Button variant="outline" size="sm" onClick={() => addImage(cruise.id)} className="gap-1 flex-shrink-0">
-                      <Plus className="h-4 w-4" /> Add
+                      <Plus className="h-4 w-4" /> URL
                     </Button>
                   </div>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    className="hidden"
+                    ref={el => { fileInputRefs.current[cruise.id] = el; }}
+                    onChange={e => { handleFileUpload(cruise.id, e.target.files); e.target.value = ""; }}
+                  />
+                  <Button variant="outline" size="sm" onClick={() => fileInputRefs.current[cruise.id]?.click()} className="gap-1 flex-shrink-0">
+                    <Upload className="h-4 w-4" /> Upload
+                  </Button>
                   {!selectMode ? (
                     <Button variant="outline" size="sm" onClick={() => setSelectMode(true)} className="gap-1 flex-shrink-0">
                       <CheckSquare className="h-4 w-4" /> Select
