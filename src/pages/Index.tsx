@@ -188,7 +188,7 @@ export default function Index() {
                 <Link to={`/cruises/${cruise.id}`} className="group block">
                   <Card className="overflow-hidden border-border/50 hover:shadow-elevated transition-all duration-500 hover:-translate-y-2 bg-card">
                     <div className="watermark-container aspect-[4/3] overflow-hidden relative">
-                      <img src={cruise.images[0]} alt={cruise.name} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" draggable={false} />
+                      <img src={cruise.images[0]} alt={cruise.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" draggable={false} />
                       <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       <div className="absolute top-3 right-3">
                         <span className="inline-flex items-center gap-1 rounded-full bg-secondary/80 backdrop-blur-sm px-3 py-1 text-xs font-bold text-primary">
@@ -313,7 +313,7 @@ export default function Index() {
                   <tr key={c.id} className={`border-t border-border/30 hover:bg-primary/3 transition-colors ${i % 2 === 0 ? 'bg-card' : 'bg-muted/30'}`}>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <img src={c.images[0]} alt={c.name} className="h-12 w-16 rounded-lg object-cover" />
+                        <img src={c.images[0]} alt={c.name} loading="lazy" className="h-12 w-16 rounded-lg object-cover" />
                         <div>
                           <p className="font-display font-bold text-foreground text-sm">{c.name}</p>
                           <p className="text-xs text-muted-foreground">{c.route}</p>
@@ -348,7 +348,7 @@ export default function Index() {
                 <Link to={`/cruises/${c.id}`}>
                   <Card className={`border-border/50 hover:shadow-md transition-all bg-card ${i % 2 === 0 ? '' : 'bg-muted/20'}`}>
                     <CardContent className="p-4 flex items-center gap-3">
-                      <img src={c.images[0]} alt={c.name} className="h-16 w-20 rounded-xl object-cover flex-shrink-0" />
+                      <img src={c.images[0]} alt={c.name} loading="lazy" className="h-16 w-20 rounded-xl object-cover flex-shrink-0" />
                       <div className="flex-1 min-w-0">
                         <p className="font-display font-bold text-foreground text-sm truncate">{c.name}</p>
                         <p className="text-xs text-muted-foreground truncate">{c.route}</p>
