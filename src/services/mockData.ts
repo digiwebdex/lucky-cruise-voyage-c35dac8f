@@ -236,6 +236,17 @@ import utshab25 from "@/assets/cruises/utshab-25.jpeg";
 import utshab26 from "@/assets/cruises/utshab-26.jpeg";
 import utshabSeatplan from "@/assets/cruises/utshab-seatplan.jpeg";
 
+// ===== Image Imports: The Crown =====
+import crown1 from "@/assets/cruises/crown-1.jpeg";
+import crown2 from "@/assets/cruises/crown-2.jpeg";
+import crown3 from "@/assets/cruises/crown-3.jpeg";
+import crown4 from "@/assets/cruises/crown-4.jpeg";
+import crown5 from "@/assets/cruises/crown-5.jpeg";
+import crown6 from "@/assets/cruises/crown-6.jpeg";
+import crown7 from "@/assets/cruises/crown-7.jpeg";
+import crown8 from "@/assets/cruises/crown-8.jpeg";
+import crown9 from "@/assets/cruises/crown-9.jpeg";
+import crown10 from "@/assets/cruises/crown-10.jpeg";
 // ===== Types =====
 export interface Cabin {
   id: string;
@@ -1128,8 +1139,177 @@ export const cruises: Cruise[] = [
       },
     ],
   },
-];
 
+  // ===== 11. MV The Crown =====
+  {
+    id: "mv-the-crown",
+    name: "M.V The Crown",
+    subtitle: "AC Vessel — Mangrove Forest Sundarban",
+    description: "M.V The Crown is a premium AC cruise vessel designed with your entertainment and adventure needs in mind. Featuring enclosed and spacious open-sky observation decks, elegant cabins with modern interior décor, individual air conditioning, comfortable beds, sofa, mirror, storage cabinets, and luggage space — The Crown offers an unparalleled Sundarban experience.",
+    route: "Khulna → Sundarban → Khulna",
+    duration: "3 Days / 2 Nights",
+    capacity: "75 Tourists",
+    cabins: "29 Cabins",
+    price: 22000,
+    priceLabel: "per person (Bangladeshi)",
+    featured: true,
+    images: [crown1, crown2, crown3, crown4, crown5, crown6, crown7, crown8, crown9, crown10],
+    facilities: [
+      "28 elegant spacious cabins with modern interior décor",
+      "High ceiling clearance in rooms",
+      "Individual air conditioning with controls in each room",
+      "Comfortable beds with premium bedding",
+      "Sofa and mirror in each cabin",
+      "Storage cabinets in rooms",
+      "Luggage storage space",
+      "Enclosed observation deck",
+      "Spacious open-sky observation deck",
+      "Swimming pool on rooftop",
+      "Dining hall",
+      "VHF & GPS Navigation",
+      "Life Jackets and Life Buoys",
+      "Fire Extinguisher Systems",
+    ],
+    touristSpots: commonTouristSpots,
+    itinerary: [
+      {
+        day: "Day 1",
+        title: "Khulna to Andarmanik & Katka",
+        activities: [
+          "7:00 AM — Depart from Khulna Jailkhana Ghat. Our guide will receive you and take you to the ship.",
+          "Cruise along Rupsa and Pashur rivers, passing Khulna Shipyard, Rupsa Bridge, Rampal Power Plant, and Mongla Port.",
+          "Lunch on board the ship.",
+          "Visit Andarmanik Eco-Tourism Centre — guided walk through the mangrove forest trail.",
+          "See Sundari, Golpata, Gewa trees and crabs scurrying along the trail.",
+          "Walk approximately 1 mile of trail, rest at the Watch Tower, then return to the ship.",
+          "Afternoon snacks on the ship.",
+          "Ship sails towards Katka Wildlife Sanctuary at the estuary of the sea.",
+        ],
+      },
+      {
+        day: "Day 2",
+        title: "Katka, Jamtola Beach, Kochikhali & Dimerchor",
+        activities: [
+          "Early morning canal cruising by country boat — enjoy the forest silence.",
+          "Trek through Tiger Para bushes, deer grazing fields, and deep forest to Jamtola Sea Beach (2.5 km).",
+          "Experience where the Sundarbans meets the Bay of Bengal.",
+          "Visit Katka Office Par — walk through mud, breathing roots, and Goran forest.",
+          "Spot deer herds up close along the way.",
+          "Return to ship, sail to Kochikhali.",
+          "Walk through the eerie Chan (grass) forest at Kochikhali — known as the Tiger's Dining Room.",
+          "Sail to Dimerchor — enjoy the beautiful sea beach until sunset.",
+          "Return to ship. Ship sails towards Koromjol.",
+        ],
+      },
+      {
+        day: "Day 3",
+        title: "Koromjol & Return",
+        activities: [
+          "Visit Koromjol — Bangladesh's only saltwater crocodile breeding centre.",
+          "See large and small crocodiles, endangered turtles, monkey troops.",
+          "Feed deer grass from your hand — a unique experience.",
+          "Enjoy all the sights, then return to the ship.",
+          "Depart for Khulna / Mongla.",
+        ],
+      },
+    ],
+    menu: [
+      {
+        day: "Day 1",
+        meals: [
+          { name: "Breakfast", items: "Bread, Paratha, Vegetables, Dal, Egg Omelette, Butter, Jelly, Honey, Banana, Dessert (Suji/Payesh), Tea-Coffee." },
+          { name: "Snacks", items: "Cake, Biscuit, Tea-Coffee." },
+          { name: "Lunch", items: "Plain Rice, Parshe Fish, Chicken, Bhorta, Dal, Salad, Dessert, Tea-Coffee." },
+          { name: "Evening Snacks", items: "Thai Soup, French Fries, Tea-Coffee." },
+          { name: "Dinner", items: "Egg Fried Rice, Chicken Fry, Chinese Vegetables, Shrimp Malai Curry, Cashew Nut Salad, Soft Drinks." },
+        ],
+      },
+      {
+        day: "Day 2",
+        meals: [
+          { name: "Morning Snacks", items: "Dry Cake/Biscuit, Tea-Coffee." },
+          { name: "Breakfast", items: "Khichuri, Egg Malai Curry, Sea Fish Fry, Begun Bhaja, Achar, Tea-Coffee." },
+          { name: "Snacks", items: "Guava, Lemon Sherbet, Tea-Coffee." },
+          { name: "Lunch", items: "Plain Rice, Koral Fish, Duck Bhuna, Vegetables, Bhorta, Dal, Salad, Firni, Tea-Coffee." },
+          { name: "Evening Snacks", items: "Noodles, Tea-Coffee." },
+        ],
+      },
+    ],
+    safetyInfo: [
+      "Two armed security guards from Bangladesh Forest Department accompany every trip.",
+      "Constant communication with Forest, Coast Guard, and Navy via VHF radio for weather and emergencies.",
+      "Life jackets and life buoys available for all passengers.",
+      "Fire extinguisher systems installed throughout the ship.",
+      "All latest navigation technology on Master Bridge (VHF, GPS).",
+    ],
+    travelTips: commonTravelTips,
+    thingsToCarry: commonThingsToCarry,
+    additionalCosts: commonAdditionalCosts,
+    packageIncludes: commonPackageIncludes,
+    packages: [
+      { id: "crown-standard", name: "Standard AC Package", price: 22000, duration: "3 Days / 2 Nights" },
+    ],
+    seatPlan: [
+      {
+        name: "Ground Floor",
+        capacity: 20,
+        rows: [
+          {
+            label: "AC Cabins",
+            cabins: Array.from({ length: 10 }, (_, i) => ({
+              id: `G${i + 1}`,
+              type: "Twin" as const,
+              bedType: "Twin Bed AC",
+              persons: 2,
+              available: true,
+            })),
+          },
+        ],
+      },
+      {
+        name: "1st Floor",
+        capacity: 30,
+        rows: [
+          {
+            label: "AC Cabins",
+            cabins: Array.from({ length: 10 }, (_, i) => ({
+              id: `1F-${i + 1}`,
+              type: "Twin" as const,
+              bedType: "Twin Bed AC",
+              persons: 2,
+              available: true,
+            })),
+          },
+        ],
+      },
+      {
+        name: "2nd Floor (VIP)",
+        capacity: 25,
+        rows: [
+          {
+            label: "VIP & Family Cabins",
+            cabins: [
+              ...Array.from({ length: 5 }, (_, i) => ({
+                id: `V${i + 1}`,
+                type: "VIP Couple" as const,
+                bedType: "Double Bed AC VIP",
+                persons: 2,
+                available: true,
+              })),
+              ...Array.from({ length: 4 }, (_, i) => ({
+                id: `VF${i + 1}`,
+                type: "VIP Family" as const,
+                bedType: "Triple Bed AC VIP",
+                persons: 3,
+                available: true,
+              })),
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];
 // ===== Testimonials =====
 export const testimonials = [
   { name: "Rahim Ahmed", text: "An unforgettable journey through the Sundarbans! The crew was amazing and the food was delicious.", rating: 5 },
