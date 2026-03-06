@@ -9,7 +9,7 @@ const sidebarLinks = [
   { to: "/admin/packages", label: "Packages", icon: Package },
   { to: "/admin/testimonials", label: "Testimonials", icon: MessageSquare },
   { to: "/admin/team", label: "Team Members", icon: UserCheck },
-  { to: "/admin/media", label: "Media Library", icon: Image },
+  { to: "/admin/media", label: "Gallery", icon: Image },
   
   { to: "/admin/pages", label: "Pages CMS", icon: FileText },
   { to: "/admin/seo", label: "SEO Manager", icon: Search },
