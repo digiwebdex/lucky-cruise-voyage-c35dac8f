@@ -272,6 +272,9 @@ import adeeba7 from "@/assets/cruises/adeeba-7.jpg";
 import adeeba8 from "@/assets/cruises/adeeba-8.jpg";
 import adeeba9 from "@/assets/cruises/adeeba-9.jpg";
 import adeeba10 from "@/assets/cruises/adeeba-10.jpg";
+import adeeba11 from "@/assets/cruises/adeeba-11.jpg";
+import adeeba12 from "@/assets/cruises/adeeba-12.jpg";
+import adeeba13 from "@/assets/cruises/adeeba-13.jpg";
 
 // ===== Types =====
 export interface Cabin {
@@ -1346,7 +1349,7 @@ export const cruises: Cruise[] = [
     price: 22000,
     priceLabel: "জনপ্রতি (বাংলাদেশী)",
     featured: true,
-    images: [adeeba1, adeeba2, adeeba3, adeeba4, adeeba5, adeeba6, adeeba7, adeeba8, adeeba9, adeeba10],
+    images: [adeeba1, adeeba2, adeeba3, adeeba4, adeeba5, adeeba6, adeeba7, adeeba8, adeeba9, adeeba10, adeeba11, adeeba12, adeeba13],
     facilities: [
       "মার্জিত প্রশস্ত কক্ষ",
       "আধুনিক অভ্যন্তরীণ সজ্জা সহ প্রশস্ত কক্ষ",
