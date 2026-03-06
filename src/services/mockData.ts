@@ -276,6 +276,18 @@ import adeeba11 from "@/assets/cruises/adeeba-11.jpg";
 import adeeba12 from "@/assets/cruises/adeeba-12.jpg";
 import adeeba13 from "@/assets/cruises/adeeba-13.jpg";
 
+// ===== Image Imports: Ocean Pearl =====
+import oceanPearl1 from "@/assets/cruises/ocean-pearl-1.jpg";
+import oceanPearl2 from "@/assets/cruises/ocean-pearl-2.jpg";
+import oceanPearl3 from "@/assets/cruises/ocean-pearl-3.jpg";
+import oceanPearl4 from "@/assets/cruises/ocean-pearl-4.jpg";
+import oceanPearl5 from "@/assets/cruises/ocean-pearl-5.jpg";
+import oceanPearl6 from "@/assets/cruises/ocean-pearl-6.jpg";
+import oceanPearl7 from "@/assets/cruises/ocean-pearl-7.jpg";
+import oceanPearl8 from "@/assets/cruises/ocean-pearl-8.jpg";
+import oceanPearl9 from "@/assets/cruises/ocean-pearl-9.jpg";
+import oceanPearl10 from "@/assets/cruises/ocean-pearl-10.jpg";
+
 // ===== Types =====
 export interface Cabin {
   id: string;
@@ -1500,6 +1512,52 @@ export const cruises: Cruise[] = [
         ],
       },
     ],
+  },
+  // ===== 13. M.V Ocean Pearl =====
+  {
+    id: "mv-ocean-pearl",
+    name: "M.V Ocean Pearl",
+    subtitle: "এমভি ওশান পার্ল — বিলাসবহুল টুরিস্ট ভেসেল",
+    description: "এমভি ওশান পার্ল আপনার বিনোদন এবং দুঃসাহসিক চাহিদার কথা মাথায় রেখে ঘেরা এবং প্রশস্ত খোলা আকাশের পর্যবেক্ষণ ডেক সহ নির্মিত হয়েছে। সুন্দরবনের সবচেয়ে বেশি প্রস্থের ৪০ ফিট ক্যাটামেরান বডি, ৩৩টি বিলাস কক্ষ এবং এক্সক্লুসিভ রুফটপ সুইমিং পুল সহ এটি সুন্দরবনের সবচেয়ে আধুনিক ও বিলাসবহুল জাহাজ।",
+    route: "Khulna → Sundarban → Khulna",
+    duration: "3 Days / 2 Nights",
+    capacity: "75 Tourists",
+    cabins: "33 Cabins",
+    price: 22000,
+    priceLabel: "per person (Bangladeshi)",
+    featured: true,
+    images: [oceanPearl1, oceanPearl2, oceanPearl3, oceanPearl4, oceanPearl5, oceanPearl6, oceanPearl7, oceanPearl8, oceanPearl9, oceanPearl10],
+    facilities: [
+      "২৪ ঘন্টা Starlink ইন্টারনেট সুবিধা",
+      "প্রতিটি রুমের সাথে বারান্দা",
+      "২৪ ঘণ্টা রুম সার্ভিস ও ইন্টারকম সুবিধা",
+      "ঠাণ্ডা ও গরম পানির সুবিধা সহ ওয়াশরুম",
+      "আরামদায়ক সোফা ও স্টোরেজ ক্যাবিনেট",
+      "মডার্ন ইন্টারিয়ার ও আলোসজ্জা",
+      "শীতাতপ নিয়ন্ত্রিত কক্ষ",
+      "এলইডি টিভি ও স্যাটেলাইট সুবিধা",
+      "৪০ ফিট ক্যাটামেরান বডি",
+      "গ্র্যান্ড রিসেপশন এরিয়া",
+      "ইন্টারেক্টিভ লাউঞ্জ",
+      "বুফে ডাইনিং হল",
+      "এক্সক্লুসিভ রুফটপ সুইমিং পুল",
+      "নামাজের জন্য ব্যবস্থা",
+      "সবচেয়ে বড় ভিউয়িং ডেক",
+    ],
+    touristSpots: commonTouristSpots,
+    itinerary: sundarbanItinerary,
+    safetyInfo: commonSafetyInfo,
+    travelTips: commonTravelTips,
+    thingsToCarry: commonThingsToCarry,
+    additionalCosts: commonAdditionalCosts,
+    packageIncludes: commonPackageIncludes,
+    packages: [
+      { id: "op-panoramic-deluxe", name: "Panoramic Eminent Deluxe (02 জন)", price: 22000, duration: "3 Days / 2 Nights" },
+      { id: "op-twin-double", name: "Panoramic Twin Double Majesty (04 জন)", price: 22000, duration: "3 Days / 2 Nights" },
+      { id: "op-triple-emperor", name: "Panoramic Triple Emperor (03 জন)", price: 22000, duration: "3 Days / 2 Nights" },
+      { id: "op-presidential-suite", name: "Presidential Royal Suite (04 জন)", price: 22000, duration: "3 Days / 2 Nights" },
+    ],
+    seatPlan: [],
   },
 ];
 // ===== Testimonials =====
