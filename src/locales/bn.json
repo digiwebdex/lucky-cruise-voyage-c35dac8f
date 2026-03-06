@@ -196,9 +196,8 @@
     "contactLink": "যোগাযোগ",
     "contactTitle": "যোগাযোগ",
     "businessHours": "ব্যবসায়িক সময়",
-    "satThu": "শনি – বৃহঃ",
-    "friday": "শুক্রবার",
-    "closed": "বন্ধ",
+    "everyday": "প্রতিদিন",
+    "alwaysOpen": "২৪/৭ খোলা",
     "allRights": "সকল স্বত্ব সংরক্ষিত।",
     "designBy": "ডিজাইন ও ডেভেলপড"
   },
