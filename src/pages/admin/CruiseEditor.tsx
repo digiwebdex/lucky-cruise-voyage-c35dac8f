@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   ArrowLeft, Clock, MapPin, Check, Users, DoorOpen, Ship,
   UtensilsCrossed, Shield, TreePine, Backpack, Calendar,
   ChevronRight, Phone, Banknote, MapPinned, Plus, Trash2, X, Save,
-  Star, Image as ImageIcon, Flame, Grid3X3
+  Star, Image as ImageIcon, Flame, Grid3X3, Upload
 } from "lucide-react";
 import SeatPlanViewer from "@/components/SeatPlanViewer";
 import { Button } from "@/components/ui/button";
@@ -342,26 +342,25 @@ export default function CruiseEditor() {
                   </button>
                 </div>
               ) : (
-                <div className="rounded-2xl border-2 border-dashed border-border/50 bg-muted/30 p-10 text-center">
-                  <Grid3X3 className="h-12 w-12 mx-auto mb-3 text-muted-foreground/30" />
-                  <p className="text-muted-foreground text-sm">No seat plan image added yet</p>
-                </div>
+                <label className="cursor-pointer block rounded-2xl border-2 border-dashed border-border/50 bg-muted/30 p-10 text-center hover:border-primary/40 hover:bg-muted/50 transition-colors">
+                  <Upload className="h-12 w-12 mx-auto mb-3 text-muted-foreground/40" />
+                  <p className="text-muted-foreground text-sm font-medium">Click to upload seat plan image</p>
+                  <p className="text-muted-foreground/60 text-xs mt-1">JPG, PNG supported</p>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={e => {
+                      const file = e.target.files?.[0];
+                      if (!file) return;
+                      const reader = new FileReader();
+                      reader.onload = () => updateField("seatPlanImage", reader.result as string);
+                      reader.readAsDataURL(file);
+                      e.target.value = "";
+                    }}
+                  />
+                </label>
               )}
-              <div className="mt-3 flex gap-2 items-center">
-                <Input
-                  placeholder="Paste seat plan image URL..."
-                  className="flex-1"
-                  onKeyDown={e => {
-                    if (e.key === "Enter") {
-                      const v = (e.target as HTMLInputElement).value.trim();
-                      if (v) { updateField("seatPlanImage", v); (e.target as HTMLInputElement).value = ""; }
-                    }
-                  }}
-                />
-                <Button variant="outline" size="sm" onClick={() => { const url = prompt("Enter seat plan image URL:"); if (url) updateField("seatPlanImage", url); }}>
-                  <Plus className="h-4 w-4 mr-1" /> Add Seat Plan
-                </Button>
-              </div>
             </div>
           </div>
 
