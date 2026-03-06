@@ -20,7 +20,7 @@ import CruiseManager from "./pages/admin/CruiseManager";
 import CruiseEditor from "./pages/admin/CruiseEditor";
 import PackagesManager from "./pages/admin/PackagesManager";
 import MediaLibrary from "./pages/admin/MediaLibrary";
-import SeatPlanManager from "./pages/admin/SeatPlanManager";
+
 import PagesCMS from "./pages/admin/PagesCMS";
 import SEOManager from "./pages/admin/SEOManager";
 import UsersPage from "./pages/admin/Users";
@@ -59,7 +59,7 @@ const App = () => (
               <Route path="testimonials" element={<TestimonialsManager />} />
               <Route path="team" element={<TeamManager />} />
               <Route path="media" element={<MediaLibrary />} />
-              <Route path="seat-plans" element={<SeatPlanManager />} />
+              
               <Route path="pages" element={<PagesCMS />} />
               <Route path="seo" element={<SEOManager />} />
               <Route path="users" element={<UsersPage />} />
