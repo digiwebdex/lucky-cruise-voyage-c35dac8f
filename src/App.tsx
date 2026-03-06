@@ -17,6 +17,7 @@ import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/admin/Login";
 import AdminDashboard from "./pages/admin/Dashboard";
 import CruiseManager from "./pages/admin/CruiseManager";
+import CruiseEditor from "./pages/admin/CruiseEditor";
 import PackagesManager from "./pages/admin/PackagesManager";
 import MediaLibrary from "./pages/admin/MediaLibrary";
 import SeatPlanManager from "./pages/admin/SeatPlanManager";
@@ -52,6 +53,8 @@ const App = () => (
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
               <Route path="cruises" element={<CruiseManager />} />
+              <Route path="cruises/new" element={<CruiseEditor />} />
+              <Route path="cruises/:id" element={<CruiseEditor />} />
               <Route path="packages" element={<PackagesManager />} />
               <Route path="testimonials" element={<TestimonialsManager />} />
               <Route path="team" element={<TeamManager />} />

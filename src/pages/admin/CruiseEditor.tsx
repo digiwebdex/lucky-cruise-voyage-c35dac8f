@@ -1,0 +1,341 @@
+import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  ArrowLeft, Clock, MapPin, Check, Users, DoorOpen, Ship,
+  UtensilsCrossed, Shield, TreePine, Backpack, Calendar,
+  ChevronRight, Phone, Banknote, MapPinned, Plus, Trash2, X, Save,
+  Star, Image as ImageIcon
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { getCruises, saveCruises, getCruiseById } from "@/services/cmsStore";
+import type { Cruise, ItineraryDay } from "@/services/mockData";
+import { toast } from "@/hooks/use-toast";
+
+const emptyCruise: Cruise = {
+  id: "", name: "", subtitle: "", description: "", route: "", duration: "", capacity: "", cabins: "",
+  price: 0, priceLabel: "per person (Bangladeshi)", featured: false, images: [], facilities: [],
+  touristSpots: [], itinerary: [], menu: [], safetyInfo: [], travelTips: [], thingsToCarry: [],
+  additionalCosts: [], packageIncludes: [], packages: [], seatPlan: [],
+};
+
+// Inline editable text component
+function EditableText({ value, onChange, className = "", multiline = false, placeholder = "Click to edit..." }: {
+  value: string; onChange: (v: string) => void; className?: string; multiline?: boolean; placeholder?: string;
+}) {
+  if (multiline) {
+    return <Textarea value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} className={`bg-primary/5 border-dashed border-primary/30 focus:border-primary ${className}`} />;
+  }
+  return <Input value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} className={`bg-primary/5 border-dashed border-primary/30 focus:border-primary ${className}`} />;
+}
+
+// Editable list component
+function EditableList({ items, onChange, placeholder = "Enter item...", icon }: {
+  items: string[]; onChange: (items: string[]) => void; placeholder?: string; icon?: React.ReactNode;
+}) {
+  const add = () => onChange([...items, ""]);
+  const update = (i: number, v: string) => { const a = [...items]; a[i] = v; onChange(a); };
+  const remove = (i: number) => onChange(items.filter((_, j) => j !== i));
+
+  return (
+    <div className="space-y-2">
+      {items.map((item, i) => (
+        <div key={i} className="flex items-center gap-3 rounded-xl bg-primary/5 border border-dashed border-primary/20 px-4 py-3 text-sm group">
+          {icon || <Check className="h-5 w-5 text-primary flex-shrink-0" />}
+          <Input value={item} onChange={e => update(i, e.target.value)} placeholder={placeholder} className="flex-1 border-0 bg-transparent p-0 h-auto shadow-none focus-visible:ring-0" />
+          <button onClick={() => remove(i)} className="opacity-0 group-hover:opacity-100 transition-opacity"><X className="h-4 w-4 text-destructive" /></button>
+        </div>
+      ))}
+      <Button variant="outline" size="sm" onClick={add} className="gap-1 border-dashed"><Plus className="h-4 w-4" /> Add</Button>
+    </div>
+  );
+}
+
+export default function CruiseEditor() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const isNew = !id || id === "new";
+
+  const [form, setForm] = useState<Cruise>(() => {
+    if (isNew) return { ...emptyCruise, id: `cruise-${Date.now()}` };
+    const existing = getCruiseById(id);
+    return existing ? { ...existing } : { ...emptyCruise, id: `cruise-${Date.now()}` };
+  });
+
+  const [selectedImg, setSelectedImg] = useState(0);
+
+  const updateField = (field: keyof Cruise, value: any) => setForm({ ...form, [field]: value });
+
+  const save = () => {
+    if (!form.name.trim()) {
+      toast({ title: "Name is required", variant: "destructive" });
+      return;
+    }
+    const cruises = getCruises();
+    if (isNew) {
+      saveCruises([...cruises, form]);
+    } else {
+      saveCruises(cruises.map(c => c.id === id ? form : c));
+    }
+    toast({ title: isNew ? "Cruise created!" : "Cruise updated!" });
+    navigate("/admin/cruises");
+  };
+
+  return (
+    <div className="min-h-screen">
+      {/* Sticky Save Bar */}
+      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border px-4 py-3 flex items-center justify-between">
+        <Button variant="ghost" onClick={() => navigate("/admin/cruises")} className="gap-2">
+          <ArrowLeft className="h-4 w-4" /> Back to Cruises
+        </Button>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <Switch checked={form.featured} onCheckedChange={v => updateField("featured", v)} />
+            <Label className="text-sm flex items-center gap-1"><Star className="h-4 w-4" /> Featured</Label>
+          </div>
+          <Button onClick={save} className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
+            <Save className="h-4 w-4" /> Save Cruise
+          </Button>
+        </div>
+      </div>
+
+      {/* Hero Banner - Editable */}
+      <section className="relative flex min-h-[45vh] items-end overflow-hidden bg-muted">
+        {form.images.length > 0 ? (
+          <div className="absolute inset-0">
+            <img src={form.images[selectedImg] || ""} alt={form.name} className="h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/70 to-secondary/20" />
+            <div className="absolute inset-0 bg-gradient-to-r from-secondary/60 to-transparent" />
+          </div>
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-muted to-muted-foreground/10">
+            <div className="text-center text-muted-foreground">
+              <ImageIcon className="h-16 w-16 mx-auto mb-3 opacity-30" />
+              <p className="text-lg font-medium">Add images below to see hero preview</p>
+            </div>
+          </div>
+        )}
+        <div className="container relative z-10 pb-10 pt-24">
+          <Badge className="mb-3 rounded-full gradient-primary text-primary-foreground font-bold border-0 px-4 py-1">
+            <EditableText value={form.duration} onChange={v => updateField("duration", v)} placeholder="3 Days / 2 Nights" className="bg-transparent border-0 text-primary-foreground placeholder:text-primary-foreground/50 h-auto p-0 w-40 shadow-none focus-visible:ring-0" />
+          </Badge>
+          <EditableText value={form.name} onChange={v => updateField("name", v)} placeholder="Cruise Name" className="text-3xl md:text-4xl font-black text-secondary-foreground bg-transparent border-0 h-auto p-0 shadow-none focus-visible:ring-0 font-display" />
+          <EditableText value={form.subtitle} onChange={v => updateField("subtitle", v)} placeholder="Subtitle" className="mt-2 text-lg font-semibold text-primary bg-transparent border-0 h-auto p-0 shadow-none focus-visible:ring-0" />
+          <div className="mt-5 flex flex-wrap gap-3 text-sm">
+            <span className="flex items-center gap-2 bg-secondary/40 backdrop-blur-sm rounded-lg px-3 py-1.5 text-secondary-foreground/70">
+              <MapPin className="h-4 w-4 text-primary" />
+              <EditableText value={form.route} onChange={v => updateField("route", v)} placeholder="Route" className="bg-transparent border-0 h-auto p-0 w-48 text-secondary-foreground/70 shadow-none focus-visible:ring-0" />
+            </span>
+            <span className="flex items-center gap-2 bg-secondary/40 backdrop-blur-sm rounded-lg px-3 py-1.5 text-secondary-foreground/70">
+              <Users className="h-4 w-4 text-primary" />
+              <EditableText value={form.capacity} onChange={v => updateField("capacity", v)} placeholder="Capacity" className="bg-transparent border-0 h-auto p-0 w-28 text-secondary-foreground/70 shadow-none focus-visible:ring-0" />
+            </span>
+            <span className="flex items-center gap-2 bg-secondary/40 backdrop-blur-sm rounded-lg px-3 py-1.5 text-secondary-foreground/70">
+              <DoorOpen className="h-4 w-4 text-primary" />
+              <EditableText value={form.cabins} onChange={v => updateField("cabins", v)} placeholder="Cabins" className="bg-transparent border-0 h-auto p-0 w-28 text-secondary-foreground/70 shadow-none focus-visible:ring-0" />
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <div className="container py-10">
+        <div className="grid gap-10 lg:grid-cols-3">
+          <div className="lg:col-span-2 space-y-10">
+
+            {/* Image Gallery Editor */}
+            <div>
+              {form.images.length > 0 && (
+                <>
+                  <div className="aspect-[16/10] overflow-hidden rounded-2xl shadow-elevated relative group">
+                    <img src={form.images[selectedImg]} alt="" className="h-full w-full object-cover" />
+                    <button onClick={() => { const imgs = form.images.filter((_, j) => j !== selectedImg); updateField("images", imgs); setSelectedImg(Math.max(0, selectedImg - 1)); }} className="absolute top-3 right-3 bg-destructive text-destructive-foreground rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity"><Trash2 className="h-4 w-4" /></button>
+                  </div>
+                  <div className="mt-3 flex gap-2 overflow-x-auto pb-2">
+                    {form.images.map((img, i) => (
+                      <button key={i} onClick={() => setSelectedImg(i)} className={`h-16 w-24 flex-shrink-0 overflow-hidden rounded-xl border-2 transition-all ${i === selectedImg ? "border-primary shadow-glow scale-105" : "border-transparent opacity-60 hover:opacity-100"}`}>
+                        <img src={img} alt="" className="h-full w-full object-cover" />
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
+              <div className="mt-3 flex gap-2 items-center">
+                <Input placeholder="Paste image URL..." className="flex-1" onKeyDown={e => { if (e.key === "Enter") { const v = (e.target as HTMLInputElement).value.trim(); if (v) { updateField("images", [...form.images, v]); (e.target as HTMLInputElement).value = ""; } } }} />
+                <Button variant="outline" size="sm" onClick={() => { const url = prompt("Enter image URL:"); if (url) updateField("images", [...form.images, url]); }}><Plus className="h-4 w-4 mr-1" /> Add Image</Button>
+              </div>
+            </div>
+
+            {/* Description */}
+            <div>
+              <h2 className="mb-3 font-display text-2xl font-black text-foreground flex items-center gap-2"><Ship className="h-6 w-6 text-primary" /> About This Cruise</h2>
+              <EditableText value={form.description} onChange={v => updateField("description", v)} multiline placeholder="Describe the cruise experience..." className="text-lg min-h-[120px]" />
+            </div>
+
+            {/* Facilities */}
+            <div>
+              <h2 className="mb-4 font-display text-2xl font-black text-foreground">Ship Facilities</h2>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="col-span-full">
+                  <EditableList items={form.facilities || []} onChange={v => updateField("facilities", v)} placeholder="Facility name..." />
+                </div>
+              </div>
+            </div>
+
+            {/* Tourist Spots */}
+            <div>
+              <h2 className="mb-4 font-display text-2xl font-black text-foreground flex items-center gap-2"><MapPinned className="h-6 w-6 text-primary" /> Tourist Spots</h2>
+              <EditableList items={form.touristSpots || []} onChange={v => updateField("touristSpots", v)} placeholder="Spot name..." icon={<MapPin className="h-4 w-4 text-primary flex-shrink-0" />} />
+            </div>
+
+            {/* Tabbed Content */}
+            <Tabs defaultValue="itinerary" className="w-full">
+              <TabsList className="grid w-full grid-cols-4 bg-muted/50 rounded-xl h-12 p-1">
+                <TabsTrigger value="itinerary" className="gap-1.5 text-xs sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><Calendar className="h-4 w-4 hidden sm:block" /> Itinerary</TabsTrigger>
+                <TabsTrigger value="menu" className="gap-1.5 text-xs sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><UtensilsCrossed className="h-4 w-4 hidden sm:block" /> Menu</TabsTrigger>
+                <TabsTrigger value="safety" className="gap-1.5 text-xs sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><Shield className="h-4 w-4 hidden sm:block" /> Safety</TabsTrigger>
+                <TabsTrigger value="tips" className="gap-1.5 text-xs sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><Backpack className="h-4 w-4 hidden sm:block" /> Tips</TabsTrigger>
+              </TabsList>
+
+              {/* Itinerary */}
+              <TabsContent value="itinerary" className="mt-6 space-y-6">
+                {(form.itinerary || []).map((day, i) => (
+                  <Card key={i} className="border-l-4 border-l-primary overflow-hidden border-border/50 bg-card group">
+                    <CardContent className="p-6">
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="flex h-11 w-11 items-center justify-center rounded-xl gradient-primary text-primary-foreground font-display font-black text-sm">{i + 1}</span>
+                        <div className="flex-1 grid grid-cols-2 gap-2">
+                          <EditableText value={day.day} onChange={v => { const arr = [...(form.itinerary || [])]; arr[i] = { ...arr[i], day: v }; updateField("itinerary", arr); }} placeholder="Day 1" />
+                          <EditableText value={day.title} onChange={v => { const arr = [...(form.itinerary || [])]; arr[i] = { ...arr[i], title: v }; updateField("itinerary", arr); }} placeholder="Title" />
+                        </div>
+                        <button onClick={() => updateField("itinerary", (form.itinerary || []).filter((_, j) => j !== i))} className="opacity-0 group-hover:opacity-100"><Trash2 className="h-4 w-4 text-destructive" /></button>
+                      </div>
+                      <div className="space-y-2 ml-1">
+                        {day.activities.map((act, j) => (
+                          <div key={j} className="flex items-start gap-3 text-sm group/act">
+                            <ChevronRight className="h-4 w-4 text-primary flex-shrink-0 mt-2.5" />
+                            <Input value={act} onChange={e => { const arr = [...(form.itinerary || [])]; const acts = [...arr[i].activities]; acts[j] = e.target.value; arr[i] = { ...arr[i], activities: acts }; updateField("itinerary", arr); }} className="flex-1 border-dashed border-primary/20 bg-transparent" placeholder="Activity..." />
+                            <button onClick={() => { const arr = [...(form.itinerary || [])]; arr[i] = { ...arr[i], activities: arr[i].activities.filter((_, k) => k !== j) }; updateField("itinerary", arr); }} className="opacity-0 group-hover/act:opacity-100 mt-2"><X className="h-4 w-4 text-destructive" /></button>
+                          </div>
+                        ))}
+                        <Button variant="ghost" size="sm" className="gap-1 text-primary ml-6" onClick={() => { const arr = [...(form.itinerary || [])]; arr[i] = { ...arr[i], activities: [...arr[i].activities, ""] }; updateField("itinerary", arr); }}><Plus className="h-3 w-3" /> Activity</Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+                <Button variant="outline" className="gap-1 border-dashed" onClick={() => updateField("itinerary", [...(form.itinerary || []), { day: `Day ${(form.itinerary?.length || 0) + 1}`, title: "", activities: [] }])}><Plus className="h-4 w-4" /> Add Day</Button>
+              </TabsContent>
+
+              {/* Menu */}
+              <TabsContent value="menu" className="mt-6 space-y-6">
+                {(form.menu || []).map((day, i) => (
+                  <Card key={i} className="overflow-hidden border-border/50 bg-card group">
+                    <CardContent className="p-6">
+                      <div className="flex items-center gap-2 mb-4">
+                        <UtensilsCrossed className="h-5 w-5 text-primary" />
+                        <EditableText value={day.day} onChange={v => { const arr = [...(form.menu || [])]; arr[i] = { ...arr[i], day: v }; updateField("menu", arr); }} placeholder="Day 1" className="w-32" />
+                        <div className="flex-1" />
+                        <button onClick={() => updateField("menu", (form.menu || []).filter((_, j) => j !== i))} className="opacity-0 group-hover:opacity-100"><Trash2 className="h-4 w-4 text-destructive" /></button>
+                      </div>
+                      <div className="space-y-3">
+                        {day.meals.map((meal, j) => (
+                          <div key={j} className="rounded-xl bg-muted/30 border border-dashed border-border/50 p-4 group/meal relative">
+                            <EditableText value={meal.name} onChange={v => { const arr = [...(form.menu || [])]; const meals = [...arr[i].meals]; meals[j] = { ...meals[j], name: v }; arr[i] = { ...arr[i], meals }; updateField("menu", arr); }} placeholder="Meal name (e.g. Breakfast)" className="font-bold text-sm text-primary mb-1 bg-transparent border-0 p-0 h-auto shadow-none" />
+                            <EditableText value={meal.items} onChange={v => { const arr = [...(form.menu || [])]; const meals = [...arr[i].meals]; meals[j] = { ...meals[j], items: v }; arr[i] = { ...arr[i], meals }; updateField("menu", arr); }} placeholder="Items..." className="text-sm bg-transparent border-0 p-0 h-auto shadow-none" />
+                            <button onClick={() => { const arr = [...(form.menu || [])]; arr[i] = { ...arr[i], meals: arr[i].meals.filter((_, k) => k !== j) }; updateField("menu", arr); }} className="absolute top-2 right-2 opacity-0 group-hover/meal:opacity-100"><X className="h-4 w-4 text-destructive" /></button>
+                          </div>
+                        ))}
+                        <Button variant="ghost" size="sm" className="gap-1 text-primary" onClick={() => { const arr = [...(form.menu || [])]; arr[i] = { ...arr[i], meals: [...arr[i].meals, { name: "", items: "" }] }; updateField("menu", arr); }}><Plus className="h-3 w-3" /> Add Meal</Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+                <Button variant="outline" className="gap-1 border-dashed" onClick={() => updateField("menu", [...(form.menu || []), { day: `Day ${(form.menu?.length || 0) + 1}`, meals: [] }])}><Plus className="h-4 w-4" /> Add Day</Button>
+              </TabsContent>
+
+              {/* Safety */}
+              <TabsContent value="safety" className="mt-6 space-y-4">
+                <Card className="border-l-4 border-l-emerald border-border/50 bg-card">
+                  <CardContent className="p-6">
+                    <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2"><Shield className="h-5 w-5 text-emerald" /> Security Measures</h3>
+                    <EditableList items={form.safetyInfo || []} onChange={v => updateField("safetyInfo", v)} placeholder="Safety measure..." icon={<Check className="h-4 w-4 text-emerald flex-shrink-0" />} />
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              {/* Tips */}
+              <TabsContent value="tips" className="mt-6 space-y-6">
+                <Card className="border-border/50 bg-card">
+                  <CardContent className="p-6">
+                    <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2"><TreePine className="h-5 w-5 text-emerald" /> Travel Tips</h3>
+                    <EditableList items={form.travelTips || []} onChange={v => updateField("travelTips", v)} placeholder="Travel tip..." icon={<span className="text-lg leading-none">🌿</span>} />
+                  </CardContent>
+                </Card>
+                <Card className="border-border/50 bg-card">
+                  <CardContent className="p-6">
+                    <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2"><Backpack className="h-5 w-5 text-primary" /> Things to Carry</h3>
+                    <EditableList items={form.thingsToCarry || []} onChange={v => updateField("thingsToCarry", v)} placeholder="Item..." />
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </div>
+
+          {/* Sidebar - Pricing & Extras */}
+          <div className="space-y-6">
+            <Card className="sticky top-20 border-border/50 shadow-elevated overflow-hidden bg-card">
+              <div className="gradient-primary px-6 py-5">
+                <p className="text-primary-foreground/80 text-sm font-medium">Starting From</p>
+                <div className="flex items-center gap-1">
+                  <span className="text-primary-foreground text-2xl font-bold">৳</span>
+                  <Input type="number" value={form.price} onChange={e => updateField("price", Number(e.target.value))} className="text-3xl font-display font-black text-primary-foreground bg-transparent border-0 h-auto p-0 shadow-none focus-visible:ring-0 w-full" />
+                </div>
+                <EditableText value={form.priceLabel} onChange={v => updateField("priceLabel", v)} placeholder="Price label" className="text-primary-foreground/70 bg-transparent border-0 text-xs h-auto p-0 mt-1 shadow-none focus-visible:ring-0" />
+              </div>
+              <CardContent className="p-6 space-y-4">
+                {/* Additional Costs */}
+                <div className="border-t border-border/30 pt-3">
+                  <p className="text-xs font-display font-bold text-foreground mb-2 flex items-center gap-1"><Banknote className="h-3.5 w-3.5 text-primary" /> Additional Costs</p>
+                  {(form.additionalCosts || []).map((cost, i) => (
+                    <div key={i} className="flex gap-2 text-xs py-1 group items-center">
+                      <Input value={cost.label} onChange={e => { const arr = [...(form.additionalCosts || [])]; arr[i] = { ...arr[i], label: e.target.value }; updateField("additionalCosts", arr); }} placeholder="Label" className="flex-1 h-7 text-xs border-dashed" />
+                      <Input value={cost.amount} onChange={e => { const arr = [...(form.additionalCosts || [])]; arr[i] = { ...arr[i], amount: e.target.value }; updateField("additionalCosts", arr); }} placeholder="Amount" className="w-24 h-7 text-xs border-dashed" />
+                      <button onClick={() => updateField("additionalCosts", (form.additionalCosts || []).filter((_, j) => j !== i))} className="opacity-0 group-hover:opacity-100"><X className="h-3 w-3 text-destructive" /></button>
+                    </div>
+                  ))}
+                  <Button variant="ghost" size="sm" className="text-xs gap-1 h-6 text-primary" onClick={() => updateField("additionalCosts", [...(form.additionalCosts || []), { label: "", amount: "" }])}><Plus className="h-3 w-3" /> Add</Button>
+                </div>
+
+                {/* Package Includes */}
+                <div className="border-t border-border/30 pt-3">
+                  <p className="text-xs font-display font-bold text-foreground mb-2">Package Includes</p>
+                  {(form.packageIncludes || []).map((item, i) => (
+                    <div key={i} className="flex items-center gap-2 text-xs py-1 group">
+                      <Check className="h-3.5 w-3.5 text-primary flex-shrink-0" />
+                      <Input value={item} onChange={e => { const arr = [...(form.packageIncludes || [])]; arr[i] = e.target.value; updateField("packageIncludes", arr); }} className="flex-1 h-7 text-xs border-dashed border-0 bg-transparent p-0 shadow-none" placeholder="Include item..." />
+                      <button onClick={() => updateField("packageIncludes", (form.packageIncludes || []).filter((_, j) => j !== i))} className="opacity-0 group-hover:opacity-100"><X className="h-3 w-3 text-destructive" /></button>
+                    </div>
+                  ))}
+                  <Button variant="ghost" size="sm" className="text-xs gap-1 h-6 text-primary" onClick={() => updateField("packageIncludes", [...(form.packageIncludes || []), ""])}><Plus className="h-3 w-3" /> Add</Button>
+                </div>
+
+                {/* Info badges */}
+                <div className="pt-3 border-t border-border/30 space-y-2.5">
+                  <div className="flex items-center gap-2.5 text-xs text-muted-foreground"><MapPin className="h-4 w-4 text-primary" /> {form.route || "Route"}</div>
+                  <div className="flex items-center gap-2.5 text-xs text-muted-foreground"><Clock className="h-4 w-4 text-primary" /> {form.duration || "Duration"}</div>
+                  <div className="flex items-center gap-2.5 text-xs text-muted-foreground"><Users className="h-4 w-4 text-primary" /> {form.capacity || "Capacity"}</div>
+                  <div className="flex items-center gap-2.5 text-xs text-muted-foreground"><DoorOpen className="h-4 w-4 text-primary" /> {form.cabins || "Cabins"}</div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
