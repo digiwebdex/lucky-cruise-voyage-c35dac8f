@@ -1,7 +1,8 @@
 import { useState, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Ship, Plus, Minus, Trash2, ZoomIn, ChevronLeft, ChevronRight, ImageIcon, Save, GripVertical } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Ship, Plus, Minus, Trash2, ZoomIn, ChevronLeft, ChevronRight, ImageIcon, Save, GripVertical, CheckSquare, X } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { getCruises, saveCruises } from "@/services/cmsStore";
 import type { Cruise } from "@/services/mockData";
@@ -14,8 +15,37 @@ export default function MediaLibrary() {
   const [lightbox, setLightbox] = useState<{ img: string; images: string[]; idx: number } | null>(null);
   const [newUrls, setNewUrls] = useState<Record<string, string>>({});
   const [hasChanges, setHasChanges] = useState(false);
+  const [selectMode, setSelectMode] = useState(false);
+  const [selected, setSelected] = useState<Record<string, Set<number>>>({});
   const [dragState, setDragState] = useState<{ cruiseId: string; fromIdx: number } | null>(null);
   const [dragOverIdx, setDragOverIdx] = useState<number | null>(null);
+
+  const toggleSelect = (cruiseId: string, idx: number) => {
+    setSelected(prev => {
+      const s = new Set(prev[cruiseId] || []);
+      s.has(idx) ? s.delete(idx) : s.add(idx);
+      return { ...prev, [cruiseId]: s };
+    });
+  };
+
+  const selectedCount = Object.values(selected).reduce((sum, s) => sum + s.size, 0);
+
+  const bulkDelete = () => {
+    setCruises(prev => prev.map(c => {
+      const sel = selected[c.id];
+      if (!sel || sel.size === 0) return c;
+      return { ...c, images: c.images.filter((_, i) => !sel.has(i)) };
+    }));
+    setHasChanges(true);
+    toast({ title: `${selectedCount} images deleted` });
+    setSelected({});
+    setSelectMode(false);
+  };
+
+  const exitSelectMode = () => {
+    setSelectMode(false);
+    setSelected({});
+  };
 
   const handleDragStart = (cruiseId: string, idx: number) => {
     setDragState({ cruiseId, fromIdx: idx });
@@ -156,59 +186,96 @@ export default function MediaLibrary() {
 
             {expandedSections.has(cruise.id) && (
               <div>
-                {/* Add image input */}
-                <div className="mb-4 flex gap-2 items-center max-w-lg">
-                  <Input
-                    placeholder="Paste image URL..."
-                    value={newUrls[cruise.id] || ""}
-                    onChange={e => setNewUrls(prev => ({ ...prev, [cruise.id]: e.target.value }))}
-                    onKeyDown={e => { if (e.key === "Enter") addImage(cruise.id); }}
-                  />
-                  <Button variant="outline" size="sm" onClick={() => addImage(cruise.id)} className="gap-1 flex-shrink-0">
-                    <Plus className="h-4 w-4" /> Add
-                  </Button>
+                {/* Toolbar: Add image + Select mode */}
+                <div className="mb-4 flex gap-2 items-center flex-wrap">
+                  <div className="flex gap-2 items-center max-w-lg flex-1">
+                    <Input
+                      placeholder="Paste image URL..."
+                      value={newUrls[cruise.id] || ""}
+                      onChange={e => setNewUrls(prev => ({ ...prev, [cruise.id]: e.target.value }))}
+                      onKeyDown={e => { if (e.key === "Enter") addImage(cruise.id); }}
+                    />
+                    <Button variant="outline" size="sm" onClick={() => addImage(cruise.id)} className="gap-1 flex-shrink-0">
+                      <Plus className="h-4 w-4" /> Add
+                    </Button>
+                  </div>
+                  {!selectMode ? (
+                    <Button variant="outline" size="sm" onClick={() => setSelectMode(true)} className="gap-1 flex-shrink-0">
+                      <CheckSquare className="h-4 w-4" /> Select
+                    </Button>
+                  ) : (
+                    <div className="flex gap-2 items-center">
+                      <Button variant="destructive" size="sm" onClick={bulkDelete} disabled={selectedCount === 0} className="gap-1">
+                        <Trash2 className="h-4 w-4" /> Delete ({selectedCount})
+                      </Button>
+                      <Button variant="ghost" size="sm" onClick={exitSelectMode} className="gap-1">
+                        <X className="h-4 w-4" /> Cancel
+                      </Button>
+                    </div>
+                  )}
                 </div>
 
                 {cruise.images.length > 0 ? (
                   <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                    {cruise.images.map((img, i) => (
+                    {cruise.images.map((img, i) => {
+                      const isSelected = selected[cruise.id]?.has(i) || false;
+                      return (
                       <div
                         key={`${cruise.id}-${i}`}
-                        draggable
-                        onDragStart={() => handleDragStart(cruise.id, i)}
-                        onDragOver={(e) => handleDragOver(e, i)}
-                        onDrop={() => handleDrop(cruise.id, i)}
+                        draggable={!selectMode}
+                        onDragStart={() => !selectMode && handleDragStart(cruise.id, i)}
+                        onDragOver={(e) => !selectMode && handleDragOver(e, i)}
+                        onDrop={() => !selectMode && handleDrop(cruise.id, i)}
                         onDragEnd={handleDragEnd}
-                        className={`overflow-hidden rounded-xl group relative cursor-grab active:cursor-grabbing transition-all duration-200 ${
-                          dragState?.cruiseId === cruise.id && dragOverIdx === i ? "ring-2 ring-primary scale-105" : ""
-                        } ${dragState?.cruiseId === cruise.id && dragState.fromIdx === i ? "opacity-40" : ""}`}
+                        onClick={() => selectMode && toggleSelect(cruise.id, i)}
+                        className={`overflow-hidden rounded-xl group relative transition-all duration-200 ${
+                          selectMode ? "cursor-pointer" : "cursor-grab active:cursor-grabbing"
+                        } ${dragState?.cruiseId === cruise.id && dragOverIdx === i ? "ring-2 ring-primary scale-105" : ""
+                        } ${dragState?.cruiseId === cruise.id && dragState.fromIdx === i ? "opacity-40" : ""
+                        } ${isSelected ? "ring-2 ring-destructive" : ""}`}
                       >
                         <img
                           src={img}
                           alt={`${cruise.name} ${i + 1}`}
                           className="w-full aspect-square object-cover transition-transform duration-300 group-hover:scale-105"
                           draggable={false}
-                          onClick={() => setLightbox({ img, images: cruise.images, idx: i })}
+                          onClick={(e) => { if (!selectMode) { e.stopPropagation(); setLightbox({ img, images: cruise.images, idx: i }); } }}
                         />
+                        {/* Select checkbox */}
+                        {selectMode && (
+                          <div className="absolute top-2 left-2 z-20">
+                            <Checkbox checked={isSelected} className="h-5 w-5 border-2 border-background bg-background/80 data-[state=checked]:bg-destructive data-[state=checked]:border-destructive" />
+                          </div>
+                        )}
                         {/* Drag handle indicator */}
-                        <div className="absolute top-2 left-2 bg-secondary/70 text-secondary-foreground rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
-                          <GripVertical className="h-3.5 w-3.5" />
-                        </div>
+                        {!selectMode && (
+                          <div className="absolute top-2 left-2 bg-secondary/70 text-secondary-foreground rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                            <GripVertical className="h-3.5 w-3.5" />
+                          </div>
+                        )}
                         {/* Overlay */}
-                        <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/40 transition-all duration-300 flex items-center justify-center pointer-events-none">
-                          <ZoomIn className="h-6 w-6 text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </div>
-                        <button
-                          onClick={(e) => { e.stopPropagation(); deleteImage(cruise.id, i); }}
-                          className="absolute top-2 right-2 bg-destructive text-destructive-foreground rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg z-10"
-                        >
-                          <Trash2 className="h-3.5 w-3.5" />
-                        </button>
+                        {!selectMode && (
+                          <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/40 transition-all duration-300 flex items-center justify-center pointer-events-none">
+                            <ZoomIn className="h-6 w-6 text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </div>
+                        )}
+                        {selectMode && isSelected && (
+                          <div className="absolute inset-0 bg-destructive/20 transition-all duration-200" />
+                        )}
+                        {!selectMode && (
+                          <button
+                            onClick={(e) => { e.stopPropagation(); deleteImage(cruise.id, i); }}
+                            className="absolute top-2 right-2 bg-destructive text-destructive-foreground rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg z-10"
+                          >
+                            <Trash2 className="h-3.5 w-3.5" />
+                          </button>
+                        )}
                         <span className="absolute bottom-2 left-2 bg-secondary/70 text-secondary-foreground text-xs px-2 py-0.5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
                           {i + 1}
                         </span>
                       </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 ) : (
                   <div className="rounded-2xl border-2 border-dashed border-border/50 bg-muted/30 p-10 text-center">
