@@ -3,9 +3,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 const mockUsers = [
-  { id: 1, name: "Admin User", email: "admin@luckytoursbd.com", role: "Admin" },
-  { id: 2, name: "Manager", email: "manager@luckytoursbd.com", role: "Editor" },
-  { id: 3, name: "Staff User", email: "staff@luckytoursbd.com", role: "Viewer" },
+  { id: 1, name: "Admin User", email: "luckytoursandtravels70@gmail.com", role: "Admin" },
+  { id: 2, name: "Manager", email: "luckytoursandtravels70@gmail.com", role: "Editor" },
+  { id: 3, name: "Staff User", email: "luckytoursandtravels70@gmail.com", role: "Viewer" },
 ];
 
 export default function UsersPage() {

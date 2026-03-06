@@ -9,7 +9,7 @@ export default function SettingsPage() {
     siteName: "Lucky Tours & Travels",
     phone: "01711871072",
     whatsapp: "8801711871072",
-    email: "info@luckytoursbd.com",
+    email: "luckytoursandtravels70@gmail.com",
     address: "Dhaka, Bangladesh",
   });
 
