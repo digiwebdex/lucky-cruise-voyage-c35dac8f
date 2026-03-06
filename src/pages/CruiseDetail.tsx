@@ -286,7 +286,7 @@ export default function CruiseDetail() {
             </Card>
 
             <Card className="border-border/50 bg-card">
-              <CardContent className="p-6 text-center">
+              <CardContent className="p-4 sm:p-6 text-center">
                 <p className="font-display font-bold text-foreground mb-2">{t.cruiseDetail.sundarbanBooking}</p>
                 <a href="tel:+8801711871072" className="text-2xl font-display font-black text-primary hover:underline">+880 1711-871072</a>
                 <p className="text-xs text-muted-foreground mt-2">{t.cruiseDetail.callOrWhatsApp}</p>
