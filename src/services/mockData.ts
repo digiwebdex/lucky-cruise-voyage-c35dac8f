@@ -295,6 +295,8 @@ export interface Package {
   id: string;
   name: string;
   price: number;
+  oldPrice?: number;
+  isOffer?: boolean;
   duration: string;
 }
 
@@ -308,6 +310,7 @@ export interface Cruise {
   capacity: string;
   cabins: string;
   price: number;
+  oldPrice?: number;
   priceLabel: string;
   featured: boolean;
   images: string[];

@@ -235,6 +235,9 @@ export default function CruiseDetail() {
             <Card className="sticky top-24 border-border/50 shadow-elevated overflow-hidden bg-card">
               <div className="gradient-primary px-6 py-5">
                 <p className="text-primary-foreground/80 text-sm font-medium">{t.cruiseDetail.startingFrom}</p>
+                {cruise.oldPrice && (
+                  <p className="text-primary-foreground/60 text-lg font-display font-bold line-through">৳{cruise.oldPrice.toLocaleString()}</p>
+                )}
                 <p className="text-4xl font-display font-black text-primary-foreground">৳{cruise.price.toLocaleString()}</p>
                 <p className="text-primary-foreground/70 text-xs mt-1">{cruise.priceLabel}</p>
               </div>

@@ -4,7 +4,7 @@ import {
   ArrowLeft, Clock, MapPin, Check, Users, DoorOpen, Ship,
   UtensilsCrossed, Shield, TreePine, Backpack, Calendar,
   ChevronRight, Phone, Banknote, MapPinned, Plus, Trash2, X, Save,
-  Star, Image as ImageIcon
+  Star, Image as ImageIcon, Flame
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -284,6 +284,48 @@ export default function CruiseEditor() {
                 </Card>
               </TabsContent>
             </Tabs>
+
+            {/* Packages */}
+            <div>
+              <h2 className="mb-4 font-display text-2xl font-black text-foreground flex items-center gap-2"><Banknote className="h-6 w-6 text-primary" /> Packages</h2>
+              <div className="space-y-4">
+                {form.packages.map((pkg, i) => (
+                  <Card key={i} className={`border-border/50 bg-card group relative overflow-hidden ${pkg.isOffer ? "ring-2 ring-primary" : ""}`}>
+                    {pkg.isOffer && (
+                      <div className="absolute top-0 right-0">
+                        <Badge className="rounded-none rounded-bl-xl gradient-primary text-primary-foreground font-bold border-0 px-2 py-1 text-xs gap-1">
+                          <Flame className="h-3 w-3" /> Offer
+                        </Badge>
+                      </div>
+                    )}
+                    <CardContent className="p-5">
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 items-center">
+                        <EditableText value={pkg.name} onChange={v => { const arr = [...form.packages]; arr[i] = { ...arr[i], name: v }; updateField("packages", arr); }} placeholder="Package name" />
+                        <EditableText value={pkg.duration} onChange={v => { const arr = [...form.packages]; arr[i] = { ...arr[i], duration: v }; updateField("packages", arr); }} placeholder="Duration" />
+                        <div className="flex gap-2 items-center">
+                          <div className="flex-1">
+                            <Label className="text-xs text-muted-foreground">Old Price</Label>
+                            <Input type="number" value={pkg.oldPrice || ""} onChange={e => { const arr = [...form.packages]; arr[i] = { ...arr[i], oldPrice: e.target.value ? Number(e.target.value) : undefined }; updateField("packages", arr); }} placeholder="Old ৳" className="h-8 text-sm border-dashed" />
+                          </div>
+                          <div className="flex-1">
+                            <Label className="text-xs text-muted-foreground">Price</Label>
+                            <Input type="number" value={pkg.price} onChange={e => { const arr = [...form.packages]; arr[i] = { ...arr[i], price: Number(e.target.value) }; updateField("packages", arr); }} placeholder="৳" className="h-8 text-sm border-dashed font-bold" />
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-2">
+                            <Switch checked={pkg.isOffer || false} onCheckedChange={v => { const arr = [...form.packages]; arr[i] = { ...arr[i], isOffer: v }; updateField("packages", arr); }} />
+                            <Label className="text-xs">Offer</Label>
+                          </div>
+                          <button onClick={() => updateField("packages", form.packages.filter((_, j) => j !== i))} className="opacity-0 group-hover:opacity-100 ml-auto"><Trash2 className="h-4 w-4 text-destructive" /></button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+                <Button variant="outline" className="gap-1 border-dashed" onClick={() => updateField("packages", [...form.packages, { id: `pkg-${Date.now()}`, name: "", price: 0, duration: "", isOffer: false }])}><Plus className="h-4 w-4" /> Add Package</Button>
+              </div>
+            </div>
           </div>
 
           {/* Sidebar - Pricing & Extras */}
@@ -291,6 +333,10 @@ export default function CruiseEditor() {
             <Card className="sticky top-20 border-border/50 shadow-elevated overflow-hidden bg-card">
               <div className="gradient-primary px-6 py-5">
                 <p className="text-primary-foreground/80 text-sm font-medium">Starting From</p>
+                <div className="flex items-center gap-2">
+                  <span className="text-primary-foreground/60 text-xs">Old Price ৳</span>
+                  <Input type="number" value={form.oldPrice || ""} onChange={e => updateField("oldPrice", e.target.value ? Number(e.target.value) : undefined)} placeholder="Old price" className="text-lg font-display text-primary-foreground/60 line-through bg-transparent border-0 h-auto p-0 shadow-none focus-visible:ring-0 w-24" />
+                </div>
                 <div className="flex items-center gap-1">
                   <span className="text-primary-foreground text-2xl font-bold">৳</span>
                   <Input type="number" value={form.price} onChange={e => updateField("price", Number(e.target.value))} className="text-3xl font-display font-black text-primary-foreground bg-transparent border-0 h-auto p-0 shadow-none focus-visible:ring-0 w-full" />
