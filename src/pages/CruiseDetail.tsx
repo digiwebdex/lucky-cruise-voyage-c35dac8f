@@ -91,7 +91,7 @@ export default function CruiseDetail() {
             </motion.div>
 
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              <h2 className="mb-4 font-display text-2xl font-black text-foreground">{t.cruiseDetail.shipFacilities}</h2>
+              <h2 className="mb-4 font-display text-xl sm:text-2xl font-black text-foreground">{t.cruiseDetail.shipFacilities}</h2>
               <div className="grid gap-3 sm:grid-cols-2">
                 {cruise.facilities.map(f => (
                   <div key={f} className="flex items-center gap-3 rounded-xl bg-primary/5 border border-primary/10 px-4 py-3.5 text-sm hover:bg-primary/10 transition-colors">
