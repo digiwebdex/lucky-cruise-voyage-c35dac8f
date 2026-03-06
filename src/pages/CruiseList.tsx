@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Search, ChevronRight, MapPin, Clock, Users, ArrowRight, SlidersHorizontal } from "lucide-react";
+import { Search, ChevronRight, MapPin, Clock, Users, ArrowRight, SlidersHorizontal, Phone } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
