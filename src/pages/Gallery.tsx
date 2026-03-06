@@ -41,9 +41,9 @@ export default function Gallery() {
       </section>
 
       {/* Cruise Filter Tabs */}
-      <section className="py-6 border-b border-border sticky top-16 z-30 bg-background/95 backdrop-blur-md">
+      <section className="py-4 sm:py-6 border-b border-border sticky top-16 z-30 bg-background/95 backdrop-blur-md">
         <div className="container">
-          <div className="flex flex-wrap gap-2 justify-center">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center">
             <Button
               variant={activeCruise === null ? "default" : "outline"}
               size="sm"
