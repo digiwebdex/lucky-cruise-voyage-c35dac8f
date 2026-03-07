@@ -20,7 +20,6 @@ import CruiseManager from "./pages/admin/CruiseManager";
 import CruiseEditor from "./pages/admin/CruiseEditor";
 import PackagesManager from "./pages/admin/PackagesManager";
 import MediaLibrary from "./pages/admin/MediaLibrary";
-
 import PagesCMS from "./pages/admin/PagesCMS";
 import SEOManager from "./pages/admin/SEOManager";
 import UsersPage from "./pages/admin/Users";
@@ -28,6 +27,9 @@ import SettingsPage from "./pages/admin/Settings";
 import TestimonialsManager from "./pages/admin/TestimonialsManager";
 import TeamManager from "./pages/admin/TeamManager";
 import OffersManager from "./pages/admin/OffersManager";
+import Bookings from "./pages/admin/Bookings";
+import CategoriesManager from "./pages/admin/CategoriesManager";
+import AvailabilityManager from "./pages/admin/AvailabilityManager";
 
 const queryClient = new QueryClient();
 
