@@ -21,7 +21,7 @@ import { toast } from "@/hooks/use-toast";
 
 const emptyCruise: Cruise = {
   id: "", name: "", subtitle: "", description: "", route: "", duration: "", capacity: "", cabins: "",
-  price: 0, priceLabel: "per person (Bangladeshi)", featured: false, images: [], facilities: [],
+  price: 0, priceLabel: "per person (Bangladeshi)", featured: false, featuredImageIndex: 0, images: [], facilities: [],
   touristSpots: [], itinerary: [], menu: [], safetyInfo: [], travelTips: [], thingsToCarry: [],
   additionalCosts: [], packageIncludes: [], packages: [], seatPlan: [],
 };
