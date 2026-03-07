@@ -153,6 +153,11 @@ export default function OffersManager() {
                     <h3 className="font-bold text-foreground">{offer.title}</h3>
                     {linked && <p className="text-sm text-muted-foreground">→ {linked.name}</p>}
                     {offer.description && <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{offer.description}</p>}
+                    {offer.expiryDate && (
+                      <p className={`text-xs mt-1 font-medium ${offer.expiryDate < new Date().toISOString() ? "text-destructive" : "text-muted-foreground"}`}>
+                        {offer.expiryDate < new Date().toISOString() ? "Expired" : `Expires: ${new Date(offer.expiryDate).toLocaleDateString()}`}
+                      </p>
+                    )}
                   </div>
                   <Switch checked={offer.isActive} onCheckedChange={() => toggleActive(offer.id)} />
                 </div>
