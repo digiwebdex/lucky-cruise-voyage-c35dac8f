@@ -1577,8 +1577,8 @@ export const cruises: Cruise[] = [
     additionalCosts: commonAdditionalCosts,
     packageIncludes: commonPackageIncludes,
     packages: [
-      { id: "khayapar-standard", name: "Standard Package", price: 15400, oldPrice: 22000, isOffer: true, duration: "3 Days / 2 Nights" }, // 30% off
-      { id: "khayapar-vip", name: "VIP Package", price: 28000, duration: "3 Days / 2 Nights" },
+      { id: "khayapar-standard", name: "Standard Package", price: 15400, oldPrice: 22000, adultPrice: 15400, adultOldPrice: 22000, childPrice: 7700, childOldPrice: 11000, isOffer: true, duration: "3 Days / 2 Nights" },
+      { id: "khayapar-vip", name: "VIP Package", price: 28000, adultPrice: 28000, childPrice: 14000, duration: "3 Days / 2 Nights" },
     ],
     seatPlan: [
       {
