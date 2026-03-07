@@ -203,5 +203,12 @@
   },
   "common": {
     "perPerson": "প্রতি জন"
+  },
+  "offers": {
+    "sectionLabel": "চলমান",
+    "title": "চলমান",
+    "titleHighlight": "অফারসমূহ",
+    "subtitle": "আমাদের সর্বশেষ ক্রুজ ডিল এবং বিশেষ প্যাকেজ মিস করবেন না",
+    "offerBadge": "অফার"
   }
 }

@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Ship, Package, Image, FileText, Search, Users, Settings, LogOut, Menu, X, ExternalLink, MessageSquare, UserCheck } from "lucide-react";
+import { LayoutDashboard, Ship, Package, Image, FileText, Search, Users, Settings, LogOut, Menu, X, ExternalLink, MessageSquare, UserCheck, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const sidebarLinks = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { to: "/admin/cruises", label: "Cruises", icon: Ship },
   { to: "/admin/packages", label: "Packages", icon: Package },
+  { to: "/admin/offers", label: "Offers", icon: Flame },
   { to: "/admin/testimonials", label: "Testimonials", icon: MessageSquare },
   { to: "/admin/team", label: "Team Members", icon: UserCheck },
   { to: "/admin/media", label: "Gallery", icon: Image },

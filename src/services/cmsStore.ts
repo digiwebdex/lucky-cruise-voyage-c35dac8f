@@ -46,6 +46,15 @@ export interface TeamMember {
   role: string;
 }
 
+export interface Offer {
+  id: string;
+  title: string;
+  posterImage: string;
+  linkedCruiseId: string;
+  description?: string;
+  isActive: boolean;
+}
+
 // ===== Default Seeds =====
 const defaultSettings: SiteSettings = {
   siteName: "Lucky Tours & Travels",
@@ -88,10 +97,11 @@ const KEYS = {
   seo: "cms_seo",
   testimonials: "cms_testimonials",
   teamMembers: "cms_teamMembers",
+  offers: "cms_offers",
 } as const;
 
 // Bump this version whenever mockData defaults change to bust localStorage cache
-const DATA_VERSION = "v6";
+const DATA_VERSION = "v7";
 const VERSION_KEY = "cms_data_version";
 
 function initVersionCheck() {
@@ -141,6 +151,24 @@ export const getTeamMembers = (): TeamMember[] => {
   return getStore(KEYS.teamMembers, defaults);
 };
 export const saveTeamMembers = (data: TeamMember[]) => setStore(KEYS.teamMembers, data);
+
+// Seed default offers from cruises with isOffer packages
+function buildDefaultOffers(): Offer[] {
+  const allCruises = getStore(KEYS.cruises, defaultCruises);
+  return allCruises
+    .filter(c => c.packages?.some(p => p.isOffer))
+    .map((c, i) => ({
+      id: `offer-${i}`,
+      title: `${c.name} Special Offer`,
+      posterImage: c.images[c.featuredImageIndex ?? 0],
+      linkedCruiseId: c.id,
+      description: c.subtitle,
+      isActive: true,
+    }));
+}
+
+export const getOffers = (): Offer[] => getStore(KEYS.offers, buildDefaultOffers());
+export const saveOffers = (data: Offer[]) => setStore(KEYS.offers, data);
 
 // Helper functions that mirror mockData exports
 export function getCruiseById(id: string): Cruise | undefined {

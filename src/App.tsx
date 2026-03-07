@@ -27,6 +27,7 @@ import UsersPage from "./pages/admin/Users";
 import SettingsPage from "./pages/admin/Settings";
 import TestimonialsManager from "./pages/admin/TestimonialsManager";
 import TeamManager from "./pages/admin/TeamManager";
+import OffersManager from "./pages/admin/OffersManager";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +58,7 @@ const App = () => (
               <Route path="cruises/:id" element={<CruiseEditor />} />
               <Route path="packages" element={<PackagesManager />} />
               <Route path="testimonials" element={<TestimonialsManager />} />
+              <Route path="offers" element={<OffersManager />} />
               <Route path="team" element={<TeamManager />} />
               <Route path="media" element={<MediaLibrary />} />
               
