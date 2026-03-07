@@ -36,10 +36,10 @@ export default function Footer() {
                 {t.footer.tagline}
               </p>
               <div className="mt-4 flex gap-3">
-                <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary hover:bg-primary/25 transition-colors">
+                <a href={`https://wa.me/${settings.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary hover:bg-primary/25 transition-colors">
                   <Phone className="h-4 w-4" />
                 </a>
-                <a href="mailto:luckytoursandtravels70@gmail.com" className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary hover:bg-primary/25 transition-colors">
+                <a href={`mailto:${settings.email}`} className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary hover:bg-primary/25 transition-colors">
                   <Mail className="h-4 w-4" />
                 </a>
               </div>
