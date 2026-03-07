@@ -6,11 +6,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getSettings } from "@/services/cmsStore";
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
 export default function Contact() {
   const { t } = useLanguage();
+  const settings = getSettings();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,7 +21,7 @@ export default function Contact() {
     const msg = encodeURIComponent(
       `Contact Inquiry\n\nName: ${data.get("name")}\nEmail: ${data.get("email")}\nMessage: ${data.get("message")}`
     );
-    window.open(`https://wa.me/8801711871072?text=${msg}`, "_blank");
+    window.open(`https://wa.me/${settings.whatsapp}?text=${msg}`, "_blank");
   };
 
   return (
@@ -46,10 +48,10 @@ export default function Contact() {
 
               <div className="grid gap-4 sm:grid-cols-2">
                 {[
-                  { icon: Phone, label: t.contact.phone, value: "01711-871072", color: "bg-primary/10 text-primary" },
-                  { icon: MessageCircle, label: t.contact.whatsapp, value: "01711-871072", link: "https://wa.me/8801711871072", color: "bg-emerald/10 text-emerald" },
-                  { icon: Mail, label: t.contact.email, value: "luckytoursandtravels70@gmail.com", color: "bg-gold/10 text-gold" },
-                  { icon: MapPin, label: t.contact.address, value: "Dhaka, Bangladesh", color: "bg-accent/10 text-accent" },
+                  { icon: Phone, label: t.contact.phone, value: settings.phone, color: "bg-primary/10 text-primary" },
+                  { icon: MessageCircle, label: t.contact.whatsapp, value: settings.phone, link: `https://wa.me/${settings.whatsapp}`, color: "bg-emerald/10 text-emerald" },
+                  { icon: Mail, label: t.contact.email, value: settings.email, color: "bg-gold/10 text-gold" },
+                  { icon: MapPin, label: t.contact.address, value: settings.address, color: "bg-accent/10 text-accent" },
                 ].map((item, i) => (
                   <Card key={i} className="border-border/50 hover:shadow-elevated transition-all duration-300 hover:-translate-y-1 bg-card">
                     <CardContent className="flex items-center gap-4 p-5">
@@ -72,7 +74,7 @@ export default function Contact() {
               <div className="overflow-hidden rounded-2xl shadow-elevated">
                 <iframe
                   title="Location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d233668.38703692693!2d90.27923710646989!3d23.780573258035943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b087026b81%3A0x8fa563b5c6e9a1ab!2sDhaka!5e0!3m2!1sen!2sbd!4v1711871072"
+                  src={settings.googleMapsUrl}
                   width="100%"
                   height="250"
                   style={{ border: 0 }}

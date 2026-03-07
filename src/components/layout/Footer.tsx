@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Ship, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getSettings } from "@/services/cmsStore";
 
 export default function Footer() {
   const { t } = useLanguage();
+  const settings = getSettings();
 
   const footerLinks = [
     { to: "/", label: t.footer.home },
@@ -34,10 +36,10 @@ export default function Footer() {
                 {t.footer.tagline}
               </p>
               <div className="mt-4 flex gap-3">
-                <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary hover:bg-primary/25 transition-colors">
+                <a href={`https://wa.me/${settings.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary hover:bg-primary/25 transition-colors">
                   <Phone className="h-4 w-4" />
                 </a>
-                <a href="mailto:luckytoursandtravels70@gmail.com" className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary hover:bg-primary/25 transition-colors">
+                <a href={`mailto:${settings.email}`} className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary hover:bg-primary/25 transition-colors">
                   <Mail className="h-4 w-4" />
                 </a>
               </div>
@@ -66,19 +68,19 @@ export default function Footer() {
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 flex-shrink-0">
                     <Phone className="h-4 w-4 text-primary" />
                   </div>
-                  <span>01711-871072</span>
+                  <span>{settings.phone}</span>
                 </li>
                 <li className="flex items-center gap-3 text-sm text-secondary-foreground/60">
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 flex-shrink-0">
                     <Mail className="h-4 w-4 text-primary" />
                   </div>
-                  <span className="break-all">luckytoursandtravels70@gmail.com</span>
+                  <span className="break-all">{settings.email}</span>
                 </li>
                 <li className="flex items-start gap-3 text-sm text-secondary-foreground/60">
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 flex-shrink-0">
                     <MapPin className="h-4 w-4 text-primary" />
                   </div>
-                  <span>Dhaka, Bangladesh</span>
+                  <span>{settings.address}</span>
                 </li>
               </ul>
             </div>
