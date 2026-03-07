@@ -151,6 +151,12 @@ export default function CruiseEditor() {
 
             {/* Image Gallery Editor */}
             <div>
+              <div className="flex items-center justify-between mb-2">
+                <h2 className="font-display text-lg font-bold text-foreground flex items-center gap-2"><ImageIcon className="h-5 w-5 text-primary" /> Images</h2>
+                {form.images.length > 0 && (
+                  <span className="text-xs text-muted-foreground flex items-center gap-1"><Star className="h-3 w-3 text-primary" fill="currentColor" /> Click star on thumbnail to set cover image</span>
+                )}
+              </div>
               {form.images.length > 0 && (
                 <>
                   <div className="aspect-[16/10] overflow-hidden rounded-2xl shadow-elevated relative group">
