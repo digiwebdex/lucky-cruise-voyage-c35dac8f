@@ -1509,8 +1509,8 @@ export const cruises: Cruise[] = [
     additionalCosts: commonAdditionalCosts,
     packageIncludes: commonPackageIncludes,
     packages: [
-      { id: "utshab-standard", name: "Standard Package", price: 19000, oldPrice: 23000, isOffer: true, duration: "3 Days / 2 Nights" },
-      { id: "utshab-premium", name: "Premium AC Package", price: 24000, duration: "3 Days / 2 Nights" },
+      { id: "utshab-standard", name: "Standard Package", price: 19000, oldPrice: 23000, adultPrice: 19000, adultOldPrice: 23000, childPrice: 9500, childOldPrice: 11500, isOffer: true, duration: "3 Days / 2 Nights" },
+      { id: "utshab-premium", name: "Premium AC Package", price: 24000, adultPrice: 24000, childPrice: 12000, duration: "3 Days / 2 Nights" },
     ],
     seatPlan: [
       {
