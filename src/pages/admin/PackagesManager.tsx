@@ -16,6 +16,7 @@ import { toast } from "@/hooks/use-toast";
 interface PackageRow extends PackageType {
   cruiseId: string;
   cruiseName: string;
+  cruiseImage: string;
 }
 
 export default function PackagesManager() {
