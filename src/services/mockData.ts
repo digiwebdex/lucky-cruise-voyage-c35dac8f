@@ -2261,7 +2261,7 @@ export const cruises: Cruise[] = [
       "অভিজ্ঞ গাইড",
     ],
     packages: [
-      { id: "rezab-standard", name: "Standard Package", price: 22000, duration: "3 Days / 2 Nights" },
+      { id: "rezab-standard", name: "Standard Package", price: 22000, adultPrice: 22000, childPrice: 11000, duration: "3 Days / 2 Nights" },
     ],
     seatPlan: [
       {
