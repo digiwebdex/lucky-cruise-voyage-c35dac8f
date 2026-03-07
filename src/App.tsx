@@ -58,6 +58,7 @@ const App = () => (
               <Route path="cruises/:id" element={<CruiseEditor />} />
               <Route path="packages" element={<PackagesManager />} />
               <Route path="testimonials" element={<TestimonialsManager />} />
+              <Route path="offers" element={<OffersManager />} />
               <Route path="team" element={<TeamManager />} />
               <Route path="media" element={<MediaLibrary />} />
               

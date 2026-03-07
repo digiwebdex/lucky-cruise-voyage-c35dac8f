@@ -359,6 +359,73 @@ export default function Index() {
         </div>
       </section>
 
+      {/* ============ NOW RUNNING OFFERS ============ */}
+      {offers.length > 0 && (
+        <section className="py-16 md:py-24 bg-secondary/30 relative">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.06),transparent_60%)]" />
+          <div className="container relative">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-14">
+              <span className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-primary">
+                <Flame className="h-4 w-4" /> {t.offers?.sectionLabel || "Now Running"}
+              </span>
+              <h2 className="mt-3 font-display text-2xl sm:text-4xl md:text-5xl font-black text-foreground">
+                {t.offers?.title || "Running"} <span className="text-gradient">{t.offers?.titleHighlight || "Offers"}</span>
+              </h2>
+              <p className="mt-4 text-muted-foreground max-w-lg mx-auto">{t.offers?.subtitle || "Don't miss our latest cruise deals and special packages"}</p>
+            </motion.div>
+
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {offers.map((offer, i) => {
+                const linkedCruise = cruises.find(c => c.id === offer.linkedCruiseId);
+                return (
+                  <motion.div key={offer.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scaleIn} transition={{ delay: i * 0.1 }}>
+                    <Link to={`/cruises/${offer.linkedCruiseId}`} className="group block">
+                      <Card className="overflow-hidden border-border/50 hover:shadow-elevated transition-all duration-500 hover:-translate-y-3 bg-card hover:border-primary/20">
+                        <div className="aspect-[4/3] overflow-hidden relative">
+                          <img src={offer.posterImage} alt={offer.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" draggable={false} />
+                          <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent" />
+                          <div className="absolute top-3 left-3">
+                            <span className="inline-flex items-center gap-1 rounded-full bg-destructive px-3 py-1 text-xs font-bold text-destructive-foreground animate-pulse shadow-lg">
+                              🔥 {t.offers?.offerBadge || "Offer"}
+                            </span>
+                          </div>
+                          <div className="absolute bottom-0 left-0 right-0 p-4">
+                            <h3 className="font-display font-bold text-lg text-secondary-foreground drop-shadow-lg">{offer.title}</h3>
+                            {linkedCruise && (
+                              <p className="text-sm text-secondary-foreground/70 flex items-center gap-1 mt-1">
+                                <Ship className="h-3.5 w-3.5 text-primary" /> {linkedCruise.name}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                        <CardContent className="p-5">
+                          {offer.description && (
+                            <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{offer.description}</p>
+                          )}
+                          <div className="flex items-center justify-between">
+                            {linkedCruise && (
+                              <div>
+                                {linkedCruise.oldPrice && (
+                                  <span className="text-sm text-muted-foreground line-through mr-2">৳{linkedCruise.oldPrice.toLocaleString()}</span>
+                                )}
+                                <span className="text-xl font-display font-black text-primary">৳{linkedCruise.price.toLocaleString()}</span>
+                                <span className="text-xs text-muted-foreground block">{t.common?.perPerson || "per person"}</span>
+                              </div>
+                            )}
+                            <div className="flex h-10 w-10 items-center justify-center rounded-xl gradient-primary text-primary-foreground group-hover:scale-110 group-hover:shadow-glow transition-all flex-shrink-0">
+                              <ArrowRight className="h-5 w-5" />
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
       {/* ============ EXPERIENCE SHOWCASE ============ */}
       <section className="py-20 md:py-28 bg-secondary relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,hsl(28_100%_52%/0.08),transparent_50%)]" />
