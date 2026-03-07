@@ -1031,7 +1031,7 @@ export const cruises: Cruise[] = [
       "পুরো ভ্রমণে অভিজ্ঞ গাইড।",
     ],
     packages: [
-      { id: "jol-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 15000, oldPrice: 20000, isOffer: true, duration: "৩ দিন / ২ রাত" },
+      { id: "jol-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 15000, oldPrice: 20000, adultPrice: 15000, adultOldPrice: 20000, childPrice: 8000, childOldPrice: 10000, isOffer: true, duration: "৩ দিন / ২ রাত" },
     ],
     seatPlan: [
       {
