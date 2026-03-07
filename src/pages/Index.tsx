@@ -4,8 +4,9 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { Ship, Shield, Star, Clock, MapPin, Phone, ChevronRight, Anchor, Waves, ArrowRight, Users, ChevronLeft, Compass, Sparkles, Heart, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { getCruises, getTestimonials } from "@/services/cmsStore";
+import { getCruises, getTestimonials, getOffers } from "@/services/cmsStore";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Flame } from "lucide-react";
 
 const fadeUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } };
 const fadeLeft = { hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0 } };
