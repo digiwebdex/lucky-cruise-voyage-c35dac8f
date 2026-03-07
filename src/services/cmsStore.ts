@@ -152,6 +152,24 @@ export const getTeamMembers = (): TeamMember[] => {
 };
 export const saveTeamMembers = (data: TeamMember[]) => setStore(KEYS.teamMembers, data);
 
+// Seed default offers from cruises with isOffer packages
+function buildDefaultOffers(): Offer[] {
+  const allCruises = getStore(KEYS.cruises, defaultCruises);
+  return allCruises
+    .filter(c => c.packages?.some(p => p.isOffer))
+    .map((c, i) => ({
+      id: `offer-${i}`,
+      title: `${c.name} Special Offer`,
+      posterImage: c.images[c.featuredImageIndex ?? 0],
+      linkedCruiseId: c.id,
+      description: c.subtitle,
+      isActive: true,
+    }));
+}
+
+export const getOffers = (): Offer[] => getStore(KEYS.offers, buildDefaultOffers());
+export const saveOffers = (data: Offer[]) => setStore(KEYS.offers, data);
+
 // Helper functions that mirror mockData exports
 export function getCruiseById(id: string): Cruise | undefined {
   return getCruises().find(c => c.id === id);
