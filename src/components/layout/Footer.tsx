@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Ship, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getSettings } from "@/services/cmsStore";
 
 export default function Footer() {
   const { t } = useLanguage();
