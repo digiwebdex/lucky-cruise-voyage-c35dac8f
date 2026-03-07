@@ -141,7 +141,7 @@ export default function OffersManager() {
         {offers.map(offer => {
           const linked = cruises.find(c => c.id === offer.linkedCruiseId);
           return (
-            <Card key={offer.id} className={`overflow-hidden ${!offer.isActive ? "opacity-50" : ""}`}>
+            <Card key={offer.id} className={`overflow-hidden ${!offer.isActive || (offer.expiryDate && offer.expiryDate < new Date().toISOString()) ? "opacity-50" : ""}`}>
               {offer.posterImage && (
                 <div className="aspect-[4/3] overflow-hidden">
                   <img src={offer.posterImage} alt={offer.title} className="h-full w-full object-cover" />
