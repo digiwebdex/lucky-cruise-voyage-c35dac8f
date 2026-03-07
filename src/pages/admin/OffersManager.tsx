@@ -120,6 +120,11 @@ export default function OffersManager() {
                 <img src={form.posterImage} alt="" className="mt-2 h-40 w-auto rounded-lg border object-cover" />
               )}
             </div>
+            <div className="space-y-2">
+              <Label>Expiry Date (optional)</Label>
+              <Input type="date" value={form.expiryDate ? form.expiryDate.split("T")[0] : ""} onChange={e => setForm(f => ({ ...f, expiryDate: e.target.value ? new Date(e.target.value + "T23:59:59").toISOString() : undefined }))} />
+              <p className="text-xs text-muted-foreground">Offer will auto-hide after this date</p>
+            </div>
             <div className="flex items-center gap-3">
               <Switch checked={form.isActive ?? true} onCheckedChange={v => setForm(f => ({ ...f, isActive: v }))} />
               <Label>Active</Label>
