@@ -21,7 +21,7 @@ export default function Contact() {
     const msg = encodeURIComponent(
       `Contact Inquiry\n\nName: ${data.get("name")}\nEmail: ${data.get("email")}\nMessage: ${data.get("message")}`
     );
-    window.open(`https://wa.me/8801711871072?text=${msg}`, "_blank");
+    window.open(`https://wa.me/${settings.whatsapp}?text=${msg}`, "_blank");
   };
 
   return (
