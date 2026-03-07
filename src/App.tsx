@@ -27,6 +27,7 @@ import UsersPage from "./pages/admin/Users";
 import SettingsPage from "./pages/admin/Settings";
 import TestimonialsManager from "./pages/admin/TestimonialsManager";
 import TeamManager from "./pages/admin/TeamManager";
+import OffersManager from "./pages/admin/OffersManager";
 
 const queryClient = new QueryClient();
 
