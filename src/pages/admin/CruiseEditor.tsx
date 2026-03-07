@@ -21,7 +21,7 @@ import { toast } from "@/hooks/use-toast";
 
 const emptyCruise: Cruise = {
   id: "", name: "", subtitle: "", description: "", route: "", duration: "", capacity: "", cabins: "",
-  price: 0, priceLabel: "per person (Bangladeshi)", featured: false, images: [], facilities: [],
+  price: 0, priceLabel: "per person (Bangladeshi)", featured: false, featuredImageIndex: 0, images: [], facilities: [],
   touristSpots: [], itinerary: [], menu: [], safetyInfo: [], travelTips: [], thingsToCarry: [],
   additionalCosts: [], packageIncludes: [], packages: [], seatPlan: [],
 };
@@ -151,6 +151,12 @@ export default function CruiseEditor() {
 
             {/* Image Gallery Editor */}
             <div>
+              <div className="flex items-center justify-between mb-2">
+                <h2 className="font-display text-lg font-bold text-foreground flex items-center gap-2"><ImageIcon className="h-5 w-5 text-primary" /> Images</h2>
+                {form.images.length > 0 && (
+                  <span className="text-xs text-muted-foreground flex items-center gap-1"><Star className="h-3 w-3 text-primary" fill="currentColor" /> Click star on thumbnail to set cover image</span>
+                )}
+              </div>
               {form.images.length > 0 && (
                 <>
                   <div className="aspect-[16/10] overflow-hidden rounded-2xl shadow-elevated relative group">
@@ -159,9 +165,18 @@ export default function CruiseEditor() {
                   </div>
                   <div className="mt-3 flex gap-2 overflow-x-auto pb-2">
                     {form.images.map((img, i) => (
-                      <button key={i} onClick={() => setSelectedImg(i)} className={`h-16 w-24 flex-shrink-0 overflow-hidden rounded-xl border-2 transition-all ${i === selectedImg ? "border-primary shadow-glow scale-105" : "border-transparent opacity-60 hover:opacity-100"}`}>
-                        <img src={img} alt="" className="h-full w-full object-cover" />
-                      </button>
+                      <div key={i} className="relative flex-shrink-0">
+                        <button onClick={() => setSelectedImg(i)} className={`h-16 w-24 overflow-hidden rounded-xl border-2 transition-all ${i === selectedImg ? "border-primary shadow-glow scale-105" : "border-transparent opacity-60 hover:opacity-100"}`}>
+                          <img src={img} alt="" className="h-full w-full object-cover" />
+                        </button>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); updateField("featuredImageIndex", i); }}
+                          title={i === (form.featuredImageIndex ?? 0) ? "Cover image" : "Set as cover image"}
+                          className={`absolute -top-1.5 -right-1.5 h-5 w-5 rounded-full flex items-center justify-center text-[10px] transition-all ${i === (form.featuredImageIndex ?? 0) ? "bg-primary text-primary-foreground shadow-md" : "bg-muted text-muted-foreground hover:bg-primary/20 border border-border"}`}
+                        >
+                          <Star className="h-3 w-3" fill={i === (form.featuredImageIndex ?? 0) ? "currentColor" : "none"} />
+                        </button>
+                      </div>
                     ))}
                   </div>
                 </>
