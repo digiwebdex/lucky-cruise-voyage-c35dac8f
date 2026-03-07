@@ -6,11 +6,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getSettings } from "@/services/cmsStore";
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
 export default function Contact() {
   const { t } = useLanguage();
+  const settings = getSettings();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
