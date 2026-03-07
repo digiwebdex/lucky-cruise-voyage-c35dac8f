@@ -145,7 +145,14 @@ export default function PackagesManager() {
                       {pkg.isOffer && <Badge variant="destructive" className="gap-1 text-xs"><Flame className="h-3 w-3" /> Offer</Badge>}
                     </div>
                   </TableCell>
-                  <TableCell className="text-muted-foreground">{pkg.cruiseName}</TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-3">
+                      {pkg.cruiseImage && (
+                        <img src={pkg.cruiseImage} alt={pkg.cruiseName} className="h-10 w-14 rounded object-cover border border-border" />
+                      )}
+                      <span className="text-muted-foreground">{pkg.cruiseName}</span>
+                    </div>
+                  </TableCell>
                   <TableCell className="text-muted-foreground">{pkg.duration}</TableCell>
                   <TableCell className="text-right">
                     {pkg.oldPrice && (
