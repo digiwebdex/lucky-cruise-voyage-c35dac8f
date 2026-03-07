@@ -1191,7 +1191,7 @@ export const cruises: Cruise[] = [
       "পুরো ভ্রমণে অভিজ্ঞ গাইড",
     ],
     packages: [
-      { id: "magpie-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 22000, duration: "৩ দিন / ২ রাত" },
+      { id: "magpie-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 22000, adultPrice: 22000, childPrice: 11000, duration: "৩ দিন / ২ রাত" },
     ],
     seatPlan: [
       {
