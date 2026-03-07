@@ -20,7 +20,6 @@ import CruiseManager from "./pages/admin/CruiseManager";
 import CruiseEditor from "./pages/admin/CruiseEditor";
 import PackagesManager from "./pages/admin/PackagesManager";
 import MediaLibrary from "./pages/admin/MediaLibrary";
-
 import PagesCMS from "./pages/admin/PagesCMS";
 import SEOManager from "./pages/admin/SEOManager";
 import UsersPage from "./pages/admin/Users";
@@ -28,6 +27,9 @@ import SettingsPage from "./pages/admin/Settings";
 import TestimonialsManager from "./pages/admin/TestimonialsManager";
 import TeamManager from "./pages/admin/TeamManager";
 import OffersManager from "./pages/admin/OffersManager";
+import Bookings from "./pages/admin/Bookings";
+import CategoriesManager from "./pages/admin/CategoriesManager";
+import AvailabilityManager from "./pages/admin/AvailabilityManager";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +59,9 @@ const App = () => (
               <Route path="cruises/new" element={<CruiseEditor />} />
               <Route path="cruises/:id" element={<CruiseEditor />} />
               <Route path="packages" element={<PackagesManager />} />
+              <Route path="categories" element={<CategoriesManager />} />
+              <Route path="availability" element={<AvailabilityManager />} />
+              <Route path="bookings" element={<Bookings />} />
               <Route path="testimonials" element={<TestimonialsManager />} />
               <Route path="offers" element={<OffersManager />} />
               <Route path="team" element={<TeamManager />} />
