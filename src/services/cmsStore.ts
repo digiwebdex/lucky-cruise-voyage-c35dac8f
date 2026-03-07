@@ -102,7 +102,7 @@ const KEYS = {
 } as const;
 
 // Bump this version whenever mockData defaults change to bust localStorage cache
-const DATA_VERSION = "v7";
+const DATA_VERSION = "v8";
 const VERSION_KEY = "cms_data_version";
 
 function initVersionCheck() {
