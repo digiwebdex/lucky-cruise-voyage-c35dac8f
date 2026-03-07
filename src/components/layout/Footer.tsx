@@ -68,7 +68,7 @@ export default function Footer() {
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 flex-shrink-0">
                     <Phone className="h-4 w-4 text-primary" />
                   </div>
-                  <span>01711-871072</span>
+                  <span>{settings.phone}</span>
                 </li>
                 <li className="flex items-center gap-3 text-sm text-secondary-foreground/60">
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 flex-shrink-0">
