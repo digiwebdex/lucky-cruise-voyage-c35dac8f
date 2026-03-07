@@ -29,7 +29,7 @@ export default function AdminLogin() {
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
               <Label>Email</Label>
-              <Input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="luckytoursandtravels70@gmail.com" required />
+              <Input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your email" required />
             </div>
             <div>
               <Label>Password</Label>
