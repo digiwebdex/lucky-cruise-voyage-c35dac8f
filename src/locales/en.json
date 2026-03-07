@@ -203,5 +203,12 @@
   },
   "common": {
     "perPerson": "per person"
+  },
+  "offers": {
+    "sectionLabel": "Now Running",
+    "title": "Running",
+    "titleHighlight": "Offers",
+    "subtitle": "Don't miss our latest cruise deals and special packages",
+    "offerBadge": "Offer"
   }
 }
