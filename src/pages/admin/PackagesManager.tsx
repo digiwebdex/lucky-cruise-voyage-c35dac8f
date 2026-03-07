@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Pencil, Trash2, Save, Flame, Package } from "lucide-react";
+import { Plus, Pencil, Trash2, Save, Flame, Package, Percent } from "lucide-react";
 import { useCmsData, getCruises, saveCruises } from "@/services/cmsStore";
 import type { Cruise, Package as PackageType } from "@/services/mockData";
 import { toast } from "@/hooks/use-toast";
@@ -19,15 +19,21 @@ interface PackageRow extends PackageType {
   cruiseImage: string;
 }
 
+function calcDiscount(oldPrice?: number, price?: number): number {
+  if (!oldPrice || !price || oldPrice <= price) return 0;
+  return Math.round(((oldPrice - price) / oldPrice) * 100);
+}
+
 export default function PackagesManager() {
   const [cruises, setCruises] = useCmsData(getCruises, saveCruises);
   const [editOpen, setEditOpen] = useState(false);
   const [editingPkg, setEditingPkg] = useState<PackageRow | null>(null);
   const [form, setForm] = useState({
-    name: "", price: "", oldPrice: "", duration: "", cruiseId: "", isOffer: false,
+    name: "", duration: "", cruiseId: "", isOffer: false,
+    adultPrice: "", adultOldPrice: "",
+    childPrice: "", childOldPrice: "",
   });
 
-  // Flatten all packages with cruise info
   const allPackages: PackageRow[] = cruises.flatMap(c =>
     c.packages.map(p => ({
       ...p,
@@ -39,7 +45,7 @@ export default function PackagesManager() {
 
   const openNew = () => {
     setEditingPkg(null);
-    setForm({ name: "", price: "", oldPrice: "", duration: "", cruiseId: cruises[0]?.id || "", isOffer: false });
+    setForm({ name: "", duration: "", cruiseId: cruises[0]?.id || "", isOffer: false, adultPrice: "", adultOldPrice: "", childPrice: "", childOldPrice: "" });
     setEditOpen(true);
   };
 
@@ -47,33 +53,43 @@ export default function PackagesManager() {
     setEditingPkg(pkg);
     setForm({
       name: pkg.name,
-      price: String(pkg.price),
-      oldPrice: pkg.oldPrice ? String(pkg.oldPrice) : "",
       duration: pkg.duration,
       cruiseId: pkg.cruiseId,
       isOffer: pkg.isOffer || false,
+      adultPrice: String(pkg.adultPrice),
+      adultOldPrice: pkg.adultOldPrice ? String(pkg.adultOldPrice) : "",
+      childPrice: String(pkg.childPrice),
+      childOldPrice: pkg.childOldPrice ? String(pkg.childOldPrice) : "",
     });
     setEditOpen(true);
   };
 
   const save = () => {
-    if (!form.name.trim() || !form.price || !form.cruiseId) {
-      toast({ title: "Name, cruise and price are required", variant: "destructive" });
+    if (!form.name.trim() || !form.adultPrice || !form.cruiseId) {
+      toast({ title: "Name, cruise and adult price are required", variant: "destructive" });
       return;
     }
+
+    const adultPrice = Number(form.adultPrice);
+    const adultOldPrice = form.adultOldPrice ? Number(form.adultOldPrice) : undefined;
+    const childPrice = Number(form.childPrice) || 0;
+    const childOldPrice = form.childOldPrice ? Number(form.childOldPrice) : undefined;
 
     const newPkg: PackageType = {
       id: editingPkg?.id || `pkg-${Date.now()}`,
       name: form.name.trim(),
-      price: Number(form.price),
-      oldPrice: form.oldPrice ? Number(form.oldPrice) : undefined,
+      price: adultPrice,
+      oldPrice: adultOldPrice,
+      adultPrice,
+      adultOldPrice,
+      childPrice,
+      childOldPrice,
       duration: form.duration.trim(),
       isOffer: form.isOffer,
     };
 
     const updated = cruises.map(c => {
       if (editingPkg) {
-        // Editing: remove from old cruise, add to new
         if (c.id === editingPkg.cruiseId && c.id !== form.cruiseId) {
           return { ...c, packages: c.packages.filter(p => p.id !== editingPkg.id) };
         }
@@ -82,14 +98,12 @@ export default function PackagesManager() {
           if (exists) {
             return { ...c, packages: c.packages.map(p => p.id === editingPkg.id ? newPkg : p) };
           }
-          // Moved from another cruise
           if (editingPkg.cruiseId !== form.cruiseId) {
             return { ...c, packages: [...c.packages, newPkg] };
           }
         }
         return c;
       } else {
-        // Adding new
         if (c.id === form.cruiseId) {
           return { ...c, packages: [...c.packages, newPkg] };
         }
@@ -112,6 +126,9 @@ export default function PackagesManager() {
     toast({ title: "Package deleted" });
   };
 
+  const adultDiscount = calcDiscount(form.adultOldPrice ? Number(form.adultOldPrice) : undefined, form.adultPrice ? Number(form.adultPrice) : undefined);
+  const childDiscount = calcDiscount(form.childOldPrice ? Number(form.childOldPrice) : undefined, form.childPrice ? Number(form.childPrice) : undefined);
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -132,45 +149,63 @@ export default function PackagesManager() {
                 <TableHead>Package</TableHead>
                 <TableHead>Cruise</TableHead>
                 <TableHead>Duration</TableHead>
-                <TableHead className="text-right">Price</TableHead>
+                <TableHead className="text-right">Adult Price</TableHead>
+                <TableHead className="text-right">Child Price</TableHead>
+                <TableHead className="text-right">Discount</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {allPackages.map(pkg => (
-                <TableRow key={`${pkg.cruiseId}-${pkg.id}`}>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <span className="font-medium">{pkg.name}</span>
-                      {pkg.isOffer && <Badge variant="destructive" className="gap-1 text-xs"><Flame className="h-3 w-3" /> Offer</Badge>}
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-3">
-                      {pkg.cruiseImage && (
-                        <img src={pkg.cruiseImage} alt={pkg.cruiseName} className="h-10 w-14 rounded object-cover border border-border" />
+              {allPackages.map(pkg => {
+                const discount = calcDiscount(pkg.adultOldPrice, pkg.adultPrice);
+                return (
+                  <TableRow key={`${pkg.cruiseId}-${pkg.id}`}>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium">{pkg.name}</span>
+                        {pkg.isOffer && <Badge variant="destructive" className="gap-1 text-xs"><Flame className="h-3 w-3" /> Offer</Badge>}
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-3">
+                        {pkg.cruiseImage && (
+                          <img src={pkg.cruiseImage} alt={pkg.cruiseName} className="h-10 w-14 rounded object-cover border border-border" />
+                        )}
+                        <span className="text-muted-foreground">{pkg.cruiseName}</span>
+                      </div>
+                    </TableCell>
+                    <TableCell className="text-muted-foreground">{pkg.duration}</TableCell>
+                    <TableCell className="text-right">
+                      {pkg.adultOldPrice && (
+                        <span className="text-muted-foreground line-through text-xs mr-2">৳{pkg.adultOldPrice.toLocaleString()}</span>
                       )}
-                      <span className="text-muted-foreground">{pkg.cruiseName}</span>
-                    </div>
-                  </TableCell>
-                  <TableCell className="text-muted-foreground">{pkg.duration}</TableCell>
-                  <TableCell className="text-right">
-                    {pkg.oldPrice && (
-                      <span className="text-muted-foreground line-through text-xs mr-2">৳{pkg.oldPrice.toLocaleString()}</span>
-                    )}
-                    <span className="font-bold text-primary">৳{pkg.price.toLocaleString()}</span>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <div className="flex justify-end gap-1">
-                      <Button size="icon" variant="ghost" onClick={() => openEdit(pkg)}><Pencil className="h-4 w-4" /></Button>
-                      <Button size="icon" variant="ghost" onClick={() => deletePkg(pkg)}><Trash2 className="h-4 w-4 text-destructive" /></Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
+                      <span className="font-bold text-primary">৳{pkg.adultPrice.toLocaleString()}</span>
+                    </TableCell>
+                    <TableCell className="text-right">
+                      {pkg.childOldPrice && (
+                        <span className="text-muted-foreground line-through text-xs mr-2">৳{pkg.childOldPrice.toLocaleString()}</span>
+                      )}
+                      <span className="font-bold text-primary">৳{pkg.childPrice.toLocaleString()}</span>
+                    </TableCell>
+                    <TableCell className="text-right">
+                      {discount > 0 && (
+                        <Badge className="bg-emerald-500/10 text-emerald-600 border-emerald-500/30 gap-1">
+                          <Percent className="h-3 w-3" /> {discount}% Off
+                        </Badge>
+                      )}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex justify-end gap-1">
+                        <Button size="icon" variant="ghost" onClick={() => openEdit(pkg)}><Pencil className="h-4 w-4" /></Button>
+                        <Button size="icon" variant="ghost" onClick={() => deletePkg(pkg)}><Trash2 className="h-4 w-4 text-destructive" /></Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
               {allPackages.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">No packages yet</TableCell>
+                  <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">No packages yet</TableCell>
                 </TableRow>
               )}
             </TableBody>
@@ -179,7 +214,7 @@ export default function PackagesManager() {
       </Card>
 
       <Dialog open={editOpen} onOpenChange={setEditOpen}>
-        <DialogContent>
+        <DialogContent className="max-w-lg">
           <DialogHeader>
             <DialogTitle>{editingPkg ? "Edit Package" : "Add Package"}</DialogTitle>
           </DialogHeader>
@@ -201,18 +236,49 @@ export default function PackagesManager() {
             </div>
             <div className="space-y-2">
               <Label>Duration</Label>
-              <Input value={form.duration} onChange={e => setForm({ ...form, duration: e.target.value })} placeholder="e.g. 2 Night 3 Days" />
+              <Input value={form.duration} onChange={e => setForm({ ...form, duration: e.target.value })} placeholder="e.g. 3 Days / 2 Nights" />
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label>Price (৳) *</Label>
-                <Input type="number" value={form.price} onChange={e => setForm({ ...form, price: e.target.value })} />
+
+            {/* Adult Pricing */}
+            <div className="rounded-xl border border-border p-4 space-y-3">
+              <p className="font-display font-bold text-sm text-foreground">Adult Pricing</p>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <Label className="text-xs">Original Price (৳)</Label>
+                  <Input type="number" value={form.adultOldPrice} onChange={e => setForm({ ...form, adultOldPrice: e.target.value })} placeholder="Old price" />
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">Discounted Price (৳) *</Label>
+                  <Input type="number" value={form.adultPrice} onChange={e => setForm({ ...form, adultPrice: e.target.value })} placeholder="Current price" />
+                </div>
               </div>
-              <div className="space-y-2">
-                <Label>Old Price (৳)</Label>
-                <Input type="number" value={form.oldPrice} onChange={e => setForm({ ...form, oldPrice: e.target.value })} placeholder="For strikethrough" />
-              </div>
+              {adultDiscount > 0 && (
+                <Badge className="bg-emerald-500/10 text-emerald-600 border-emerald-500/30 gap-1">
+                  <Percent className="h-3 w-3" /> {adultDiscount}% Off (Adult)
+                </Badge>
+              )}
             </div>
+
+            {/* Child Pricing */}
+            <div className="rounded-xl border border-border p-4 space-y-3">
+              <p className="font-display font-bold text-sm text-foreground">Child Pricing</p>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <Label className="text-xs">Original Price (৳)</Label>
+                  <Input type="number" value={form.childOldPrice} onChange={e => setForm({ ...form, childOldPrice: e.target.value })} placeholder="Old price" />
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">Discounted Price (৳)</Label>
+                  <Input type="number" value={form.childPrice} onChange={e => setForm({ ...form, childPrice: e.target.value })} placeholder="Current price" />
+                </div>
+              </div>
+              {childDiscount > 0 && (
+                <Badge className="bg-emerald-500/10 text-emerald-600 border-emerald-500/30 gap-1">
+                  <Percent className="h-3 w-3" /> {childDiscount}% Off (Child)
+                </Badge>
+              )}
+            </div>
+
             <div className="flex items-center gap-3">
               <Switch checked={form.isOffer} onCheckedChange={v => setForm({ ...form, isOffer: v })} />
               <Label>Mark as Offer</Label>
