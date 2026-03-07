@@ -350,8 +350,13 @@ export interface Package {
   name: string;
   price: number;
   oldPrice?: number;
+  adultPrice: number;
+  adultOldPrice?: number;
+  childPrice: number;
+  childOldPrice?: number;
   isOffer?: boolean;
   duration: string;
+  categoryId?: string;
 }
 
 export interface Cruise {
@@ -650,7 +655,7 @@ export const cruises: Cruise[] = [
       "ট্রিপ চলাকালীন অভিজ্ঞ গাইড।",
     ],
     packages: [
-      { id: "flamingo-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 22000, duration: "৩ দিন / ২ রাত" },
+      { id: "flamingo-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 22000, adultPrice: 22000, childPrice: 11000, duration: "৩ দিন / ২ রাত" },
     ],
     seatPlan: [
       {
@@ -848,7 +853,7 @@ export const cruises: Cruise[] = [
       "ট্রিপ চলাকালীন অভিজ্ঞ গাইড।",
     ],
     packages: [
-      { id: "forest-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 22000, duration: "৩ দিন / ২ রাত" },
+      { id: "forest-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 22000, adultPrice: 22000, childPrice: 11000, duration: "৩ দিন / ২ রাত" },
     ],
     seatPlan: [
       {
@@ -1026,7 +1031,7 @@ export const cruises: Cruise[] = [
       "পুরো ভ্রমণে অভিজ্ঞ গাইড।",
     ],
     packages: [
-      { id: "jol-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 15000, oldPrice: 20000, isOffer: true, duration: "৩ দিন / ২ রাত" },
+      { id: "jol-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 15000, oldPrice: 20000, adultPrice: 15000, adultOldPrice: 20000, childPrice: 8000, childOldPrice: 10000, isOffer: true, duration: "৩ দিন / ২ রাত" },
     ],
     seatPlan: [
       {
@@ -1186,7 +1191,7 @@ export const cruises: Cruise[] = [
       "পুরো ভ্রমণে অভিজ্ঞ গাইড",
     ],
     packages: [
-      { id: "magpie-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 22000, duration: "৩ দিন / ২ রাত" },
+      { id: "magpie-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 22000, adultPrice: 22000, childPrice: 11000, duration: "৩ দিন / ২ রাত" },
     ],
     seatPlan: [
       {
@@ -1352,7 +1357,7 @@ export const cruises: Cruise[] = [
       "পুরো ভ্রমণে অভিজ্ঞ গাইড",
     ],
     packages: [
-      { id: "pearl-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 22000, duration: "৩ দিন / ২ রাত" },
+      { id: "pearl-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 22000, adultPrice: 22000, childPrice: 11000, duration: "৩ দিন / ২ রাত" },
     ],
     seatPlan: [
       {
@@ -1402,8 +1407,8 @@ export const cruises: Cruise[] = [
     additionalCosts: commonAdditionalCosts,
     packageIncludes: commonPackageIncludes,
     packages: [
-      { id: "pearl3-standard", name: "Standard Package", price: 22000, duration: "3 Days / 2 Nights" },
-      { id: "pearl3-vip", name: "VIP Package", price: 28000, duration: "3 Days / 2 Nights" },
+      { id: "pearl3-standard", name: "Standard Package", price: 22000, adultPrice: 22000, childPrice: 11000, duration: "3 Days / 2 Nights" },
+      { id: "pearl3-vip", name: "VIP Package", price: 28000, adultPrice: 28000, childPrice: 14000, duration: "3 Days / 2 Nights" },
     ],
     seatPlan: [
       {
@@ -1456,7 +1461,7 @@ export const cruises: Cruise[] = [
     additionalCosts: commonAdditionalCosts,
     packageIncludes: commonPackageIncludes,
     packages: [
-      { id: "silver-standard", name: "Standard Package", price: 13200, oldPrice: 16500, isOffer: true, duration: "3 Days / 2 Nights" }, // 20% off
+      { id: "silver-standard", name: "Standard Package", price: 13200, oldPrice: 16500, adultPrice: 13200, adultOldPrice: 16500, childPrice: 6600, childOldPrice: 8250, isOffer: true, duration: "3 Days / 2 Nights" },
     ],
     seatPlan: [
       {
@@ -1504,8 +1509,8 @@ export const cruises: Cruise[] = [
     additionalCosts: commonAdditionalCosts,
     packageIncludes: commonPackageIncludes,
     packages: [
-      { id: "utshab-standard", name: "Standard Package", price: 19000, oldPrice: 23000, isOffer: true, duration: "3 Days / 2 Nights" },
-      { id: "utshab-premium", name: "Premium AC Package", price: 24000, duration: "3 Days / 2 Nights" },
+      { id: "utshab-standard", name: "Standard Package", price: 19000, oldPrice: 23000, adultPrice: 19000, adultOldPrice: 23000, childPrice: 9500, childOldPrice: 11500, isOffer: true, duration: "3 Days / 2 Nights" },
+      { id: "utshab-premium", name: "Premium AC Package", price: 24000, adultPrice: 24000, childPrice: 12000, duration: "3 Days / 2 Nights" },
     ],
     seatPlan: [
       {
@@ -1572,8 +1577,8 @@ export const cruises: Cruise[] = [
     additionalCosts: commonAdditionalCosts,
     packageIncludes: commonPackageIncludes,
     packages: [
-      { id: "khayapar-standard", name: "Standard Package", price: 15400, oldPrice: 22000, isOffer: true, duration: "3 Days / 2 Nights" }, // 30% off
-      { id: "khayapar-vip", name: "VIP Package", price: 28000, duration: "3 Days / 2 Nights" },
+      { id: "khayapar-standard", name: "Standard Package", price: 15400, oldPrice: 22000, adultPrice: 15400, adultOldPrice: 22000, childPrice: 7700, childOldPrice: 11000, isOffer: true, duration: "3 Days / 2 Nights" },
+      { id: "khayapar-vip", name: "VIP Package", price: 28000, adultPrice: 28000, childPrice: 14000, duration: "3 Days / 2 Nights" },
     ],
     seatPlan: [
       {
@@ -1710,7 +1715,7 @@ export const cruises: Cruise[] = [
     additionalCosts: commonAdditionalCosts,
     packageIncludes: commonPackageIncludes,
     packages: [
-      { id: "mohammadi2-standard", name: "Standard Non-AC Package", price: 11000, oldPrice: 22000, isOffer: true, duration: "3 Days / 2 Nights" }, // 50% off
+      { id: "mohammadi2-standard", name: "Standard Non-AC Package", price: 11000, oldPrice: 22000, adultPrice: 11000, adultOldPrice: 22000, childPrice: 5500, childOldPrice: 11000, isOffer: true, duration: "3 Days / 2 Nights" },
     ],
     seatPlanImage: mohammadi2Seatplan,
     seatPlan: [
@@ -1892,7 +1897,7 @@ export const cruises: Cruise[] = [
     additionalCosts: commonAdditionalCosts,
     packageIncludes: commonPackageIncludes,
     packages: [
-      { id: "crown-standard", name: "Standard AC Package", price: 22000, duration: "3 Days / 2 Nights" },
+      { id: "crown-standard", name: "Standard AC Package", price: 22000, adultPrice: 22000, childPrice: 11000, duration: "3 Days / 2 Nights" },
     ],
     seatPlanImage: crownSeatplan,
     seatPlan: [
@@ -2082,7 +2087,7 @@ export const cruises: Cruise[] = [
       "অভিজ্ঞ গাইড সার্বক্ষণিক সাথে থাকবে।",
     ],
     packages: [
-      { id: "adeeba-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 22000, duration: "৩ দিন / ২ রাত" },
+      { id: "adeeba-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 22000, adultPrice: 22000, childPrice: 11000, duration: "৩ দিন / ২ রাত" },
     ],
     seatPlan: [
       {
@@ -2152,10 +2157,10 @@ export const cruises: Cruise[] = [
     additionalCosts: commonAdditionalCosts,
     packageIncludes: commonPackageIncludes,
     packages: [
-      { id: "op-panoramic-deluxe", name: "Panoramic Eminent Deluxe (02 জন)", price: 22000, duration: "3 Days / 2 Nights" },
-      { id: "op-twin-double", name: "Panoramic Twin Double Majesty (04 জন)", price: 22000, duration: "3 Days / 2 Nights" },
-      { id: "op-triple-emperor", name: "Panoramic Triple Emperor (03 জন)", price: 22000, duration: "3 Days / 2 Nights" },
-      { id: "op-presidential-suite", name: "Presidential Royal Suite (04 জন)", price: 22000, duration: "3 Days / 2 Nights" },
+      { id: "op-panoramic-deluxe", name: "Panoramic Eminent Deluxe (02 জন)", price: 22000, adultPrice: 22000, childPrice: 11000, duration: "3 Days / 2 Nights" },
+      { id: "op-twin-double", name: "Panoramic Twin Double Majesty (04 জন)", price: 22000, adultPrice: 22000, childPrice: 11000, duration: "3 Days / 2 Nights" },
+      { id: "op-triple-emperor", name: "Panoramic Triple Emperor (03 জন)", price: 22000, adultPrice: 22000, childPrice: 11000, duration: "3 Days / 2 Nights" },
+      { id: "op-presidential-suite", name: "Presidential Royal Suite (04 জন)", price: 22000, adultPrice: 22000, childPrice: 11000, duration: "3 Days / 2 Nights" },
     ],
     seatPlan: [],
     seatPlanImage: oceanPearlSeatplan,
@@ -2256,7 +2261,7 @@ export const cruises: Cruise[] = [
       "অভিজ্ঞ গাইড",
     ],
     packages: [
-      { id: "rezab-standard", name: "Standard Package", price: 22000, duration: "3 Days / 2 Nights" },
+      { id: "rezab-standard", name: "Standard Package", price: 22000, adultPrice: 22000, childPrice: 11000, duration: "3 Days / 2 Nights" },
     ],
     seatPlan: [
       {

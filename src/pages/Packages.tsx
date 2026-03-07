@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Flame } from "lucide-react";
+import { ArrowRight, Flame, Percent } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -10,13 +10,17 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 const scaleIn = { hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } };
 
+function calcDiscount(oldPrice?: number, price?: number): number {
+  if (!oldPrice || !price || oldPrice <= price) return 0;
+  return Math.round(((oldPrice - price) / oldPrice) * 100);
+}
+
 export default function Packages() {
   const { t } = useLanguage();
   const cruises = getCruises();
   const allPackages = cruises
     .flatMap(c => c.packages.map(p => ({ ...p, cruiseName: c.name, cruiseId: c.id })))
     .sort((a, b) => {
-      // Offers first
       if (a.isOffer && !b.isOffer) return -1;
       if (!a.isOffer && b.isOffer) return 1;
       return 0;
@@ -54,38 +58,69 @@ export default function Packages() {
             </motion.div>
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {allPackages.map((pkg, i) => (
-                <motion.div key={`${pkg.cruiseId}-${pkg.id}`} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scaleIn} transition={{ delay: i * 0.06 }}>
-                  <Card className={`border-border/50 hover:shadow-elevated transition-all duration-500 hover:-translate-y-2 h-full bg-card relative overflow-hidden ${pkg.isOffer ? "ring-2 ring-primary shadow-glow" : ""}`}>
-                    {pkg.isOffer && (
-                      <div className="absolute top-0 right-0">
-                        <Badge className="rounded-none rounded-bl-xl gradient-primary text-primary-foreground font-bold border-0 px-3 py-1.5 gap-1">
-                          <Flame className="h-3.5 w-3.5" /> অফার
-                        </Badge>
-                      </div>
-                    )}
-                    <CardContent className="p-7">
-                      <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary">{pkg.cruiseName}</span>
-                      <h3 className="mt-3 font-display text-xl font-bold text-foreground">{pkg.name}</h3>
-                      <p className="mt-1 text-sm text-muted-foreground">{pkg.duration}</p>
-                      <div className="mt-6 flex items-center justify-between border-t border-border/50 pt-5">
-                        <div>
-                          {pkg.oldPrice && (
-                            <span className="text-sm font-medium text-muted-foreground line-through block">৳{pkg.oldPrice.toLocaleString()}</span>
-                          )}
-                          <span className="text-2xl font-display font-black text-primary">৳{pkg.price.toLocaleString()}</span>
-                          <span className="text-xs text-muted-foreground block">{t.packages.perPerson}</span>
+              {allPackages.map((pkg, i) => {
+                const adultDiscount = calcDiscount(pkg.adultOldPrice, pkg.adultPrice);
+                const childDiscount = calcDiscount(pkg.childOldPrice, pkg.childPrice);
+                const mainDiscount = adultDiscount || calcDiscount(pkg.oldPrice, pkg.price);
+
+                return (
+                  <motion.div key={`${pkg.cruiseId}-${pkg.id}`} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scaleIn} transition={{ delay: i * 0.06 }}>
+                    <Card className={`border-border/50 hover:shadow-elevated transition-all duration-500 hover:-translate-y-2 h-full bg-card relative overflow-hidden ${pkg.isOffer ? "ring-2 ring-primary shadow-glow" : ""}`}>
+                      {/* Discount Badge */}
+                      {mainDiscount > 0 && (
+                        <div className="absolute top-0 left-0">
+                          <Badge className="rounded-none rounded-br-xl bg-emerald-500 text-white font-bold border-0 px-3 py-1.5 gap-1">
+                            <Percent className="h-3.5 w-3.5" /> {mainDiscount}% Off
+                          </Badge>
                         </div>
-                        <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer">
-                          <Button className="gradient-primary text-primary-foreground font-bold rounded-xl gap-1">
-                            {t.packages.book} <ArrowRight className="h-4 w-4" />
-                          </Button>
-                        </a>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
+                      )}
+                      {pkg.isOffer && (
+                        <div className="absolute top-0 right-0">
+                          <Badge className="rounded-none rounded-bl-xl gradient-primary text-primary-foreground font-bold border-0 px-3 py-1.5 gap-1">
+                            <Flame className="h-3.5 w-3.5" /> অফার
+                          </Badge>
+                        </div>
+                      )}
+                      <CardContent className="p-7 pt-10">
+                        <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary">{pkg.cruiseName}</span>
+                        <h3 className="mt-3 font-display text-xl font-bold text-foreground">{pkg.name}</h3>
+                        <p className="mt-1 text-sm text-muted-foreground">{pkg.duration}</p>
+
+                        <div className="mt-6 border-t border-border/50 pt-5 space-y-3">
+                          {/* Adult Price */}
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Adult</span>
+                            <div className="text-right">
+                              {pkg.adultOldPrice && pkg.adultOldPrice > pkg.adultPrice && (
+                                <span className="text-sm font-medium text-muted-foreground line-through mr-2">৳{pkg.adultOldPrice.toLocaleString()}</span>
+                              )}
+                              <span className="text-xl font-display font-black text-primary">৳{pkg.adultPrice.toLocaleString()}</span>
+                            </div>
+                          </div>
+                          {/* Child Price */}
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Child</span>
+                            <div className="text-right">
+                              {pkg.childOldPrice && pkg.childOldPrice > pkg.childPrice && (
+                                <span className="text-sm font-medium text-muted-foreground line-through mr-2">৳{pkg.childOldPrice.toLocaleString()}</span>
+                              )}
+                              <span className="text-xl font-display font-black text-primary">৳{pkg.childPrice.toLocaleString()}</span>
+                            </div>
+                          </div>
+
+                          <div className="pt-3">
+                            <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer">
+                              <Button className="w-full gradient-primary text-primary-foreground font-bold rounded-xl gap-1">
+                                {t.packages.book} <ArrowRight className="h-4 w-4" />
+                              </Button>
+                            </a>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                );
+              })}
             </div>
           )}
         </div>
