@@ -5,8 +5,11 @@ import { Button } from "@/components/ui/button";
 
 const sidebarLinks = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { to: "/admin/bookings", label: "Bookings", icon: ClipboardList },
   { to: "/admin/cruises", label: "Cruises", icon: Ship },
   { to: "/admin/packages", label: "Packages", icon: Package },
+  { to: "/admin/categories", label: "Categories", icon: Tag },
+  { to: "/admin/availability", label: "Availability", icon: CalendarDays },
   { to: "/admin/offers", label: "Offers", icon: Flame },
   { to: "/admin/testimonials", label: "Testimonials", icon: MessageSquare },
   { to: "/admin/team", label: "Team Members", icon: UserCheck },

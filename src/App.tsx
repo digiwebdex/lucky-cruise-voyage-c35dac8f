@@ -59,6 +59,9 @@ const App = () => (
               <Route path="cruises/new" element={<CruiseEditor />} />
               <Route path="cruises/:id" element={<CruiseEditor />} />
               <Route path="packages" element={<PackagesManager />} />
+              <Route path="categories" element={<CategoriesManager />} />
+              <Route path="availability" element={<AvailabilityManager />} />
+              <Route path="bookings" element={<Bookings />} />
               <Route path="testimonials" element={<TestimonialsManager />} />
               <Route path="offers" element={<OffersManager />} />
               <Route path="team" element={<TeamManager />} />
