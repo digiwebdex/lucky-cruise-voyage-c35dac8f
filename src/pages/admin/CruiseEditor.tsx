@@ -182,8 +182,29 @@ export default function CruiseEditor() {
                 </>
               )}
               <div className="mt-3 flex gap-2 items-center">
-                <Input placeholder="Paste image URL..." className="flex-1" onKeyDown={e => { if (e.key === "Enter") { const v = (e.target as HTMLInputElement).value.trim(); if (v) { updateField("images", [...form.images, v]); (e.target as HTMLInputElement).value = ""; } } }} />
-                <Button variant="outline" size="sm" onClick={() => { const url = prompt("Enter image URL:"); if (url) updateField("images", [...form.images, url]); }}><Plus className="h-4 w-4 mr-1" /> Add Image</Button>
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  className="hidden"
+                  id={`cruise-img-upload`}
+                  onChange={e => {
+                    const files = e.target.files;
+                    if (!files || files.length === 0) return;
+                    const promises = Array.from(files).map(file => new Promise<string>((resolve) => {
+                      const reader = new FileReader();
+                      reader.onload = () => resolve(reader.result as string);
+                      reader.readAsDataURL(file);
+                    }));
+                    Promise.all(promises).then(dataUrls => {
+                      updateField("images", [...form.images, ...dataUrls]);
+                    });
+                    e.target.value = "";
+                  }}
+                />
+                <Button variant="outline" size="sm" onClick={() => document.getElementById('cruise-img-upload')?.click()} className="gap-1.5">
+                  <Upload className="h-4 w-4" /> Upload Images
+                </Button>
               </div>
             </div>
 
