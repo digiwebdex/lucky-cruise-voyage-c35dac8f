@@ -29,7 +29,12 @@ export default function PackagesManager() {
 
   // Flatten all packages with cruise info
   const allPackages: PackageRow[] = cruises.flatMap(c =>
-    c.packages.map(p => ({ ...p, cruiseId: c.id, cruiseName: c.name }))
+    c.packages.map(p => ({
+      ...p,
+      cruiseId: c.id,
+      cruiseName: c.name,
+      cruiseImage: c.images[c.featuredImageIndex ?? 0] || "",
+    }))
   );
 
   const openNew = () => {
