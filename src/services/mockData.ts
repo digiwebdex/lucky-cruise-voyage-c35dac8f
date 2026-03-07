@@ -853,7 +853,7 @@ export const cruises: Cruise[] = [
       "ট্রিপ চলাকালীন অভিজ্ঞ গাইড।",
     ],
     packages: [
-      { id: "forest-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 22000, duration: "৩ দিন / ২ রাত" },
+      { id: "forest-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 22000, adultPrice: 22000, childPrice: 11000, duration: "৩ দিন / ২ রাত" },
     ],
     seatPlan: [
       {
