@@ -46,6 +46,15 @@ export interface TeamMember {
   role: string;
 }
 
+export interface Offer {
+  id: string;
+  title: string;
+  posterImage: string;
+  linkedCruiseId: string;
+  description?: string;
+  isActive: boolean;
+}
+
 // ===== Default Seeds =====
 const defaultSettings: SiteSettings = {
   siteName: "Lucky Tours & Travels",
