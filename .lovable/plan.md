@@ -1,24 +1,26 @@
 
 
-## Move Seat Plan into Cruise Editor
+## Problem
 
-The user wants to remove the standalone Seat Plan Manager page and instead manage seat plan images directly within each cruise's editor page -- matching the public cruise detail page layout where the seat plan appears below the itinerary/content tabs.
+The hero slider currently uses hardcoded image indices (e.g., `images[0]`, `images[1]`) which may show interior/detail photos instead of the full ship exterior image.
 
-### Changes
+## Solution
 
-**1. Add Seat Plan section to CruiseEditor.tsx**
-- Add a new "Seat Plan" section after the Packages section (or after the tabs), matching the public page layout
-- Show the current `seatPlanImage` with the existing `SeatPlanViewer` component for preview
-- Add a delete button (trash icon overlay) to remove the current seat plan image
-- Add an input field to paste a new seat plan image URL (same pattern as the image gallery editor)
-- Import `Grid3X3` icon and `SeatPlanViewer` component
+Update the `heroSlides` array in `src/pages/Index.tsx` to use each cruise's `featuredImageIndex` property, which was already added to allow admins to select the best representative ship image.
 
-**2. Remove Seat Plan Manager admin page**
-- Remove the `/admin/seat-plans` route from `App.tsx`
-- Remove the "Seat Plans" link from `AdminLayout.tsx` sidebar
-- The file `src/pages/admin/SeatPlanManager.tsx` can remain but won't be routed
+### Change in `src/pages/Index.tsx` (lines 63-69)
 
-### Technical Details
+Replace the hardcoded indices with `featuredImageIndex`:
 
-The seat plan section in CruiseEditor will use `form.seatPlanImage` field (already in the Cruise type). The UI pattern mirrors the existing image gallery editor: display current image with a hover-delete button, plus an input/button to add a new URL. The `SeatPlanViewer` component with its zoom functionality will be reused for preview.
+```typescript
+const heroSlides = [
+  { image: cruises[0]?.images[cruises[0]?.featuredImageIndex ?? 0] },
+  { image: cruises[1]?.images[cruises[1]?.featuredImageIndex ?? 0] },
+  { image: cruises[2]?.images[cruises[2]?.featuredImageIndex ?? 0] },
+  { image: cruises[3]?.images[cruises[3]?.featuredImageIndex ?? 0] },
+  { image: cruises[4]?.images[cruises[4]?.featuredImageIndex ?? 0] },
+];
+```
+
+This ensures the hero section always displays the admin-selected featured image (the full ship photo) for each cruise.
 
