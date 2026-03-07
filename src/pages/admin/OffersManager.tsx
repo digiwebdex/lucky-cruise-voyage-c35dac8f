@@ -53,6 +53,7 @@ export default function OffersManager() {
         linkedCruiseId: form.linkedCruiseId!,
         description: form.description || "",
         isActive: form.isActive ?? true,
+        expiryDate: form.expiryDate || undefined,
       };
       setOffers([...offers, newOffer]);
     } else {
@@ -119,6 +120,11 @@ export default function OffersManager() {
                 <img src={form.posterImage} alt="" className="mt-2 h-40 w-auto rounded-lg border object-cover" />
               )}
             </div>
+            <div className="space-y-2">
+              <Label>Expiry Date (optional)</Label>
+              <Input type="date" value={form.expiryDate ? form.expiryDate.split("T")[0] : ""} onChange={e => setForm(f => ({ ...f, expiryDate: e.target.value ? new Date(e.target.value + "T23:59:59").toISOString() : undefined }))} />
+              <p className="text-xs text-muted-foreground">Offer will auto-hide after this date</p>
+            </div>
             <div className="flex items-center gap-3">
               <Switch checked={form.isActive ?? true} onCheckedChange={v => setForm(f => ({ ...f, isActive: v }))} />
               <Label>Active</Label>
@@ -135,7 +141,7 @@ export default function OffersManager() {
         {offers.map(offer => {
           const linked = cruises.find(c => c.id === offer.linkedCruiseId);
           return (
-            <Card key={offer.id} className={`overflow-hidden ${!offer.isActive ? "opacity-50" : ""}`}>
+            <Card key={offer.id} className={`overflow-hidden ${!offer.isActive || (offer.expiryDate && offer.expiryDate < new Date().toISOString()) ? "opacity-50" : ""}`}>
               {offer.posterImage && (
                 <div className="aspect-[4/3] overflow-hidden">
                   <img src={offer.posterImage} alt={offer.title} className="h-full w-full object-cover" />
@@ -147,6 +153,11 @@ export default function OffersManager() {
                     <h3 className="font-bold text-foreground">{offer.title}</h3>
                     {linked && <p className="text-sm text-muted-foreground">→ {linked.name}</p>}
                     {offer.description && <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{offer.description}</p>}
+                    {offer.expiryDate && (
+                      <p className={`text-xs mt-1 font-medium ${offer.expiryDate < new Date().toISOString() ? "text-destructive" : "text-muted-foreground"}`}>
+                        {offer.expiryDate < new Date().toISOString() ? "Expired" : `Expires: ${new Date(offer.expiryDate).toLocaleDateString()}`}
+                      </p>
+                    )}
                   </div>
                   <Switch checked={offer.isActive} onCheckedChange={() => toggleActive(offer.id)} />
                 </div>

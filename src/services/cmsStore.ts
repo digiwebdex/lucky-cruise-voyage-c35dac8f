@@ -53,6 +53,7 @@ export interface Offer {
   linkedCruiseId: string;
   description?: string;
   isActive: boolean;
+  expiryDate?: string; // ISO date string, offer hidden after this date
 }
 
 // ===== Default Seeds =====

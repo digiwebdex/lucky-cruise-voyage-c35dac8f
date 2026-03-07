@@ -47,7 +47,8 @@ export default function Index() {
   const { t } = useLanguage();
   const cruises = getCruises();
   const testimonials = getTestimonials();
-  const offers = getOffers().filter(o => o.isActive);
+  const now = new Date().toISOString();
+  const offers = getOffers().filter(o => o.isActive && (!o.expiryDate || o.expiryDate >= now));
   const allCruises = cruises.slice(0, 6);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(1);
