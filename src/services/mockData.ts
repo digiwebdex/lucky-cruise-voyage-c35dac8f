@@ -2087,7 +2087,7 @@ export const cruises: Cruise[] = [
       "অভিজ্ঞ গাইড সার্বক্ষণিক সাথে থাকবে।",
     ],
     packages: [
-      { id: "adeeba-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 22000, duration: "৩ দিন / ২ রাত" },
+      { id: "adeeba-standard", name: "স্ট্যান্ডার্ড প্যাকেজ", price: 22000, adultPrice: 22000, childPrice: 11000, duration: "৩ দিন / ২ রাত" },
     ],
     seatPlan: [
       {
