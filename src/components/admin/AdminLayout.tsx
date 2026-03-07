@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Ship, Package, Image, FileText, Search, Users, Settings, LogOut, Menu, X, ExternalLink, MessageSquare, UserCheck } from "lucide-react";
+import { LayoutDashboard, Ship, Package, Image, FileText, Search, Users, Settings, LogOut, Menu, X, ExternalLink, MessageSquare, UserCheck, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const sidebarLinks = [
