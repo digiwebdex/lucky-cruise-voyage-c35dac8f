@@ -1715,7 +1715,7 @@ export const cruises: Cruise[] = [
     additionalCosts: commonAdditionalCosts,
     packageIncludes: commonPackageIncludes,
     packages: [
-      { id: "mohammadi2-standard", name: "Standard Non-AC Package", price: 11000, oldPrice: 22000, isOffer: true, duration: "3 Days / 2 Nights" }, // 50% off
+      { id: "mohammadi2-standard", name: "Standard Non-AC Package", price: 11000, oldPrice: 22000, adultPrice: 11000, adultOldPrice: 22000, childPrice: 5500, childOldPrice: 11000, isOffer: true, duration: "3 Days / 2 Nights" },
     ],
     seatPlanImage: mohammadi2Seatplan,
     seatPlan: [
