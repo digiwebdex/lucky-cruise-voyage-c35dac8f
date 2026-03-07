@@ -350,8 +350,13 @@ export interface Package {
   name: string;
   price: number;
   oldPrice?: number;
+  adultPrice: number;
+  adultOldPrice?: number;
+  childPrice: number;
+  childOldPrice?: number;
   isOffer?: boolean;
   duration: string;
+  categoryId?: string;
 }
 
 export interface Cruise {
