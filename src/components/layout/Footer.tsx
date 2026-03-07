@@ -5,6 +5,7 @@ import { getSettings } from "@/services/cmsStore";
 
 export default function Footer() {
   const { t } = useLanguage();
+  const settings = getSettings();
 
   const footerLinks = [
     { to: "/", label: t.footer.home },
