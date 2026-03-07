@@ -16,6 +16,7 @@ import { toast } from "@/hooks/use-toast";
 interface PackageRow extends PackageType {
   cruiseId: string;
   cruiseName: string;
+  cruiseImage: string;
 }
 
 export default function PackagesManager() {
@@ -28,7 +29,12 @@ export default function PackagesManager() {
 
   // Flatten all packages with cruise info
   const allPackages: PackageRow[] = cruises.flatMap(c =>
-    c.packages.map(p => ({ ...p, cruiseId: c.id, cruiseName: c.name }))
+    c.packages.map(p => ({
+      ...p,
+      cruiseId: c.id,
+      cruiseName: c.name,
+      cruiseImage: c.images[c.featuredImageIndex ?? 0] || "",
+    }))
   );
 
   const openNew = () => {
@@ -139,7 +145,14 @@ export default function PackagesManager() {
                       {pkg.isOffer && <Badge variant="destructive" className="gap-1 text-xs"><Flame className="h-3 w-3" /> Offer</Badge>}
                     </div>
                   </TableCell>
-                  <TableCell className="text-muted-foreground">{pkg.cruiseName}</TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-3">
+                      {pkg.cruiseImage && (
+                        <img src={pkg.cruiseImage} alt={pkg.cruiseName} className="h-10 w-14 rounded object-cover border border-border" />
+                      )}
+                      <span className="text-muted-foreground">{pkg.cruiseName}</span>
+                    </div>
+                  </TableCell>
                   <TableCell className="text-muted-foreground">{pkg.duration}</TableCell>
                   <TableCell className="text-right">
                     {pkg.oldPrice && (
