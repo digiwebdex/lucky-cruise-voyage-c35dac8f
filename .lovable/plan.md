@@ -1,24 +1,53 @@
 
 
-## Move Seat Plan into Cruise Editor
+## "Now Running Offers" Section on Homepage
 
-The user wants to remove the standalone Seat Plan Manager page and instead manage seat plan images directly within each cruise's editor page -- matching the public cruise detail page layout where the seat plan appears below the itinerary/content tabs.
+### What We're Building
+
+A new section on the homepage (below the Featured Cruises section) called **"Now Running Offers"** that displays promotional offer posters/banners. Each offer is linked to an existing cruise, so clicking it takes users to that cruise's detail page where they can see rooms, seat plans, etc.
+
+### Data Model
+
+Add a new `Offer` type and store offers in `cmsStore.ts`:
+
+```typescript
+interface Offer {
+  id: string;
+  title: string;        // e.g. "M.V. Jol Safari Special"
+  posterImage: string;   // poster/banner image URL
+  linkedCruiseId: string; // links to an existing cruise
+  description?: string;  // short promo text
+  isActive: boolean;
+}
+```
+
+Default offers will be seeded from cruises that already have `isOffer` packages.
 
 ### Changes
 
-**1. Add Seat Plan section to CruiseEditor.tsx**
-- Add a new "Seat Plan" section after the Packages section (or after the tabs), matching the public page layout
-- Show the current `seatPlanImage` with the existing `SeatPlanViewer` component for preview
-- Add a delete button (trash icon overlay) to remove the current seat plan image
-- Add an input field to paste a new seat plan image URL (same pattern as the image gallery editor)
-- Import `Grid3X3` icon and `SeatPlanViewer` component
+**1. Add Offer data layer (`src/services/cmsStore.ts`)**
+- Add `Offer` interface, default seed data, `getOffers`/`saveOffers` functions
+- Bump `DATA_VERSION` to bust cache
 
-**2. Remove Seat Plan Manager admin page**
-- Remove the `/admin/seat-plans` route from `App.tsx`
-- Remove the "Seat Plans" link from `AdminLayout.tsx` sidebar
-- The file `src/pages/admin/SeatPlanManager.tsx` can remain but won't be routed
+**2. Add "Now Running Offers" section to Homepage (`src/pages/Index.tsx`)**
+- New section after Featured Cruises showing offer poster cards in a grid
+- Each card displays the poster image, offer title, linked cruise name, and a "View Details" button
+- Clicking the card navigates to `/cruises/{linkedCruiseId}`
+- Animated with existing Framer Motion variants
+- Show a fire/flame badge for visual emphasis
 
-### Technical Details
+**3. Add Offers Manager admin page (`src/pages/admin/OffersManager.tsx`)**
+- CRUD interface to create/edit/delete offers
+- Poster image upload (paste URL or file upload to base64)
+- Dropdown to select and link an existing cruise from the cruise list
+- Toggle to activate/deactivate offers
+- Preview of the poster with linked cruise name
 
-The seat plan section in CruiseEditor will use `form.seatPlanImage` field (already in the Cruise type). The UI pattern mirrors the existing image gallery editor: display current image with a hover-delete button, plus an input/button to add a new URL. The `SeatPlanViewer` component with its zoom functionality will be reused for preview.
+**4. Wire up admin route and sidebar**
+- Add `/admin/offers` route in `App.tsx`
+- Add "Offers" link in `AdminLayout.tsx` sidebar
+
+**5. Add translations (`src/locales/en.json`, `src/locales/bn.json`)**
+- Section title: "Now Running Offers" / "চলমান অফারসমূহ"
+- Button labels and descriptions
 
