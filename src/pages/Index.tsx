@@ -61,11 +61,11 @@ export default function Index() {
   const stat3 = useCounter(15, 1500);
 
   const heroSlides = [
-    { image: cruises[0]?.images[cruises[0]?.featuredImageIndex ?? 0] },
-    { image: cruises[1]?.images[cruises[1]?.featuredImageIndex ?? 0] },
-    { image: cruises[2]?.images[cruises[2]?.featuredImageIndex ?? 0] },
-    { image: cruises[3]?.images[cruises[3]?.featuredImageIndex ?? 0] },
-    { image: cruises[4]?.images[cruises[4]?.featuredImageIndex ?? 0] },
+    { image: cruises[0]?.images[0] },
+    { image: cruises[1]?.images[0] },
+    { image: cruises[2]?.images[0] },
+    { image: cruises[3]?.images[1] },
+    { image: cruises[4]?.images[0] },
   ];
 
   const goToSlide = useCallback((idx: number) => {
