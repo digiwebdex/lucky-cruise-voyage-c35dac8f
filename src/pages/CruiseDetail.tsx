@@ -240,6 +240,40 @@ export default function CruiseDetail() {
                 )}
                 <p className="text-4xl font-display font-black text-primary-foreground">৳{cruise.price.toLocaleString()}</p>
                 <p className="text-primary-foreground/70 text-xs mt-1">{cruise.priceLabel}</p>
+                {/* Package-level adult/child pricing */}
+                {cruise.packages.length > 0 && (() => {
+                  const pkg = cruise.packages[0];
+                  const discount = pkg.adultOldPrice && pkg.adultOldPrice > pkg.adultPrice
+                    ? Math.round(((pkg.adultOldPrice - pkg.adultPrice) / pkg.adultOldPrice) * 100)
+                    : 0;
+                  return (
+                    <div className="mt-3 space-y-2 border-t border-primary-foreground/20 pt-3">
+                      {discount > 0 && (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-primary-foreground/20 px-2.5 py-1 text-xs font-bold text-primary-foreground">
+                          {discount}% Off
+                        </span>
+                      )}
+                      <div className="flex items-center justify-between text-sm text-primary-foreground/90">
+                        <span className="font-medium">Adult</span>
+                        <div>
+                          {pkg.adultOldPrice && pkg.adultOldPrice > pkg.adultPrice && (
+                            <span className="line-through text-primary-foreground/50 mr-1.5 text-xs">৳{pkg.adultOldPrice.toLocaleString()}</span>
+                          )}
+                          <span className="font-bold">৳{pkg.adultPrice.toLocaleString()}</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between text-sm text-primary-foreground/90">
+                        <span className="font-medium">Child</span>
+                        <div>
+                          {pkg.childOldPrice && pkg.childOldPrice > pkg.childPrice && (
+                            <span className="line-through text-primary-foreground/50 mr-1.5 text-xs">৳{pkg.childOldPrice.toLocaleString()}</span>
+                          )}
+                          <span className="font-bold">৳{pkg.childPrice.toLocaleString()}</span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
               </div>
               <CardContent className="p-4 sm:p-6 space-y-4">
                 <Button size="lg" className="w-full gradient-primary text-primary-foreground font-bold text-base rounded-xl h-13 shadow-glow hover:scale-[1.02] transition-transform" onClick={() => setBookingOpen(true)}>
