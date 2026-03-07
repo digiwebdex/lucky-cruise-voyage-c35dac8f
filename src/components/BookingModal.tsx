@@ -29,7 +29,7 @@ export default function BookingModal({ cruise, open, onOpenChange }: BookingModa
   const [children, setChildren] = useState("0");
   const [selectedPackage, setSelectedPackage] = useState("");
   const [notes, setNotes] = useState("");
-  const { t, language } = useLanguage();
+  const { t, lang: language } = useLanguage();
 
   const availableDates = useMemo(() => getAvailabilityForCruise(cruise.id), [cruise.id]);
   const categories = useMemo(() => getCategories(), []);
