@@ -1,337 +1,283 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect, useCallback, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { Ship, Shield, Star, Clock, MapPin, Phone, ChevronRight, Anchor, Waves, ArrowRight, Users, ChevronLeft, Compass, Sparkles, Heart, Camera } from "lucide-react";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Ship, Shield, Star, Clock, MapPin, Phone, ChevronRight, ArrowRight, Users, Flame, Heart, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { Input } from "@/components/ui/input";
 import { getCruises, getTestimonials, getOffers } from "@/services/cmsStore";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Flame } from "lucide-react";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
+import BookingModal from "@/components/BookingModal";
 
-const fadeUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } };
-const fadeLeft = { hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0 } };
-const fadeRight = { hidden: { opacity: 0, x: 40 }, visible: { opacity: 1, x: 0 } };
-const scaleIn = { hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } };
-
-// Animated counter hook
-function useCounter(target: number, duration = 2000) {
-  const [count, setCount] = useState(0);
-  const [started, setStarted] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!started) return;
-    let startTime: number;
-    const step = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      setCount(Math.floor(progress * target));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [started, target, duration]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setStarted(true); },
-      { threshold: 0.3 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  return { count, ref };
-}
+const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
 export default function Index() {
-  const { t } = useLanguage();
+  const { t, lang: language } = useLanguage();
   const cruises = getCruises();
   const testimonials = getTestimonials();
   const now = new Date().toISOString();
   const offers = getOffers().filter(o => o.isActive && (!o.expiryDate || o.expiryDate >= now));
   const allCruises = cruises.slice(0, 6);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [direction, setDirection] = useState(1);
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
 
-  const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  // Quick booking bar state
+  const [selectedCruise, setSelectedCruise] = useState("");
+  const [travelDate, setTravelDate] = useState<Date>();
+  const [guests, setGuests] = useState("2");
+  const [bookingCruise, setBookingCruise] = useState<typeof cruises[0] | null>(null);
+  const [bookingOpen, setBookingOpen] = useState(false);
 
-  const stat1 = useCounter(6, 1500);
-  const stat2 = useCounter(5000, 2000);
-  const stat3 = useCounter(15, 1500);
+  const heroImage = cruises[0]?.images[cruises[0]?.featuredImageIndex ?? 0];
 
-  const heroSlides = [
-    { image: cruises[0]?.images[cruises[0]?.featuredImageIndex ?? 0] },
-    { image: cruises[1]?.images[cruises[1]?.featuredImageIndex ?? 0] },
-    { image: cruises[2]?.images[cruises[2]?.featuredImageIndex ?? 0] },
-    { image: cruises[3]?.images[cruises[3]?.featuredImageIndex ?? 0] },
-    { image: cruises[4]?.images[cruises[4]?.featuredImageIndex ?? 0] },
-  ];
-
-  const goToSlide = useCallback((idx: number) => {
-    setDirection(idx > currentSlide ? 1 : -1);
-    setCurrentSlide(idx);
-  }, [currentSlide]);
-
-  const nextSlide = useCallback(() => {
-    setDirection(1);
-    setCurrentSlide(prev => (prev + 1) % heroSlides.length);
-  }, []);
-
-  const prevSlide = useCallback(() => {
-    setDirection(-1);
-    setCurrentSlide(prev => (prev - 1 + heroSlides.length) % heroSlides.length);
-  }, []);
-
-  useEffect(() => {
-    const timer = setInterval(nextSlide, 5000);
-    return () => clearInterval(timer);
-  }, [nextSlide]);
-
-  // Auto-rotate testimonials
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveTestimonial(prev => (prev + 1) % Math.min(testimonials.length, 5));
-    }, 4000);
-    return () => clearInterval(timer);
-  }, [testimonials.length]);
-
-  const slideVariants = {
-    enter: (dir: number) => ({ x: dir > 0 ? "100%" : "-100%", opacity: 0, scale: 1.1 }),
-    center: { x: 0, opacity: 1, scale: 1 },
-    exit: (dir: number) => ({ x: dir > 0 ? "-50%" : "50%", opacity: 0, scale: 0.95 }),
+  const handleQuickBook = () => {
+    const cruise = cruises.find(c => c.id === selectedCruise);
+    if (cruise) {
+      setBookingCruise(cruise);
+      setBookingOpen(true);
+    } else {
+      // Send generic WhatsApp message
+      const msg = encodeURIComponent(
+        `*🚢 Booking Inquiry*\n\n` +
+        `${travelDate ? `*Date:* ${format(travelDate, "PPP")}\n` : ""}` +
+        `*Guests:* ${guests}\n` +
+        `\n_Sent from Lucky Tours website_`
+      );
+      window.open(`https://wa.me/8801711871072?text=${msg}`, "_blank");
+    }
   };
 
-  const slide = heroSlides[currentSlide];
-  const slideText = t.hero.slides[currentSlide];
-
   return (
-    <div className="overflow-hidden">
-      {/* ============ HERO SLIDER ============ */}
-      <section ref={heroRef} className="relative min-h-[80vh] sm:min-h-[95vh] flex items-center overflow-hidden">
-        <AnimatePresence initial={false} custom={direction} mode="popLayout">
-          <motion.div
-            key={currentSlide}
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="absolute inset-0"
-          >
-            <motion.div style={{ y: heroY }} className="absolute inset-0">
-              <img src={slide.image} alt="" className="h-full w-full object-cover scale-110" draggable={false} />
-            </motion.div>
-            <div className="absolute inset-0 bg-gradient-to-r from-secondary/90 via-secondary/50 to-secondary/20" />
-            <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-secondary/30" />
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Floating decorative elements */}
-        <div className="absolute top-20 right-10 opacity-[0.06] hidden lg:block pointer-events-none">
-          <Anchor className="h-56 w-56 text-primary animate-float" />
-        </div>
-        <div className="absolute bottom-20 left-10 opacity-[0.04] hidden lg:block pointer-events-none">
-          <Waves className="h-72 w-72 text-primary" />
-        </div>
-        <div className="absolute top-1/3 right-1/4 hidden lg:block pointer-events-none">
-          <Compass className="h-20 w-20 text-primary/10 animate-[spin_20s_linear_infinite]" />
+    <div>
+      {/* ============ HERO ============ */}
+      <section className="relative min-h-[55vh] sm:min-h-[60vh] flex items-center">
+        <div className="absolute inset-0">
+          <img src={heroImage} alt="Sundarban Cruise" className="h-full w-full object-cover" draggable={false} />
+          <div className="absolute inset-0 bg-gradient-to-r from-secondary/85 via-secondary/60 to-secondary/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-secondary/70 via-transparent to-secondary/20" />
         </div>
 
-        {/* Particles */}
-        <div className="particle h-3 w-3 top-[20%] left-[15%]" style={{ animationDelay: "0s" }} />
-        <div className="particle h-2 w-2 top-[40%] right-[20%]" style={{ animationDelay: "2s" }} />
-        <div className="particle h-4 w-4 bottom-[30%] left-[60%]" style={{ animationDelay: "4s" }} />
-
-        <motion.div style={{ opacity: heroOpacity }} className="container relative z-10 py-12 sm:py-20">
-          <div className="max-w-3xl">
-            <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.6 }}>
-              <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-md px-5 py-2 text-sm font-semibold text-primary mb-6 shadow-lg shadow-primary/5">
-                <Sparkles className="h-4 w-4" /> {t.hero.badge}
+        <div className="container relative z-10 py-12 sm:py-16">
+          <div className="max-w-2xl">
+            <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.5 }}>
+              <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm px-4 py-1.5 text-sm font-semibold text-primary mb-5">
+                <Star className="h-3.5 w-3.5" /> {t.hero.badge}
               </span>
             </motion.div>
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentSlide}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-              >
-                <h1 className="font-display text-3xl sm:text-5xl md:text-7xl font-black leading-[1.05] text-secondary-foreground mb-3 sm:mb-5">
-                  {slideText.title}
-                  <br />
-                  <span className="text-gradient">{slideText.highlight}</span>
-                </h1>
-                <p className="text-sm sm:text-lg md:text-xl text-secondary-foreground/60 max-w-xl mb-6 sm:mb-10 leading-relaxed">
-                  {slideText.subtitle}
-                </p>
-              </motion.div>
-            </AnimatePresence>
+            <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.5, delay: 0.1 }}>
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black leading-tight text-secondary-foreground mb-3">
+                {t.hero.slides[0].title}
+                <br />
+                <span className="text-primary">{t.hero.slides[0].highlight}</span>
+              </h1>
+              <p className="text-sm sm:text-base text-secondary-foreground/70 max-w-md mb-6 leading-relaxed">
+                {t.hero.slides[0].subtitle}
+              </p>
+            </motion.div>
 
-            <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.35 }} className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+            <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.5, delay: 0.2 }} className="flex flex-wrap gap-3">
               <Link to="/cruises">
-                <Button size="lg" className="w-full sm:w-auto gradient-primary text-primary-foreground font-bold text-sm sm:text-base px-6 sm:px-8 h-12 sm:h-14 rounded-2xl shadow-glow hover:scale-105 transition-transform gap-2 shimmer">
-                  {t.hero.exploreCruises} <ArrowRight className="h-5 w-5" />
+                <Button size="lg" className="bg-primary text-primary-foreground font-bold rounded-xl h-11 px-6 gap-2 hover:bg-primary/90">
+                  {t.hero.exploreCruises} <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
               <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto border-2 border-primary/40 text-primary font-bold text-sm sm:text-base px-6 sm:px-8 h-12 sm:h-14 rounded-2xl hover:bg-primary hover:text-primary-foreground transition-all gap-2 backdrop-blur-md bg-secondary/20">
-                  <Phone className="h-5 w-5" /> {t.hero.bookViaWhatsApp}
+                <Button size="lg" variant="outline" className="border-primary/40 text-primary font-bold rounded-xl h-11 px-6 gap-2 backdrop-blur-sm bg-secondary/20 hover:bg-primary hover:text-primary-foreground">
+                  <Phone className="h-4 w-4" /> {t.hero.bookViaWhatsApp}
                 </Button>
               </a>
             </motion.div>
 
-            {/* Stats with animated counters */}
-            <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.7, delay: 0.5 }} className="mt-10 sm:mt-16">
-              <div className="inline-flex flex-wrap gap-6 sm:gap-10 rounded-2xl bg-secondary/40 backdrop-blur-xl border border-secondary-foreground/10 px-6 sm:px-10 py-4 sm:py-6">
-                {[
-                  { ref: stat1.ref, count: stat1.count, suffix: "+", label: t.hero.cruiseShips },
-                  { ref: stat2.ref, count: stat2.count, suffix: "+", label: t.hero.happyTravellers },
-                  { ref: stat3.ref, count: stat3.count, suffix: "+", label: t.hero.yearsExperience },
-                ].map((stat, i) => (
-                  <div key={i} ref={stat.ref} className="text-left">
-                    <div className="text-2xl sm:text-4xl font-display font-black text-primary stat-glow">{stat.count}{stat.suffix}</div>
-                    <div className="text-[10px] sm:text-sm text-secondary-foreground/50 font-medium mt-0.5">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
+            {/* Stats */}
+            <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.5, delay: 0.3 }} className="mt-8 flex gap-8">
+              {[
+                { value: "6+", label: t.hero.cruiseShips },
+                { value: "5000+", label: t.hero.happyTravellers },
+                { value: "15+", label: t.hero.yearsExperience },
+              ].map((stat, i) => (
+                <div key={i}>
+                  <div className="text-xl sm:text-2xl font-display font-black text-primary">{stat.value}</div>
+                  <div className="text-[10px] sm:text-xs text-secondary-foreground/50 font-medium">{stat.label}</div>
+                </div>
+              ))}
             </motion.div>
-          </div>
-        </motion.div>
-
-        {/* Slide navigation */}
-        <div className="absolute bottom-4 sm:bottom-8 right-4 sm:right-8 z-20 flex items-center gap-2 sm:gap-3">
-          <button onClick={prevSlide} className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-secondary/50 backdrop-blur-xl text-secondary-foreground/70 hover:bg-primary hover:text-primary-foreground transition-all border border-secondary-foreground/10 hover:scale-110">
-            <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
-          </button>
-          <div className="flex gap-1.5 sm:gap-2">
-            {heroSlides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => goToSlide(i)}
-                className={`h-2 sm:h-2.5 rounded-full transition-all duration-500 ${i === currentSlide ? "w-8 sm:w-10 bg-primary shadow-glow" : "w-2 sm:w-2.5 bg-secondary-foreground/30 hover:bg-secondary-foreground/50"}`}
-              />
-            ))}
-          </div>
-          <button onClick={nextSlide} className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-secondary/50 backdrop-blur-xl text-secondary-foreground/70 hover:bg-primary hover:text-primary-foreground transition-all border border-secondary-foreground/10 hover:scale-110">
-            <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
-          </button>
-        </div>
-
-        <div className="absolute bottom-8 left-8 z-20 hidden md:flex items-center gap-3">
-          <span className="text-5xl font-display font-black text-primary stat-glow">0{currentSlide + 1}</span>
-          <div className="flex flex-col">
-            <span className="text-secondary-foreground/30 text-xs font-medium">/ 0{heroSlides.length}</span>
-            <div className="h-0.5 w-12 bg-secondary-foreground/10 rounded-full mt-1">
-              <motion.div 
-                className="h-full bg-primary rounded-full" 
-                initial={{ width: "0%" }}
-                animate={{ width: "100%" }}
-                transition={{ duration: 5, ease: "linear" }}
-                key={currentSlide}
-              />
-            </div>
           </div>
         </div>
       </section>
 
-      {/* ============ QUICK INFO BAR ============ */}
-      <section className="relative -mt-8 sm:-mt-12 z-20 pb-8">
+      {/* ============ QUICK BOOKING BAR ============ */}
+      <section className="relative -mt-8 z-20 pb-6">
         <div className="container">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-            {[
-              { icon: Ship, label: t.whyUs.premiumFleet, value: "6+ Ships", color: "from-primary to-primary-glow" },
-              { icon: Shield, label: t.whyUs.maxSafety, value: "100%", color: "from-emerald to-accent" },
-              { icon: Star, label: t.whyUs.allInclusive, value: "5★", color: "from-gold to-primary" },
-              { icon: Clock, label: t.whyUs.support247, value: "24/7", color: "from-accent to-emerald" },
-            ].map((item, i) => (
-              <motion.div key={i} variants={fadeUp} transition={{ delay: i * 0.1 }} className="group">
-                <div className="rounded-2xl bg-card border border-border/50 p-4 sm:p-5 shadow-elevated hover:shadow-glow transition-all duration-500 hover:-translate-y-1 text-center">
-                  <div className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${item.color} text-primary-foreground group-hover:scale-110 transition-transform shadow-lg`}>
-                    <item.icon className="h-5 w-5" />
-                  </div>
-                  <div className="font-display font-black text-lg text-foreground">{item.value}</div>
-                  <div className="text-xs text-muted-foreground font-medium mt-0.5">{item.label}</div>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+            <div className="rounded-xl bg-card border border-border shadow-md p-4 sm:p-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-end">
+                {/* Cruise Select */}
+                <div className="lg:col-span-1">
+                  <label className="text-xs font-semibold text-muted-foreground mb-1 block">
+                    {language === "bn" ? "ক্রুজ নির্বাচন করুন" : "Select Cruise"}
+                  </label>
+                  <Select onValueChange={setSelectedCruise}>
+                    <SelectTrigger className="h-10 rounded-lg">
+                      <SelectValue placeholder={language === "bn" ? "ক্রুজ বাছুন" : "Choose cruise"} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {cruises.map(c => (
+                        <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
-              </motion.div>
-            ))}
+
+                {/* Date */}
+                <div className="lg:col-span-1">
+                  <label className="text-xs font-semibold text-muted-foreground mb-1 block">
+                    {language === "bn" ? "তারিখ" : "Travel Date"}
+                  </label>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant="outline" className={cn("w-full h-10 justify-start text-left font-normal rounded-lg", !travelDate && "text-muted-foreground")}>
+                        {travelDate ? format(travelDate, "dd MMM yyyy") : (language === "bn" ? "তারিখ বাছুন" : "Pick date")}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={travelDate}
+                        onSelect={setTravelDate}
+                        disabled={d => d < new Date(new Date().setHours(0, 0, 0, 0))}
+                        initialFocus
+                        className="pointer-events-auto"
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </div>
+
+                {/* Guests */}
+                <div className="lg:col-span-1">
+                  <label className="text-xs font-semibold text-muted-foreground mb-1 block">
+                    <Users className="h-3 w-3 inline mr-1" />
+                    {language === "bn" ? "অতিথি" : "Guests"}
+                  </label>
+                  <Input
+                    type="number"
+                    min="1"
+                    max="50"
+                    value={guests}
+                    onChange={e => setGuests(e.target.value)}
+                    className="h-10 rounded-lg"
+                  />
+                </div>
+
+                {/* WhatsApp */}
+                <div className="lg:col-span-1">
+                  <a
+                    href={`https://wa.me/8801711871072?text=${encodeURIComponent(language === "bn" ? "আমি ক্রুজ সম্পর্কে জানতে চাই" : "I want to book a cruise")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <Button variant="outline" className="w-full h-10 rounded-lg border-emerald/30 text-emerald hover:bg-emerald hover:text-emerald-foreground font-semibold gap-2">
+                      <Phone className="h-4 w-4" /> WhatsApp
+                    </Button>
+                  </a>
+                </div>
+
+                {/* Search/Book */}
+                <div className="lg:col-span-1">
+                  <Button onClick={handleQuickBook} className="w-full h-10 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 font-bold gap-2">
+                    <Search className="h-4 w-4" /> {language === "bn" ? "বুক করুন" : "Book Now"}
+                  </Button>
+                </div>
+              </div>
+            </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* ============ QUICK INFO STRIP ============ */}
+      <section className="py-8 bg-muted/30">
+        <div className="container">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {[
+              { icon: Ship, label: t.whyUs.premiumFleet, value: "6+ Ships" },
+              { icon: Shield, label: t.whyUs.maxSafety, value: "100% Safe" },
+              { icon: Star, label: t.whyUs.allInclusive, value: "All-Inclusive" },
+              { icon: Clock, label: t.whyUs.support247, value: "24/7" },
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-3 p-3 rounded-lg">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary flex-shrink-0">
+                  <item.icon className="h-5 w-5" />
+                </div>
+                <div>
+                  <div className="font-bold text-sm text-foreground">{item.value}</div>
+                  <div className="text-xs text-muted-foreground">{item.label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ============ FEATURED CRUISES ============ */}
-      <section className="py-16 md:py-24 bg-background relative">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 animated-line" />
+      <section className="py-14 md:py-20 bg-background">
         <div className="container">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-14">
-            <span className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-primary">
-              <Ship className="h-4 w-4" /> {t.featured.ourFleet}
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-10">
+            <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary">
+              <Ship className="h-3.5 w-3.5" /> {t.featured.ourFleet}
             </span>
-            <h2 className="mt-3 font-display text-2xl sm:text-4xl md:text-5xl font-black text-foreground">
-              {t.featured.title} <span className="text-gradient">{t.featured.titleHighlight}</span>
+            <h2 className="mt-2 font-display text-2xl sm:text-3xl md:text-4xl font-black text-foreground">
+              {t.featured.title} <span className="text-primary">{t.featured.titleHighlight}</span>
             </h2>
-            <p className="mt-4 text-muted-foreground max-w-lg mx-auto">{t.featured.subtitle}</p>
+            <p className="mt-2 text-muted-foreground text-sm max-w-md mx-auto">{t.featured.subtitle}</p>
           </motion.div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {allCruises.map((cruise, i) => (
-              <motion.div key={cruise.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scaleIn} transition={{ delay: i * 0.08 }}>
+              <motion.div key={cruise.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.06 }}>
                 <Link to={`/cruises/${cruise.id}`} className="group block">
-                  <Card className="overflow-hidden border-border/50 hover:shadow-elevated transition-all duration-500 hover:-translate-y-3 bg-card hover:border-primary/20">
-                    <div className="watermark-container aspect-[4/3] overflow-hidden relative">
-                      <img src={cruise.images[cruise.featuredImageIndex ?? 0]} alt={cruise.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" draggable={false} />
-                      <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      
-                      {/* Hover overlay content */}
-                      <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                        <div className="flex items-center gap-2 text-secondary-foreground text-sm font-medium">
-                          <MapPin className="h-4 w-4 text-primary" />
-                          <span>{cruise.route}</span>
-                        </div>
-                      </div>
-
-                      <div className="absolute top-3 right-3">
-                        <span className="inline-flex items-center gap-1 rounded-full bg-secondary/80 backdrop-blur-sm px-3 py-1 text-xs font-bold text-primary shadow-lg">
-                          <Users className="h-3 w-3" /> {cruise.capacity}
-                        </span>
-                      </div>
+                  <Card className="overflow-hidden border-border hover:shadow-lg transition-shadow duration-300 bg-card">
+                    <div className="aspect-[4/3] overflow-hidden relative">
+                      <img src={cruise.images[cruise.featuredImageIndex ?? 0]} alt={cruise.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" draggable={false} />
                       <div className="absolute top-3 left-3 flex flex-col gap-1.5">
                         {cruise.featured && (
-                          <span className="inline-flex items-center gap-1 rounded-full gradient-primary px-3 py-1 text-xs font-bold text-primary-foreground shadow-lg">
+                          <span className="inline-flex items-center gap-1 rounded-full bg-primary px-2.5 py-0.5 text-xs font-bold text-primary-foreground">
                             <Star className="h-3 w-3" /> {t.featured.featured}
                           </span>
                         )}
                         {cruise.packages?.some(p => p.isOffer) && (
-                          <span className="inline-flex items-center gap-1 rounded-full bg-destructive px-3 py-1 text-xs font-bold text-destructive-foreground animate-pulse shadow-lg">
+                          <span className="inline-flex items-center gap-1 rounded-full bg-destructive px-2.5 py-0.5 text-xs font-bold text-destructive-foreground">
                             🔥 অফার
                           </span>
                         )}
                       </div>
-                    </div>
-                    <CardContent className="p-5">
-                      <div className="flex items-start justify-between gap-2">
-                        <div>
-                          <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">{cruise.name}</h3>
-                          <p className="mt-1 text-sm text-muted-foreground flex items-center gap-1"><MapPin className="h-3.5 w-3.5" />{cruise.route}</p>
-                        </div>
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl gradient-primary text-primary-foreground group-hover:scale-110 group-hover:shadow-glow transition-all flex-shrink-0">
-                          <ArrowRight className="h-5 w-5" />
-                        </div>
+                      <div className="absolute top-3 right-3">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-card/90 backdrop-blur-sm px-2.5 py-0.5 text-xs font-semibold text-foreground">
+                          <Users className="h-3 w-3" /> {cruise.capacity}
+                        </span>
                       </div>
-                      <p className="mt-0.5 text-xs text-muted-foreground/70 flex items-center gap-1"><Clock className="h-3 w-3" />{cruise.duration}</p>
-                      <div className="mt-4 flex items-center gap-3 border-t border-border/50 pt-4">
-                        <div className="flex-1">
+                    </div>
+                    <CardContent className="p-4">
+                      <h3 className="font-display font-bold text-base text-foreground group-hover:text-primary transition-colors">{cruise.name}</h3>
+                      <p className="mt-0.5 text-xs text-muted-foreground flex items-center gap-1">
+                        <MapPin className="h-3 w-3" />{cruise.route}
+                      </p>
+                      <p className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
+                        <Clock className="h-3 w-3" />{cruise.duration}
+                      </p>
+                      <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
+                        <div>
                           {cruise.oldPrice && (
-                            <span className="text-sm text-muted-foreground line-through mr-2">৳{cruise.oldPrice.toLocaleString()}</span>
+                            <span className="text-xs text-muted-foreground line-through mr-1.5">৳{cruise.oldPrice.toLocaleString()}</span>
                           )}
-                          <span className="text-2xl font-display font-black text-primary">৳{cruise.price.toLocaleString()}</span>
-                          <span className="text-xs text-muted-foreground block">{t.featured.perPerson}</span>
+                          <span className="text-lg font-display font-black text-primary">৳{cruise.price.toLocaleString()}</span>
+                          <span className="text-[10px] text-muted-foreground block">{t.featured.perPerson}</span>
+                        </div>
+                        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                          <ArrowRight className="h-4 w-4" />
                         </div>
                       </div>
                       <a
@@ -339,9 +285,9 @@ export default function Index() {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-emerald/10 border border-emerald/20 px-4 py-2.5 text-sm font-bold text-emerald hover:bg-emerald hover:text-emerald-foreground transition-all duration-300 hover:shadow-lg"
+                        className="mt-2.5 flex w-full items-center justify-center gap-2 rounded-lg border border-emerald/20 bg-emerald/5 px-3 py-2 text-xs font-bold text-emerald hover:bg-emerald hover:text-emerald-foreground transition-colors"
                       >
-                        <Phone className="h-4 w-4" /> {t.hero.bookViaWhatsApp}
+                        <Phone className="h-3.5 w-3.5" /> {t.hero.bookViaWhatsApp}
                       </a>
                     </CardContent>
                   </Card>
@@ -350,9 +296,9 @@ export default function Index() {
             ))}
           </div>
 
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mt-12 text-center">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mt-10 text-center">
             <Link to="/cruises">
-              <Button variant="outline" size="lg" className="rounded-2xl border-2 border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground font-bold gap-2 px-8 hover:shadow-glow transition-all">
+              <Button variant="outline" size="lg" className="rounded-xl border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground font-bold gap-2 px-6">
                 {t.featured.viewAll} <ChevronRight className="h-4 w-4" />
               </Button>
             </Link>
@@ -360,61 +306,60 @@ export default function Index() {
         </div>
       </section>
 
-      {/* ============ NOW RUNNING OFFERS ============ */}
+      {/* ============ OFFERS ============ */}
       {offers.length > 0 && (
-        <section className="py-16 md:py-24 bg-secondary/30 relative">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.06),transparent_60%)]" />
-          <div className="container relative">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-14">
-              <span className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-primary">
-                <Flame className="h-4 w-4" /> {t.offers?.sectionLabel || "Now Running"}
+        <section className="py-14 md:py-20 bg-muted/20">
+          <div className="container">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-10">
+              <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary">
+                <Flame className="h-3.5 w-3.5" /> {t.offers?.sectionLabel || "Now Running"}
               </span>
-              <h2 className="mt-3 font-display text-2xl sm:text-4xl md:text-5xl font-black text-foreground">
-                {t.offers?.title || "Running"} <span className="text-gradient">{t.offers?.titleHighlight || "Offers"}</span>
+              <h2 className="mt-2 font-display text-2xl sm:text-3xl md:text-4xl font-black text-foreground">
+                {t.offers?.title || "Running"} <span className="text-primary">{t.offers?.titleHighlight || "Offers"}</span>
               </h2>
-              <p className="mt-4 text-muted-foreground max-w-lg mx-auto">{t.offers?.subtitle || "Don't miss our latest cruise deals and special packages"}</p>
+              <p className="mt-2 text-muted-foreground text-sm max-w-md mx-auto">{t.offers?.subtitle || "Don't miss our latest cruise deals"}</p>
             </motion.div>
 
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {offers.map((offer, i) => {
                 const linkedCruise = cruises.find(c => c.id === offer.linkedCruiseId);
                 return (
-                  <motion.div key={offer.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scaleIn} transition={{ delay: i * 0.1 }}>
+                  <motion.div key={offer.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.08 }}>
                     <Link to={`/cruises/${offer.linkedCruiseId}`} className="group block">
-                      <Card className="overflow-hidden border-border/50 hover:shadow-elevated transition-all duration-500 hover:-translate-y-3 bg-card hover:border-primary/20">
+                      <Card className="overflow-hidden border-border hover:shadow-lg transition-shadow duration-300 bg-card">
                         <div className="aspect-[4/3] overflow-hidden relative">
-                          <img src={offer.posterImage} alt={offer.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" draggable={false} />
-                          <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent" />
+                          <img src={offer.posterImage} alt={offer.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" draggable={false} />
+                          <div className="absolute inset-0 bg-gradient-to-t from-secondary/70 via-transparent to-transparent" />
                           <div className="absolute top-3 left-3">
-                            <span className="inline-flex items-center gap-1 rounded-full bg-destructive px-3 py-1 text-xs font-bold text-destructive-foreground animate-pulse shadow-lg">
+                            <span className="inline-flex items-center gap-1 rounded-full bg-destructive px-2.5 py-0.5 text-xs font-bold text-destructive-foreground">
                               🔥 {t.offers?.offerBadge || "Offer"}
                             </span>
                           </div>
                           <div className="absolute bottom-0 left-0 right-0 p-4">
-                            <h3 className="font-display font-bold text-lg text-secondary-foreground drop-shadow-lg">{offer.title}</h3>
+                            <h3 className="font-display font-bold text-base text-secondary-foreground">{offer.title}</h3>
                             {linkedCruise && (
-                              <p className="text-sm text-secondary-foreground/70 flex items-center gap-1 mt-1">
-                                <Ship className="h-3.5 w-3.5 text-primary" /> {linkedCruise.name}
+                              <p className="text-xs text-secondary-foreground/70 flex items-center gap-1 mt-0.5">
+                                <Ship className="h-3 w-3 text-primary" /> {linkedCruise.name}
                               </p>
                             )}
                           </div>
                         </div>
-                        <CardContent className="p-5">
+                        <CardContent className="p-4">
                           {offer.description && (
-                            <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{offer.description}</p>
+                            <p className="text-xs text-muted-foreground mb-2 line-clamp-2">{offer.description}</p>
                           )}
                           <div className="flex items-center justify-between">
                             {linkedCruise && (
                               <div>
                                 {linkedCruise.oldPrice && (
-                                  <span className="text-sm text-muted-foreground line-through mr-2">৳{linkedCruise.oldPrice.toLocaleString()}</span>
+                                  <span className="text-xs text-muted-foreground line-through mr-1.5">৳{linkedCruise.oldPrice.toLocaleString()}</span>
                                 )}
-                                <span className="text-xl font-display font-black text-primary">৳{linkedCruise.price.toLocaleString()}</span>
-                                <span className="text-xs text-muted-foreground block">{t.common?.perPerson || "per person"}</span>
+                                <span className="text-lg font-display font-black text-primary">৳{linkedCruise.price.toLocaleString()}</span>
+                                <span className="text-[10px] text-muted-foreground block">{t.common?.perPerson || "per person"}</span>
                               </div>
                             )}
-                            <div className="flex h-10 w-10 items-center justify-center rounded-xl gradient-primary text-primary-foreground group-hover:scale-110 group-hover:shadow-glow transition-all flex-shrink-0">
-                              <ArrowRight className="h-5 w-5" />
+                            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                              <ArrowRight className="h-4 w-4" />
                             </div>
                           </div>
                         </CardContent>
@@ -427,130 +372,88 @@ export default function Index() {
           </div>
         </section>
       )}
-      {/* ============ EXPERIENCE SHOWCASE ============ */}
-      <section className="py-20 md:py-28 bg-secondary relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,hsl(28_100%_52%/0.08),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_50%,hsl(170_65%_40%/0.06),transparent_50%)]" />
-        <div className="container relative">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeLeft}>
-              <span className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-primary mb-4">
-                <Camera className="h-4 w-4" /> {t.whyUs.sectionLabel}
-              </span>
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-secondary-foreground leading-tight">
-                {t.whyUs.title}
-                <br />
-                <span className="text-gradient">{t.whyUs.titleHighlight}</span>
-              </h2>
-              <p className="mt-6 text-secondary-foreground/60 leading-relaxed text-lg max-w-md">
-                {t.whyUs.premiumFleetDesc}
-              </p>
-              <div className="mt-8 grid grid-cols-2 gap-4">
-                {[
-                  { icon: Ship, title: t.whyUs.premiumFleet, desc: t.whyUs.premiumFleetDesc },
-                  { icon: Shield, title: t.whyUs.maxSafety, desc: t.whyUs.maxSafetyDesc },
-                  { icon: Star, title: t.whyUs.allInclusive, desc: t.whyUs.allInclusiveDesc },
-                  { icon: Clock, title: t.whyUs.support247, desc: t.whyUs.support247Desc },
-                ].map((item, i) => (
-                  <motion.div key={i} variants={fadeUp} transition={{ delay: i * 0.1 }} className="group">
-                    <div className="rounded-xl border border-secondary-foreground/10 bg-secondary-foreground/5 backdrop-blur-sm p-4 hover:border-primary/30 hover:bg-primary/5 transition-all duration-300">
-                      <item.icon className="h-6 w-6 text-primary mb-2 group-hover:scale-110 transition-transform" />
-                      <h3 className="font-display font-bold text-sm text-secondary-foreground">{item.title}</h3>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeRight} className="relative">
-              <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                <div className="space-y-3 sm:space-y-4 pt-8">
-                  <div className="rounded-2xl overflow-hidden shadow-elevated">
-                    <img src={cruises[0]?.images[1]} alt="" loading="lazy" className="w-full aspect-[3/4] object-cover hover:scale-105 transition-transform duration-700" />
+      {/* ============ WHY CHOOSE US ============ */}
+      <section className="py-14 md:py-20 bg-background">
+        <div className="container">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-10">
+            <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary">
+              <Shield className="h-3.5 w-3.5" /> {t.whyUs.sectionLabel}
+            </span>
+            <h2 className="mt-2 font-display text-2xl sm:text-3xl md:text-4xl font-black text-foreground">
+              {t.whyUs.title} <span className="text-primary">{t.whyUs.titleHighlight}</span>
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {[
+              { icon: Ship, title: t.whyUs.premiumFleet, desc: t.whyUs.premiumFleetDesc },
+              { icon: Shield, title: t.whyUs.maxSafety, desc: t.whyUs.maxSafetyDesc },
+              { icon: Star, title: t.whyUs.allInclusive, desc: t.whyUs.allInclusiveDesc },
+              { icon: Clock, title: t.whyUs.support247, desc: t.whyUs.support247Desc },
+            ].map((item, i) => (
+              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.08 }}>
+                <div className="rounded-xl border border-border bg-card p-5 text-center h-full">
+                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <item.icon className="h-6 w-6" />
                   </div>
-                  <div className="rounded-2xl overflow-hidden shadow-elevated">
-                    <img src={cruises[2]?.images[2]} alt="" loading="lazy" className="w-full aspect-square object-cover hover:scale-105 transition-transform duration-700" />
-                  </div>
-                </div>
-                <div className="space-y-3 sm:space-y-4">
-                  <div className="rounded-2xl overflow-hidden shadow-elevated">
-                    <img src={cruises[1]?.images[2]} alt="" loading="lazy" className="w-full aspect-square object-cover hover:scale-105 transition-transform duration-700" />
-                  </div>
-                  <div className="rounded-2xl overflow-hidden shadow-elevated">
-                    <img src={cruises[3]?.images[1]} alt="" loading="lazy" className="w-full aspect-[3/4] object-cover hover:scale-105 transition-transform duration-700" />
-                  </div>
-                </div>
-              </div>
-              {/* Floating badge */}
-              <motion.div 
-                animate={{ y: [0, -8, 0] }} 
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -bottom-4 -left-4 sm:bottom-8 sm:-left-8 bg-card rounded-2xl p-4 shadow-elevated border border-border/50 z-10"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl gradient-primary text-primary-foreground">
-                    <Heart className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <div className="font-display font-black text-xl text-foreground">5000+</div>
-                    <div className="text-xs text-muted-foreground">{t.hero.happyTravellers}</div>
-                  </div>
+                  <h3 className="font-display font-bold text-sm text-foreground mb-1">{item.title}</h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
                 </div>
               </motion.div>
-            </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ============ CRUISE COMPARISON ============ */}
-      <section className="py-20 md:py-28 bg-background">
+      <section className="py-14 md:py-20 bg-muted/20">
         <div className="container">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-14">
-            <span className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-primary">
-              <Compass className="h-4 w-4" /> {t.compare.sectionLabel}
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-10">
+            <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary">
+              <Ship className="h-3.5 w-3.5" /> {t.compare.sectionLabel}
             </span>
-            <h2 className="mt-3 font-display text-2xl sm:text-4xl md:text-5xl font-black text-foreground">
-              {t.compare.title} <span className="text-gradient">{t.compare.titleHighlight}</span>
+            <h2 className="mt-2 font-display text-2xl sm:text-3xl md:text-4xl font-black text-foreground">
+              {t.compare.title} <span className="text-primary">{t.compare.titleHighlight}</span>
             </h2>
-            <p className="mt-4 text-muted-foreground max-w-lg mx-auto">{t.compare.subtitle}</p>
+            <p className="mt-2 text-muted-foreground text-sm max-w-md mx-auto">{t.compare.subtitle}</p>
           </motion.div>
 
           {/* Desktop Table */}
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="hidden md:block overflow-x-auto rounded-2xl border border-border/50 shadow-elevated bg-card">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="hidden md:block overflow-x-auto rounded-xl border border-border bg-card">
             <table className="w-full">
               <thead>
-                <tr className="gradient-navy text-secondary-foreground">
-                  <th className="px-6 py-4 text-left text-sm font-display font-bold">{t.compare.cruise}</th>
-                  <th className="px-6 py-4 text-center text-sm font-display font-bold">{t.compare.price}</th>
-                  <th className="px-6 py-4 text-center text-sm font-display font-bold">{t.compare.capacity}</th>
-                  <th className="px-6 py-4 text-center text-sm font-display font-bold">{t.compare.cabins}</th>
-                  <th className="px-6 py-4 text-center text-sm font-display font-bold">{t.compare.duration}</th>
-                  <th className="px-6 py-4 text-center text-sm font-display font-bold"></th>
+                <tr className="bg-muted/50 border-b border-border">
+                  <th className="px-5 py-3 text-left text-xs font-bold text-foreground uppercase tracking-wide">{t.compare.cruise}</th>
+                  <th className="px-5 py-3 text-center text-xs font-bold text-foreground uppercase tracking-wide">{t.compare.price}</th>
+                  <th className="px-5 py-3 text-center text-xs font-bold text-foreground uppercase tracking-wide">{t.compare.capacity}</th>
+                  <th className="px-5 py-3 text-center text-xs font-bold text-foreground uppercase tracking-wide">{t.compare.cabins}</th>
+                  <th className="px-5 py-3 text-center text-xs font-bold text-foreground uppercase tracking-wide">{t.compare.duration}</th>
+                  <th className="px-5 py-3 text-center text-xs font-bold text-foreground uppercase tracking-wide"></th>
                 </tr>
               </thead>
               <tbody>
-                {cruises.map((c, i) => (
-                  <tr key={c.id} className={`border-t border-border/30 hover:bg-primary/5 transition-colors ${i % 2 === 0 ? 'bg-card' : 'bg-muted/30'}`}>
-                    <td className="px-6 py-4">
+                {cruises.map((c) => (
+                  <tr key={c.id} className="border-t border-border hover:bg-muted/30 transition-colors">
+                    <td className="px-5 py-3">
                       <div className="flex items-center gap-3">
-                        <img src={c.images[0]} alt={c.name} loading="lazy" className="h-12 w-16 rounded-lg object-cover shadow-sm" />
+                        <img src={c.images[0]} alt={c.name} loading="lazy" className="h-10 w-14 rounded-lg object-cover" />
                         <div>
-                          <p className="font-display font-bold text-foreground text-sm">{c.name}</p>
+                          <p className="font-bold text-foreground text-sm">{c.name}</p>
                           <p className="text-xs text-muted-foreground">{c.route}</p>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-center">
+                    <td className="px-5 py-3 text-center">
                       {c.oldPrice && <span className="text-xs text-muted-foreground line-through block">৳{c.oldPrice.toLocaleString()}</span>}
-                      <span className="font-display font-black text-primary text-lg">৳{c.price.toLocaleString()}</span>
-                      {c.packages?.some(p => p.isOffer) && <span className="text-xs text-destructive font-bold block">🔥 অফার</span>}
+                      <span className="font-display font-black text-primary text-base">৳{c.price.toLocaleString()}</span>
                     </td>
-                    <td className="px-6 py-4 text-center text-sm text-muted-foreground">{c.capacity}</td>
-                    <td className="px-6 py-4 text-center text-sm text-muted-foreground">{c.cabins}</td>
-                    <td className="px-6 py-4 text-center text-sm text-muted-foreground">{c.duration}</td>
-                    <td className="px-6 py-4 text-center">
+                    <td className="px-5 py-3 text-center text-sm text-muted-foreground">{c.capacity}</td>
+                    <td className="px-5 py-3 text-center text-sm text-muted-foreground">{c.cabins}</td>
+                    <td className="px-5 py-3 text-center text-sm text-muted-foreground">{c.duration}</td>
+                    <td className="px-5 py-3 text-center">
                       <Link to={`/cruises/${c.id}`}>
-                        <Button size="sm" className="gradient-primary text-primary-foreground rounded-lg font-semibold text-xs gap-1 hover:shadow-glow transition-all">
+                        <Button size="sm" className="bg-primary text-primary-foreground rounded-lg font-semibold text-xs gap-1 h-8">
                           {t.compare.view} <ArrowRight className="h-3 w-3" />
                         </Button>
                       </Link>
@@ -562,24 +465,23 @@ export default function Index() {
           </motion.div>
 
           {/* Mobile Cards */}
-          <div className="md:hidden space-y-3">
+          <div className="md:hidden space-y-2.5">
             {cruises.map((c, i) => (
-              <motion.div key={c.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scaleIn} transition={{ delay: i * 0.05 }}>
+              <motion.div key={c.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.04 }}>
                 <Link to={`/cruises/${c.id}`}>
-                  <Card className={`border-border/50 hover:shadow-md transition-all bg-card hover:border-primary/20 ${i % 2 === 0 ? '' : 'bg-muted/20'}`}>
-                    <CardContent className="p-4 flex items-center gap-3">
-                      <img src={c.images[0]} alt={c.name} loading="lazy" className="h-16 w-20 rounded-xl object-cover flex-shrink-0 shadow-sm" />
+                  <Card className="border-border hover:shadow-md transition-shadow bg-card">
+                    <CardContent className="p-3 flex items-center gap-3">
+                      <img src={c.images[0]} alt={c.name} loading="lazy" className="h-14 w-18 rounded-lg object-cover flex-shrink-0" />
                       <div className="flex-1 min-w-0">
-                        <p className="font-display font-bold text-foreground text-sm truncate">{c.name}</p>
+                        <p className="font-bold text-foreground text-sm truncate">{c.name}</p>
                         <p className="text-xs text-muted-foreground truncate">{c.route}</p>
-                        <div className="mt-1 flex items-center gap-2 flex-wrap">
+                        <div className="mt-1 flex items-center gap-1.5">
                           {c.oldPrice && <span className="text-xs text-muted-foreground line-through">৳{c.oldPrice.toLocaleString()}</span>}
-                          <span className="font-display font-black text-primary text-lg leading-tight">৳{c.price.toLocaleString()}</span>
-                          {c.packages?.some(p => p.isOffer) && <span className="text-xs text-destructive font-bold">🔥 অফার</span>}
+                          <span className="font-display font-black text-primary text-base">৳{c.price.toLocaleString()}</span>
                         </div>
                       </div>
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg gradient-primary text-primary-foreground flex-shrink-0">
-                        <ArrowRight className="h-4 w-4" />
+                      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground flex-shrink-0">
+                        <ArrowRight className="h-3.5 w-3.5" />
                       </div>
                     </CardContent>
                   </Card>
@@ -591,38 +493,34 @@ export default function Index() {
       </section>
 
       {/* ============ TESTIMONIALS ============ */}
-      <section className="py-20 md:py-28 bg-warm-bg relative overflow-hidden">
-        <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
-        <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-emerald/5 blur-3xl" />
-        <div className="container relative">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-14">
-            <span className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-primary">
-              <Heart className="h-4 w-4" /> {t.testimonials.sectionLabel}
+      <section className="py-14 md:py-20 bg-background">
+        <div className="container">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-10">
+            <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary">
+              <Heart className="h-3.5 w-3.5" /> {t.testimonials.sectionLabel}
             </span>
-            <h2 className="mt-3 font-display text-2xl sm:text-4xl md:text-5xl font-black text-foreground">
-              {t.testimonials.title} <span className="text-gradient">{t.testimonials.titleHighlight}</span>
+            <h2 className="mt-2 font-display text-2xl sm:text-3xl md:text-4xl font-black text-foreground">
+              {t.testimonials.title} <span className="text-primary">{t.testimonials.titleHighlight}</span>
             </h2>
           </motion.div>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-3">
             {testimonials.slice(0, 3).map((testi, i) => (
-              <motion.div key={testi.name} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scaleIn} transition={{ delay: i * 0.1 }}>
-                <Card className="border-border/50 hover:shadow-elevated transition-all duration-500 h-full bg-card hover:border-primary/20 hover:-translate-y-1">
-                  <CardContent className="p-7 relative">
-                    {/* Quote mark */}
-                    <div className="absolute top-4 right-4 text-6xl font-display font-black text-primary/10 leading-none">"</div>
-                    <div className="flex gap-1 mb-4">
+              <motion.div key={testi.name} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.08 }}>
+                <Card className="border-border hover:shadow-md transition-shadow h-full bg-card">
+                  <CardContent className="p-5">
+                    <div className="flex gap-0.5 mb-3">
                       {Array.from({ length: testi.rating }, (_, i) => (
-                        <Star key={i} className="h-5 w-5 fill-gold text-gold" />
+                        <Star key={i} className="h-4 w-4 fill-primary text-primary" />
                       ))}
                     </div>
-                    <p className="text-muted-foreground italic leading-relaxed mb-6 relative z-10">"{testi.text}"</p>
-                    <div className="flex items-center gap-3 border-t border-border/30 pt-4">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl gradient-primary text-sm font-bold text-primary-foreground shadow-lg">
+                    <p className="text-sm text-muted-foreground italic leading-relaxed mb-4">"{testi.text}"</p>
+                    <div className="flex items-center gap-3 border-t border-border pt-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground">
                         {testi.name.split(" ").map(n => n[0]).join("")}
                       </div>
                       <div>
-                        <span className="font-display font-bold text-foreground">{testi.name}</span>
+                        <span className="font-bold text-sm text-foreground">{testi.name}</span>
                         <p className="text-xs text-muted-foreground flex items-center gap-1">
                           <Shield className="h-3 w-3 text-emerald" /> {t.testimonials.verifiedGuest}
                         </p>
@@ -637,51 +535,36 @@ export default function Index() {
       </section>
 
       {/* ============ CTA ============ */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
-        <div className="absolute inset-0 gradient-hero" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,hsl(28_100%_52%/0.12),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,hsl(170_65%_40%/0.08),transparent_50%)]" />
-        
-        {/* Animated decorative elements */}
-        <div className="absolute top-10 left-10 opacity-[0.06] pointer-events-none">
-          <Ship className="h-32 w-32 text-primary animate-float" />
-        </div>
-        <div className="absolute bottom-10 right-10 opacity-[0.06] pointer-events-none">
-          <Anchor className="h-24 w-24 text-primary animate-float" style={{ animationDelay: "1.5s" }} />
-        </div>
-
-        <div className="container relative z-10 text-center">
+      <section className="py-16 md:py-24 bg-secondary">
+        <div className="container text-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            <motion.div
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="inline-flex items-center gap-2 rounded-full bg-primary/10 backdrop-blur-md border border-primary/20 px-6 py-2 text-sm font-semibold text-primary mb-8"
-            >
-              <Sparkles className="h-4 w-4" /> {t.hero.badge}
-            </motion.div>
-            <h2 className="font-display text-3xl sm:text-4xl md:text-6xl font-black text-secondary-foreground mb-6 leading-tight">
-              {t.cta.title}
-              <br />
-              <span className="text-gradient">{t.cta.titleHighlight}</span>
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-secondary-foreground mb-4">
+              {t.cta.title}{" "}
+              <span className="text-primary">{t.cta.titleHighlight}</span>
             </h2>
-            <p className="mx-auto max-w-xl text-base sm:text-lg text-secondary-foreground/60 mb-10 leading-relaxed">
+            <p className="mx-auto max-w-lg text-sm sm:text-base text-secondary-foreground/60 mb-8">
               {t.cta.subtitle}
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-3">
               <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="gradient-primary text-primary-foreground font-bold text-base px-10 h-14 rounded-2xl shadow-glow hover:scale-105 transition-transform gap-2 shimmer">
-                  <Phone className="h-5 w-5" /> {t.cta.whatsappUs}
+                <Button size="lg" className="bg-primary text-primary-foreground font-bold rounded-xl h-11 px-8 gap-2 hover:bg-primary/90">
+                  <Phone className="h-4 w-4" /> {t.cta.whatsappUs}
                 </Button>
               </a>
               <Link to="/contact">
-                <Button size="lg" variant="outline" className="border-2 border-primary/40 text-primary font-bold text-base px-10 h-14 rounded-2xl hover:bg-primary hover:text-primary-foreground transition-all gap-2 backdrop-blur-md bg-secondary/20">
-                  <MapPin className="h-5 w-5" /> {t.cta.contactPage}
+                <Button size="lg" variant="outline" className="border-primary/40 text-primary font-bold rounded-xl h-11 px-8 gap-2 hover:bg-primary hover:text-primary-foreground">
+                  <MapPin className="h-4 w-4" /> {t.cta.contactPage}
                 </Button>
               </Link>
             </div>
           </motion.div>
         </div>
       </section>
+
+      {/* Booking Modal */}
+      {bookingCruise && (
+        <BookingModal cruise={bookingCruise} open={bookingOpen} onOpenChange={setBookingOpen} />
+      )}
     </div>
   );
 }
