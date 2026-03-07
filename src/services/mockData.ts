@@ -368,6 +368,7 @@ export interface Cruise {
   priceLabel: string;
   featured: boolean;
   images: string[];
+  featuredImageIndex?: number;
   facilities: string[];
   touristSpots?: string[];
   itinerary?: ItineraryDay[];

@@ -282,7 +282,7 @@ export default function Index() {
                 <Link to={`/cruises/${cruise.id}`} className="group block">
                   <Card className="overflow-hidden border-border/50 hover:shadow-elevated transition-all duration-500 hover:-translate-y-3 bg-card hover:border-primary/20">
                     <div className="watermark-container aspect-[4/3] overflow-hidden relative">
-                      <img src={cruise.images[0]} alt={cruise.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" draggable={false} />
+                      <img src={cruise.images[cruise.featuredImageIndex ?? 0]} alt={cruise.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" draggable={false} />
                       <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       
                       {/* Hover overlay content */}

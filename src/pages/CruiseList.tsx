@@ -81,7 +81,7 @@ export default function CruiseList() {
                 <Link to={`/cruises/${cruise.id}`} className="group block">
                   <Card className="overflow-hidden border-border/50 hover:shadow-elevated transition-all duration-500 hover:-translate-y-2 bg-card">
                     <div className="watermark-container aspect-[16/10] overflow-hidden relative">
-                      <img src={cruise.images[0]} alt={cruise.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" draggable={false} />
+                      <img src={cruise.images[cruise.featuredImageIndex ?? 0]} alt={cruise.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" draggable={false} />
                       <div className="absolute inset-0 bg-gradient-to-t from-secondary/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       {cruise.featured && (
                         <div className="absolute top-3 left-3">
