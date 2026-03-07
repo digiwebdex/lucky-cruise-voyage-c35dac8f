@@ -80,7 +80,7 @@ export default function Footer() {
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 flex-shrink-0">
                     <MapPin className="h-4 w-4 text-primary" />
                   </div>
-                  <span>Dhaka, Bangladesh</span>
+                  <span>{settings.address}</span>
                 </li>
               </ul>
             </div>
