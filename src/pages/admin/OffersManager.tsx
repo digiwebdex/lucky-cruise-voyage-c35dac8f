@@ -53,6 +53,7 @@ export default function OffersManager() {
         linkedCruiseId: form.linkedCruiseId!,
         description: form.description || "",
         isActive: form.isActive ?? true,
+        expiryDate: form.expiryDate || undefined,
       };
       setOffers([...offers, newOffer]);
     } else {
