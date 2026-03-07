@@ -97,6 +97,7 @@ const KEYS = {
   seo: "cms_seo",
   testimonials: "cms_testimonials",
   teamMembers: "cms_teamMembers",
+  offers: "cms_offers",
 } as const;
 
 // Bump this version whenever mockData defaults change to bust localStorage cache
