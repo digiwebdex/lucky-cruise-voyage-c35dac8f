@@ -1390,6 +1390,7 @@ export const cruises: Cruise[] = [
   // ===== 6. MV Pearl 3 =====
   {
     id: "mv-pearl-3",
+    destination: "sundarban",
     name: "M.V Pearl 3",
     subtitle: "Tourist Ship — Mangrove Forest Sundarban",
     description: "MV Pearl 3 is the newest addition to the Pearl fleet, offering enhanced luxury and modern comforts for the ultimate Sundarban cruise experience.",
