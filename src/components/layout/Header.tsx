@@ -209,11 +209,11 @@ export default function Header() {
                 <Globe className="h-4 w-4" />
                 {lang === "bn" ? "Switch to English" : "বাংলায় দেখুন"}
               </button>
-              <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer" className="block pt-2">
-                <Button size="lg" className="w-full gap-2 gradient-primary text-primary-foreground font-bold">
-                  <Phone className="h-4 w-4" /> {t.nav.bookOnWhatsApp}
+              <div className="pt-2">
+                <Button size="lg" onClick={() => { setMobileOpen(false); setBookingOpen(true); }} className="w-full gap-2 gradient-primary text-primary-foreground font-bold">
+                  <Phone className="h-4 w-4" /> {t.nav.bookNow}
                 </Button>
-              </a>
+              </div>
             </div>
           </motion.nav>
         )}
