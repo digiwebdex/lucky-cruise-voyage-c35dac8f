@@ -112,10 +112,10 @@ const KEYS = {
   testimonials: "cms_testimonials",
   teamMembers: "cms_teamMembers",
   offers: "cms_offers",
+  blogs: "cms_blogs",
 } as const;
 
-// Bump this version whenever mockData defaults change to bust localStorage cache
-const DATA_VERSION = "v12";
+const DATA_VERSION = "v13";
 const VERSION_KEY = "cms_data_version";
 
 function initVersionCheck() {
