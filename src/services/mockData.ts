@@ -1689,6 +1689,7 @@ export const cruises: Cruise[] = [
   // ===== 10. MV Mohammadi 2 =====
   {
     id: "mv-mohammadi-2",
+    destination: "sundarban",
     name: "M.V Mohammadi 2",
     subtitle: "Non-AC Cruise Vessel — Mangrove Forest Sundarban",
     description: "এম.ভি মোহাম্মাদী ২ is a brand new, colorfully designed Non-AC cruise vessel built for an affordable yet memorable Sundarban adventure. Featuring captivating interior design, live BBQ corner, dual engines for safe travel, dual generators for 24/7 electricity, IPS lighting system, and modern GPS/VHF/Echo Sounder navigation. An experienced chef prepares delicious meals on board.",
