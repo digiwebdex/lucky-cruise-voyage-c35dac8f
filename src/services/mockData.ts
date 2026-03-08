@@ -489,32 +489,32 @@ const sundarbanItinerary: ItineraryDay[] = [
 // ===== Helper to build the Khayapar menu =====
 const khayaparMenu: MenuDay[] = [
   {
-    day: "Day 1",
+    day: "১ম দিন",
     meals: [
-      { name: "Breakfast", items: "Bread, Paratha, Vegetables, Dal, Egg Omelette, Butter, Jelly, Honey, Banana, Dessert (Suji/Payesh), Tea-Coffee." },
-      { name: "Snacks", items: "Cake, Biscuit, Tea-Coffee." },
-      { name: "Lunch", items: "Plain Rice, Parshe Fish, Chicken, Bhorta, Dal, Salad, Dessert, Tea-Coffee." },
-      { name: "Evening Snacks", items: "Thai Soup, French Fries, Tea-Coffee." },
-      { name: "Dinner", items: "Egg Fried Rice, Chicken Fry, Chinese Vegetables, Shrimp Malai Curry, Cashew Nut Salad, Soft Drinks." },
+      { name: "সকালের নাস্তা", items: "পাউরুটি, পরোটা, সবজি, ডাল, ডিম অমলেট, মাখন, জেলি, মধু, কলা, ডেজার্ট (সুজি / পায়েস), চা-কফি।" },
+      { name: "স্ন্যাকস", items: "কেক, বিস্কুট, চা-কফি।" },
+      { name: "দুপুরের খাবার", items: "সাদা ভাত, পারশে মাছ, মুরগি, ভর্তা, ডাল, সালাদ, ডেজার্ট, চা-কফি।" },
+      { name: "বিকেলের স্ন্যাকস", items: "থাই স্যুপ, ফ্রেঞ্চ ফ্রাই, চা-কফি।" },
+      { name: "রাতের খাবার", items: "এগ ফ্রাইড রাইস, চিকেন ফ্রাই, চাইনিজ সবজি, চিংড়ি মালাইকারি, কাজুবাদাম সালাদ, সফট ড্রিংকস।" },
     ],
   },
   {
-    day: "Day 2",
+    day: "২য় দিন",
     meals: [
-      { name: "Morning Snacks", items: "Dry Cake/Biscuit, Tea-Coffee." },
-      { name: "Breakfast", items: "Khichuri, Egg Malai Curry, Sea Fish Fry, Begun Bhaja, Achar, Tea-Coffee." },
-      { name: "Snacks", items: "Guava, Lemon Sherbet, Tea-Coffee." },
-      { name: "Lunch", items: "Plain Rice, Koral Fish, Duck Bhuna, Vegetables, Bhorta, Dal, Salad, Firni, Tea-Coffee." },
-      { name: "Evening Snacks", items: "Noodles, Tea-Coffee." },
-      { name: "Dinner", items: "Egg Fried Rice, Paratha, Chicken Bar-B-Q, Fish Bar-B-Q, Chinese Vegetables, Cholar Dal Bhuna, Russian Salad, Soft Drinks." },
+      { name: "মর্নিং স্ন্যাকস", items: "ড্রাই কেক / বিস্কুট, চা-কফি।" },
+      { name: "সকালের নাস্তা", items: "খিচুড়ি, ডিম মালাইকারি, সামুদ্রিক মাছ ভাজা, বেগুন ভাজা, আচার, চা-কফি।" },
+      { name: "স্ন্যাকস", items: "পেয়ারা, লেবুর শরবত, চা-কফি।" },
+      { name: "দুপুরের খাবার", items: "সাদা ভাত, কোরাল মাছ, হাঁস ভুনা, সবজি, ভর্তা, ডাল, সালাদ, ফিরনি, চা-কফি।" },
+      { name: "স্ন্যাকস", items: "নুডলস, চা-কফি।" },
+      { name: "রাতের খাবার", items: "এগ ফ্রাইড রাইস, পরোটা, চিকেন বারবিকিউ, ফিশ বারবিকিউ, চাইনিজ সবজি, ছোলার ডাল ভুনা, রাশিয়ান সালাদ, সফট ড্রিংকস।" },
     ],
   },
   {
-    day: "Day 3",
+    day: "৩য় দিন",
     meals: [
-      { name: "Breakfast", items: "Plain Rice, Various Bhorta, Egg Omelette, Ghee, Dal, Salad, Tea-Coffee." },
-      { name: "Snacks", items: "Orange, Biscuit, Tea-Coffee." },
-      { name: "Lunch", items: "Plain Polao, Mutton Rezala, Sea Fish, Egg Malai Curry, Muri Ghonto, Salad, Doi." },
+      { name: "সকালের নাস্তা", items: "সাদা ভাত, বিভিন্ন ভর্তা, ডিম অমলেট, ঘি, ডাল, সালাদ, চা-কফি।" },
+      { name: "স্ন্যাকস", items: "কমলা, বিস্কুট, চা-কফি।" },
+      { name: "দুপুরের খাবার", items: "প্লেইন পোলাও, মাটন রেজালা, সি-ফিশ, ডিম মালাইকারি, মুরিঘন্ট, সালাদ, দই।" },
     ],
   },
 ];
