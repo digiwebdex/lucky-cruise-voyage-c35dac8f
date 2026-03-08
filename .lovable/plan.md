@@ -1,24 +1,22 @@
 
 
-## Move Seat Plan into Cruise Editor
+# Add Duplicate of MV Jol Safari for Tanguar Haor
 
-The user wants to remove the standalone Seat Plan Manager page and instead manage seat plan images directly within each cruise's editor page -- matching the public cruise detail page layout where the seat plan appears below the itinerary/content tabs.
+## What
+Add a second Tanguar Haor cruise entry by duplicating MV Jol Safari's data with a different ID and name (e.g., "MV Jol Safari 2" / "এমভি জল সাফারি ২"). Same images, facilities, itinerary, and package structure -- just a separate listing.
 
-### Changes
+## Changes
 
-**1. Add Seat Plan section to CruiseEditor.tsx**
-- Add a new "Seat Plan" section after the Packages section (or after the tabs), matching the public page layout
-- Show the current `seatPlanImage` with the existing `SeatPlanViewer` component for preview
-- Add a delete button (trash icon overlay) to remove the current seat plan image
-- Add an input field to paste a new seat plan image URL (same pattern as the image gallery editor)
-- Import `Grid3X3` icon and `SeatPlanViewer` component
+**File: `src/services/mockData.ts`**
+- Add a new cruise entry after MV Jol Safari (around line 1016) with:
+  - `id: "mv-jol-safari-2"`
+  - `destination: "tanguar-haor"`
+  - `name: "এমভি জল সাফারি ২"`
+  - Same images (jol-safari-1 through 9), same seat plan image, same facilities, itinerary, menu, safety, tips, packages
+  - Slightly different subtitle to distinguish it (e.g., "টাঙ্গুয়ার হাওরে দ্বিতীয় লাক্সারি এসি হাউজবোট")
 
-**2. Remove Seat Plan Manager admin page**
-- Remove the `/admin/seat-plans` route from `App.tsx`
-- Remove the "Seat Plans" link from `AdminLayout.tsx` sidebar
-- The file `src/pages/admin/SeatPlanManager.tsx` can remain but won't be routed
+**File: `src/services/cmsStore.ts`**
+- Increment `DATA_VERSION` to force localStorage refresh
 
-### Technical Details
-
-The seat plan section in CruiseEditor will use `form.seatPlanImage` field (already in the Cruise type). The UI pattern mirrors the existing image gallery editor: display current image with a hover-delete button, plus an input/button to add a new URL. The `SeatPlanViewer` component with its zoom functionality will be reused for preview.
+No other files need changes -- the cruise list, detail page, and admin will pick it up automatically.
 
