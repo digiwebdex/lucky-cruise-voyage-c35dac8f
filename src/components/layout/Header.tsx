@@ -140,12 +140,10 @@ export default function Header() {
             <span>{lang === "bn" ? "EN" : "বাং"}</span>
           </button>
 
-          <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer">
-            <Button size="sm" className="hidden gap-2 gradient-primary text-primary-foreground shadow-md hover:shadow-lg transition-all hover:scale-105 sm:flex font-semibold">
-              <Phone className="h-4 w-4" /> {t.nav.bookNow}
-              <ChevronRight className="h-3 w-3" />
-            </Button>
-          </a>
+          <Button size="sm" onClick={() => setBookingOpen(true)} className="hidden gap-2 gradient-primary text-primary-foreground shadow-md hover:shadow-lg transition-all hover:scale-105 sm:flex font-semibold">
+            <Phone className="h-4 w-4" /> {t.nav.bookNow}
+            <ChevronRight className="h-3 w-3" />
+          </Button>
           <button className="md:hidden p-2 rounded-lg hover:bg-primary/10 transition-colors text-secondary-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
