@@ -52,6 +52,8 @@ const App = () => (
               <Route path="/packages" element={<Packages />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/blog" element={<BlogList />} />
+              <Route path="/blog/:slug" element={<BlogDetail />} />
             </Route>
             {/* Admin */}
             <Route path="/admin/login" element={<AdminLogin />} />
