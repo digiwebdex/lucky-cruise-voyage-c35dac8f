@@ -11,6 +11,7 @@ const sidebarLinks = [
   { to: "/admin/categories", label: "Categories", icon: Tag },
   { to: "/admin/availability", label: "Availability", icon: CalendarDays },
   { to: "/admin/offers", label: "Offers", icon: Flame },
+  { to: "/admin/blogs", label: "Blog Posts", icon: BookOpen },
   { to: "/admin/testimonials", label: "Testimonials", icon: MessageSquare },
   { to: "/admin/team", label: "Team Members", icon: UserCheck },
   { to: "/admin/media", label: "Gallery", icon: Image },
