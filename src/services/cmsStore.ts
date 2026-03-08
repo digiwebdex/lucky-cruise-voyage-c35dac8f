@@ -53,7 +53,20 @@ export interface Offer {
   linkedCruiseId: string;
   description?: string;
   isActive: boolean;
-  expiryDate?: string; // ISO date string, offer hidden after this date
+  expiryDate?: string;
+}
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  category: "sundarban" | "tanguar-haor";
+  excerpt: string;
+  body: string;
+  coverImage: string;
+  author: string;
+  publishedAt: string;
+  isPublished: boolean;
 }
 
 // ===== Default Seeds =====
