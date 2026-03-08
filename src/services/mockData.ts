@@ -1549,6 +1549,7 @@ export const cruises: Cruise[] = [
   // ===== 9. MV Khayapar =====
   {
     id: "mv-khayapar",
+    destination: "sundarban",
     name: "M.V Khayapar",
     subtitle: "Tourist Ship — Mangrove Forest Sundarban",
     description: "MV Kheyapar has been built with enclosed and spacious open air observation decks, keeping in mind your entertainment and adventurous needs. A premium 75-passenger cruise with 35 cabins for the ultimate Sundarban experience.",
