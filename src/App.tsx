@@ -30,7 +30,9 @@ import OffersManager from "./pages/admin/OffersManager";
 import Bookings from "./pages/admin/Bookings";
 import CategoriesManager from "./pages/admin/CategoriesManager";
 import AvailabilityManager from "./pages/admin/AvailabilityManager";
-
+import BlogList from "./pages/BlogList";
+import BlogDetail from "./pages/BlogDetail";
+import BlogManager from "./pages/admin/BlogManager";
 const queryClient = new QueryClient();
 
 const App = () => (
