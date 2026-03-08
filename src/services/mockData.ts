@@ -359,6 +359,8 @@ export interface Package {
   categoryId?: string;
 }
 
+export type CruiseDestination = "sundarban" | "tanguar-haor";
+
 export interface Cruise {
   id: string;
   name: string;
@@ -372,6 +374,7 @@ export interface Cruise {
   oldPrice?: number;
   priceLabel: string;
   featured: boolean;
+  destination: CruiseDestination;
   images: string[];
   featuredImageIndex?: number;
   facilities: string[];
