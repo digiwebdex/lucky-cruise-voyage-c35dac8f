@@ -218,6 +218,7 @@ export default function Header() {
           </motion.nav>
         )}
       </AnimatePresence>
+      <HeaderBookingModal open={bookingOpen} onOpenChange={setBookingOpen} />
     </header>
   );
 }
