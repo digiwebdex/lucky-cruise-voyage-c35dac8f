@@ -1445,6 +1445,7 @@ export const cruises: Cruise[] = [
   // ===== 7. MV Silver =====
   {
     id: "mv-silver",
+    destination: "sundarban",
     name: "M.V Silver",
     subtitle: "Tourist Ship — Mangrove Forest Sundarban",
     description: "MV Silver is an elegant cruise ship designed for comfort and style. Its silver-themed interiors and excellent service make every Sundarban trip memorable.",
