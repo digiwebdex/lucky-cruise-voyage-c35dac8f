@@ -1494,6 +1494,7 @@ export const cruises: Cruise[] = [
   // ===== 8. MV Utshab =====
   {
     id: "mv-utshab",
+    destination: "sundarban",
     name: "M.V Utshab",
     subtitle: "Tourist Ship — Mangrove Forest Sundarban",
     description: "MV Utshab (meaning 'Festival') brings a festive spirit to every Sundarban cruise. Spacious, colourful, and well-equipped, it's ideal for large group adventures.",
