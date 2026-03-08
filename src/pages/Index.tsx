@@ -115,18 +115,34 @@ export default function Index() {
         <div className="container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <div className="rounded-xl bg-card border border-border shadow-md p-4 sm:p-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-end">
-                {/* Cruise Select */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 items-end">
+                {/* Tour Select */}
+                <div className="lg:col-span-1">
+                  <label className="text-xs font-semibold text-muted-foreground mb-1 block">
+                    {language === "bn" ? "ট্যুর নির্বাচন করুন" : "Select Tour"}
+                  </label>
+                  <Select value={selectedTour} onValueChange={v => { setSelectedTour(v); setSelectedCruise(""); }}>
+                    <SelectTrigger className="h-10 rounded-lg">
+                      <SelectValue placeholder={language === "bn" ? "ট্যুর বাছুন" : "Choose tour"} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="sundarban">{language === "bn" ? "সুন্দরবন ভ্রমণ" : "Sundarban Tour"}</SelectItem>
+                      <SelectItem value="tanguar-haor">{language === "bn" ? "টাঙ্গুয়ার হাওর ভ্রমণ" : "Tanguar Haor Tour"}</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Cruise Select (filtered by tour) */}
                 <div className="lg:col-span-1">
                   <label className="text-xs font-semibold text-muted-foreground mb-1 block">
                     {language === "bn" ? "ক্রুজ নির্বাচন করুন" : "Select Cruise"}
                   </label>
-                  <Select onValueChange={setSelectedCruise}>
+                  <Select value={selectedCruise} onValueChange={setSelectedCruise}>
                     <SelectTrigger className="h-10 rounded-lg">
                       <SelectValue placeholder={language === "bn" ? "ক্রুজ বাছুন" : "Choose cruise"} />
                     </SelectTrigger>
                     <SelectContent>
-                      {cruises.map(c => (
+                      {(selectedTour ? cruises.filter(c => c.destination === selectedTour) : cruises).map(c => (
                         <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
                       ))}
                     </SelectContent>
