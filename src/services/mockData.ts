@@ -1806,6 +1806,7 @@ export const cruises: Cruise[] = [
   // ===== 11. MV The Crown =====
   {
     id: "mv-the-crown",
+    destination: "sundarban",
     name: "M.V The Crown",
     subtitle: "AC Vessel — Mangrove Forest Sundarban",
     description: "M.V The Crown is a premium AC cruise vessel designed with your entertainment and adventure needs in mind. Featuring enclosed and spacious open-sky observation decks, elegant cabins with modern interior décor, individual air conditioning, comfortable beds, sofa, mirror, storage cabinets, and luggage space — The Crown offers an unparalleled Sundarban experience.",
