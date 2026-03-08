@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Search, ChevronRight, MapPin, Clock, Users, ArrowRight, SlidersHorizontal, Phone } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -14,6 +14,8 @@ const scaleIn = { hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, sc
 
 export default function CruiseList() {
   const { t } = useLanguage();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const destination = searchParams.get("destination") || "all";
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState("default");
   const [minPrice, setMinPrice] = useState("");
@@ -21,6 +23,7 @@ export default function CruiseList() {
 
   const allResults = searchCruises(query);
   const results = allResults.filter(c => {
+    if (destination !== "all" && c.destination !== destination) return false;
     if (minPrice && c.price < Number(minPrice)) return false;
     if (maxPrice && c.price > Number(maxPrice)) return false;
     return true;
@@ -32,6 +35,16 @@ export default function CruiseList() {
     return 0;
   });
 
+  const pageTitle = destination === "tanguar-haor"
+    ? t.nav.tanguarHaorTour
+    : destination === "sundarban"
+      ? t.nav.sundarbanTour
+      : `${t.cruiseList.title} ${t.cruiseList.titleHighlight}`;
+
+  const pageSubtitle = destination === "tanguar-haor"
+    ? t.cruiseList.tanguarSubtitle || t.cruiseList.subtitle
+    : t.cruiseList.subtitle;
+
   return (
     <div>
       <section className="gradient-hero py-16 md:py-20 text-center relative overflow-hidden">
@@ -39,9 +52,41 @@ export default function CruiseList() {
         <div className="container relative">
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
             <h1 className="font-display text-4xl md:text-5xl font-black text-secondary-foreground">
-              {t.cruiseList.title} <span className="text-gradient">{t.cruiseList.titleHighlight}</span>
+              {destination === "all" ? (
+                <>{t.cruiseList.title} <span className="text-gradient">{t.cruiseList.titleHighlight}</span></>
+              ) : (
+                <span className="text-gradient">{pageTitle}</span>
+              )}
             </h1>
-            <p className="mt-3 text-secondary-foreground/60 max-w-md mx-auto">{t.cruiseList.subtitle}</p>
+            <p className="mt-3 text-secondary-foreground/60 max-w-md mx-auto">{pageSubtitle}</p>
+            
+            {/* Destination tabs */}
+            <div className="mt-6 flex justify-center gap-3">
+              {[
+                { key: "all", label: t.cruiseList.allCruises || "All" },
+                { key: "sundarban", label: t.nav.sundarbanTour },
+                { key: "tanguar-haor", label: t.nav.tanguarHaorTour },
+              ].map(tab => (
+                <button
+                  key={tab.key}
+                  onClick={() => {
+                    if (tab.key === "all") {
+                      searchParams.delete("destination");
+                    } else {
+                      searchParams.set("destination", tab.key);
+                    }
+                    setSearchParams(searchParams);
+                  }}
+                  className={`rounded-full px-5 py-2 text-sm font-bold transition-all ${
+                    destination === tab.key || (tab.key === "all" && destination === "all")
+                      ? "gradient-primary text-primary-foreground shadow-md"
+                      : "bg-secondary-foreground/10 text-secondary-foreground/70 hover:bg-secondary-foreground/20"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
@@ -88,6 +133,15 @@ export default function CruiseList() {
                           <span className="inline-flex items-center gap-1 rounded-full gradient-primary px-3 py-1 text-xs font-bold text-primary-foreground">{t.featured.featured}</span>
                         </div>
                       )}
+                      <div className="absolute top-3 right-3">
+                        <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-bold ${
+                          cruise.destination === "tanguar-haor" 
+                            ? "bg-emerald/90 text-white" 
+                            : "bg-primary/90 text-primary-foreground"
+                        }`}>
+                          {cruise.destination === "tanguar-haor" ? t.nav.tanguarHaorTour : t.nav.sundarbanTour}
+                        </span>
+                      </div>
                     </div>
                     <CardContent className="p-5">
                       <h3 className="font-display font-bold text-lg text-foreground group-hover:text-primary transition-colors">{cruise.name}</h3>
@@ -106,7 +160,7 @@ export default function CruiseList() {
                         </div>
                       </div>
                       <a
-                        href={`https://wa.me/8801711871072?text=${encodeURIComponent(`আমি ${cruise.name} ক্রুজ সম্পর্কে জানতে চাই`)}`}
+                        href={`https://wa.me/8801711871072?text=${encodeURIComponent(`আমি ${cruise.name} সম্পর্কে জানতে চাই`)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}

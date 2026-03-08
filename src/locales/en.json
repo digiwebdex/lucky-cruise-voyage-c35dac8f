@@ -7,7 +7,9 @@
     "about": "About",
     "contact": "Contact",
     "bookNow": "Book Now",
-    "bookOnWhatsApp": "Book on WhatsApp"
+    "bookOnWhatsApp": "Book on WhatsApp",
+    "sundarbanTour": "Sundarban Tour",
+    "tanguarHaorTour": "Tanguar Haor Tour"
   },
   "hero": {
     "badge": "Bangladesh's Premium Cruise Experience",
@@ -75,6 +77,8 @@
     "title": "Our",
     "titleHighlight": "Cruises",
     "subtitle": "Find your perfect cruise adventure in the Sundarbans",
+    "tanguarSubtitle": "Explore the crystal-clear waters of Tanguar Haor on luxury houseboats",
+    "allCruises": "All",
     "searchPlaceholder": "Search cruises, routes...",
     "minPrice": "Min ৳",
     "maxPrice": "Max ৳",

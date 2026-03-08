@@ -21,7 +21,7 @@ import { toast } from "@/hooks/use-toast";
 
 const emptyCruise: Cruise = {
   id: "", name: "", subtitle: "", description: "", route: "", duration: "", capacity: "", cabins: "",
-  price: 0, priceLabel: "per person (Bangladeshi)", featured: false, featuredImageIndex: 0, images: [], facilities: [],
+  price: 0, priceLabel: "per person (Bangladeshi)", featured: false, destination: "sundarban", featuredImageIndex: 0, images: [], facilities: [],
   touristSpots: [], itinerary: [], menu: [], safetyInfo: [], travelTips: [], thingsToCarry: [],
   additionalCosts: [], packageIncludes: [], packages: [], seatPlan: [],
 };
@@ -96,6 +96,16 @@ export default function CruiseEditor() {
           <ArrowLeft className="h-4 w-4" /> Back to Cruises
         </Button>
         <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <select
+              value={form.destination}
+              onChange={e => updateField("destination", e.target.value)}
+              className="rounded-md border border-border bg-background px-3 py-1.5 text-sm"
+            >
+              <option value="sundarban">সুন্দরবন ভ্রমণ</option>
+              <option value="tanguar-haor">টাঙ্গুয়ার হাওর ভ্রমণ</option>
+            </select>
+          </div>
           <div className="flex items-center gap-2">
             <Switch checked={form.featured} onCheckedChange={v => updateField("featured", v)} />
             <Label className="text-sm flex items-center gap-1"><Star className="h-4 w-4" /> Featured</Label>

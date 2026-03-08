@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { Menu, X, Phone, ChevronRight, Globe } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Menu, X, Phone, ChevronRight, ChevronDown, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.png";
@@ -9,12 +9,19 @@ import { useLanguage } from "@/contexts/LanguageContext";
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [cruiseDropdownOpen, setCruiseDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const { lang, setLang, t } = useLanguage();
 
+  const cruiseSubLinks = [
+    { to: "/cruises?destination=sundarban", label: t.nav.sundarbanTour },
+    { to: "/cruises?destination=tanguar-haor", label: t.nav.tanguarHaorTour },
+  ];
+
   const navLinks = [
     { to: "/", label: t.nav.home },
-    { to: "/cruises", label: t.nav.cruises },
+    { to: "/cruises", label: t.nav.cruises, hasDropdown: true },
     { to: "/packages", label: t.nav.packages },
     { to: "/gallery", label: t.nav.gallery },
     { to: "/about", label: t.nav.about },
@@ -25,6 +32,16 @@ export default function Header() {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setCruiseDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const toggleLang = () => setLang(lang === "bn" ? "en" : "bn");
@@ -40,7 +57,54 @@ export default function Header() {
         {/* Desktop Nav */}
         <nav className="hidden items-center gap-0.5 md:flex">
           {navLinks.map(link => {
-            const active = location.pathname === link.to || (link.to !== "/" && location.pathname.startsWith(link.to));
+            const active = location.pathname === link.to || (link.to !== "/" && location.pathname.startsWith(link.to.split("?")[0]));
+            
+            if (link.hasDropdown) {
+              return (
+                <div key={link.to} className="relative" ref={dropdownRef}>
+                  <button
+                    onClick={() => setCruiseDropdownOpen(!cruiseDropdownOpen)}
+                    className={`relative rounded-lg px-4 py-2 text-sm font-semibold transition-all duration-200 flex items-center gap-1 ${
+                      active
+                        ? "text-primary"
+                        : "text-secondary-foreground/70 hover:text-primary hover:bg-primary/5"
+                    }`}
+                  >
+                    {link.label}
+                    <ChevronDown className={`h-3.5 w-3.5 transition-transform ${cruiseDropdownOpen ? "rotate-180" : ""}`} />
+                    {active && (
+                      <motion.div
+                        layoutId="nav-underline"
+                        className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full gradient-primary"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                      />
+                    )}
+                  </button>
+                  <AnimatePresence>
+                    {cruiseDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -5 }}
+                        className="absolute top-full left-0 mt-1 w-56 rounded-xl border border-border/50 bg-card shadow-elevated overflow-hidden z-50"
+                      >
+                        {cruiseSubLinks.map(sub => (
+                          <Link
+                            key={sub.to}
+                            to={sub.to}
+                            onClick={() => setCruiseDropdownOpen(false)}
+                            className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            }
+
             return (
               <Link
                 key={link.to}
@@ -97,7 +161,33 @@ export default function Header() {
           >
             <div className="px-4 py-3 space-y-1">
               {navLinks.map(link => {
-                const active = location.pathname === link.to;
+                const active = location.pathname === link.to.split("?")[0];
+                
+                if (link.hasDropdown) {
+                  return (
+                    <div key={link.to}>
+                      <div className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold ${
+                        active ? "bg-primary/15 text-primary" : "text-secondary-foreground/70"
+                      }`}>
+                        {link.label}
+                      </div>
+                      <div className="ml-4 space-y-1">
+                        {cruiseSubLinks.map(sub => (
+                          <Link
+                            key={sub.to}
+                            to={sub.to}
+                            onClick={() => setMobileOpen(false)}
+                            className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium text-secondary-foreground/60 hover:bg-primary/5 hover:text-primary transition-all"
+                          >
+                            <ChevronRight className="h-3.5 w-3.5" />
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                }
+
                 return (
                   <Link
                     key={link.to}
