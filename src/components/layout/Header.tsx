@@ -26,7 +26,7 @@ export default function Header() {
     { to: "/cruises", label: t.nav.cruises, hasDropdown: true },
     { to: "/packages", label: t.nav.packages },
     { to: "/gallery", label: t.nav.gallery },
-    { to: "/blog", label: language === "bn" ? "ব্লগ" : "Blog" },
+    { to: "/blog", label: lang === "bn" ? "ব্লগ" : "Blog" },
     { to: "/about", label: t.nav.about },
     { to: "/contact", label: t.nav.contact },
   ];
