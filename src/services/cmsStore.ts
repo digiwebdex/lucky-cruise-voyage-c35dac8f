@@ -53,7 +53,20 @@ export interface Offer {
   linkedCruiseId: string;
   description?: string;
   isActive: boolean;
-  expiryDate?: string; // ISO date string, offer hidden after this date
+  expiryDate?: string;
+}
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  category: "sundarban" | "tanguar-haor";
+  excerpt: string;
+  body: string;
+  coverImage: string;
+  author: string;
+  publishedAt: string;
+  isPublished: boolean;
 }
 
 // ===== Default Seeds =====
@@ -99,10 +112,10 @@ const KEYS = {
   testimonials: "cms_testimonials",
   teamMembers: "cms_teamMembers",
   offers: "cms_offers",
+  blogs: "cms_blogs",
 } as const;
 
-// Bump this version whenever mockData defaults change to bust localStorage cache
-const DATA_VERSION = "v12";
+const DATA_VERSION = "v13";
 const VERSION_KEY = "cms_data_version";
 
 function initVersionCheck() {
@@ -170,6 +183,49 @@ function buildDefaultOffers(): Offer[] {
 
 export const getOffers = (): Offer[] => getStore(KEYS.offers, buildDefaultOffers());
 export const saveOffers = (data: Offer[]) => setStore(KEYS.offers, data);
+
+// ===== Blog =====
+const defaultBlogs: BlogPost[] = [
+  {
+    id: "blog-1",
+    title: "সুন্দরবনের রয়েল বেঙ্গল টাইগার: প্রকৃতির এক অনন্য সৃষ্টি",
+    slug: "royal-bengal-tiger-sundarban",
+    category: "sundarban",
+    excerpt: "সুন্দরবনে রয়েল বেঙ্গল টাইগারের জীবনযাত্রা এবং সংরক্ষণ সম্পর্কে জানুন। এই মহিমান্বিত প্রাণীটি কেন বিশ্বের অন্যতম বিপন্ন প্রজাতি।",
+    body: "সুন্দরবন হলো রয়েল বেঙ্গল টাইগারের অন্যতম প্রধান আবাসস্থল। এখানে প্রায় ১০০টিরও বেশি বাঘ রয়েছে বলে ধারণা করা হয়। এই বাঘগুলো ম্যানগ্রোভ বনে সাঁতার কাটতে এবং মাছ শিকার করতে পারদর্শী।\n\nসুন্দরবনের বাঘ অন্যান্য বাঘের তুলনায় আলাদা — এরা নোনা পানিতে সাঁতার কাটে, হরিণ ও বন্য শূকর শিকার করে এবং কখনো কখনো মানুষের কাছেও আসে।\n\nআমাদের ক্রুজ ট্যুরে আপনি নিরাপদ দূরত্ব থেকে এই অসাধারণ প্রাণীদের দেখার সুযোগ পাবেন।",
+    coverImage: "",
+    author: "Lucky Tours",
+    publishedAt: "2026-03-01T10:00:00Z",
+    isPublished: true,
+  },
+  {
+    id: "blog-2",
+    title: "টাঙ্গুয়ার হাওর: বাংলাদেশের দ্বিতীয় রামসার সাইট",
+    slug: "tanguar-haor-ramsar-site",
+    category: "tanguar-haor",
+    excerpt: "টাঙ্গুয়ার হাওরের অপরূপ সৌন্দর্য, জীববৈচিত্র্য এবং ভ্রমণ গাইড। কেন এটি প্রকৃতিপ্রেমীদের কাছে স্বর্গ।",
+    body: "টাঙ্গুয়ার হাওর সুনামগঞ্জ জেলায় অবস্থিত বাংলাদেশের অন্যতম বৃহত্তম মিঠাপানির জলাভূমি। ২০০০ সালে এটি রামসার সাইট হিসেবে ঘোষিত হয়।\n\nএই হাওরে ২০৮ প্রজাতির পাখি, ১৫০ প্রজাতির মাছ এবং অসংখ্য জলজ উদ্ভিদ রয়েছে। শীতকালে পরিযায়ী পাখিদের আগমনে হাওর এক অন্য রূপ ধারণ করে।\n\nআমাদের হাউজবোট ট্যুরে আপনি হাওরের নীল পানি, মেঘালয় পাহাড়ের দৃশ্য এবং স্থানীয় জেলেদের জীবনযাত্রা উপভোগ করতে পারবেন।",
+    coverImage: "",
+    author: "Lucky Tours",
+    publishedAt: "2026-03-05T10:00:00Z",
+    isPublished: true,
+  },
+  {
+    id: "blog-3",
+    title: "সুন্দরবন ভ্রমণে কী কী নিতে হবে — সম্পূর্ণ গাইড",
+    slug: "sundarban-travel-packing-guide",
+    category: "sundarban",
+    excerpt: "প্রথমবার সুন্দরবন যাচ্ছেন? এই সম্পূর্ণ প্যাকিং লিস্ট ও টিপস আপনার ভ্রমণকে আরও আরামদায়ক করবে।",
+    body: "সুন্দরবন ভ্রমণে যাওয়ার আগে সঠিক প্রস্তুতি নেওয়া খুবই গুরুত্বপূর্ণ। এখানে কিছু প্রয়োজনীয় জিনিসের তালিকা দেওয়া হলো:\n\n১. হালকা সুতির পোশাক\n২. সানস্ক্রিন ও সানগ্লাস\n৩. মশা তাড়ানোর ক্রিম\n৪. ক্যামেরা ও চার্জার\n৫. ব্যক্তিগত ওষুধ\n৬. পানির বোতল\n৭. টর্চলাইট\n\nআমাদের ক্রুজে খাবার, পানি ও মৌলিক প্রাথমিক চিকিৎসার ব্যবস্থা থাকলেও এই জিনিসগুলো সাথে রাখা উচিত।",
+    coverImage: "",
+    author: "Lucky Tours",
+    publishedAt: "2026-02-28T10:00:00Z",
+    isPublished: true,
+  },
+];
+
+export const getBlogs = (): BlogPost[] => getStore(KEYS.blogs, defaultBlogs);
+export const saveBlogs = (data: BlogPost[]) => setStore(KEYS.blogs, data);
 
 // Helper functions that mirror mockData exports
 export function getCruiseById(id: string): Cruise | undefined {

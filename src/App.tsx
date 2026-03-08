@@ -30,7 +30,9 @@ import OffersManager from "./pages/admin/OffersManager";
 import Bookings from "./pages/admin/Bookings";
 import CategoriesManager from "./pages/admin/CategoriesManager";
 import AvailabilityManager from "./pages/admin/AvailabilityManager";
-
+import BlogList from "./pages/BlogList";
+import BlogDetail from "./pages/BlogDetail";
+import BlogManager from "./pages/admin/BlogManager";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -50,6 +52,8 @@ const App = () => (
               <Route path="/packages" element={<Packages />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/blog" element={<BlogList />} />
+              <Route path="/blog/:slug" element={<BlogDetail />} />
             </Route>
             {/* Admin */}
             <Route path="/admin/login" element={<AdminLogin />} />
@@ -64,6 +68,7 @@ const App = () => (
               <Route path="bookings" element={<Bookings />} />
               <Route path="testimonials" element={<TestimonialsManager />} />
               <Route path="offers" element={<OffersManager />} />
+              <Route path="blogs" element={<BlogManager />} />
               <Route path="team" element={<TeamManager />} />
               <Route path="media" element={<MediaLibrary />} />
               

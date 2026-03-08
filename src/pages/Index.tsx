@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Ship, Shield, Star, Clock, MapPin, Phone, ChevronRight, ArrowRight, Users, Flame, Heart, Search } from "lucide-react";
+import { Ship, Shield, Star, Clock, MapPin, Phone, ChevronRight, ArrowRight, Users, Flame, Heart, Search, BookOpen, Calendar as CalendarIcon2, User as UserIcon2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
-import { getCruises, getTestimonials, getOffers } from "@/services/cmsStore";
+import { getCruises, getTestimonials, getOffers, getBlogs } from "@/services/cmsStore";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
@@ -447,6 +447,70 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+      {/* ============ BLOG ============ */}
+      {(() => {
+        const blogPosts = getBlogs().filter(b => b.isPublished).slice(0, 3);
+        if (blogPosts.length === 0) return null;
+        return (
+          <section className="py-14 md:py-20 bg-muted/20">
+            <div className="container">
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-10">
+                <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary">
+                  <BookOpen className="h-3.5 w-3.5" /> {language === "bn" ? "ব্লগ" : "Blog"}
+                </span>
+                <h2 className="mt-2 font-display text-2xl sm:text-3xl md:text-4xl font-black text-foreground">
+                  {language === "bn" ? "ভ্রমণ গল্প ও " : "Travel Stories & "}<span className="text-primary">{language === "bn" ? "গাইড" : "Guides"}</span>
+                </h2>
+                <p className="mt-2 text-muted-foreground text-sm max-w-md mx-auto">
+                  {language === "bn" ? "আমাদের সর্বশেষ ভ্রমণ টিপস এবং গাইড পড়ুন" : "Read our latest travel tips and guides"}
+                </p>
+              </motion.div>
+
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {blogPosts.map((post, i) => (
+                  <motion.div key={post.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.08 }}>
+                    <Link to={`/blog/${post.slug}`} className="group block">
+                      <Card className="overflow-hidden border-border hover:shadow-lg transition-all duration-300 h-full bg-card">
+                        <div className="aspect-[16/10] overflow-hidden relative bg-muted">
+                          {post.coverImage ? (
+                            <img src={post.coverImage} alt={post.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                          ) : (
+                            <div className="h-full w-full flex items-center justify-center bg-gradient-to-br from-primary/10 to-secondary/20">
+                              <BookOpen className="h-12 w-12 text-primary/30" />
+                            </div>
+                          )}
+                          <div className="absolute top-3 left-3">
+                            <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold ${post.category === "tanguar-haor" ? "bg-emerald text-emerald-foreground" : "bg-primary text-primary-foreground"}`}>
+                              {post.category === "tanguar-haor" ? (language === "bn" ? "টাঙ্গুয়ার হাওর" : "Tanguar Haor") : (language === "bn" ? "সুন্দরবন" : "Sundarban")}
+                            </span>
+                          </div>
+                        </div>
+                        <CardContent className="p-4">
+                          <h3 className="font-display font-bold text-sm text-foreground group-hover:text-primary transition-colors line-clamp-2 mb-1.5">{post.title}</h3>
+                          <p className="text-xs text-muted-foreground line-clamp-2 mb-3">{post.excerpt}</p>
+                          <div className="flex items-center gap-3 text-[10px] text-muted-foreground border-t border-border pt-2.5">
+                            <span className="flex items-center gap-1"><UserIcon2 className="h-3 w-3" />{post.author}</span>
+                            <span className="flex items-center gap-1"><CalendarIcon2 className="h-3 w-3" />{new Date(post.publishedAt).toLocaleDateString(language === "bn" ? "bn-BD" : "en-US", { day: "numeric", month: "short" })}</span>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mt-8 text-center">
+                <Link to="/blog">
+                  <Button variant="outline" size="lg" className="rounded-xl border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground font-bold gap-2 px-6">
+                    {language === "bn" ? "সব ব্লগ দেখুন" : "View All Posts"} <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              </motion.div>
+            </div>
+          </section>
+        );
+      })()}
 
       {/* ============ CTA ============ */}
       <section className="py-16 md:py-24 bg-secondary">
