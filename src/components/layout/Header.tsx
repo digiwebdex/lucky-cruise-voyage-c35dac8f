@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.png";
 import { useLanguage } from "@/contexts/LanguageContext";
+import HeaderBookingModal from "@/components/HeaderBookingModal";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
