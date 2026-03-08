@@ -10,6 +10,7 @@ import HeaderBookingModal from "@/components/HeaderBookingModal";
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
   const [cruiseDropdownOpen, setCruiseDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
