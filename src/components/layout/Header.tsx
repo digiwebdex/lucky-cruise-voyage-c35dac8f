@@ -112,7 +112,7 @@ export default function Header() {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`relative rounded-lg px-4 py-2 text-sm font-semibold transition-all duration-200 ${
+                className={`relative rounded-lg px-2 lg:px-4 py-2 text-xs lg:text-sm font-semibold transition-all duration-200 ${
                   active
                     ? "text-primary"
                     : "text-secondary-foreground/70 hover:text-primary hover:bg-primary/5"
