@@ -1,5 +1,3 @@
-import { useState, useRef, type MouseEvent } from "react";
-
 interface ImageZoomProps {
   src: string;
   alt: string;
