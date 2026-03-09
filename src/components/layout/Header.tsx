@@ -52,13 +52,13 @@ export default function Header() {
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "bg-secondary/98 backdrop-blur-lg shadow-lg shadow-secondary/10" : "bg-secondary/90 backdrop-blur-md"}`}>
       <div className="container flex h-16 items-center justify-between md:h-18">
-        <Link to="/" className="flex items-center gap-2 sm:gap-3 group min-w-0">
-          <img src={logo} alt="Lucky Tours & Travels" className="h-10 sm:h-14 w-auto flex-shrink-0 transition-transform group-hover:scale-105" />
-          <span className="text-xs sm:text-lg font-black tracking-wide text-primary whitespace-nowrap" style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '0.05em' }}>Lucky Tours & Travels</span>
+        <Link to="/" className="flex items-center gap-2 sm:gap-3 group min-w-0 flex-shrink-0">
+          <img src={logo} alt="Lucky Tours & Travels" className="h-10 sm:h-12 lg:h-14 w-auto flex-shrink-0 transition-transform group-hover:scale-105" />
+          <span className="text-sm xl:text-lg font-black tracking-wide text-primary whitespace-nowrap hidden xl:inline" style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '0.05em' }}>Lucky Tours & Travels</span>
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden items-center gap-0.5 md:flex">
+        <nav className="hidden items-center gap-0 lg:gap-0.5 md:flex">
           {navLinks.map(link => {
             const active = location.pathname === link.to || (link.to !== "/" && location.pathname.startsWith(link.to.split("?")[0]));
             
@@ -67,7 +67,7 @@ export default function Header() {
                 <div key={link.to} className="relative" ref={dropdownRef}>
                   <button
                     onClick={() => setCruiseDropdownOpen(!cruiseDropdownOpen)}
-                    className={`relative rounded-lg px-4 py-2 text-sm font-semibold transition-all duration-200 flex items-center gap-1 ${
+                    className={`relative rounded-lg px-2 lg:px-4 py-2 text-xs lg:text-sm font-semibold transition-all duration-200 flex items-center gap-1 ${
                       active
                         ? "text-primary"
                         : "text-secondary-foreground/70 hover:text-primary hover:bg-primary/5"
@@ -112,7 +112,7 @@ export default function Header() {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`relative rounded-lg px-4 py-2 text-sm font-semibold transition-all duration-200 ${
+                className={`relative rounded-lg px-2 lg:px-4 py-2 text-xs lg:text-sm font-semibold transition-all duration-200 ${
                   active
                     ? "text-primary"
                     : "text-secondary-foreground/70 hover:text-primary hover:bg-primary/5"
@@ -131,7 +131,7 @@ export default function Header() {
           })}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
           {/* Language Toggle */}
           <button
             onClick={toggleLang}
@@ -141,9 +141,9 @@ export default function Header() {
             <span>{lang === "bn" ? "EN" : "বাং"}</span>
           </button>
 
-          <Button size="sm" onClick={() => setBookingOpen(true)} className="hidden gap-2 gradient-primary text-primary-foreground shadow-md hover:shadow-lg transition-all hover:scale-105 sm:flex font-semibold">
-            <Phone className="h-4 w-4" /> {t.nav.bookNow}
-            <ChevronRight className="h-3 w-3" />
+          <Button size="sm" onClick={() => setBookingOpen(true)} className="hidden gap-1.5 lg:gap-2 gradient-primary text-primary-foreground shadow-md hover:shadow-lg transition-all hover:scale-105 sm:flex font-semibold text-xs lg:text-sm px-3 lg:px-4">
+            <Phone className="h-3.5 w-3.5 lg:h-4 lg:w-4" /> {t.nav.bookNow}
+            <ChevronRight className="h-3 w-3 hidden lg:block" />
           </Button>
           <button className="md:hidden p-2 rounded-lg hover:bg-primary/10 transition-colors text-secondary-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
