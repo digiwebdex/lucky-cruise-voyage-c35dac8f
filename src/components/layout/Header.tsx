@@ -131,7 +131,7 @@ export default function Header() {
           })}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
           {/* Language Toggle */}
           <button
             onClick={toggleLang}
@@ -141,9 +141,9 @@ export default function Header() {
             <span>{lang === "bn" ? "EN" : "বাং"}</span>
           </button>
 
-          <Button size="sm" onClick={() => setBookingOpen(true)} className="hidden gap-2 gradient-primary text-primary-foreground shadow-md hover:shadow-lg transition-all hover:scale-105 sm:flex font-semibold">
-            <Phone className="h-4 w-4" /> {t.nav.bookNow}
-            <ChevronRight className="h-3 w-3" />
+          <Button size="sm" onClick={() => setBookingOpen(true)} className="hidden gap-1.5 lg:gap-2 gradient-primary text-primary-foreground shadow-md hover:shadow-lg transition-all hover:scale-105 sm:flex font-semibold text-xs lg:text-sm px-3 lg:px-4">
+            <Phone className="h-3.5 w-3.5 lg:h-4 lg:w-4" /> {t.nav.bookNow}
+            <ChevronRight className="h-3 w-3 hidden lg:block" />
           </Button>
           <button className="md:hidden p-2 rounded-lg hover:bg-primary/10 transition-colors text-secondary-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
