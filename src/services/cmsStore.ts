@@ -115,7 +115,7 @@ const KEYS = {
   blogs: "cms_blogs",
 } as const;
 
-const DATA_VERSION = "v20";
+const DATA_VERSION = "v21";
 const VERSION_KEY = "cms_data_version";
 
 function initVersionCheck() {
