@@ -67,7 +67,7 @@ export default function Header() {
                 <div key={link.to} className="relative" ref={dropdownRef}>
                   <button
                     onClick={() => setCruiseDropdownOpen(!cruiseDropdownOpen)}
-                    className={`relative rounded-lg px-4 py-2 text-sm font-semibold transition-all duration-200 flex items-center gap-1 ${
+                    className={`relative rounded-lg px-2 lg:px-4 py-2 text-xs lg:text-sm font-semibold transition-all duration-200 flex items-center gap-1 ${
                       active
                         ? "text-primary"
                         : "text-secondary-foreground/70 hover:text-primary hover:bg-primary/5"
