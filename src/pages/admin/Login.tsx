@@ -12,10 +12,12 @@ export default function AdminLogin() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Mock auth
-    if (email && password) {
+    const storedPassword = localStorage.getItem("admin_password") || "admin123";
+    if (password === storedPassword) {
       localStorage.setItem("admin_logged_in", "true");
       navigate("/admin");
+    } else {
+      alert("Incorrect password");
     }
   };
 
