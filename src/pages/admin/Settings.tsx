@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -5,15 +6,50 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useCmsData, getSettings, saveSettings } from "@/services/cmsStore";
 import { toast } from "@/hooks/use-toast";
+import { Lock } from "lucide-react";
+
+const DEFAULT_PASSWORD = "admin123";
+
+function getStoredPassword(): string {
+  return localStorage.getItem("admin_password") || DEFAULT_PASSWORD;
+}
+
+function setStoredPassword(pw: string) {
+  localStorage.setItem("admin_password", pw);
+}
 
 export default function SettingsPage() {
   const [settings, setSettings] = useCmsData(getSettings, saveSettings);
+  const [currentPw, setCurrentPw] = useState("");
+  const [newPw, setNewPw] = useState("");
+  const [confirmPw, setConfirmPw] = useState("");
 
   const update = (field: string, value: any) => setSettings({ ...settings, [field]: value });
 
   const handleSave = () => {
     saveSettings(settings);
     toast({ title: "Settings saved" });
+  };
+
+  const handlePasswordChange = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (currentPw !== getStoredPassword()) {
+      toast({ title: "Error", description: "Current password is incorrect", variant: "destructive" });
+      return;
+    }
+    if (newPw.length < 6) {
+      toast({ title: "Error", description: "New password must be at least 6 characters", variant: "destructive" });
+      return;
+    }
+    if (newPw !== confirmPw) {
+      toast({ title: "Error", description: "New passwords do not match", variant: "destructive" });
+      return;
+    }
+    setStoredPassword(newPw);
+    setCurrentPw("");
+    setNewPw("");
+    setConfirmPw("");
+    toast({ title: "Password updated successfully" });
   };
 
   return (
@@ -59,6 +95,33 @@ export default function SettingsPage() {
               <Label>Language Switcher</Label>
               <Switch checked={settings.languageSwitcherEnabled} onCheckedChange={v => update("languageSwitcherEnabled", v)} />
             </div>
+          </CardContent>
+        </Card>
+
+        <Card className="border-border border-l-4 border-l-primary">
+          <CardContent className="space-y-4 p-6">
+            <div className="flex items-center gap-2">
+              <Lock className="h-5 w-5 text-primary" />
+              <h2 className="font-bold text-foreground">Change Admin Password</h2>
+            </div>
+            <p className="text-sm text-muted-foreground">Default password: <code className="bg-muted px-1.5 py-0.5 rounded text-xs">admin123</code></p>
+            <form onSubmit={handlePasswordChange} className="space-y-3">
+              <div>
+                <Label>Current Password</Label>
+                <Input type="password" value={currentPw} onChange={e => setCurrentPw(e.target.value)} placeholder="Enter current password" required />
+              </div>
+              <div>
+                <Label>New Password</Label>
+                <Input type="password" value={newPw} onChange={e => setNewPw(e.target.value)} placeholder="Enter new password" required />
+              </div>
+              <div>
+                <Label>Confirm New Password</Label>
+                <Input type="password" value={confirmPw} onChange={e => setConfirmPw(e.target.value)} placeholder="Confirm new password" required />
+              </div>
+              <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+                Update Password
+              </Button>
+            </form>
           </CardContent>
         </Card>
       </div>
