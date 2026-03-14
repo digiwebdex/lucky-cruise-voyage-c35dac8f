@@ -134,7 +134,8 @@ export default function SettingsPage() {
                     {i + 1}
                   </div>
                 </div>
-              ))}
+                );
+              })}
 
               <button
                 onClick={() => heroFileRef.current?.click()}
