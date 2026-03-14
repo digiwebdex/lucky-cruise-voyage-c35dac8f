@@ -205,6 +205,17 @@ export default function BlogManager() {
               <Switch checked={form.isPublished} onCheckedChange={v => setForm(f => ({ ...f, isPublished: v }))} />
               <Label>{form.isPublished ? "Published" : "Draft"}</Label>
             </div>
+
+            {/* SEO Section */}
+            <SeoFieldsPanel
+              seoTitle={form.seoTitle || ""}
+              seoDescription={form.seoDescription || ""}
+              seoKeywords={form.seoKeywords || ""}
+              ogImage={form.ogImage || ""}
+              onChange={(field, value) => setForm(f => ({ ...f, [field]: value }))}
+              titlePlaceholder={form.title}
+            />
+
             <Button onClick={handleSave} className="w-full bg-primary text-primary-foreground">
               {editing ? "Update Post" : "Create Post"}
             </Button>
