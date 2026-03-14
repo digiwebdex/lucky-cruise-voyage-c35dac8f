@@ -27,6 +27,10 @@ export interface CmsPage {
   heroText: string;
   body: string;
   sections: { heading: string; content: string }[];
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string;
+  ogImage?: string;
 }
 
 export interface SeoEntry {
