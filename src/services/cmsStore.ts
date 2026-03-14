@@ -262,6 +262,26 @@ const defaultBlogs: BlogPost[] = [
 export const getBlogs = (): BlogPost[] => getStore(KEYS.blogs, defaultBlogs);
 export const saveBlogs = (data: BlogPost[]) => setStore(KEYS.blogs, data);
 
+// ===== Reviews =====
+export const getReviews = (): CustomerReview[] => getStore(KEYS.reviews, []);
+export const saveReviews = (data: CustomerReview[]) => setStore(KEYS.reviews, data);
+
+export function addReview(review: Omit<CustomerReview, "id" | "createdAt" | "status">): CustomerReview {
+  const reviews = getReviews();
+  const newReview: CustomerReview = {
+    ...review,
+    id: `review-${Date.now()}`,
+    createdAt: new Date().toISOString(),
+    status: "pending",
+  };
+  saveReviews([newReview, ...reviews]);
+  return newReview;
+}
+
+export function getApprovedReviews(targetType: string, targetId: string): CustomerReview[] {
+  return getReviews().filter(r => r.targetType === targetType && r.targetId === targetId && r.status === "approved");
+}
+
 // Helper functions that mirror mockData exports
 export function getCruiseById(id: string): Cruise | undefined {
   return getCruises().find(c => c.id === id);
