@@ -16,7 +16,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { getCruises, saveCruises, getCruiseById } from "@/services/cmsStore";
-import type { Cruise, ItineraryDay } from "@/services/mockData";
+import type { Cruise, ItineraryDay, sundarbanSubCategories } from "@/services/mockData";
+import { sundarbanSubCategories as subCatOptions } from "@/services/mockData";
 import { toast } from "@/hooks/use-toast";
 
 const emptyCruise: Cruise = {
