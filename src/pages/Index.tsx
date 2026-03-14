@@ -46,6 +46,7 @@ export default function Index() {
     return () => clearInterval(timer);
   }, [heroImages.length]);
 
+  const handleQuickBook = () => {
     const cruise = cruises.find(c => c.id === selectedCruise);
     if (cruise) {
       setBookingCruise(cruise);
