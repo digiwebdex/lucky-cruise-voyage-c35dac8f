@@ -8,10 +8,12 @@ export interface SiteSettings {
   whatsapp: string;
   email: string;
   address: string;
+  addressBn: string;
   facebookUrl: string;
   youtubeUrl: string;
   instagramUrl: string;
   footerText: string;
+  footerTextBn: string;
   googleMapsUrl: string;
   whatsappFloatEnabled: boolean;
   languageSwitcherEnabled: boolean;
