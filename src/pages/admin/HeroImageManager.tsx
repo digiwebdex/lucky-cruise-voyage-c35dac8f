@@ -7,6 +7,8 @@ import { toast } from "@/hooks/use-toast";
 
 export default function HeroImageManager() {
   const [settings, setSettingsState] = useState(getSettings());
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef2 = useRef<HTMLInputElement>(null);
   const heroImages = settings.heroImages || [];
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
