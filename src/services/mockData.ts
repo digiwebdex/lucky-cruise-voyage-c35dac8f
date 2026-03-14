@@ -2912,6 +2912,7 @@ export const cruises: Cruise[] = [
   {
     id: "mv-rezab",
     destination: "sundarban",
+    subCategory: "ac-attach-bath",
     name: "এম.ভি রেজাব",
     subtitle: "এসি টুরিস্ট ক্রুজ জাহাজ (সুন্দরবন)",
     description: "বিশ্বের বৃহত্তম ম্যানগ্রোভ বন সুন্দরবন ভ্রমণ করুন একদম নতুন এয়ার কন্ডিশন্ড ক্রুজ জাহাজ এম.ভি রেজাব এর সাথে।",
