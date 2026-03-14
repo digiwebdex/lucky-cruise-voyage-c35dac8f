@@ -56,14 +56,17 @@ export default function SettingsPage() {
   const handleHeroImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files) return;
+    const currentImages = [...(settings.heroImages || [])];
+    let loaded = 0;
+    const total = files.length;
     Array.from(files).forEach(file => {
       const reader = new FileReader();
       reader.onload = () => {
-        const base64 = reader.result as string;
-        setSettings(prev => ({
-          ...prev,
-          heroImages: [...(prev.heroImages || []), base64],
-        }));
+        currentImages.push(reader.result as string);
+        loaded++;
+        if (loaded === total) {
+          setSettings({ ...settings, heroImages: currentImages });
+        }
       };
       reader.readAsDataURL(file);
     });
