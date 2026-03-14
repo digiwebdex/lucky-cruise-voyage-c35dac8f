@@ -103,6 +103,7 @@ export interface CustomerReview {
 export interface PromoAd {
   id: string;
   title: string;
+  subtitle?: string;
   image: string;
   linkedCruiseId: string;
   isActive: boolean;
