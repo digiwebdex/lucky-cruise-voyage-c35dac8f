@@ -12,6 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { useCmsData, getBlogs, saveBlogs, type BlogPost } from "@/services/cmsStore";
 import { toast } from "sonner";
+import SeoFieldsPanel from "@/components/admin/SeoFieldsPanel";
 
 const emptyPost: Omit<BlogPost, "id"> = {
   title: "",
@@ -23,6 +24,10 @@ const emptyPost: Omit<BlogPost, "id"> = {
   author: "Lucky Tours",
   publishedAt: new Date().toISOString(),
   isPublished: true,
+  seoTitle: "",
+  seoDescription: "",
+  seoKeywords: "",
+  ogImage: "",
 };
 
 export default function BlogManager() {
