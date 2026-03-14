@@ -72,12 +72,10 @@ export default function HeroImageManager() {
             <p className="text-muted-foreground text-sm mt-1 max-w-md">
               হিরো ইমেজ আপলোড করুন। যদি কোনো ইমেজ না থাকে, প্রথম ক্রুজের ফিচার্ড ইমেজ দেখানো হবে।
             </p>
-            <label className="mt-4">
-              <Button variant="outline" className="gap-2">
-                <Plus className="h-4 w-4" /> ইমেজ যোগ করুন
-              </Button>
-              <input type="file" accept="image/*" multiple className="hidden" onChange={handleUpload} />
-            </label>
+            <Button variant="outline" className="gap-2" onClick={() => fileInputRef2.current?.click()}>
+              <Plus className="h-4 w-4" /> ইমেজ যোগ করুন
+            </Button>
+            <input ref={fileInputRef2} type="file" accept="image/*" multiple className="hidden" onChange={handleUpload} />
           </CardContent>
         </Card>
       ) : (
