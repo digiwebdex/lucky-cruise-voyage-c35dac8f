@@ -1,15 +1,28 @@
 import { useState, useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Plus, Trash2, ImageIcon, GripVertical } from "lucide-react";
 import { getSettings, saveSettings } from "@/services/cmsStore";
 import { toast } from "@/hooks/use-toast";
+
+type HeroImage = { image: string; title?: string };
+
+function normalizeHeroImages(raw: (string | HeroImage)[]): HeroImage[] {
+  return raw.map(item => typeof item === "string" ? { image: item, title: "" } : item);
+}
 
 export default function HeroImageManager() {
   const [settings, setSettingsState] = useState(getSettings());
   const fileInputRef = useRef<HTMLInputElement>(null);
   const fileInputRef2 = useRef<HTMLInputElement>(null);
-  const heroImages = settings.heroImages || [];
+  const heroImages = normalizeHeroImages(settings.heroImages || []);
+
+  const save = (imgs: HeroImage[]) => {
+    const updated = { ...settings, heroImages: imgs };
+    saveSettings(updated);
+    setSettingsState(updated);
+  };
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -20,12 +33,10 @@ export default function HeroImageManager() {
     Array.from(files).forEach(file => {
       const reader = new FileReader();
       reader.onload = () => {
-        current.push(reader.result as string);
+        current.push({ image: reader.result as string, title: "" });
         loaded++;
         if (loaded === total) {
-          const updated = { ...settings, heroImages: current };
-          saveSettings(updated);
-          setSettingsState(updated);
+          save(current);
           toast({ title: `${total}টি ইমেজ যোগ হয়েছে` });
         }
       };
@@ -35,9 +46,7 @@ export default function HeroImageManager() {
   };
 
   const removeImage = (index: number) => {
-    const updated = { ...settings, heroImages: heroImages.filter((_, i) => i !== index) };
-    saveSettings(updated);
-    setSettingsState(updated);
+    save(heroImages.filter((_, i) => i !== index));
     toast({ title: "ইমেজ মুছে ফেলা হয়েছে" });
   };
 
@@ -46,9 +55,13 @@ export default function HeroImageManager() {
     const imgs = [...heroImages];
     const [moved] = imgs.splice(from, 1);
     imgs.splice(to, 0, moved);
-    const updated = { ...settings, heroImages: imgs };
-    saveSettings(updated);
-    setSettingsState(updated);
+    save(imgs);
+  };
+
+  const updateTitle = (index: number, title: string) => {
+    const imgs = [...heroImages];
+    imgs[index] = { ...imgs[index], title };
+    save(imgs);
   };
 
   return (
@@ -80,10 +93,10 @@ export default function HeroImageManager() {
         </Card>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {heroImages.map((img, i) => (
+          {heroImages.map((item, i) => (
             <Card key={i} className="overflow-hidden group">
               <div className="relative aspect-video">
-                <img src={img} alt={`Hero ${i + 1}`} className="h-full w-full object-cover" />
+                <img src={item.image} alt={item.title || `Hero ${i + 1}`} className="h-full w-full object-cover" />
                 <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/40 transition-colors" />
                 <div className="absolute top-2 left-2 bg-background/80 backdrop-blur-sm text-foreground text-xs font-bold px-2 py-1 rounded-md">
                   #{i + 1}
@@ -99,6 +112,14 @@ export default function HeroImageManager() {
                   </Button>
                 </div>
               </div>
+              <CardContent className="p-3">
+                <Input
+                  placeholder="টাইটেল লিখুন (যেমন: সুন্দরবন ক্রুজ ট্যুর)"
+                  value={item.title || ""}
+                  onChange={e => updateTitle(i, e.target.value)}
+                  className="text-sm"
+                />
+              </CardContent>
             </Card>
           ))}
         </div>

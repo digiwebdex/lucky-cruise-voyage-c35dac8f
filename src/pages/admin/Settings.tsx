@@ -119,7 +119,9 @@ export default function SettingsPage() {
             </p>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-              {(settings.heroImages || []).map((img, i) => (
+              {(settings.heroImages || []).map((item, i) => {
+                const img = typeof item === "string" ? item : item.image;
+                return (
                 <div key={i} className="relative group aspect-video rounded-xl overflow-hidden border border-border">
                   <img src={img} alt={`Hero ${i + 1}`} className="h-full w-full object-cover" />
                   <button

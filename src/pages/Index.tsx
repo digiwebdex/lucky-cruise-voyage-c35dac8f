@@ -73,9 +73,16 @@ export default function Index() {
       {/* ============ HERO ============ */}
       <section className="relative min-h-[65vh] sm:min-h-[75vh] flex items-center">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="Sundarban Cruise" className="h-full w-full object-cover" draggable={false} />
+          <img src={heroImage} alt={heroTitle || "Sundarban Cruise"} className="h-full w-full object-cover" draggable={false} />
           <div className="absolute inset-0 bg-gradient-to-r from-secondary/85 via-secondary/60 to-secondary/30" />
           <div className="absolute inset-0 bg-gradient-to-t from-secondary/70 via-transparent to-secondary/20" />
+          {heroTitle && (
+            <div className="absolute bottom-6 left-6 z-10">
+              <span className="bg-secondary/70 backdrop-blur-sm text-secondary-foreground text-lg sm:text-xl font-bold px-4 py-2 rounded-lg">
+                {heroTitle}
+              </span>
+            </div>
+          )}
         </div>
 
         <div className="container relative z-10 py-12 sm:py-16">
