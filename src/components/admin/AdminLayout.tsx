@@ -11,6 +11,7 @@ const sidebarLinks = [
   { to: "/admin/categories", label: "Categories", icon: Tag },
   { to: "/admin/availability", label: "Availability", icon: CalendarDays },
   { to: "/admin/offers", label: "Offers", icon: Flame },
+  { to: "/admin/promo-ads", label: "অফার এডভারটাইজ", icon: Megaphone },
   { to: "/admin/blogs", label: "Blog Posts", icon: BookOpen },
   { to: "/admin/reviews", label: "Reviews", icon: Star },
   { to: "/admin/testimonials", label: "Testimonials", icon: MessageSquare },
