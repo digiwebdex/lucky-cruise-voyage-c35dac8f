@@ -100,6 +100,14 @@ export interface CustomerReview {
   status: "pending" | "approved" | "rejected";
 }
 
+export interface PromoAd {
+  id: string;
+  title: string;
+  image: string;
+  linkedCruiseId: string;
+  isActive: boolean;
+}
+
 // ===== Default Seeds =====
 const defaultSettings: SiteSettings = {
   siteName: "Lucky Tours & Travels",
