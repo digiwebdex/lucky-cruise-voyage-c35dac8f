@@ -11,8 +11,9 @@ import { getSettings } from "@/services/cmsStore";
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
 export default function Contact() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const settings = getSettings();
+  const address = lang === "bn" && settings.addressBn ? settings.addressBn : settings.address;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,7 +52,7 @@ export default function Contact() {
                   { icon: Phone, label: t.contact.phone, value: settings.phone, color: "bg-primary/10 text-primary" },
                   { icon: MessageCircle, label: t.contact.whatsapp, value: settings.phone, link: `https://wa.me/${settings.whatsapp}`, color: "bg-emerald/10 text-emerald" },
                   { icon: Mail, label: t.contact.email, value: settings.email, color: "bg-gold/10 text-gold" },
-                  { icon: MapPin, label: t.contact.address, value: settings.address, color: "bg-accent/10 text-accent" },
+                  { icon: MapPin, label: t.contact.address, value: address, color: "bg-accent/10 text-accent" },
                 ].map((item, i) => (
                   <Card key={i} className="border-border/50 hover:shadow-elevated transition-all duration-300 hover:-translate-y-1 bg-card">
                     <CardContent className="flex items-center gap-4 p-5">

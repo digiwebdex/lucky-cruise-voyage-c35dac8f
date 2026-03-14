@@ -92,7 +92,9 @@ export default function SettingsPage() {
             <div><Label>WhatsApp Number</Label><Input value={settings.whatsapp} onChange={e => update("whatsapp", e.target.value)} /></div>
             <div><Label>Email</Label><Input value={settings.email} onChange={e => update("email", e.target.value)} /></div>
             <div><Label>Address</Label><Input value={settings.address} onChange={e => update("address", e.target.value)} /></div>
+            <div><Label>Address (বাংলা)</Label><Input value={settings.addressBn || ""} onChange={e => update("addressBn", e.target.value)} placeholder="e.g. ঢাকা, বাংলাদেশ" /></div>
             <div><Label>Footer Text</Label><Input value={settings.footerText} onChange={e => update("footerText", e.target.value)} /></div>
+            <div><Label>Footer Text (বাংলা)</Label><Input value={settings.footerTextBn || ""} onChange={e => update("footerTextBn", e.target.value)} placeholder="e.g. © লাকি ট্যুরস..." /></div>
           </CardContent>
         </Card>
 

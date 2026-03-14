@@ -4,8 +4,9 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { getSettings } from "@/services/cmsStore";
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const settings = getSettings();
+  const address = lang === "bn" && settings.addressBn ? settings.addressBn : settings.address;
 
   const footerLinks = [
     { to: "/", label: t.footer.home },
@@ -95,7 +96,7 @@ export default function Footer() {
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 flex-shrink-0">
                     <MapPin className="h-4 w-4 text-primary" />
                   </div>
-                  <span>{settings.address}</span>
+                  <span>{address}</span>
                 </li>
               </ul>
             </div>
