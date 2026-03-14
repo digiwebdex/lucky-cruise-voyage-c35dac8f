@@ -87,6 +87,19 @@ export interface SeoFields {
   ogImage?: string;
 }
 
+export interface CustomerReview {
+  id: string;
+  targetType: "cruise" | "blog";
+  targetId: string;
+  targetName: string;
+  name: string;
+  email: string;
+  rating: number;
+  comment: string;
+  createdAt: string;
+  status: "pending" | "approved" | "rejected";
+}
+
 // ===== Default Seeds =====
 const defaultSettings: SiteSettings = {
   siteName: "Lucky Tours & Travels",
