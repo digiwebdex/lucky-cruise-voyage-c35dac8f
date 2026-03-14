@@ -252,6 +252,38 @@ export default function Index() {
         </div>
       </section>
 
+      {/* ============ PROMO ADS BANNER ============ */}
+      {promoAds.length > 0 && (
+        <section className="py-6 md:py-10 bg-background">
+          <div className="container">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {promoAds.map((ad, i) => (
+                <motion.div
+                  key={ad.id}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={fadeUp}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  <Link to={`/cruises/${ad.linkedCruiseId}`} className="group block">
+                    <div className="aspect-square overflow-hidden rounded-2xl border border-border shadow-sm hover:shadow-lg transition-all duration-300">
+                      <img
+                        src={ad.image}
+                        alt={ad.title}
+                        loading="lazy"
+                        draggable={false}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ============ FEATURED CRUISES ============ */}
       <section className="py-14 md:py-20 bg-background">
         <div className="container">
