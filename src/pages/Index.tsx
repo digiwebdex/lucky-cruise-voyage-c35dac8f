@@ -67,7 +67,7 @@ export default function Index() {
   return (
     <div>
       {/* ============ HERO ============ */}
-      <section className="relative min-h-[55vh] sm:min-h-[60vh] flex items-center">
+      <section className="relative min-h-[65vh] sm:min-h-[75vh] flex items-center">
         <div className="absolute inset-0">
           <img src={heroImage} alt="Sundarban Cruise" className="h-full w-full object-cover" draggable={false} />
           <div className="absolute inset-0 bg-gradient-to-r from-secondary/85 via-secondary/60 to-secondary/30" />
