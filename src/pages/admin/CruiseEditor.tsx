@@ -100,12 +100,27 @@ export default function CruiseEditor() {
           <div className="flex items-center gap-2">
             <select
               value={form.destination}
-              onChange={e => updateField("destination", e.target.value)}
+              onChange={e => {
+                updateField("destination", e.target.value);
+                if (e.target.value !== "sundarban") updateField("subCategory", undefined);
+              }}
               className="rounded-md border border-border bg-background px-3 py-1.5 text-sm"
             >
               <option value="sundarban">সুন্দরবন ভ্রমণ</option>
               <option value="tanguar-haor">টাঙ্গুয়ার হাওর ভ্রমণ</option>
             </select>
+            {form.destination === "sundarban" && (
+              <select
+                value={form.subCategory || ""}
+                onChange={e => updateField("subCategory", e.target.value || undefined)}
+                className="rounded-md border border-border bg-background px-3 py-1.5 text-sm"
+              >
+                <option value="">-- সাবক্যাটাগরি --</option>
+                {subCatOptions.map(sc => (
+                  <option key={sc.value} value={sc.value}>{sc.labelBn}</option>
+                ))}
+              </select>
+            )}
           </div>
           <div className="flex items-center gap-2">
             <Switch checked={form.featured} onCheckedChange={v => updateField("featured", v)} />
