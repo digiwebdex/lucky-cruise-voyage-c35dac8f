@@ -20,7 +20,7 @@ export default function PromoAdsManager() {
 
   const openNew = () => {
     setEditing(null);
-    setForm({ title: "", image: "", linkedCruiseId: cruises[0]?.id || "", isActive: true });
+    setForm({ title: "", subtitle: "", image: "", linkedCruiseId: cruises[0]?.id || "", isActive: true });
     setEditOpen(true);
   };
 
