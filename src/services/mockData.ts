@@ -2202,6 +2202,7 @@ export const cruises: Cruise[] = [
   {
     id: "mv-mohammadi-2",
     destination: "sundarban",
+    subCategory: "non-ac-non-attach-bath",
     name: "এম.ভি মোহাম্মাদী ২",
     subtitle: "সুন্দরবনের নন-এসি ক্রুজ জাহাজ",
     description: "এম.ভি মোহাম্মাদী ২ এর পক্ষ থেকে সবাইকে জানাই নতুন মৌসুমে স্বাগতম। সুন্দরবনে আরামদায়ক ভ্রমণ নিশ্চিত করতে আমাদের আধুনিক সুযোগ-সুবিধা সম্বলিত জাহাজ এম.ভি মোহাম্মাদী ২ প্রস্তুত।",
