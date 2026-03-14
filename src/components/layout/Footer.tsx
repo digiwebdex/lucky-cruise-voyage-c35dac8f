@@ -4,8 +4,9 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { getSettings } from "@/services/cmsStore";
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const settings = getSettings();
+  const address = lang === "bn" && settings.addressBn ? settings.addressBn : settings.address;
 
   const footerLinks = [
     { to: "/", label: t.footer.home },
