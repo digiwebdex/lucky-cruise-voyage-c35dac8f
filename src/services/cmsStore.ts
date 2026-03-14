@@ -156,6 +156,7 @@ const KEYS = {
   offers: "cms_offers",
   blogs: "cms_blogs",
   reviews: "cms_reviews",
+  promoAds: "cms_promoAds",
 } as const;
 
 const DATA_VERSION = "v24";
