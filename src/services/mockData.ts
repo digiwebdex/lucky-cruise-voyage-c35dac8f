@@ -2596,6 +2596,7 @@ export const cruises: Cruise[] = [
   {
     id: "mv-adeeba-khan",
     destination: "sundarban",
+    subCategory: "ac-attach-bath",
     name: "এম.ভি. আদিবা খান",
     subtitle: "খুলনা-সুন্দরবন-খুলনা ক্রুজ ট্যুর",
     description: "নিরাপত্তা এবং আরামদায়ক পরিবেশের সুবিধাসহ একটি মাঝারি আকারের আরামদায়ক পর্যটন নৌকা। আধুনিক অভ্যন্তরীণ সজ্জা সহ প্রশস্ত কক্ষ এবং উচ্চ কক্ষের উচ্চতার ছাড়পত্র।",
