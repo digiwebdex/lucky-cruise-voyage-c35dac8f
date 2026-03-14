@@ -80,7 +80,7 @@ const defaultSettings: SiteSettings = {
   email: "luckytoursandtravels70@gmail.com",
   address: "Dhaka, Bangladesh",
   addressBn: "ঢাকা, বাংলাদেশ",
-  facebookUrl: "",
+  facebookUrl: "https://www.facebook.com/Luckytoursandtravels",
   youtubeUrl: "",
   instagramUrl: "",
   footerText: "© Lucky Tours & Travels. All rights reserved.",
