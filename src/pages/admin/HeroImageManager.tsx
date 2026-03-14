@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus, Trash2, ImageIcon, GripVertical } from "lucide-react";
@@ -7,6 +7,8 @@ import { toast } from "@/hooks/use-toast";
 
 export default function HeroImageManager() {
   const [settings, setSettingsState] = useState(getSettings());
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef2 = useRef<HTMLInputElement>(null);
   const heroImages = settings.heroImages || [];
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,12 +58,10 @@ export default function HeroImageManager() {
           <h1 className="text-2xl font-bold text-foreground">Hero Image Manager</h1>
           <p className="text-muted-foreground mt-1">হোমপেজের হিরো ব্যানার ইমেজ পরিচালনা করুন। ইমেজগুলো ৫ সেকেন্ড পর পর অটো-রোটেট হবে।</p>
         </div>
-        <label>
-          <Button className="gap-2">
-            <Plus className="h-4 w-4" /> ইমেজ আপলোড
-          </Button>
-          <input type="file" accept="image/*" multiple className="hidden" onChange={handleUpload} />
-        </label>
+        <Button className="gap-2" onClick={() => fileInputRef.current?.click()}>
+          <Plus className="h-4 w-4" /> ইমেজ আপলোড
+        </Button>
+        <input ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={handleUpload} />
       </div>
 
       {heroImages.length === 0 ? (
@@ -72,12 +72,10 @@ export default function HeroImageManager() {
             <p className="text-muted-foreground text-sm mt-1 max-w-md">
               হিরো ইমেজ আপলোড করুন। যদি কোনো ইমেজ না থাকে, প্রথম ক্রুজের ফিচার্ড ইমেজ দেখানো হবে।
             </p>
-            <label className="mt-4">
-              <Button variant="outline" className="gap-2">
-                <Plus className="h-4 w-4" /> ইমেজ যোগ করুন
-              </Button>
-              <input type="file" accept="image/*" multiple className="hidden" onChange={handleUpload} />
-            </label>
+            <Button variant="outline" className="gap-2" onClick={() => fileInputRef2.current?.click()}>
+              <Plus className="h-4 w-4" /> ইমেজ যোগ করুন
+            </Button>
+            <input ref={fileInputRef2} type="file" accept="image/*" multiple className="hidden" onChange={handleUpload} />
           </CardContent>
         </Card>
       ) : (
