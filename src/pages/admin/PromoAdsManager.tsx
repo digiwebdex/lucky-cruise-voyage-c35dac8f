@@ -152,6 +152,9 @@ export default function PromoAdsManager() {
               <Input value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} placeholder="যেমন: স্পেশাল অফার" />
             </div>
             <div className="space-y-1.5">
+              <Label>সাবটাইটেল</Label>
+              <Input value={form.subtitle} onChange={e => setForm(f => ({ ...f, subtitle: e.target.value }))} placeholder="যেমন: সুন্দরবন ক্রুজ ট্যুর" />
+            <div className="space-y-1.5">
               <Label>অফার ইমেজ (1080×1080) *</Label>
               <Input type="file" accept="image/*" onChange={handleImageUpload} />
               {form.image && (
