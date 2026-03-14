@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Ship, Package, Image, FileText, Search, Users, Settings, LogOut, Menu, X, ExternalLink, MessageSquare, UserCheck, Flame, ClipboardList, Tag, CalendarDays, BookOpen, Star } from "lucide-react";
+import { LayoutDashboard, Ship, Package, Image, FileText, Search, Users, Settings, LogOut, Menu, X, ExternalLink, MessageSquare, UserCheck, Flame, ClipboardList, Tag, CalendarDays, BookOpen, Star, Megaphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const sidebarLinks = [
@@ -11,6 +11,7 @@ const sidebarLinks = [
   { to: "/admin/categories", label: "Categories", icon: Tag },
   { to: "/admin/availability", label: "Availability", icon: CalendarDays },
   { to: "/admin/offers", label: "Offers", icon: Flame },
+  { to: "/admin/promo-ads", label: "অফার এডভারটাইজ", icon: Megaphone },
   { to: "/admin/blogs", label: "Blog Posts", icon: BookOpen },
   { to: "/admin/reviews", label: "Reviews", icon: Star },
   { to: "/admin/testimonials", label: "Testimonials", icon: MessageSquare },

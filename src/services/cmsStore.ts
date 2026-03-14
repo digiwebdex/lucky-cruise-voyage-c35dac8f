@@ -100,6 +100,14 @@ export interface CustomerReview {
   status: "pending" | "approved" | "rejected";
 }
 
+export interface PromoAd {
+  id: string;
+  title: string;
+  image: string;
+  linkedCruiseId: string;
+  isActive: boolean;
+}
+
 // ===== Default Seeds =====
 const defaultSettings: SiteSettings = {
   siteName: "Lucky Tours & Travels",
@@ -148,9 +156,10 @@ const KEYS = {
   offers: "cms_offers",
   blogs: "cms_blogs",
   reviews: "cms_reviews",
+  promoAds: "cms_promoAds",
 } as const;
 
-const DATA_VERSION = "v24";
+const DATA_VERSION = "v25";
 const VERSION_KEY = "cms_data_version";
 
 function initVersionCheck() {
@@ -281,6 +290,20 @@ export function addReview(review: Omit<CustomerReview, "id" | "createdAt" | "sta
 export function getApprovedReviews(targetType: string, targetId: string): CustomerReview[] {
   return getReviews().filter(r => r.targetType === targetType && r.targetId === targetId && r.status === "approved");
 }
+
+// ===== Promo Ads =====
+import promo1 from "@/assets/promos/promo-1.jpg";
+import promo2 from "@/assets/promos/promo-2.jpg";
+import promo3 from "@/assets/promos/promo-3.jpg";
+
+const defaultPromoAds: PromoAd[] = [
+  { id: "promo-1", title: "স্পেশাল অফার", image: promo1, linkedCruiseId: "rezab", isActive: true },
+  { id: "promo-2", title: "ফ্যামিলি প্যাকেজ", image: promo2, linkedCruiseId: "flamingo", isActive: true },
+  { id: "promo-3", title: "হানিমুন স্পেশাল", image: promo3, linkedCruiseId: "pearl", isActive: true },
+];
+
+export const getPromoAds = (): PromoAd[] => getStore(KEYS.promoAds, defaultPromoAds);
+export const savePromoAds = (data: PromoAd[]) => setStore(KEYS.promoAds, data);
 
 // Helper functions that mirror mockData exports
 export function getCruiseById(id: string): Cruise | undefined {

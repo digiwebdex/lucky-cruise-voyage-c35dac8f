@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
-import { getCruises, getTestimonials, getOffers, getBlogs, getSettings } from "@/services/cmsStore";
+import { getCruises, getTestimonials, getOffers, getBlogs, getSettings, getPromoAds } from "@/services/cmsStore";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
@@ -23,6 +23,7 @@ export default function Index() {
   const settings = getSettings();
   const now = new Date().toISOString();
   const offers = getOffers().filter(o => o.isActive && (!o.expiryDate || o.expiryDate >= now));
+  const promoAds = getPromoAds().filter(a => a.isActive).slice(0, 3);
   const allCruises = cruises.slice(0, 6);
 
   // Quick booking bar state
@@ -250,6 +251,38 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+      {/* ============ PROMO ADS BANNER ============ */}
+      {promoAds.length > 0 && (
+        <section className="py-6 md:py-10 bg-background">
+          <div className="container">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {promoAds.map((ad, i) => (
+                <motion.div
+                  key={ad.id}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={fadeUp}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  <Link to={`/cruises/${ad.linkedCruiseId}`} className="group block">
+                    <div className="aspect-square overflow-hidden rounded-2xl border border-border shadow-sm hover:shadow-lg transition-all duration-300">
+                      <img
+                        src={ad.image}
+                        alt={ad.title}
+                        loading="lazy"
+                        draggable={false}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ============ FEATURED CRUISES ============ */}
       <section className="py-14 md:py-20 bg-background">
