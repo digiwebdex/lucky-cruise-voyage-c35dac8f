@@ -35,10 +35,14 @@ export default function Index() {
   const [bookingOpen, setBookingOpen] = useState(false);
   const [heroIndex, setHeroIndex] = useState(0);
 
-  const adminHeroImages = settings.heroImages?.length ? settings.heroImages : [];
+  const normalizedHero = (settings.heroImages || []).map(item =>
+    typeof item === "string" ? { image: item, title: "" } : item
+  );
   const fallbackHeroImage = cruises[0]?.images[cruises[0]?.featuredImageIndex ?? 0];
-  const heroImages = adminHeroImages.length > 0 ? adminHeroImages : (fallbackHeroImage ? [fallbackHeroImage] : []);
-  const heroImage = heroImages[heroIndex % heroImages.length] || "";
+  const heroImages = normalizedHero.length > 0 ? normalizedHero : (fallbackHeroImage ? [{ image: fallbackHeroImage, title: "" }] : []);
+  const currentHero = heroImages[heroIndex % heroImages.length] || { image: "", title: "" };
+  const heroImage = currentHero.image;
+  const heroTitle = currentHero.title;
 
   // Auto-rotate hero images
   useEffect(() => {
