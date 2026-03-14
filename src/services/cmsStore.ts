@@ -291,6 +291,20 @@ export function getApprovedReviews(targetType: string, targetId: string): Custom
   return getReviews().filter(r => r.targetType === targetType && r.targetId === targetId && r.status === "approved");
 }
 
+// ===== Promo Ads =====
+import promo1 from "@/assets/promos/promo-1.jpg";
+import promo2 from "@/assets/promos/promo-2.jpg";
+import promo3 from "@/assets/promos/promo-3.jpg";
+
+const defaultPromoAds: PromoAd[] = [
+  { id: "promo-1", title: "স্পেশাল অফার", image: promo1, linkedCruiseId: "rezab", isActive: true },
+  { id: "promo-2", title: "ফ্যামিলি প্যাকেজ", image: promo2, linkedCruiseId: "flamingo", isActive: true },
+  { id: "promo-3", title: "হানিমুন স্পেশাল", image: promo3, linkedCruiseId: "pearl", isActive: true },
+];
+
+export const getPromoAds = (): PromoAd[] => getStore(KEYS.promoAds, defaultPromoAds);
+export const savePromoAds = (data: PromoAd[]) => setStore(KEYS.promoAds, data);
+
 // Helper functions that mirror mockData exports
 export function getCruiseById(id: string): Cruise | undefined {
   return getCruises().find(c => c.id === id);
