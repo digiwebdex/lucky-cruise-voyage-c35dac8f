@@ -11,8 +11,9 @@ import { getSettings } from "@/services/cmsStore";
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
 export default function Contact() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const settings = getSettings();
+  const address = lang === "bn" && settings.addressBn ? settings.addressBn : settings.address;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
