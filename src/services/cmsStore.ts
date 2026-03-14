@@ -147,6 +147,7 @@ const KEYS = {
   teamMembers: "cms_teamMembers",
   offers: "cms_offers",
   blogs: "cms_blogs",
+  reviews: "cms_reviews",
 } as const;
 
 const DATA_VERSION = "v24";
