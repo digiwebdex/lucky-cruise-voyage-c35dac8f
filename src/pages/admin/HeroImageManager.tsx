@@ -58,12 +58,10 @@ export default function HeroImageManager() {
           <h1 className="text-2xl font-bold text-foreground">Hero Image Manager</h1>
           <p className="text-muted-foreground mt-1">হোমপেজের হিরো ব্যানার ইমেজ পরিচালনা করুন। ইমেজগুলো ৫ সেকেন্ড পর পর অটো-রোটেট হবে।</p>
         </div>
-        <label>
-          <Button className="gap-2">
-            <Plus className="h-4 w-4" /> ইমেজ আপলোড
-          </Button>
-          <input type="file" accept="image/*" multiple className="hidden" onChange={handleUpload} />
-        </label>
+        <Button className="gap-2" onClick={() => fileInputRef.current?.click()}>
+          <Plus className="h-4 w-4" /> ইমেজ আপলোড
+        </Button>
+        <input ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={handleUpload} />
       </div>
 
       {heroImages.length === 0 ? (
