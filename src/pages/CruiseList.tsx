@@ -26,6 +26,7 @@ export default function CruiseList() {
   const allResults = searchCruises(query);
   const results = allResults.filter(c => {
     if (destination !== "all" && c.destination !== destination) return false;
+    if (destination === "sundarban" && subCat !== "all" && c.subCategory !== subCat) return false;
     if (minPrice && c.price < Number(minPrice)) return false;
     if (maxPrice && c.price > Number(maxPrice)) return false;
     return true;
