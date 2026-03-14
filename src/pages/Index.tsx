@@ -23,7 +23,7 @@ export default function Index() {
   const settings = getSettings();
   const now = new Date().toISOString();
   const offers = getOffers().filter(o => o.isActive && (!o.expiryDate || o.expiryDate >= now));
-  const promoAds = getPromoAds().filter(a => a.isActive).slice(0, 3);
+  const promoAds = getPromoAds().filter(a => a.isActive).slice(0, 15);
   const allCruises = cruises.slice(0, 6);
 
   // Quick booking bar state
