@@ -70,6 +70,17 @@ export interface BlogPost {
   author: string;
   publishedAt: string;
   isPublished: boolean;
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string;
+  ogImage?: string;
+}
+
+export interface SeoFields {
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string;
+  ogImage?: string;
 }
 
 // ===== Default Seeds =====
