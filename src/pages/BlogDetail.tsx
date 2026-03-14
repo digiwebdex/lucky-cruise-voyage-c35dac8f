@@ -117,6 +117,11 @@ export default function BlogDetail() {
               </div>
             </div>
           )}
+
+          {/* Customer Reviews */}
+          <div className="mt-14 max-w-3xl mx-auto">
+            <ReviewSection targetType="blog" targetId={post.id} targetName={post.title} />
+          </div>
         </div>
       </section>
     </div>

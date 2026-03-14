@@ -353,6 +353,11 @@ export default function CruiseDetail() {
       </Dialog>
 
       <BookingModal cruise={cruise} open={bookingOpen} onOpenChange={setBookingOpen} />
+
+      {/* Customer Reviews */}
+      <section className="container py-12 border-t border-border">
+        <ReviewSection targetType="cruise" targetId={cruise.id} targetName={cruise.name} />
+      </section>
     </div>
   );
 }
