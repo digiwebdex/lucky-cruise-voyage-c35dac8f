@@ -62,7 +62,7 @@ export default function SettingsPage() {
     Array.from(files).forEach(file => {
       const reader = new FileReader();
       reader.onload = () => {
-        currentImages.push(reader.result as string);
+        currentImages.push({ image: reader.result as string, title: "" });
         loaded++;
         if (loaded === total) {
           setSettings({ ...settings, heroImages: currentImages });
