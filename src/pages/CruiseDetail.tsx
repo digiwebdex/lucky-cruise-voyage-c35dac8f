@@ -15,6 +15,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { getCruiseById } from "@/services/cmsStore";
 import SeatPlanViewer from "@/components/SeatPlanViewer";
 import BookingModal from "@/components/BookingModal";
+import ReviewSection from "@/components/ReviewSection";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const fadeUp = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } };
