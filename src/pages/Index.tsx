@@ -267,6 +267,7 @@ export default function Index() {
       {promoAds.length > 0 && (
         <section className="py-6 md:py-10 bg-background">
           <div className="container">
+            <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground text-center mb-6">প্রিমিয়াম অফার</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {promoAds.map((ad, i) => (
                 <motion.div
