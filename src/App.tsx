@@ -34,6 +34,7 @@ import BlogList from "./pages/BlogList";
 import BlogDetail from "./pages/BlogDetail";
 import BlogManager from "./pages/admin/BlogManager";
 import ReviewsManager from "./pages/admin/ReviewsManager";
+import PromoAdsManager from "./pages/admin/PromoAdsManager";
 const queryClient = new QueryClient();
 
 const App = () => (
