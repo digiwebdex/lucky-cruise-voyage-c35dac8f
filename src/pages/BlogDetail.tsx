@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getBlogs } from "@/services/cmsStore";
 import { useLanguage } from "@/contexts/LanguageContext";
+import ReviewSection from "@/components/ReviewSection";
 
 const fadeUp = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } };
 
@@ -116,6 +117,11 @@ export default function BlogDetail() {
               </div>
             </div>
           )}
+
+          {/* Customer Reviews */}
+          <div className="mt-14 max-w-3xl mx-auto">
+            <ReviewSection targetType="blog" targetId={post.id} targetName={post.title} />
+          </div>
         </div>
       </section>
     </div>

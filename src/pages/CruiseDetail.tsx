@@ -15,6 +15,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { getCruiseById } from "@/services/cmsStore";
 import SeatPlanViewer from "@/components/SeatPlanViewer";
 import BookingModal from "@/components/BookingModal";
+import ReviewSection from "@/components/ReviewSection";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const fadeUp = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } };
@@ -352,6 +353,11 @@ export default function CruiseDetail() {
       </Dialog>
 
       <BookingModal cruise={cruise} open={bookingOpen} onOpenChange={setBookingOpen} />
+
+      {/* Customer Reviews */}
+      <section className="container py-12 border-t border-border">
+        <ReviewSection targetType="cruise" targetId={cruise.id} targetName={cruise.name} />
+      </section>
     </div>
   );
 }
