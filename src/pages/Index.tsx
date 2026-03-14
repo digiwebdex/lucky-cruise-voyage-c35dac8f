@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Ship, Shield, Star, Clock, MapPin, Phone, ChevronRight, ArrowRight, Users, Flame, Heart, Search, BookOpen, Calendar as CalendarIcon2, User as UserIcon2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
