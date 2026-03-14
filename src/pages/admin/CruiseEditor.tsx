@@ -4,8 +4,9 @@ import {
   ArrowLeft, Clock, MapPin, Check, Users, DoorOpen, Ship,
   UtensilsCrossed, Shield, TreePine, Backpack, Calendar,
   ChevronRight, Phone, Banknote, MapPinned, Plus, Trash2, X, Save,
-  Star, Image as ImageIcon, Flame, Grid3X3, Upload
+  Star, Image as ImageIcon, Flame, Grid3X3, Upload, Search
 } from "lucide-react";
+import SeoFieldsPanel from "@/components/admin/SeoFieldsPanel";
 import SeatPlanViewer from "@/components/SeatPlanViewer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -424,6 +425,16 @@ export default function CruiseEditor() {
                 </label>
               )}
             </div>
+
+            {/* SEO Section */}
+            <SeoFieldsPanel
+              seoTitle={form.seoTitle || ""}
+              seoDescription={form.seoDescription || ""}
+              seoKeywords={form.seoKeywords || ""}
+              ogImage={form.ogImage || ""}
+              onChange={(field, value) => updateField(field as keyof Cruise, value)}
+              titlePlaceholder={form.name}
+            />
           </div>
 
           {/* Sidebar - Pricing & Extras */}

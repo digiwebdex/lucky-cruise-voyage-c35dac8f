@@ -403,6 +403,10 @@ export interface Cruise {
   packages: Package[];
   seatPlan: Deck[];
   seatPlanImage?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string;
+  ogImage?: string;
 }
 
 // ===== Common data =====

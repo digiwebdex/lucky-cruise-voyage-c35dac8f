@@ -12,6 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { useCmsData, getBlogs, saveBlogs, type BlogPost } from "@/services/cmsStore";
 import { toast } from "sonner";
+import SeoFieldsPanel from "@/components/admin/SeoFieldsPanel";
 
 const emptyPost: Omit<BlogPost, "id"> = {
   title: "",
@@ -23,6 +24,10 @@ const emptyPost: Omit<BlogPost, "id"> = {
   author: "Lucky Tours",
   publishedAt: new Date().toISOString(),
   isPublished: true,
+  seoTitle: "",
+  seoDescription: "",
+  seoKeywords: "",
+  ogImage: "",
 };
 
 export default function BlogManager() {
@@ -200,6 +205,17 @@ export default function BlogManager() {
               <Switch checked={form.isPublished} onCheckedChange={v => setForm(f => ({ ...f, isPublished: v }))} />
               <Label>{form.isPublished ? "Published" : "Draft"}</Label>
             </div>
+
+            {/* SEO Section */}
+            <SeoFieldsPanel
+              seoTitle={form.seoTitle || ""}
+              seoDescription={form.seoDescription || ""}
+              seoKeywords={form.seoKeywords || ""}
+              ogImage={form.ogImage || ""}
+              onChange={(field, value) => setForm(f => ({ ...f, [field]: value }))}
+              titlePlaceholder={form.title}
+            />
+
             <Button onClick={handleSave} className="w-full bg-primary text-primary-foreground">
               {editing ? "Update Post" : "Create Post"}
             </Button>

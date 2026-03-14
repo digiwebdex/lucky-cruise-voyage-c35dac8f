@@ -27,6 +27,10 @@ export interface CmsPage {
   heroText: string;
   body: string;
   sections: { heading: string; content: string }[];
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string;
+  ogImage?: string;
 }
 
 export interface SeoEntry {
@@ -70,6 +74,17 @@ export interface BlogPost {
   author: string;
   publishedAt: string;
   isPublished: boolean;
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string;
+  ogImage?: string;
+}
+
+export interface SeoFields {
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string;
+  ogImage?: string;
 }
 
 // ===== Default Seeds =====
@@ -121,7 +136,7 @@ const KEYS = {
   blogs: "cms_blogs",
 } as const;
 
-const DATA_VERSION = "v23";
+const DATA_VERSION = "v24";
 const VERSION_KEY = "cms_data_version";
 
 function initVersionCheck() {
