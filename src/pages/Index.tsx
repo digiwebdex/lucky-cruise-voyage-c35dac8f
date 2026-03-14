@@ -278,7 +278,7 @@ export default function Index() {
                   transition={{ delay: i * 0.1 }}
                 >
                   <Link to={`/cruises/${ad.linkedCruiseId}`} className="group block">
-                    <div className="aspect-square overflow-hidden rounded-2xl border border-border shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div className="relative aspect-square overflow-hidden rounded-2xl border border-border shadow-sm hover:shadow-lg transition-all duration-300">
                       <img
                         src={ad.image}
                         alt={ad.title}
@@ -286,6 +286,19 @@ export default function Index() {
                         draggable={false}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                      <div className="absolute top-3 left-3">
+                        <span className="bg-primary text-primary-foreground text-xs font-bold px-2.5 py-1 rounded-full shadow-md">
+                          {ad.title}
+                        </span>
+                      </div>
+                      {ad.subtitle && (
+                        <div className="absolute bottom-3 left-3 right-3">
+                          <p className="text-white text-sm font-semibold drop-shadow-lg leading-tight">
+                            {ad.subtitle}
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </Link>
                 </motion.div>

@@ -16,17 +16,17 @@ export default function PromoAdsManager() {
   const [cruises] = useCmsData(getCruises, saveCruises);
   const [editOpen, setEditOpen] = useState(false);
   const [editing, setEditing] = useState<PromoAd | null>(null);
-  const [form, setForm] = useState({ title: "", image: "", linkedCruiseId: "", isActive: true });
+  const [form, setForm] = useState({ title: "", subtitle: "", image: "", linkedCruiseId: "", isActive: true });
 
   const openNew = () => {
     setEditing(null);
-    setForm({ title: "", image: "", linkedCruiseId: cruises[0]?.id || "", isActive: true });
+    setForm({ title: "", subtitle: "", image: "", linkedCruiseId: cruises[0]?.id || "", isActive: true });
     setEditOpen(true);
   };
 
   const openEdit = (ad: PromoAd) => {
     setEditing(ad);
-    setForm({ title: ad.title, image: ad.image, linkedCruiseId: ad.linkedCruiseId, isActive: ad.isActive });
+    setForm({ title: ad.title, subtitle: ad.subtitle || "", image: ad.image, linkedCruiseId: ad.linkedCruiseId, isActive: ad.isActive });
     setEditOpen(true);
   };
 
@@ -150,6 +150,10 @@ export default function PromoAdsManager() {
             <div className="space-y-1.5">
               <Label>অফার টাইটেল *</Label>
               <Input value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} placeholder="যেমন: স্পেশাল অফার" />
+            </div>
+            <div className="space-y-1.5">
+              <Label>সাবটাইটেল</Label>
+              <Input value={form.subtitle} onChange={e => setForm(f => ({ ...f, subtitle: e.target.value }))} placeholder="যেমন: সুন্দরবন ক্রুজ ট্যুর" />
             </div>
             <div className="space-y-1.5">
               <Label>অফার ইমেজ (1080×1080) *</Label>
