@@ -425,6 +425,16 @@ export default function CruiseEditor() {
                 </label>
               )}
             </div>
+
+            {/* SEO Section */}
+            <SeoFieldsPanel
+              seoTitle={form.seoTitle || ""}
+              seoDescription={form.seoDescription || ""}
+              seoKeywords={form.seoKeywords || ""}
+              ogImage={form.ogImage || ""}
+              onChange={(field, value) => updateField(field as keyof Cruise, value)}
+              titlePlaceholder={form.name}
+            />
           </div>
 
           {/* Sidebar - Pricing & Extras */}
