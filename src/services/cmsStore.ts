@@ -17,7 +17,7 @@ export interface SiteSettings {
   googleMapsUrl: string;
   whatsappFloatEnabled: boolean;
   languageSwitcherEnabled: boolean;
-  heroImages: string[];
+  heroImages: (string | { image: string; title?: string })[];
 }
 
 export interface CmsPage {
