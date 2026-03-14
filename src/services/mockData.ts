@@ -361,6 +361,19 @@ export interface Package {
 
 export type CruiseDestination = "sundarban" | "tanguar-haor";
 
+export type SundarbanSubCategory = 
+  | "premium-luxury"
+  | "ac-attach-bath"
+  | "non-ac-attach-bath"
+  | "non-ac-non-attach-bath";
+
+export const sundarbanSubCategories: { value: SundarbanSubCategory; label: string; labelBn: string }[] = [
+  { value: "premium-luxury", label: "Premium Luxury Ship", labelBn: "প্রিমিয়াম লাক্সারি শিপ" },
+  { value: "ac-attach-bath", label: "AC Attach Bath Ship", labelBn: "এসি এটাচ বাথ শিপ" },
+  { value: "non-ac-attach-bath", label: "Non AC Attach Bath", labelBn: "নন এসি এটাচ বাথ" },
+  { value: "non-ac-non-attach-bath", label: "Non AC Non Attach Bath", labelBn: "নন এসি নন এটাচ বাথ" },
+];
+
 export interface Cruise {
   id: string;
   name: string;
@@ -375,6 +388,7 @@ export interface Cruise {
   priceLabel: string;
   featured: boolean;
   destination: CruiseDestination;
+  subCategory?: SundarbanSubCategory;
   images: string[];
   featuredImageIndex?: number;
   facilities: string[];
