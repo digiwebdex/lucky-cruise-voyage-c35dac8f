@@ -335,8 +335,8 @@ export default function Index() {
         </div>
       </section>
 
-      {/* ============ OFFERS ============ */}
-      {offers.length > 0 && (
+      {/* ============ OFFERS (DISABLED) ============ */}
+      {false && offers.length > 0 && (
         <section className="py-14 md:py-20 bg-muted/20">
           <div className="container">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-10">
