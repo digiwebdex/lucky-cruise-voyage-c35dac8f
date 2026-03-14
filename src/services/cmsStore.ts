@@ -159,7 +159,7 @@ const KEYS = {
   promoAds: "cms_promoAds",
 } as const;
 
-const DATA_VERSION = "v25";
+const DATA_VERSION = "v26";
 const VERSION_KEY = "cms_data_version";
 
 function initVersionCheck() {
