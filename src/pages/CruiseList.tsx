@@ -18,6 +18,7 @@ export default function CruiseList() {
   const [searchParams, setSearchParams] = useSearchParams();
   const destination = searchParams.get("destination") || "all";
   const [query, setQuery] = useState("");
+  const [subCat, setSubCat] = useState("all");
   const [sort, setSort] = useState("default");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
