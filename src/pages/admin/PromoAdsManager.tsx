@@ -26,7 +26,7 @@ export default function PromoAdsManager() {
 
   const openEdit = (ad: PromoAd) => {
     setEditing(ad);
-    setForm({ title: ad.title, image: ad.image, linkedCruiseId: ad.linkedCruiseId, isActive: ad.isActive });
+    setForm({ title: ad.title, subtitle: ad.subtitle || "", image: ad.image, linkedCruiseId: ad.linkedCruiseId, isActive: ad.isActive });
     setEditOpen(true);
   };
 
