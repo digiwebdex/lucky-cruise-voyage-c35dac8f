@@ -206,7 +206,7 @@ export default function SEOManager() {
           <CardContent className="p-4 text-center">
             <XCircle className="h-5 w-5 mx-auto mb-1 text-destructive" />
             <p className="text-2xl font-black text-destructive">{poorCount}</p>
-            <p className="text-xs text-muted-foreground">Poor (<50%)</p>
+            <p className="text-xs text-muted-foreground">{"Poor (<50%)"}</p>
           </CardContent>
         </Card>
       </div>
