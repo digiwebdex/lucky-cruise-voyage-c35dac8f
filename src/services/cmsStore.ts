@@ -301,16 +301,20 @@ import promo5 from "@/assets/promos/promo-offer-5.jpg";
 import promo6 from "@/assets/promos/promo-offer-6.jpg";
 import promo7 from "@/assets/promos/promo-offer-7.jpg";
 import promo8 from "@/assets/promos/promo-offer-8.jpg";
+import promo9 from "@/assets/promos/promo-offer-9.jpg";
+import promo10 from "@/assets/promos/promo-offer-10.jpg";
 
 const defaultPromoAds: PromoAd[] = [
-  { id: "promo-1", title: "স্পেশাল অফার ৩০%", image: promo1, linkedCruiseId: "mv-rezab", isActive: true },
-  { id: "promo-2", title: "ফ্যামিলি প্যাকেজ", image: promo2, linkedCruiseId: "mv-flamingo", isActive: true },
-  { id: "promo-3", title: "হানিমুন প্যাকেজ", image: promo3, linkedCruiseId: "mv-pearl", isActive: true },
-  { id: "promo-4", title: "VIP ক্রুজ", image: promo4, linkedCruiseId: "mv-pearl-3", isActive: true },
-  { id: "promo-5", title: "টাঙ্গুয়ার হাওর ট্যুর", image: promo5, linkedCruiseId: "mv-jol-safari", isActive: true },
-  { id: "promo-6", title: "গ্রুপ ডিসকাউন্ট", image: promo6, linkedCruiseId: "mv-magpie", isActive: true },
-  { id: "promo-7", title: "আর্লি বার্ড অফার", image: promo7, linkedCruiseId: "mv-the-crown", isActive: true },
-  { id: "promo-8", title: "শীতকালীন স্পেশাল", image: promo8, linkedCruiseId: "mv-khayapar", isActive: true },
+  { id: "promo-1", title: "স্পেশাল অফার", subtitle: "সুন্দরবন ক্রুজ ট্যুর", image: promo1, linkedCruiseId: "mv-rezab", isActive: true },
+  { id: "promo-2", title: "ফ্যামিলি প্যাকেজ", subtitle: "পরিবারের সাথে সুন্দরবন", image: promo2, linkedCruiseId: "mv-flamingo", isActive: true },
+  { id: "promo-3", title: "হানিমুন স্পেশাল", subtitle: "সুন্দরবনে রোমান্টিক ক্রুজ", image: promo3, linkedCruiseId: "mv-pearl", isActive: true },
+  { id: "promo-4", title: "VIP ক্রুজ", subtitle: "প্রিমিয়াম লাক্সারি কেবিন", image: promo4, linkedCruiseId: "mv-pearl-3", isActive: true },
+  { id: "promo-5", title: "টাঙ্গুয়ার হাওর", subtitle: "স্বচ্ছ পানির সৌন্দর্য", image: promo5, linkedCruiseId: "mv-jol-safari", isActive: true },
+  { id: "promo-6", title: "গ্রুপ ডিসকাউন্ট", subtitle: "বন্ধুদের সাথে ঘুরে আসুন", image: promo6, linkedCruiseId: "mv-magpie", isActive: true },
+  { id: "promo-7", title: "আর্লি বার্ড অফার", subtitle: "আগেই বুক করুন, সাশ্রয় করুন", image: promo7, linkedCruiseId: "mv-the-crown", isActive: true },
+  { id: "promo-8", title: "শীতকালীন স্পেশাল", subtitle: "কুয়াশায় সুন্দরবন ভ্রমণ", image: promo8, linkedCruiseId: "mv-khayapar", isActive: true },
+  { id: "promo-9", title: "ফুড ফেস্টিভাল", subtitle: "দেশি খাবারের স্বাদ নিন", image: promo9, linkedCruiseId: "mv-ocean-pearl", isActive: true },
+  { id: "promo-10", title: "ওয়াইল্ডলাইফ সাফারি", subtitle: "রয়েল বেঙ্গল টাইগার দেখুন", image: promo10, linkedCruiseId: "mv-forest", isActive: true },
 ];
 
 export const getPromoAds = (): PromoAd[] => getStore(KEYS.promoAds, defaultPromoAds);
