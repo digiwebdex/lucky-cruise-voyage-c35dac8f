@@ -70,6 +70,7 @@ const App = () => (
               <Route path="testimonials" element={<TestimonialsManager />} />
               <Route path="offers" element={<OffersManager />} />
               <Route path="blogs" element={<BlogManager />} />
+              <Route path="reviews" element={<ReviewsManager />} />
               <Route path="team" element={<TeamManager />} />
               <Route path="media" element={<MediaLibrary />} />
               
