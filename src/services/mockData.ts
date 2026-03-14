@@ -361,6 +361,19 @@ export interface Package {
 
 export type CruiseDestination = "sundarban" | "tanguar-haor";
 
+export type SundarbanSubCategory = 
+  | "premium-luxury"
+  | "ac-attach-bath"
+  | "non-ac-attach-bath"
+  | "non-ac-non-attach-bath";
+
+export const sundarbanSubCategories: { value: SundarbanSubCategory; label: string; labelBn: string }[] = [
+  { value: "premium-luxury", label: "Premium Luxury Ship", labelBn: "প্রিমিয়াম লাক্সারি শিপ" },
+  { value: "ac-attach-bath", label: "AC Attach Bath Ship", labelBn: "এসি এটাচ বাথ শিপ" },
+  { value: "non-ac-attach-bath", label: "Non AC Attach Bath", labelBn: "নন এসি এটাচ বাথ" },
+  { value: "non-ac-non-attach-bath", label: "Non AC Non Attach Bath", labelBn: "নন এসি নন এটাচ বাথ" },
+];
+
 export interface Cruise {
   id: string;
   name: string;
@@ -375,6 +388,7 @@ export interface Cruise {
   priceLabel: string;
   featured: boolean;
   destination: CruiseDestination;
+  subCategory?: SundarbanSubCategory;
   images: string[];
   featuredImageIndex?: number;
   facilities: string[];
@@ -525,6 +539,7 @@ export const cruises: Cruise[] = [
   {
     id: "mv-flamingo",
     destination: "sundarban",
+    subCategory: "premium-luxury",
     name: "এমভি ফ্লেমিংগো",
     subtitle: "খুলনা-সুন্দরবন-খুলনা ক্রুজ ট্যুর",
     description: "এমভি ফ্লেমিংগোতে রয়েছে উন্নতমানের আবাসন ব্যবস্থা, সেন্ট্রাল এয়ার কন্ডিশন, ব্যাংকুয়েট হল, টপ ডেক এবং নিখুঁত সেবা। এসব সুবিধা আপনার ভ্রমণকে করবে আরামদায়ক, আনন্দময় এবং স্মরণীয়।",
@@ -717,6 +732,7 @@ export const cruises: Cruise[] = [
   {
     id: "mv-forest",
     destination: "sundarban",
+    subCategory: "premium-luxury",
     name: "এমভি ফরেস্ট ক্রুজ",
     subtitle: "সুন্দরবনের নতুন বিলাসবহুল ক্রুজ জাহাজ",
     description: "ফরেস্ট ক্রুজ এর পক্ষ থেকে সবাইকে জানাই নতুন মৌসুমে আন্তরিক স্বাগতম। সুন্দরবনে আরামদায়ক ও উন্নত সেবা দিতে প্রস্তুত আমাদের নবনির্মিত আধুনিক সুযোগ-সুবিধা সম্বলিত জাহাজ এমভি ফরেস্ট ক্রুজ।",
@@ -1147,6 +1163,7 @@ export const cruises: Cruise[] = [
   {
     id: "mv-magpie",
     destination: "sundarban",
+    subCategory: "non-ac-attach-bath",
     name: "এমভি রয়্যাল ম্যাগপাই",
     subtitle: "সুন্দরবনের পর্যটকবাহী ক্রুজ জাহাজ",
     description: "এমভি রয়্যাল ম্যাগপাই একটি আধুনিক পর্যটকবাহী জাহাজ যা সুন্দরবনের ম্যানগ্রোভ অরণ্যে ভ্রমণের জন্য তৈরি। আপনার বিনোদন ও অ্যাডভেঞ্চারের কথা মাথায় রেখে এতে তৈরি করা হয়েছে বন্ধ এবং প্রশস্ত ওপেন-এয়ার অবজারভেশন ডেক।",
@@ -1316,6 +1333,7 @@ export const cruises: Cruise[] = [
   {
     id: "mv-pearl",
     destination: "sundarban",
+    subCategory: "ac-attach-bath",
     name: "এমভি সি পার্ল ক্রুজ ৪",
     subtitle: "খুলনা-সুন্দরবন-খুলনা ক্রুজ জাহাজ",
     description: "এমভি সি পার্ল ক্রুজ ৪ একটি ৪ ডেক বিশিষ্ট বিলাসবহুল ক্রুজ জাহাজ। জাহাজের নিচের ডেকে রয়েছে ২০ জনের জন্য একটি এক্সিকিউটিভ মিটিং লাউঞ্জ। প্রথম ডেকে রয়েছে ১২টি এয়ারকন্ডিশনড ডিলাক্স, সুপার ডিলাক্স ও ফ্যামিলি কেবিন। দ্বিতীয় ডেকে রয়েছে ৮টি কেবিন। আর স্কাই ডেকে রয়েছে ১টি প্রিমিয়ার কেবিন এবং সুন্দরবনের অপূর্ব সৌন্দর্য উপভোগ করার জন্য ৩৬০° প্যানোরামিক ভিউ।",
@@ -1480,6 +1498,7 @@ export const cruises: Cruise[] = [
   {
     id: "mv-pearl-3",
     destination: "sundarban",
+    subCategory: "ac-attach-bath",
     name: "এমভি সি পার্ল ক্রুজ ৩",
     subtitle: "খুলনা-সুন্দরবন-খুলনা ক্রুজ জাহাজ",
     description: "এমভি সি পার্ল ক্রুজ ৩ একটি ৩ ডেক বিশিষ্ট স্ট্যান্ডার্ড ক্রুজ জাহাজ।\nপ্রথম ডেকে রয়েছে ৮টি এয়ারকন্ডিশনড ও নন-এয়ারকন্ডিশনড কেবিন। দ্বিতীয় ডেকে রয়েছে ১৪টি এয়ারকন্ডিশনড ও নন-এয়ারকন্ডিশনড কেবিন। স্কাই ডেকে রয়েছে ৩টি কেবিন ও একটি মাস্টার স্লিপিং রুম এবং সুন্দরবনের অপূর্ব সৌন্দর্য উপভোগ করার জন্য ৩৬০° প্যানোরামিক ভিউ।",
@@ -1642,6 +1661,7 @@ export const cruises: Cruise[] = [
   {
     id: "mv-silver",
     destination: "sundarban",
+    subCategory: "ac-attach-bath",
     name: "এমভি সিলভার ক্রুজ",
     subtitle: "খুলনা-সুন্দরবন-খুলনা এসি ক্রুজ জাহাজ",
     description: "এমভি সিলভার ক্রুজ একটি আধুনিক এসি পর্যটকবাহী জাহাজ, যা সুন্দরবনের ম্যানগ্রোভ অরণ্যে ভ্রমণের জন্য নির্মিত। আপনার বিনোদন ও অ্যাডভেঞ্চারের প্রয়োজন মাথায় রেখে এতে তৈরি করা হয়েছে বন্ধ এবং প্রশস্ত ওপেন-এয়ার অবজারভেশন ডেক।",
@@ -1800,6 +1820,7 @@ export const cruises: Cruise[] = [
   {
     id: "mv-utshab",
     destination: "sundarban",
+    subCategory: "ac-attach-bath",
     name: "এমভি উৎসব",
     subtitle: "খুলনার বিলাসবহুল এসি ক্রুজ জাহাজ",
     description: "এমভি উৎসব একটি আধুনিক বিলাসবহুল এসি পর্যটকবাহী জাহাজ, যা সুন্দরবনের ম্যানগ্রোভ অরণ্যে ভ্রমণের জন্য নির্মিত। আপনার বিনোদন ও অ্যাডভেঞ্চারের প্রয়োজন মাথায় রেখে এতে তৈরি করা হয়েছে বন্ধ এবং প্রশস্ত ওপেন-এয়ার অবজারভেশন ডেক।",
@@ -1963,6 +1984,7 @@ export const cruises: Cruise[] = [
   {
     id: "mv-khayapar",
     destination: "sundarban",
+    subCategory: "non-ac-attach-bath",
     name: "এমভি খেয়াপার",
     subtitle: "সুন্দরবনের পর্যটকবাহী ক্রুজ জাহাজ",
     description: "এমভি খেয়াপার একটি আধুনিক পর্যটকবাহী জাহাজ, যা সুন্দরবনের ম্যানগ্রোভ অরণ্যে ভ্রমণের জন্য তৈরি করা হয়েছে। আপনার বিনোদন ও অ্যাডভেঞ্চারের কথা মাথায় রেখে এতে তৈরি করা হয়েছে বন্ধ এবং প্রশস্ত ওপেন-এয়ার অবজারভেশন ডেক।",
@@ -2180,6 +2202,7 @@ export const cruises: Cruise[] = [
   {
     id: "mv-mohammadi-2",
     destination: "sundarban",
+    subCategory: "non-ac-non-attach-bath",
     name: "এম.ভি মোহাম্মাদী ২",
     subtitle: "সুন্দরবনের নন-এসি ক্রুজ জাহাজ",
     description: "এম.ভি মোহাম্মাদী ২ এর পক্ষ থেকে সবাইকে জানাই নতুন মৌসুমে স্বাগতম। সুন্দরবনে আরামদায়ক ভ্রমণ নিশ্চিত করতে আমাদের আধুনিক সুযোগ-সুবিধা সম্বলিত জাহাজ এম.ভি মোহাম্মাদী ২ প্রস্তুত।",
@@ -2375,6 +2398,7 @@ export const cruises: Cruise[] = [
   {
     id: "mv-the-crown",
     destination: "sundarban",
+    subCategory: "ac-attach-bath",
     name: "এম.ভি দ্য ক্রাউন",
     subtitle: "সুন্দরবনের এসি ক্রুজ জাহাজ",
     description: "এম.ভি দ্য ক্রাউন একটি আধুনিক এসি ক্রুজ জাহাজ, যা সুন্দরবনের ম্যানগ্রোভ অরণ্যে ভ্রমণের জন্য তৈরি করা হয়েছে। আপনার বিনোদন ও অ্যাডভেঞ্চারের কথা মাথায় রেখে এতে তৈরি করা হয়েছে বন্ধ ও প্রশস্ত ওপেন এয়ার অবজারভেশন ডেক।",
@@ -2572,6 +2596,7 @@ export const cruises: Cruise[] = [
   {
     id: "mv-adeeba-khan",
     destination: "sundarban",
+    subCategory: "ac-attach-bath",
     name: "এম.ভি. আদিবা খান",
     subtitle: "খুলনা-সুন্দরবন-খুলনা ক্রুজ ট্যুর",
     description: "নিরাপত্তা এবং আরামদায়ক পরিবেশের সুবিধাসহ একটি মাঝারি আকারের আরামদায়ক পর্যটন নৌকা। আধুনিক অভ্যন্তরীণ সজ্জা সহ প্রশস্ত কক্ষ এবং উচ্চ কক্ষের উচ্চতার ছাড়পত্র।",
@@ -2737,6 +2762,7 @@ export const cruises: Cruise[] = [
   {
     id: "mv-ocean-pearl",
     destination: "sundarban",
+    subCategory: "premium-luxury",
     name: "এম.ভি ওশান পার্ল",
     subtitle: "বিলাসবহুল টুরিস্ট ভেসেল",
     description: "এম.ভি ওশান পার্ল একটি বিলাসবহুল পর্যটকবাহী ক্রুজ জাহাজ, যা সুন্দরবনের ম্যানগ্রোভ অরণ্যে ভ্রমণের জন্য নির্মিত। আপনার বিনোদন ও অ্যাডভেঞ্চারের কথা মাথায় রেখে এতে রয়েছে বন্ধ এবং প্রশস্ত ওপেন-এয়ার অবজারভেশন ডেক। সুন্দরবনের সবচেয়ে বেশি প্রস্থের ৪০ ফুট ক্যাটামেরান বডি, ৩৩টি বিলাসবহুল কক্ষ এবং এক্সক্লুসিভ রুফটপ সুইমিং পুল সহ এটি সুন্দরবনের সবচেয়ে আধুনিক ও বিলাসবহুল জাহাজ।",
@@ -2886,6 +2912,7 @@ export const cruises: Cruise[] = [
   {
     id: "mv-rezab",
     destination: "sundarban",
+    subCategory: "ac-attach-bath",
     name: "এম.ভি রেজাব",
     subtitle: "এসি টুরিস্ট ক্রুজ জাহাজ (সুন্দরবন)",
     description: "বিশ্বের বৃহত্তম ম্যানগ্রোভ বন সুন্দরবন ভ্রমণ করুন একদম নতুন এয়ার কন্ডিশন্ড ক্রুজ জাহাজ এম.ভি রেজাব এর সাথে।",

@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { searchCruises } from "@/services/cmsStore";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { sundarbanSubCategories } from "@/services/mockData";
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 const scaleIn = { hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } };
@@ -17,6 +18,7 @@ export default function CruiseList() {
   const [searchParams, setSearchParams] = useSearchParams();
   const destination = searchParams.get("destination") || "all";
   const [query, setQuery] = useState("");
+  const [subCat, setSubCat] = useState("all");
   const [sort, setSort] = useState("default");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
@@ -24,6 +26,7 @@ export default function CruiseList() {
   const allResults = searchCruises(query);
   const results = allResults.filter(c => {
     if (destination !== "all" && c.destination !== destination) return false;
+    if (destination === "sundarban" && subCat !== "all" && c.subCategory !== subCat) return false;
     if (minPrice && c.price < Number(minPrice)) return false;
     if (maxPrice && c.price > Number(maxPrice)) return false;
     return true;
@@ -61,7 +64,7 @@ export default function CruiseList() {
             <p className="mt-3 text-secondary-foreground/60 max-w-md mx-auto">{pageSubtitle}</p>
             
             {/* Destination tabs */}
-            <div className="mt-6 flex justify-center gap-3">
+            <div className="mt-6 flex justify-center gap-3 flex-wrap">
               {[
                 { key: "all", label: t.cruiseList.allCruises || "All" },
                 { key: "sundarban", label: t.nav.sundarbanTour },
@@ -76,6 +79,7 @@ export default function CruiseList() {
                       searchParams.set("destination", tab.key);
                     }
                     setSearchParams(searchParams);
+                    setSubCat("all");
                   }}
                   className={`rounded-full px-5 py-2 text-sm font-bold transition-all ${
                     destination === tab.key || (tab.key === "all" && destination === "all")
@@ -87,6 +91,35 @@ export default function CruiseList() {
                 </button>
               ))}
             </div>
+
+            {/* Sundarban subcategory tabs */}
+            {destination === "sundarban" && (
+              <div className="mt-4 flex justify-center gap-2 flex-wrap">
+                <button
+                  onClick={() => setSubCat("all")}
+                  className={`rounded-full px-4 py-1.5 text-xs font-bold transition-all ${
+                    subCat === "all"
+                      ? "bg-primary/20 text-primary border border-primary/40"
+                      : "bg-secondary-foreground/5 text-secondary-foreground/60 hover:bg-secondary-foreground/10 border border-transparent"
+                  }`}
+                >
+                  সকল
+                </button>
+                {sundarbanSubCategories.map(sc => (
+                  <button
+                    key={sc.value}
+                    onClick={() => setSubCat(sc.value)}
+                    className={`rounded-full px-4 py-1.5 text-xs font-bold transition-all ${
+                      subCat === sc.value
+                        ? "bg-primary/20 text-primary border border-primary/40"
+                        : "bg-secondary-foreground/5 text-secondary-foreground/60 hover:bg-secondary-foreground/10 border border-transparent"
+                    }`}
+                  >
+                    {sc.labelBn}
+                  </button>
+                ))}
+              </div>
+            )}
           </motion.div>
         </div>
       </section>
