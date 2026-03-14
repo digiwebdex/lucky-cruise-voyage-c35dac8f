@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useCmsData, getSettings, saveSettings } from "@/services/cmsStore";
 import { toast } from "@/hooks/use-toast";
-import { Lock } from "lucide-react";
+import { Lock, Upload, X, Image as ImageIcon } from "lucide-react";
 
 const DEFAULT_PASSWORD = "admin123";
 
@@ -23,6 +23,7 @@ export default function SettingsPage() {
   const [currentPw, setCurrentPw] = useState("");
   const [newPw, setNewPw] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
+  const heroFileRef = useRef<HTMLInputElement>(null);
 
   const update = (field: string, value: any) => setSettings({ ...settings, [field]: value });
 
@@ -52,6 +53,30 @@ export default function SettingsPage() {
     toast({ title: "Password updated successfully" });
   };
 
+  const handleHeroImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files) return;
+    Array.from(files).forEach(file => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64 = reader.result as string;
+        setSettings(prev => ({
+          ...prev,
+          heroImages: [...(prev.heroImages || []), base64],
+        }));
+      };
+      reader.readAsDataURL(file);
+    });
+    if (heroFileRef.current) heroFileRef.current.value = "";
+  };
+
+  const removeHeroImage = (index: number) => {
+    setSettings({
+      ...settings,
+      heroImages: (settings.heroImages || []).filter((_, i) => i !== index),
+    });
+  };
+
   return (
     <div>
       <h1 className="mb-6 text-2xl font-bold text-secondary">Settings</h1>
@@ -74,6 +99,53 @@ export default function SettingsPage() {
             <div><Label>Facebook URL</Label><Input value={settings.facebookUrl} onChange={e => update("facebookUrl", e.target.value)} placeholder="https://facebook.com/..." /></div>
             <div><Label>YouTube URL</Label><Input value={settings.youtubeUrl} onChange={e => update("youtubeUrl", e.target.value)} placeholder="https://youtube.com/..." /></div>
             <div><Label>Instagram URL</Label><Input value={settings.instagramUrl} onChange={e => update("instagramUrl", e.target.value)} placeholder="https://instagram.com/..." /></div>
+          </CardContent>
+        </Card>
+
+        {/* Hero Banner Images */}
+        <Card className="border-border border-l-4 border-l-emerald lg:col-span-2">
+          <CardContent className="space-y-4 p-6">
+            <div className="flex items-center gap-2">
+              <ImageIcon className="h-5 w-5 text-emerald" />
+              <h2 className="font-bold text-foreground">হিরো ব্যানার ইমেজ</h2>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              হোমপেজের হিরো সেকশনে যেসব ইমেজ দেখাবে সেগুলো এখানে আপলোড করুন। খালি থাকলে প্রথম ক্রুজের ফিচার্ড ইমেজ দেখাবে।
+            </p>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+              {(settings.heroImages || []).map((img, i) => (
+                <div key={i} className="relative group aspect-video rounded-xl overflow-hidden border border-border">
+                  <img src={img} alt={`Hero ${i + 1}`} className="h-full w-full object-cover" />
+                  <button
+                    onClick={() => removeHeroImage(i)}
+                    className="absolute top-2 right-2 rounded-full bg-destructive/90 p-1 text-destructive-foreground opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                  <div className="absolute bottom-1 left-2 text-xs font-bold text-white bg-black/50 px-2 py-0.5 rounded">
+                    {i + 1}
+                  </div>
+                </div>
+              ))}
+
+              <button
+                onClick={() => heroFileRef.current?.click()}
+                className="aspect-video rounded-xl border-2 border-dashed border-border hover:border-primary/50 flex flex-col items-center justify-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Upload className="h-6 w-6" />
+                <span className="text-xs font-medium">আপলোড</span>
+              </button>
+            </div>
+
+            <input
+              ref={heroFileRef}
+              type="file"
+              accept="image/*"
+              multiple
+              className="hidden"
+              onChange={handleHeroImageUpload}
+            />
           </CardContent>
         </Card>
 

@@ -20,6 +20,7 @@ export default function Index() {
   const { t, lang: language } = useLanguage();
   const cruises = getCruises();
   const testimonials = getTestimonials();
+  const settings = getSettings();
   const now = new Date().toISOString();
   const offers = getOffers().filter(o => o.isActive && (!o.expiryDate || o.expiryDate >= now));
   const allCruises = cruises.slice(0, 6);
@@ -31,8 +32,12 @@ export default function Index() {
   const [guests, setGuests] = useState("2");
   const [bookingCruise, setBookingCruise] = useState<typeof cruises[0] | null>(null);
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [heroIndex, setHeroIndex] = useState(0);
 
-  const heroImage = cruises[0]?.images[cruises[0]?.featuredImageIndex ?? 0];
+  const adminHeroImages = settings.heroImages?.length ? settings.heroImages : [];
+  const fallbackHeroImage = cruises[0]?.images[cruises[0]?.featuredImageIndex ?? 0];
+  const heroImages = adminHeroImages.length > 0 ? adminHeroImages : (fallbackHeroImage ? [fallbackHeroImage] : []);
+  const heroImage = heroImages[heroIndex % heroImages.length] || "";
 
   const handleQuickBook = () => {
     const cruise = cruises.find(c => c.id === selectedCruise);
