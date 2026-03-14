@@ -81,8 +81,8 @@ export default function PromoAdsManager() {
       <Card className="border-border">
         <CardContent className="p-5">
           <p className="text-xs font-bold text-muted-foreground mb-3 uppercase tracking-wider">Homepage Preview</p>
-          <div className="grid grid-cols-3 gap-3">
-            {ads.filter(a => a.isActive).slice(0, 3).map(ad => {
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+            {ads.filter(a => a.isActive).slice(0, 15).map(ad => {
               const cruise = cruises.find(c => c.id === ad.linkedCruiseId);
               return (
                 <div key={ad.id} className="aspect-square rounded-xl overflow-hidden border border-border relative group">
