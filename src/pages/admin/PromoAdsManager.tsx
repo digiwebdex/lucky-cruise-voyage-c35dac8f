@@ -70,7 +70,7 @@ export default function PromoAdsManager() {
           <h1 className="font-display text-2xl font-bold text-foreground flex items-center gap-2">
             <ImageIcon className="h-6 w-6 text-primary" /> অফার এডভারটাইজ
           </h1>
-          <p className="text-sm text-muted-foreground">হোমপেজে প্রমো ব্যানার ইমেজ ম্যানেজ করুন (1080×1080)</p>
+          <p className="text-sm text-muted-foreground">হোমপেজে সর্বোচ্চ ১৫টি প্রমো ব্যানার ইমেজ ম্যানেজ করুন (1080×1080)</p>
         </div>
         <Button onClick={openNew} className="gap-2 bg-primary text-primary-foreground">
           <Plus className="h-4 w-4" /> নতুন অফার যোগ করুন
@@ -81,8 +81,8 @@ export default function PromoAdsManager() {
       <Card className="border-border">
         <CardContent className="p-5">
           <p className="text-xs font-bold text-muted-foreground mb-3 uppercase tracking-wider">Homepage Preview</p>
-          <div className="grid grid-cols-3 gap-3">
-            {ads.filter(a => a.isActive).slice(0, 3).map(ad => {
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+            {ads.filter(a => a.isActive).slice(0, 15).map(ad => {
               const cruise = cruises.find(c => c.id === ad.linkedCruiseId);
               return (
                 <div key={ad.id} className="aspect-square rounded-xl overflow-hidden border border-border relative group">
