@@ -39,7 +39,13 @@ export default function Index() {
   const heroImages = adminHeroImages.length > 0 ? adminHeroImages : (fallbackHeroImage ? [fallbackHeroImage] : []);
   const heroImage = heroImages[heroIndex % heroImages.length] || "";
 
-  const handleQuickBook = () => {
+  // Auto-rotate hero images
+  useEffect(() => {
+    if (heroImages.length <= 1) return;
+    const timer = setInterval(() => setHeroIndex(i => i + 1), 5000);
+    return () => clearInterval(timer);
+  }, [heroImages.length]);
+
     const cruise = cruises.find(c => c.id === selectedCruise);
     if (cruise) {
       setBookingCruise(cruise);
