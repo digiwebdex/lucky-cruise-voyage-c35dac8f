@@ -6,20 +6,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import HeaderBookingModal from "@/components/HeaderBookingModal";
+import { sundarbanSubCategories } from "@/services/mockData";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
   const [cruiseDropdownOpen, setCruiseDropdownOpen] = useState(false);
+  const [sundarbanExpanded, setSundarbanExpanded] = useState(false);
+  const [mobileSundarbanOpen, setMobileSundarbanOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const { lang, setLang, t } = useLanguage();
 
-  const cruiseSubLinks = [
-    { to: "/cruises?destination=sundarban", label: t.nav.sundarbanTour },
-    { to: "/cruises?destination=tanguar-haor", label: t.nav.tanguarHaorTour },
-  ];
 
   const navLinks = [
     { to: "/", label: t.nav.home },
@@ -89,18 +88,56 @@ export default function Header() {
                         initial={{ opacity: 0, y: -5 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -5 }}
-                        className="absolute top-full left-0 mt-1 w-56 rounded-xl border border-border/50 bg-card shadow-elevated overflow-hidden z-50"
+                        className="absolute top-full left-0 mt-1 w-64 rounded-xl border border-border/50 bg-card shadow-elevated overflow-hidden z-50"
                       >
-                        {cruiseSubLinks.map(sub => (
-                          <Link
-                            key={sub.to}
-                            to={sub.to}
-                            onClick={() => setCruiseDropdownOpen(false)}
-                            className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
+                        {/* Sundarban with subcategories */}
+                        <div>
+                          <button
+                            onClick={() => setSundarbanExpanded(!sundarbanExpanded)}
+                            className="flex items-center justify-between w-full px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
                           >
-                            {sub.label}
-                          </Link>
-                        ))}
+                            <span>{t.nav.sundarbanTour}</span>
+                            <ChevronDown className={`h-3.5 w-3.5 transition-transform ${sundarbanExpanded ? "rotate-180" : ""}`} />
+                          </button>
+                          <AnimatePresence>
+                            {sundarbanExpanded && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                className="overflow-hidden bg-muted/30"
+                              >
+                                <Link
+                                  to="/cruises?destination=sundarban"
+                                  onClick={() => { setCruiseDropdownOpen(false); setSundarbanExpanded(false); }}
+                                  className="flex items-center gap-2 px-6 py-2.5 text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
+                                >
+                                  <ChevronRight className="h-3 w-3" />
+                                  {lang === "bn" ? "সকল সুন্দরবন ক্রুজ" : "All Sundarban Cruises"}
+                                </Link>
+                                {sundarbanSubCategories.map(sc => (
+                                  <Link
+                                    key={sc.value}
+                                    to={`/cruises?destination=sundarban&sub=${sc.value}`}
+                                    onClick={() => { setCruiseDropdownOpen(false); setSundarbanExpanded(false); }}
+                                    className="flex items-center gap-2 px-6 py-2.5 text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
+                                  >
+                                    <ChevronRight className="h-3 w-3" />
+                                    {lang === "bn" ? sc.labelBn : sc.label}
+                                  </Link>
+                                ))}
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                        {/* Tanguar Haor */}
+                        <Link
+                          to="/cruises?destination=tanguar-haor"
+                          onClick={() => setCruiseDropdownOpen(false)}
+                          className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
+                        >
+                          {t.nav.tanguarHaorTour}
+                        </Link>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -173,17 +210,49 @@ export default function Header() {
                         {link.label}
                       </div>
                       <div className="ml-4 space-y-1">
-                        {cruiseSubLinks.map(sub => (
-                          <Link
-                            key={sub.to}
-                            to={sub.to}
-                            onClick={() => setMobileOpen(false)}
-                            className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium text-secondary-foreground/60 hover:bg-primary/5 hover:text-primary transition-all"
-                          >
+                        {/* Sundarban with expandable subcategories */}
+                        <button
+                          onClick={() => setMobileSundarbanOpen(!mobileSundarbanOpen)}
+                          className="flex items-center justify-between w-full rounded-xl px-4 py-2.5 text-sm font-medium text-secondary-foreground/60 hover:bg-primary/5 hover:text-primary transition-all"
+                        >
+                          <span className="flex items-center gap-2">
                             <ChevronRight className="h-3.5 w-3.5" />
-                            {sub.label}
-                          </Link>
-                        ))}
+                            {t.nav.sundarbanTour}
+                          </span>
+                          <ChevronDown className={`h-3.5 w-3.5 transition-transform ${mobileSundarbanOpen ? "rotate-180" : ""}`} />
+                        </button>
+                        {mobileSundarbanOpen && (
+                          <div className="ml-4 space-y-0.5">
+                            <Link
+                              to="/cruises?destination=sundarban"
+                              onClick={() => setMobileOpen(false)}
+                              className="flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-medium text-secondary-foreground/50 hover:bg-primary/5 hover:text-primary transition-all"
+                            >
+                              <ChevronRight className="h-3 w-3" />
+                              {lang === "bn" ? "সকল সুন্দরবন ক্রুজ" : "All Sundarban Cruises"}
+                            </Link>
+                            {sundarbanSubCategories.map(sc => (
+                              <Link
+                                key={sc.value}
+                                to={`/cruises?destination=sundarban&sub=${sc.value}`}
+                                onClick={() => setMobileOpen(false)}
+                                className="flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-medium text-secondary-foreground/50 hover:bg-primary/5 hover:text-primary transition-all"
+                              >
+                                <ChevronRight className="h-3 w-3" />
+                                {lang === "bn" ? sc.labelBn : sc.label}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                        {/* Tanguar Haor */}
+                        <Link
+                          to="/cruises?destination=tanguar-haor"
+                          onClick={() => setMobileOpen(false)}
+                          className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium text-secondary-foreground/60 hover:bg-primary/5 hover:text-primary transition-all"
+                        >
+                          <ChevronRight className="h-3.5 w-3.5" />
+                          {t.nav.tanguarHaorTour}
+                        </Link>
                       </div>
                     </div>
                   );
