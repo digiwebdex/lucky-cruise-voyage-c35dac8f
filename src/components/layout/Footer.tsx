@@ -41,6 +41,10 @@ export default function Footer() {
               <p className="text-sm text-secondary-foreground/60 leading-relaxed">
                 {t.footer.tagline}
               </p>
+              <div className="mt-4 flex items-center gap-3">
+                <img src={toasLogo} alt="TOAS Verified" className="h-14 w-14 rounded-full bg-white p-1" />
+                <span className="text-xs font-semibold text-primary">TOAS Verified</span>
+              </div>
               <div className="mt-4 flex gap-3">
                 {settings.facebookUrl && (
                   <a href={settings.facebookUrl} target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary hover:bg-primary/25 transition-colors">
