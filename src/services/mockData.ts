@@ -357,6 +357,7 @@ export interface Package {
   isOffer?: boolean;
   duration: string;
   categoryId?: string;
+  thumbnail?: string;
 }
 
 export type CruiseDestination = "sundarban" | "tanguar-haor";
