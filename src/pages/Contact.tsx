@@ -6,8 +6,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { getSettings } from "@/services/cmsStore";
+import { getSettings, addContactInquiry } from "@/services/cmsStore";
 import PageHeroBanner from "@/components/PageHeroBanner";
+import { toast } from "sonner";
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
@@ -20,10 +21,23 @@ export default function Contact() {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const data = new FormData(form);
+    const name = (data.get("name") as string || "").trim();
+    const email = (data.get("email") as string || "").trim();
+    const message = (data.get("message") as string || "").trim();
+
+    if (!name || !email || !message) return;
+
+    // Store in admin panel
+    addContactInquiry({ name, email, message });
+
+    // Also send via WhatsApp
     const msg = encodeURIComponent(
-      `Contact Inquiry\n\nName: ${data.get("name")}\nEmail: ${data.get("email")}\nMessage: ${data.get("message")}`
+      `Contact Inquiry\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`
     );
     window.open(`https://wa.me/${settings.whatsapp}?text=${msg}`, "_blank");
+
+    toast.success(lang === "bn" ? "আপনার মেসেজ পাঠানো হয়েছে!" : "Your message has been sent!");
+    form.reset();
   };
 
   return (
@@ -90,15 +104,15 @@ export default function Contact() {
                   <form onSubmit={handleSubmit} className="space-y-5">
                     <div>
                       <Label htmlFor="name" className="text-sm font-semibold">{t.booking.name}</Label>
-                      <Input id="name" name="name" placeholder={t.contact.yourName} required className="mt-1.5 rounded-xl h-12" />
+                      <Input id="name" name="name" placeholder={t.contact.yourName} required className="mt-1.5 rounded-xl h-12" maxLength={100} />
                     </div>
                     <div>
                       <Label htmlFor="email" className="text-sm font-semibold">{t.contact.email}</Label>
-                      <Input id="email" name="email" type="email" placeholder={t.contact.yourEmail} required className="mt-1.5 rounded-xl h-12" />
+                      <Input id="email" name="email" type="email" placeholder={t.contact.yourEmail} required className="mt-1.5 rounded-xl h-12" maxLength={255} />
                     </div>
                     <div>
                       <Label htmlFor="message" className="text-sm font-semibold">{t.contact.messageLabel}</Label>
-                      <Textarea id="message" name="message" placeholder={t.contact.messagePlaceholder} rows={5} required className="mt-1.5 rounded-xl" />
+                      <Textarea id="message" name="message" placeholder={t.contact.messagePlaceholder} rows={5} required className="mt-1.5 rounded-xl" maxLength={1000} />
                     </div>
                     <Button type="submit" size="lg" className="w-full gradient-primary text-primary-foreground font-bold text-base rounded-xl h-13 gap-2 hover:scale-[1.02] transition-transform">
                       <Send className="h-5 w-5" /> {t.contact.sendViaWhatsApp}
