@@ -461,12 +461,12 @@ export default function Index() {
         <div className="container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-10">
             <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary">
-              <Ship className="h-3.5 w-3.5" /> {t.featured.ourFleet}
+              <Ship className="h-3.5 w-3.5" /> {bn ? hc.featuredSectionLabelBn : hc.featuredSectionLabel}
             </span>
             <h2 className="mt-2 font-display text-2xl sm:text-3xl md:text-4xl font-black text-foreground">
-              {t.featured.title} <span className="text-primary">{t.featured.titleHighlight}</span>
+              {bn ? hc.featuredTitleBn : hc.featuredTitle} <span className="text-primary">{bn ? hc.featuredHighlightBn : hc.featuredHighlight}</span>
             </h2>
-            <p className="mt-2 text-muted-foreground text-sm max-w-md mx-auto">{t.featured.subtitle}</p>
+            <p className="mt-2 text-muted-foreground text-sm max-w-md mx-auto">{bn ? hc.featuredSubtitleBn : hc.featuredSubtitle}</p>
           </motion.div>
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
