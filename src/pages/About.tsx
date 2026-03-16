@@ -42,9 +42,9 @@ export default function About() {
             </motion.div>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scaleIn} className="grid grid-cols-2 gap-4">
               {[
-                { value: "6+", label: t.about.cruiseShips, icon: Ship },
-                { value: "5000+", label: t.about.happyTravellers, icon: Users },
-                { value: "50+", label: t.about.toursCompleted, icon: Globe },
+                { value: "70+", label: t.about.cruiseShips, icon: Ship },
+                { value: "1,50,000+", label: t.about.happyTravellers, icon: Users },
+                { value: "1000+", label: t.about.toursCompleted, icon: Globe },
                 { value: "15+", label: t.about.yearsExperience, icon: Award },
               ].map((s, i) => (
                 <Card key={i} className="border-border/50 hover:shadow-elevated transition-all duration-500 hover:-translate-y-1 bg-card text-center">

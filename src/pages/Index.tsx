@@ -120,8 +120,8 @@ export default function Index() {
             {/* Stats */}
             <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.5, delay: 0.3 }} className="mt-8 flex gap-8">
               {[
-                { value: "6+", label: t.hero.cruiseShips },
-                { value: "5000+", label: t.hero.happyTravellers },
+                { value: "70+", label: t.hero.cruiseShips },
+                { value: "1,50,000+", label: t.hero.happyTravellers },
                 { value: "15+", label: t.hero.yearsExperience },
               ].map((stat, i) => (
                 <div key={i}>
