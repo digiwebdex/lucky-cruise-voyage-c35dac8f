@@ -448,7 +448,7 @@ const defaultBlogs: BlogPost[] = [
 ];
 
 export const getBlogs = (): BlogPost[] => getStore(KEYS.blogs, defaultBlogs);
-export const saveBlogs = (data: BlogPost[]) => setStore(KEYS.blogs, data);
+export const saveBlogs = (data: BlogPost[]) => { setStore(KEYS.blogs, data); syncToApi('/api/blogs', data); };
 
 // ===== Reviews =====
 export const getReviews = (): CustomerReview[] => getStore(KEYS.reviews, []);
