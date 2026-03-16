@@ -77,7 +77,7 @@ export const getAvailabilityForCruise = (cruiseId: string): string[] => {
 };
 
 export const getBookings = (): Booking[] => getStore(KEYS.bookings, []);
-export const saveBookings = (data: Booking[]) => setStore(KEYS.bookings, data);
+export const saveBookings = (data: Booking[]) => { setStore(KEYS.bookings, data); syncToApi('/api/bookings', data); };
 
 export const addBooking = (booking: Omit<Booking, "id" | "createdAt" | "status">): Booking => {
   const bookings = getBookings();
