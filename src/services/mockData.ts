@@ -368,10 +368,10 @@ export type SundarbanSubCategory =
   | "non-ac-non-attach-bath";
 
 export const sundarbanSubCategories: { value: SundarbanSubCategory; label: string; labelBn: string }[] = [
-  { value: "premium-luxury", label: "Premium Luxury Ship", labelBn: "প্রিমিয়াম লাক্সারি শিপ" },
-  { value: "ac-attach-bath", label: "AC Attach Bath Ship", labelBn: "এসি এটাচ বাথ শিপ" },
-  { value: "non-ac-attach-bath", label: "Non AC Attach Bath", labelBn: "নন এসি এটাচ বাথ" },
-  { value: "non-ac-non-attach-bath", label: "Non AC Non Attach Bath", labelBn: "নন এসি নন এটাচ বাথ" },
+  { value: "premium-luxury", label: "Premium Luxury Cruise", labelBn: "প্রিমিয়াম লাক্সারি ক্রুজ" },
+  { value: "ac-attach-bath", label: "AC + Attach Bath Cruise", labelBn: "এসি+এটাচ বাথ ক্রুজ" },
+  { value: "non-ac-attach-bath", label: "Premium Non AC Cruise", labelBn: "প্রিমিয়াম নন এসি ক্রুজ" },
+  { value: "non-ac-non-attach-bath", label: "Non AC Cruise", labelBn: "নন এসি ক্রুজ" },
 ];
 
 export interface Cruise {
