@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Plus, Trash2, ImageIcon, GripVertical } from "lucide-react";
 import { getSettings, saveSettings } from "@/services/cmsStore";
 import { toast } from "@/hooks/use-toast";
+import { uploadImages } from "@/services/uploadHelper";
 
 type HeroImage = { image: string; title?: string };
 
