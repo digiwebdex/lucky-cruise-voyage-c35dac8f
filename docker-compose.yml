@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:16-alpine
+    container_name: lucky-cruise-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: lucky_cruise_db
+      POSTGRES_USER: lucky_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./database/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql
+    ports:
+      - "5433:5432"  # Use 5433 to avoid conflict with other sites
+    networks:
+      - lucky-net
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: lucky-cruise-api
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: lucky_cruise_db
+      DB_USER: lucky_user
+      DB_PASSWORD: ${DB_PASSWORD:-changeme}
+      JWT_SECRET: ${JWT_SECRET:-change-this-secret}
+      PORT: 4001
+      BACKEND_URL: https://api.luckytoursandtravels.com
+      FRONTEND_URL: https://luckytoursandtravels.com
+    ports:
+      - "4001:4001"
+    volumes:
+      - uploads:/app/uploads
+    networks:
+      - lucky-net
+
+volumes:
+  pgdata:
+  uploads:
+
+networks:
+  lucky-net:
+    driver: bridge
