@@ -20,6 +20,7 @@ import { getCruises, saveCruises, getCruiseById } from "@/services/cmsStore";
 import type { Cruise, ItineraryDay, sundarbanSubCategories } from "@/services/mockData";
 import { sundarbanSubCategories as subCatOptions } from "@/services/mockData";
 import { toast } from "@/hooks/use-toast";
+import { uploadImage, uploadImages } from "@/services/uploadHelper";
 
 const emptyCruise: Cruise = {
   id: "", name: "", subtitle: "", description: "", route: "", duration: "", capacity: "", cabins: "",
@@ -215,17 +216,15 @@ export default function CruiseEditor() {
                   multiple
                   className="hidden"
                   id={`cruise-img-upload`}
-                  onChange={e => {
+                  onChange={async e => {
                     const files = e.target.files;
                     if (!files || files.length === 0) return;
-                    const promises = Array.from(files).map(file => new Promise<string>((resolve) => {
-                      const reader = new FileReader();
-                      reader.onload = () => resolve(reader.result as string);
-                      reader.readAsDataURL(file);
-                    }));
-                    Promise.all(promises).then(dataUrls => {
-                      updateField("images", [...form.images, ...dataUrls]);
-                    });
+                    try {
+                      const urls = await uploadImages(Array.from(files));
+                      updateField("images", [...form.images, ...urls]);
+                    } catch (err) {
+                      toast({ title: "Image upload failed", variant: "destructive" });
+                    }
                     e.target.value = "";
                   }}
                 />
@@ -413,12 +412,15 @@ export default function CruiseEditor() {
                     type="file"
                     accept="image/*"
                     className="hidden"
-                    onChange={e => {
+                    onChange={async e => {
                       const file = e.target.files?.[0];
                       if (!file) return;
-                      const reader = new FileReader();
-                      reader.onload = () => updateField("seatPlanImage", reader.result as string);
-                      reader.readAsDataURL(file);
+                      try {
+                        const url = await uploadImage(file);
+                        updateField("seatPlanImage", url);
+                      } catch (err) {
+                        toast({ title: "Seat plan upload failed", variant: "destructive" });
+                      }
                       e.target.value = "";
                     }}
                   />

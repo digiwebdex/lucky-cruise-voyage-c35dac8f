@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Plus, Trash2, ImageIcon, GripVertical } from "lucide-react";
 import { getSettings, saveSettings } from "@/services/cmsStore";
 import { toast } from "@/hooks/use-toast";
+import { uploadImages } from "@/services/uploadHelper";
 
 type HeroImage = { image: string; title?: string };
 
@@ -24,24 +25,18 @@ export default function HeroImageManager() {
     setSettingsState(updated);
   };
 
-  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (!files) return;
-    const current = [...heroImages];
-    let loaded = 0;
-    const total = files.length;
-    Array.from(files).forEach(file => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        current.push({ image: reader.result as string, title: "" });
-        loaded++;
-        if (loaded === total) {
-          save(current);
-          toast({ title: `${total}টি ইমেজ যোগ হয়েছে` });
-        }
-      };
-      reader.readAsDataURL(file);
-    });
+    if (!files || files.length === 0) return;
+    try {
+      const urls = await uploadImages(Array.from(files));
+      const current = [...heroImages];
+      urls.forEach(url => current.push({ image: url, title: "" }));
+      save(current);
+      toast({ title: `${urls.length}টি ইমেজ যোগ হয়েছে` });
+    } catch (err) {
+      toast({ title: "Image upload failed", variant: "destructive" });
+    }
     e.target.value = "";
   };
 

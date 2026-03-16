@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Plus, Trash2, Edit2, Save, X, Upload, Flame } from "lucide-react";
 import { useCmsData, getOffers, saveOffers, getCruises, type Offer } from "@/services/cmsStore";
 import { toast } from "@/hooks/use-toast";
+import { uploadImage } from "@/services/uploadHelper";
 
 export default function OffersManager() {
   const [offers, setOffers] = useCmsData(getOffers, saveOffers);
@@ -32,12 +33,15 @@ export default function OffersManager() {
     setForm({});
   };
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => setForm(f => ({ ...f, posterImage: reader.result as string }));
-    reader.readAsDataURL(file);
+    try {
+      const url = await uploadImage(file);
+      setForm(f => ({ ...f, posterImage: url }));
+    } catch (err) {
+      toast({ title: "Image upload failed", variant: "destructive" });
+    }
   };
 
   const save = () => {

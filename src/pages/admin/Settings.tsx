@@ -53,23 +53,18 @@ export default function SettingsPage() {
     toast({ title: "Password updated successfully" });
   };
 
-  const handleHeroImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleHeroImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (!files) return;
-    const currentImages = [...(settings.heroImages || [])];
-    let loaded = 0;
-    const total = files.length;
-    Array.from(files).forEach(file => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        currentImages.push({ image: reader.result as string, title: "" });
-        loaded++;
-        if (loaded === total) {
-          setSettings({ ...settings, heroImages: currentImages });
-        }
-      };
-      reader.readAsDataURL(file);
-    });
+    if (!files || files.length === 0) return;
+    try {
+      const { uploadImages } = await import("@/services/uploadHelper");
+      const urls = await uploadImages(Array.from(files));
+      const currentImages = [...(settings.heroImages || [])];
+      urls.forEach(url => currentImages.push({ image: url, title: "" }));
+      setSettings({ ...settings, heroImages: currentImages });
+    } catch (err) {
+      console.error("Hero image upload failed:", err);
+    }
     if (heroFileRef.current) heroFileRef.current.value = "";
   };
 

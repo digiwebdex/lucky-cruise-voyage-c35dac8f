@@ -103,21 +103,18 @@ export default function MediaLibrary() {
 
   const fileInputRefs = useRef<Record<string, HTMLInputElement | null>>({});
 
-  const handleFileUpload = (cruiseId: string, files: FileList | null) => {
+  const handleFileUpload = async (cruiseId: string, files: FileList | null) => {
     if (!files || files.length === 0) return;
     const cruise = cruises.find(c => c.id === cruiseId);
     if (!cruise) return;
-
-    const promises = Array.from(files).map(file => new Promise<string>((resolve) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result as string);
-      reader.readAsDataURL(file);
-    }));
-
-    Promise.all(promises).then(dataUrls => {
-      updateCruiseImages(cruiseId, [...cruise.images, ...dataUrls]);
-      toast({ title: `${dataUrls.length} image(s) added` });
-    });
+    try {
+      const { uploadImages } = await import("@/services/uploadHelper");
+      const urls = await uploadImages(Array.from(files));
+      updateCruiseImages(cruiseId, [...cruise.images, ...urls]);
+      toast({ title: `${urls.length} image(s) added` });
+    } catch (err) {
+      toast({ title: "Image upload failed", variant: "destructive" });
+    }
   };
 
   const saveAll = () => {

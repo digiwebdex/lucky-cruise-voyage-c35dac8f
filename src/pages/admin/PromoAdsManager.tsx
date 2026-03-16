@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Badge } from "@/components/ui/badge";
 import { useCmsData, getPromoAds, savePromoAds, getCruises, saveCruises, type PromoAd } from "@/services/cmsStore";
 import { toast } from "sonner";
+import { uploadImage } from "@/services/uploadHelper";
 
 export default function PromoAdsManager() {
   const [ads, saveAll] = useCmsData(getPromoAds, savePromoAds);
@@ -30,12 +31,15 @@ export default function PromoAdsManager() {
     setEditOpen(true);
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => setForm(f => ({ ...f, image: reader.result as string }));
-    reader.readAsDataURL(file);
+    try {
+      const url = await uploadImage(file);
+      setForm(f => ({ ...f, image: url }));
+    } catch (err) {
+      toast.error("Image upload failed");
+    }
   };
 
   const handleSave = () => {
