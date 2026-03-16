@@ -384,9 +384,6 @@ export default function Index() {
                   </Button>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        </div>
 
               {/* Filtered Results */}
               {(selectedTour || selectedSubCat) && (() => {
