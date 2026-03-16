@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Badge } from "@/components/ui/badge";
 import { useCmsData, getPromoAds, savePromoAds, getCruises, saveCruises, type PromoAd } from "@/services/cmsStore";
 import { toast } from "sonner";
+import { uploadImage } from "@/services/uploadHelper";
 
 export default function PromoAdsManager() {
   const [ads, saveAll] = useCmsData(getPromoAds, savePromoAds);
