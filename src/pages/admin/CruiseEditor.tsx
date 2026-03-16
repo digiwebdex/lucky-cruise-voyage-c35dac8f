@@ -216,17 +216,15 @@ export default function CruiseEditor() {
                   multiple
                   className="hidden"
                   id={`cruise-img-upload`}
-                  onChange={e => {
+                  onChange={async e => {
                     const files = e.target.files;
                     if (!files || files.length === 0) return;
-                    const promises = Array.from(files).map(file => new Promise<string>((resolve) => {
-                      const reader = new FileReader();
-                      reader.onload = () => resolve(reader.result as string);
-                      reader.readAsDataURL(file);
-                    }));
-                    Promise.all(promises).then(dataUrls => {
-                      updateField("images", [...form.images, ...dataUrls]);
-                    });
+                    try {
+                      const urls = await uploadImages(Array.from(files));
+                      updateField("images", [...form.images, ...urls]);
+                    } catch (err) {
+                      toast({ title: "Image upload failed", variant: "destructive" });
+                    }
                     e.target.value = "";
                   }}
                 />
