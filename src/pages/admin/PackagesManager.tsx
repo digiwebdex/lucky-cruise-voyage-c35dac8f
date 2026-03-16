@@ -38,6 +38,7 @@ export default function PackagesManager() {
     adultPrice: "", adultOldPrice: "",
     childPrice: "", childOldPrice: "",
     thumbnail: "",
+    tripDates: [] as Date[],
   });
   const fileInputRef = useRef<HTMLInputElement>(null);
 
