@@ -432,10 +432,10 @@ export default function Index() {
         <div className="container">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[
-              { icon: Ship, label: t.whyUs.premiumFleet, value: "6+ Ships" },
-              { icon: Shield, label: t.whyUs.maxSafety, value: "100% Safe" },
-              { icon: Star, label: t.whyUs.allInclusive, value: "All-Inclusive" },
-              { icon: Clock, label: t.whyUs.support247, value: "24/7" },
+              { icon: Ship, label: bn ? hc.strip1LabelBn : hc.strip1Label, value: hc.strip1Value },
+              { icon: Shield, label: bn ? hc.strip2LabelBn : hc.strip2Label, value: hc.strip2Value },
+              { icon: Star, label: bn ? hc.strip3LabelBn : hc.strip3Label, value: hc.strip3Value },
+              { icon: Clock, label: bn ? hc.strip4LabelBn : hc.strip4Label, value: hc.strip4Value },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3 p-3 rounded-lg">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary flex-shrink-0">
