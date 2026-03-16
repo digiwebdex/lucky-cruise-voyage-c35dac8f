@@ -30,8 +30,12 @@ export default function Footer() {
           <div className="grid gap-8 sm:gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {/* Brand */}
             <div className="lg:col-span-1">
-              <div className="flex items-center gap-2 mb-4">
+              <div className="flex items-center gap-3 mb-4">
                 <img src={logoImg} alt="Lucky Tours & Travels" className="h-12 w-auto" />
+                <div>
+                  <h3 className="text-xl font-display font-bold text-primary">Lucky Tours</h3>
+                  <p className="text-xs text-secondary-foreground/50 font-medium -mt-0.5">& Travels</p>
+                </div>
               </div>
               <p className="text-sm text-secondary-foreground/60 leading-relaxed">
                 {t.footer.tagline}
