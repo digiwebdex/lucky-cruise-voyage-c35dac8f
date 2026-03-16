@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { getCruises } from "@/services/cmsStore";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import PageHeroBanner from "@/components/PageHeroBanner";
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 const scaleIn = { hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } };
