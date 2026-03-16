@@ -359,19 +359,19 @@ function setStore<T>(key: string, data: T): void {
 
 // ===== Public API =====
 export const getCruises = (): Cruise[] => getStore(KEYS.cruises, defaultCruises);
-export const saveCruises = (data: Cruise[]) => setStore(KEYS.cruises, data);
+export const saveCruises = (data: Cruise[]) => { setStore(KEYS.cruises, data); syncToApi('/api/cruises', data); };
 
 export const getSettings = (): SiteSettings => getStore(KEYS.settings, defaultSettings);
-export const saveSettings = (data: SiteSettings) => setStore(KEYS.settings, data);
+export const saveSettings = (data: SiteSettings) => { setStore(KEYS.settings, data); syncToApi('/api/settings', data); };
 
 export const getPages = (): CmsPage[] => getStore(KEYS.pages, defaultPages);
-export const savePages = (data: CmsPage[]) => setStore(KEYS.pages, data);
+export const savePages = (data: CmsPage[]) => { setStore(KEYS.pages, data); syncToApi('/api/pages', data); };
 
 export const getSeo = (): SeoEntry[] => getStore(KEYS.seo, defaultSeo);
-export const saveSeo = (data: SeoEntry[]) => setStore(KEYS.seo, data);
+export const saveSeo = (data: SeoEntry[]) => { setStore(KEYS.seo, data); syncToApi('/api/seo', data); };
 
 export const getHomepageContent = (): HomepageContent => getStore(KEYS.homepageContent, defaultHomepageContent);
-export const saveHomepageContent = (data: HomepageContent) => setStore(KEYS.homepageContent, data);
+export const saveHomepageContent = (data: HomepageContent) => { setStore(KEYS.homepageContent, data); syncToApi('/api/homepage-content', data); };
 
 export const getTestimonials = (): Testimonial[] => {
   const defaults = defaultTestimonials.map((t, i) => ({ ...t, id: `testimonial-${i}` }));
