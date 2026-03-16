@@ -38,6 +38,9 @@ import ReviewsManager from "./pages/admin/ReviewsManager";
 import PromoAdsManager from "./pages/admin/PromoAdsManager";
 import HeroImageManager from "./pages/admin/HeroImageManager";
 import FeaturedCruiseManager from "./pages/admin/FeaturedCruiseManager";
+import SeatPlanManager from "./pages/admin/SeatPlanManager";
+import HomepageContentManager from "./pages/admin/HomepageContentManager";
+import ContactInquiries from "./pages/admin/ContactInquiries";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -72,6 +75,7 @@ const App = () => (
               <Route path="categories" element={<CategoriesManager />} />
               <Route path="availability" element={<AvailabilityManager />} />
               <Route path="bookings" element={<Bookings />} />
+              <Route path="contact-inquiries" element={<ContactInquiries />} />
               <Route path="testimonials" element={<TestimonialsManager />} />
               <Route path="offers" element={<OffersManager />} />
               <Route path="blogs" element={<BlogManager />} />
@@ -79,9 +83,10 @@ const App = () => (
               <Route path="promo-ads" element={<PromoAdsManager />} />
               <Route path="hero-images" element={<HeroImageManager />} />
               <Route path="featured-cruises" element={<FeaturedCruiseManager />} />
+              <Route path="homepage-content" element={<HomepageContentManager />} />
+              <Route path="seat-plans" element={<SeatPlanManager />} />
               <Route path="team" element={<TeamManager />} />
               <Route path="media" element={<MediaLibrary />} />
-              
               <Route path="pages" element={<PagesCMS />} />
               <Route path="seo" element={<SEOManager />} />
               <Route path="users" element={<UsersPage />} />

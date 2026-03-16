@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
-import { getCruises, getTestimonials, getOffers, getBlogs, getSettings, getPromoAds } from "@/services/cmsStore";
+import { getCruises, getTestimonials, getOffers, getBlogs, getSettings, getPromoAds, getHomepageContent } from "@/services/cmsStore";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
@@ -22,12 +22,15 @@ const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 // ===== Promo Packages Section with Lightbox =====
 function PromoPackagesSection({ promoAds, cruises }: { promoAds: PromoAd[]; cruises: Cruise[] }) {
   const [lightboxAd, setLightboxAd] = useState<PromoAd | null>(null);
+  const hpc = getHomepageContent();
+  const { lang } = useLanguage();
+  const isBn = lang === "bn";
 
   return (
     <section className="py-8 md:py-12 bg-background">
       <div className="container">
-        <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground text-center mb-2">আমাদের প্যাকেজ সমূহ</h2>
-        <p className="text-center text-muted-foreground text-sm mb-8">আপকামিং ট্যুর প্যাকেজ ও অফার সমূহ</p>
+        <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground text-center mb-2">{isBn ? hpc.promoTitleBn : hpc.promoTitle}</h2>
+        <p className="text-center text-muted-foreground text-sm mb-8">{isBn ? hpc.promoSubtitleBn : hpc.promoSubtitle}</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {promoAds.map((ad, i) => {
             const cruise = cruises.find(c => c.id === ad.linkedCruiseId);
@@ -138,6 +141,8 @@ export default function Index() {
   const cruises = getCruises();
   const testimonials = getTestimonials();
   const settings = getSettings();
+  const hc = getHomepageContent();
+  const bn = language === "bn";
   const now = new Date().toISOString();
   const offers = getOffers().filter(o => o.isActive && (!o.expiryDate || o.expiryDate >= now));
   const promoAds = getPromoAds().filter(a => a.isActive).slice(0, 15);
@@ -214,18 +219,18 @@ export default function Index() {
           <div className="max-w-2xl">
             <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.5 }}>
               <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm px-4 py-1.5 text-sm font-semibold text-primary mb-5">
-                <Star className="h-3.5 w-3.5" /> {t.hero.badge}
+                <Star className="h-3.5 w-3.5" /> {bn ? hc.heroBadgeBn : hc.heroBadge}
               </span>
             </motion.div>
 
             <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.5, delay: 0.1 }}>
               <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black leading-tight text-secondary-foreground mb-3">
-                {t.hero.slides[0].title}
+                {bn ? hc.heroTitleBn : hc.heroTitle}
                 <br />
-                <span className="text-primary">{t.hero.slides[0].highlight}</span>
+                <span className="text-primary">{bn ? hc.heroHighlightBn : hc.heroHighlight}</span>
               </h1>
               <p className="text-sm sm:text-base text-secondary-foreground/70 max-w-md mb-6 leading-relaxed">
-                {t.hero.slides[0].subtitle}
+                {bn ? hc.heroSubtitleBn : hc.heroSubtitle}
               </p>
             </motion.div>
 
@@ -245,9 +250,9 @@ export default function Index() {
             {/* Stats */}
             <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.5, delay: 0.3 }} className="mt-8 flex gap-8">
               {[
-                { value: "70+", label: t.hero.cruiseShips },
-                { value: "1,50,000+", label: t.hero.happyTravellers },
-                { value: "15+", label: t.hero.yearsExperience },
+                { value: hc.stat1Value, label: bn ? hc.stat1LabelBn : hc.stat1Label },
+                { value: hc.stat2Value, label: bn ? hc.stat2LabelBn : hc.stat2Label },
+                { value: hc.stat3Value, label: bn ? hc.stat3LabelBn : hc.stat3Label },
               ].map((stat, i) => (
                 <div key={i}>
                   <div className="text-xl sm:text-2xl font-display font-black text-primary">{stat.value}</div>
@@ -430,10 +435,10 @@ export default function Index() {
         <div className="container">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[
-              { icon: Ship, label: t.whyUs.premiumFleet, value: "6+ Ships" },
-              { icon: Shield, label: t.whyUs.maxSafety, value: "100% Safe" },
-              { icon: Star, label: t.whyUs.allInclusive, value: "All-Inclusive" },
-              { icon: Clock, label: t.whyUs.support247, value: "24/7" },
+              { icon: Ship, label: bn ? hc.strip1LabelBn : hc.strip1Label, value: hc.strip1Value },
+              { icon: Shield, label: bn ? hc.strip2LabelBn : hc.strip2Label, value: hc.strip2Value },
+              { icon: Star, label: bn ? hc.strip3LabelBn : hc.strip3Label, value: hc.strip3Value },
+              { icon: Clock, label: bn ? hc.strip4LabelBn : hc.strip4Label, value: hc.strip4Value },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3 p-3 rounded-lg">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary flex-shrink-0">
@@ -459,12 +464,12 @@ export default function Index() {
         <div className="container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-10">
             <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary">
-              <Ship className="h-3.5 w-3.5" /> {t.featured.ourFleet}
+              <Ship className="h-3.5 w-3.5" /> {bn ? hc.featuredSectionLabelBn : hc.featuredSectionLabel}
             </span>
             <h2 className="mt-2 font-display text-2xl sm:text-3xl md:text-4xl font-black text-foreground">
-              {t.featured.title} <span className="text-primary">{t.featured.titleHighlight}</span>
+              {bn ? hc.featuredTitleBn : hc.featuredTitle} <span className="text-primary">{bn ? hc.featuredHighlightBn : hc.featuredHighlight}</span>
             </h2>
-            <p className="mt-2 text-muted-foreground text-sm max-w-md mx-auto">{t.featured.subtitle}</p>
+            <p className="mt-2 text-muted-foreground text-sm max-w-md mx-auto">{bn ? hc.featuredSubtitleBn : hc.featuredSubtitle}</p>
           </motion.div>
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -613,16 +618,16 @@ export default function Index() {
               <Shield className="h-3.5 w-3.5" /> {t.whyUs.sectionLabel}
             </span>
             <h2 className="mt-2 font-display text-2xl sm:text-3xl md:text-4xl font-black text-foreground">
-              {t.whyUs.title} <span className="text-primary">{t.whyUs.titleHighlight}</span>
+              {bn ? hc.whyUsTitleBn : hc.whyUsTitle} <span className="text-primary">{bn ? hc.whyUsHighlightBn : hc.whyUsHighlight}</span>
             </h2>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { icon: Ship, title: t.whyUs.premiumFleet, desc: t.whyUs.premiumFleetDesc },
-              { icon: Shield, title: t.whyUs.maxSafety, desc: t.whyUs.maxSafetyDesc },
-              { icon: Star, title: t.whyUs.allInclusive, desc: t.whyUs.allInclusiveDesc },
-              { icon: Clock, title: t.whyUs.support247, desc: t.whyUs.support247Desc },
+              { icon: Ship, title: bn ? hc.whyUs1TitleBn : hc.whyUs1Title, desc: bn ? hc.whyUs1DescBn : hc.whyUs1Desc },
+              { icon: Shield, title: bn ? hc.whyUs2TitleBn : hc.whyUs2Title, desc: bn ? hc.whyUs2DescBn : hc.whyUs2Desc },
+              { icon: Star, title: bn ? hc.whyUs3TitleBn : hc.whyUs3Title, desc: bn ? hc.whyUs3DescBn : hc.whyUs3Desc },
+              { icon: Clock, title: bn ? hc.whyUs4TitleBn : hc.whyUs4Title, desc: bn ? hc.whyUs4DescBn : hc.whyUs4Desc },
             ].map((item, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.08 }}>
                 <div className="rounded-xl border border-border bg-card p-5 text-center h-full">
@@ -646,7 +651,7 @@ export default function Index() {
               <Heart className="h-3.5 w-3.5" /> {t.testimonials.sectionLabel}
             </span>
             <h2 className="mt-2 font-display text-2xl sm:text-3xl md:text-4xl font-black text-foreground">
-              {t.testimonials.title} <span className="text-primary">{t.testimonials.titleHighlight}</span>
+              {bn ? hc.testimonialsTitleBn : hc.testimonialsTitle} <span className="text-primary">{bn ? hc.testimonialsHighlightBn : hc.testimonialsHighlight}</span>
             </h2>
           </motion.div>
 
@@ -749,11 +754,11 @@ export default function Index() {
         <div className="container text-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-secondary-foreground mb-4">
-              {t.cta.title}{" "}
-              <span className="text-primary">{t.cta.titleHighlight}</span>
+              {bn ? hc.ctaTitleBn : hc.ctaTitle}{" "}
+              <span className="text-primary">{bn ? hc.ctaHighlightBn : hc.ctaHighlight}</span>
             </h2>
             <p className="mx-auto max-w-lg text-sm sm:text-base text-secondary-foreground/60 mb-8">
-              {t.cta.subtitle}
+              {bn ? hc.ctaSubtitleBn : hc.ctaSubtitle}
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer">
