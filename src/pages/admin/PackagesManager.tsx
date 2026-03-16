@@ -340,6 +340,41 @@ export default function PackagesManager() {
               )}
             </div>
 
+            {/* Trip Dates */}
+            <div className="space-y-2">
+              <Label className="flex items-center gap-2">
+                <CalendarDays className="h-4 w-4" /> Trip Dates (তারিখ নির্বাচন)
+              </Label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" className={cn("w-full justify-start text-left font-normal", form.tripDates.length === 0 && "text-muted-foreground")}>
+                    <CalendarDays className="mr-2 h-4 w-4" />
+                    {form.tripDates.length > 0
+                      ? form.tripDates.sort((a, b) => a.getTime() - b.getTime()).map(d => format(d, "d MMM", { locale: bn })).join(", ")
+                      : "তারিখ নির্বাচন করুন"}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="multiple"
+                    selected={form.tripDates}
+                    onSelect={(dates) => setForm(f => ({ ...f, tripDates: dates || [] }))}
+                    className={cn("p-3 pointer-events-auto")}
+                  />
+                </PopoverContent>
+              </Popover>
+              {form.tripDates.length > 0 && (
+                <div className="flex flex-wrap gap-1">
+                  {form.tripDates.sort((a, b) => a.getTime() - b.getTime()).map((d, i) => (
+                    <Badge key={i} variant="secondary" className="gap-1">
+                      {format(d, "EEEE d MMM yyyy", { locale: bn })}
+                      <X className="h-3 w-3 cursor-pointer" onClick={() => setForm(f => ({ ...f, tripDates: f.tripDates.filter((_, idx) => idx !== i) }))} />
+                    </Badge>
+                  ))}
+                </div>
+              )}
+            </div>
+
             <div className="flex items-center gap-3">
               <Switch checked={form.isOffer} onCheckedChange={v => setForm({ ...form, isOffer: v })} />
               <Label>Mark as Offer</Label>
