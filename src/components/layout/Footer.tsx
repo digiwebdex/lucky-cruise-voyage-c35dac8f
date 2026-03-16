@@ -8,6 +8,8 @@ import { useState } from "react";
 export default function Footer() {
   const { t, lang } = useLanguage();
   const settings = getSettings();
+  const [showCert, setShowCert] = useState(false);
+  const address = lang === "bn" && settings.addressBn ? settings.addressBn : settings.address;
   const address = lang === "bn" && settings.addressBn ? settings.addressBn : settings.address;
 
   const footerLinks = [
