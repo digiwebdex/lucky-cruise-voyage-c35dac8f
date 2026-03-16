@@ -401,7 +401,7 @@ function buildDefaultOffers(): Offer[] {
 }
 
 export const getOffers = (): Offer[] => getStore(KEYS.offers, buildDefaultOffers());
-export const saveOffers = (data: Offer[]) => setStore(KEYS.offers, data);
+export const saveOffers = (data: Offer[]) => { setStore(KEYS.offers, data); syncToApi('/api/offers', data); };
 
 // ===== Blog =====
 import blogTiger from "@/assets/blog/blog-tiger-sundarban.jpg";
