@@ -216,7 +216,8 @@ export default function Index() {
           <div className="max-w-2xl">
             <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.5 }}>
               <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm px-4 py-1.5 text-sm font-semibold text-primary mb-5">
-                <Star className="h-3.5 w-3.5" /> {t.hero.badge}
+                <Star className="h-3.5 w-3.5" /> {bn ? hc.heroBadgeBn : hc.heroBadge}
+              </span>
               </span>
             </motion.div>
 
