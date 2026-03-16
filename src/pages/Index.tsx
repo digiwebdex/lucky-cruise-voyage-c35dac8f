@@ -648,7 +648,7 @@ export default function Index() {
               <Heart className="h-3.5 w-3.5" /> {t.testimonials.sectionLabel}
             </span>
             <h2 className="mt-2 font-display text-2xl sm:text-3xl md:text-4xl font-black text-foreground">
-              {t.testimonials.title} <span className="text-primary">{t.testimonials.titleHighlight}</span>
+              {bn ? hc.testimonialsTitleBn : hc.testimonialsTitle} <span className="text-primary">{bn ? hc.testimonialsHighlightBn : hc.testimonialsHighlight}</span>
             </h2>
           </motion.div>
 
