@@ -19,10 +19,6 @@ export default function Header() {
   const location = useLocation();
   const { lang, setLang, t } = useLanguage();
 
-  const cruiseSubLinks = [
-    { to: "/cruises?destination=sundarban", label: t.nav.sundarbanTour },
-    { to: "/cruises?destination=tanguar-haor", label: t.nav.tanguarHaorTour },
-  ];
 
   const navLinks = [
     { to: "/", label: t.nav.home },
