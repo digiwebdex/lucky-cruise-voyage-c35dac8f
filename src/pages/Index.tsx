@@ -27,7 +27,7 @@ function PromoPackagesSection({ promoAds, cruises }: { promoAds: PromoAd[]; crui
       <div className="container">
         <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground text-center mb-2">আমাদের প্যাকেজ সমূহ</h2>
         <p className="text-center text-muted-foreground text-sm mb-8">আপকামিং ট্যুর প্যাকেজ ও অফার সমূহ</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {promoAds.map((ad, i) => {
             const cruise = cruises.find(c => c.id === ad.linkedCruiseId);
             return (
