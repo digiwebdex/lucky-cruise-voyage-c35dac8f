@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Flame, Percent, Image as ImageIcon } from "lucide-react";
+import { ArrowRight, Flame, Percent, CalendarDays } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +9,19 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 const scaleIn = { hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } };
+
+const bnDays = ["রবি", "সোম", "মঙ্গল", "বুধ", "বৃহঃ", "শুক্র", "শনি"];
+const bnMonths = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
+const toBn = (n: number): string => n.toString().replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[parseInt(d)]);
+
+function formatTripDates(dates: string[]): string {
+  const sorted = dates.map(d => new Date(d)).sort((a, b) => a.getTime() - b.getTime());
+  const days = sorted.map(d => bnDays[d.getDay()]);
+  const dateNums = sorted.map(d => toBn(d.getDate()));
+  const month = bnMonths[sorted[0].getMonth()];
+  const year = toBn(sorted[0].getFullYear());
+  return `${days.join("-")} ${dateNums.join("-")} ${month} ${year}`;
+}
 
 function calcDiscount(oldPrice?: number, price?: number): number {
   if (!oldPrice || !price || oldPrice <= price) return 0;
@@ -64,6 +77,12 @@ function PackageCard({ pkg, i }: { pkg: any; i: number }) {
           <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary">{pkg.cruiseName}</span>
           <h3 className="mt-3 font-display text-xl font-bold text-foreground">{pkg.name}</h3>
           <p className="mt-1 text-sm text-muted-foreground">{pkg.duration}</p>
+          {pkg.tripDates && pkg.tripDates.length > 0 && (
+            <div className="mt-2 flex items-center gap-1.5 text-sm text-primary font-semibold">
+              <CalendarDays className="h-4 w-4" />
+              <span>{formatTripDates(pkg.tripDates)}</span>
+            </div>
+          )}
 
           <div className="mt-6 border-t border-border/50 pt-5">
             <Link to={`/cruises/${pkg.cruiseId}`}>

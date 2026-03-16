@@ -1,4 +1,6 @@
 import { useState, useRef } from "react";
+import { format } from "date-fns";
+import { bn } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -8,10 +10,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Pencil, Trash2, Save, Flame, Package, Percent, Upload, X } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Plus, Pencil, Trash2, Save, Flame, Package, Percent, Upload, X, CalendarDays } from "lucide-react";
 import { useCmsData, getCruises, saveCruises } from "@/services/cmsStore";
 import type { Cruise, Package as PackageType } from "@/services/mockData";
 import { toast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
 interface PackageRow extends PackageType {
   cruiseId: string;
@@ -33,6 +38,7 @@ export default function PackagesManager() {
     adultPrice: "", adultOldPrice: "",
     childPrice: "", childOldPrice: "",
     thumbnail: "",
+    tripDates: [] as Date[],
   });
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -47,7 +53,7 @@ export default function PackagesManager() {
 
   const openNew = () => {
     setEditingPkg(null);
-    setForm({ name: "", duration: "", cruiseId: cruises[0]?.id || "", isOffer: false, adultPrice: "", adultOldPrice: "", childPrice: "", childOldPrice: "", thumbnail: "" });
+    setForm({ name: "", duration: "", cruiseId: cruises[0]?.id || "", isOffer: false, adultPrice: "", adultOldPrice: "", childPrice: "", childOldPrice: "", thumbnail: "", tripDates: [] });
     setEditOpen(true);
   };
 
@@ -63,6 +69,7 @@ export default function PackagesManager() {
       childPrice: String(pkg.childPrice),
       childOldPrice: pkg.childOldPrice ? String(pkg.childOldPrice) : "",
       thumbnail: pkg.thumbnail || "",
+      tripDates: (pkg.tripDates || []).map((d: string) => new Date(d)),
     });
     setEditOpen(true);
   };
@@ -100,6 +107,7 @@ export default function PackagesManager() {
       duration: form.duration.trim(),
       isOffer: form.isOffer,
       thumbnail: form.thumbnail || undefined,
+      tripDates: form.tripDates.length > 0 ? form.tripDates.map(d => d.toISOString().split("T")[0]) : undefined,
     };
 
     const updated = cruises.map(c => {
@@ -329,6 +337,41 @@ export default function PackagesManager() {
                 <Badge className="bg-emerald-500/10 text-emerald-600 border-emerald-500/30 gap-1">
                   <Percent className="h-3 w-3" /> {childDiscount}% Off (Child)
                 </Badge>
+              )}
+            </div>
+
+            {/* Trip Dates */}
+            <div className="space-y-2">
+              <Label className="flex items-center gap-2">
+                <CalendarDays className="h-4 w-4" /> Trip Dates (তারিখ নির্বাচন)
+              </Label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" className={cn("w-full justify-start text-left font-normal", form.tripDates.length === 0 && "text-muted-foreground")}>
+                    <CalendarDays className="mr-2 h-4 w-4" />
+                    {form.tripDates.length > 0
+                      ? form.tripDates.sort((a, b) => a.getTime() - b.getTime()).map(d => format(d, "d MMM", { locale: bn })).join(", ")
+                      : "তারিখ নির্বাচন করুন"}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="multiple"
+                    selected={form.tripDates}
+                    onSelect={(dates) => setForm(f => ({ ...f, tripDates: dates || [] }))}
+                    className={cn("p-3 pointer-events-auto")}
+                  />
+                </PopoverContent>
+              </Popover>
+              {form.tripDates.length > 0 && (
+                <div className="flex flex-wrap gap-1">
+                  {form.tripDates.sort((a, b) => a.getTime() - b.getTime()).map((d, i) => (
+                    <Badge key={i} variant="secondary" className="gap-1">
+                      {format(d, "EEEE d MMM yyyy", { locale: bn })}
+                      <X className="h-3 w-3 cursor-pointer" onClick={() => setForm(f => ({ ...f, tripDates: f.tripDates.filter((_, idx) => idx !== i) }))} />
+                    </Badge>
+                  ))}
+                </div>
               )}
             </div>
 
