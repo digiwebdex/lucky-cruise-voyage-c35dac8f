@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { useCmsData, getBlogs, saveBlogs, type BlogPost } from "@/services/cmsStore";
 import { toast } from "sonner";
 import SeoFieldsPanel from "@/components/admin/SeoFieldsPanel";
+import { uploadImage } from "@/services/uploadHelper";
 
 const emptyPost: Omit<BlogPost, "id"> = {
   title: "",

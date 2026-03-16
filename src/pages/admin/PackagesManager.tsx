@@ -78,14 +78,15 @@ export default function PackagesManager() {
     setEditOpen(true);
   };
 
-  const handleThumbnailUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleThumbnailUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      setForm(f => ({ ...f, thumbnail: reader.result as string }));
-    };
-    reader.readAsDataURL(file);
+    try {
+      const url = await (await import("@/services/uploadHelper")).uploadImage(file);
+      setForm(f => ({ ...f, thumbnail: url }));
+    } catch (err) {
+      toast({ title: "Image upload failed", variant: "destructive" });
+    }
   };
 
   const save = () => {

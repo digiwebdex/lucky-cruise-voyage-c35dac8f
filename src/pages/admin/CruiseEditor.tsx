@@ -412,12 +412,15 @@ export default function CruiseEditor() {
                     type="file"
                     accept="image/*"
                     className="hidden"
-                    onChange={e => {
+                    onChange={async e => {
                       const file = e.target.files?.[0];
                       if (!file) return;
-                      const reader = new FileReader();
-                      reader.onload = () => updateField("seatPlanImage", reader.result as string);
-                      reader.readAsDataURL(file);
+                      try {
+                        const url = await uploadImage(file);
+                        updateField("seatPlanImage", url);
+                      } catch (err) {
+                        toast({ title: "Seat plan upload failed", variant: "destructive" });
+                      }
                       e.target.value = "";
                     }}
                   />
