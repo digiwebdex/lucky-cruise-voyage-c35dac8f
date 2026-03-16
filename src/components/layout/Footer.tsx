@@ -4,6 +4,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { getSettings } from "@/services/cmsStore";
 import toasCertificate from "@/assets/toas-certificate.jpg";
 import logoImg from "@/assets/logo.png";
+import toasLogo from "@/assets/toas-logo.png";
 import { useState } from "react";
 
 export default function Footer() {
