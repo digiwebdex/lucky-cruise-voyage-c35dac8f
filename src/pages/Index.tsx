@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Ship, Shield, Star, Clock, MapPin, Phone, ChevronRight, ArrowRight, Users, Flame, Heart, Search, BookOpen, Calendar as CalendarIcon2, User as UserIcon2 } from "lucide-react";
+import { Ship, Shield, Star, Clock, MapPin, Phone, ChevronRight, ArrowRight, Users, Flame, Heart, Search, BookOpen, Calendar as CalendarIcon2, User as UserIcon2, X } from "lucide-react";
+import type { PromoAd } from "@/services/cmsStore";
+import type { Cruise } from "@/services/mockData";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
