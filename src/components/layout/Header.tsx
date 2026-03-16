@@ -6,12 +6,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import HeaderBookingModal from "@/components/HeaderBookingModal";
+import { sundarbanSubCategories } from "@/services/mockData";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
   const [cruiseDropdownOpen, setCruiseDropdownOpen] = useState(false);
+  const [sundarbanExpanded, setSundarbanExpanded] = useState(false);
+  const [mobileSundarbanOpen, setMobileSundarbanOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const { lang, setLang, t } = useLanguage();
