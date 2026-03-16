@@ -36,7 +36,6 @@ export default function Gallery() {
             </h1>
             <p className="mt-3 text-secondary-foreground/60 max-w-md mx-auto">{t.gallery.subtitle}</p>
       </PageHeroBanner>
-      </section>
 
       {/* Cruise Filter Tabs */}
       <section className="py-4 sm:py-6 border-b border-border sticky top-16 z-30 bg-background/95 backdrop-blur-md">
