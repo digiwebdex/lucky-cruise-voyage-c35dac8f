@@ -18,6 +18,120 @@ import BookingModal from "@/components/BookingModal";
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
+// ===== Promo Packages Section with Lightbox =====
+function PromoPackagesSection({ promoAds, cruises }: { promoAds: PromoAd[]; cruises: Cruise[] }) {
+  const [lightboxAd, setLightboxAd] = useState<PromoAd | null>(null);
+
+  return (
+    <section className="py-8 md:py-12 bg-background">
+      <div className="container">
+        <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground text-center mb-2">আমাদের প্যাকেজ সমূহ</h2>
+        <p className="text-center text-muted-foreground text-sm mb-8">আপকামিং ট্যুর প্যাকেজ ও অফার সমূহ</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {promoAds.map((ad, i) => {
+            const cruise = cruises.find(c => c.id === ad.linkedCruiseId);
+            return (
+              <motion.div
+                key={ad.id}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                transition={{ delay: i * 0.08 }}
+              >
+                <div className="rounded-2xl border border-border shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden bg-card">
+                  {/* Clickable image - opens lightbox */}
+                  <button
+                    onClick={() => setLightboxAd(ad)}
+                    className="w-full aspect-[4/3] overflow-hidden relative block cursor-pointer"
+                  >
+                    <img
+                      src={ad.image}
+                      alt={ad.title}
+                      loading="lazy"
+                      draggable={false}
+                      className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute top-3 left-3">
+                      <span className="bg-primary text-primary-foreground text-xs font-bold px-2.5 py-1 rounded-full shadow-md">
+                        {ad.title}
+                      </span>
+                    </div>
+                    {ad.dateLabel && (
+                      <div className="absolute top-3 right-3">
+                        <span className="bg-card/90 backdrop-blur-sm text-foreground text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+                          <CalendarIcon2 className="h-3 w-3 text-primary" />
+                          {ad.dateLabel}
+                        </span>
+                      </div>
+                    )}
+                    {ad.subtitle && (
+                      <div className="absolute bottom-3 left-3 right-3">
+                        <p className="text-white text-sm font-semibold drop-shadow-lg leading-tight">
+                          {ad.subtitle}
+                        </p>
+                      </div>
+                    )}
+                  </button>
+                  {/* Bottom bar with cruise name and details link */}
+                  <div className="p-3 flex items-center justify-between">
+                    <div>
+                      {cruise && (
+                        <p className="text-sm font-bold text-foreground">{cruise.name}</p>
+                      )}
+                      {ad.dateLabel && (
+                        <p className="text-xs text-primary font-semibold mt-0.5">{ad.dateLabel}</p>
+                      )}
+                    </div>
+                    <Link
+                      to={`/cruises/${ad.linkedCruiseId}`}
+                      className="text-xs font-bold text-primary hover:underline flex items-center gap-1"
+                    >
+                      বিস্তারিত <ArrowRight className="h-3 w-3" />
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Lightbox */}
+      {lightboxAd && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          onClick={() => setLightboxAd(null)}
+        >
+          <div className="relative max-w-3xl w-full" onClick={e => e.stopPropagation()}>
+            <button
+              onClick={() => setLightboxAd(null)}
+              className="absolute -top-12 right-0 text-white hover:text-primary transition-colors"
+            >
+              <X className="h-8 w-8" />
+            </button>
+            <img
+              src={lightboxAd.image}
+              alt={lightboxAd.title}
+              className="w-full rounded-2xl shadow-2xl"
+            />
+            <div className="mt-4 text-center">
+              <Link
+                to={`/cruises/${lightboxAd.linkedCruiseId}`}
+                className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold px-6 py-3 rounded-xl hover:bg-primary/90 transition-colors"
+                onClick={() => setLightboxAd(null)}
+              >
+                বিস্তারিত দেখুন <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
 export default function Index() {
   const { t, lang: language } = useLanguage();
   const cruises = getCruises();
