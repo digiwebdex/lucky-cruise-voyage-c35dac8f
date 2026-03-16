@@ -10,6 +10,19 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 const scaleIn = { hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } };
 
+const bnDays = ["রবি", "সোম", "মঙ্গল", "বুধ", "বৃহঃ", "শুক্র", "শনি"];
+const bnMonths = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
+const toBn = (n: number): string => n.toString().replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[parseInt(d)]);
+
+function formatTripDates(dates: string[]): string {
+  const sorted = dates.map(d => new Date(d)).sort((a, b) => a.getTime() - b.getTime());
+  const days = sorted.map(d => bnDays[d.getDay()]);
+  const dateNums = sorted.map(d => toBn(d.getDate()));
+  const month = bnMonths[sorted[0].getMonth()];
+  const year = toBn(sorted[0].getFullYear());
+  return `${days.join("-")} ${dateNums.join("-")} ${month} ${year}`;
+}
+
 function calcDiscount(oldPrice?: number, price?: number): number {
   if (!oldPrice || !price || oldPrice <= price) return 0;
   return Math.round(((oldPrice - price) / oldPrice) * 100);
