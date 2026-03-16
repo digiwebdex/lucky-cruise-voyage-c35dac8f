@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Pencil, Trash2, Save, Flame, Package, Percent } from "lucide-react";
+import { Plus, Pencil, Trash2, Save, Flame, Package, Percent, Upload, X } from "lucide-react";
 import { useCmsData, getCruises, saveCruises } from "@/services/cmsStore";
 import type { Cruise, Package as PackageType } from "@/services/mockData";
 import { toast } from "@/hooks/use-toast";
@@ -32,7 +32,9 @@ export default function PackagesManager() {
     name: "", duration: "", cruiseId: "", isOffer: false,
     adultPrice: "", adultOldPrice: "",
     childPrice: "", childOldPrice: "",
+    thumbnail: "",
   });
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const allPackages: PackageRow[] = cruises.flatMap(c =>
     c.packages.map(p => ({
@@ -45,7 +47,7 @@ export default function PackagesManager() {
 
   const openNew = () => {
     setEditingPkg(null);
-    setForm({ name: "", duration: "", cruiseId: cruises[0]?.id || "", isOffer: false, adultPrice: "", adultOldPrice: "", childPrice: "", childOldPrice: "" });
+    setForm({ name: "", duration: "", cruiseId: cruises[0]?.id || "", isOffer: false, adultPrice: "", adultOldPrice: "", childPrice: "", childOldPrice: "", thumbnail: "" });
     setEditOpen(true);
   };
 
@@ -60,8 +62,19 @@ export default function PackagesManager() {
       adultOldPrice: pkg.adultOldPrice ? String(pkg.adultOldPrice) : "",
       childPrice: String(pkg.childPrice),
       childOldPrice: pkg.childOldPrice ? String(pkg.childOldPrice) : "",
+      thumbnail: pkg.thumbnail || "",
     });
     setEditOpen(true);
+  };
+
+  const handleThumbnailUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      setForm(f => ({ ...f, thumbnail: reader.result as string }));
+    };
+    reader.readAsDataURL(file);
   };
 
   const save = () => {
@@ -86,6 +99,7 @@ export default function PackagesManager() {
       childOldPrice,
       duration: form.duration.trim(),
       isOffer: form.isOffer,
+      thumbnail: form.thumbnail || undefined,
     };
 
     const updated = cruises.map(c => {
@@ -146,6 +160,7 @@ export default function PackagesManager() {
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead>Thumbnail</TableHead>
                 <TableHead>Package</TableHead>
                 <TableHead>Cruise</TableHead>
                 <TableHead>Duration</TableHead>
@@ -158,8 +173,18 @@ export default function PackagesManager() {
             <TableBody>
               {allPackages.map(pkg => {
                 const discount = calcDiscount(pkg.adultOldPrice, pkg.adultPrice);
+                const thumbSrc = pkg.thumbnail || pkg.cruiseImage;
                 return (
                   <TableRow key={`${pkg.cruiseId}-${pkg.id}`}>
+                    <TableCell>
+                      {thumbSrc ? (
+                        <img src={thumbSrc} alt={pkg.name} className="h-12 w-16 rounded object-cover border border-border" />
+                      ) : (
+                        <div className="h-12 w-16 rounded bg-muted flex items-center justify-center text-muted-foreground">
+                          <Upload className="h-4 w-4" />
+                        </div>
+                      )}
+                    </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">
                         <span className="font-medium">{pkg.name}</span>
@@ -167,12 +192,7 @@ export default function PackagesManager() {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <div className="flex items-center gap-3">
-                        {pkg.cruiseImage && (
-                          <img src={pkg.cruiseImage} alt={pkg.cruiseName} className="h-10 w-14 rounded object-cover border border-border" />
-                        )}
-                        <span className="text-muted-foreground">{pkg.cruiseName}</span>
-                      </div>
+                      <span className="text-muted-foreground">{pkg.cruiseName}</span>
                     </TableCell>
                     <TableCell className="text-muted-foreground">{pkg.duration}</TableCell>
                     <TableCell className="text-right">
@@ -205,7 +225,7 @@ export default function PackagesManager() {
               })}
               {allPackages.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">No packages yet</TableCell>
+                  <TableCell colSpan={8} className="text-center py-8 text-muted-foreground">No packages yet</TableCell>
                 </TableRow>
               )}
             </TableBody>
@@ -214,11 +234,44 @@ export default function PackagesManager() {
       </Card>
 
       <Dialog open={editOpen} onOpenChange={setEditOpen}>
-        <DialogContent className="max-w-lg">
+        <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>{editingPkg ? "Edit Package" : "Add Package"}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
+            {/* Thumbnail Upload */}
+            <div className="space-y-2">
+              <Label>Thumbnail Image</Label>
+              {form.thumbnail ? (
+                <div className="relative inline-block">
+                  <img src={form.thumbnail} alt="Thumbnail" className="h-32 w-full rounded-lg object-cover border border-border" />
+                  <Button
+                    size="icon"
+                    variant="destructive"
+                    className="absolute top-1 right-1 h-6 w-6"
+                    onClick={() => setForm(f => ({ ...f, thumbnail: "" }))}
+                  >
+                    <X className="h-3 w-3" />
+                  </Button>
+                </div>
+              ) : (
+                <div
+                  className="h-32 w-full rounded-lg border-2 border-dashed border-border flex flex-col items-center justify-center cursor-pointer hover:border-primary/50 transition-colors"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  <Upload className="h-8 w-8 text-muted-foreground mb-2" />
+                  <span className="text-sm text-muted-foreground">Click to upload thumbnail</span>
+                </div>
+              )}
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleThumbnailUpload}
+              />
+            </div>
+
             <div className="space-y-2">
               <Label>Package Name *</Label>
               <Input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="e.g. Standard Package" />
