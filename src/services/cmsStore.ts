@@ -119,7 +119,7 @@ const defaultSettings: SiteSettings = {
   address: "Dhaka, Bangladesh",
   addressBn: "ঢাকা, বাংলাদেশ",
   facebookUrl: "https://www.facebook.com/Luckytoursandtravels",
-  youtubeUrl: "",
+  youtubeUrl: "https://www.youtube.com/@luckytoursandtravels70",
   instagramUrl: "",
   footerText: "© Lucky Tours & Travels. All rights reserved.",
   footerTextBn: "© লাকি ট্যুরস অ্যান্ড ট্রাভেলস। সর্বস্বত্ব সংরক্ষিত।",
