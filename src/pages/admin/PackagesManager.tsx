@@ -55,7 +55,7 @@ export default function PackagesManager() {
 
   const openNew = () => {
     setEditingPkg(null);
-    setForm({ name: "", duration: "", cruiseId: cruises[0]?.id || "", isOffer: false, adultPrice: "", adultOldPrice: "", childPrice: "", childOldPrice: "", thumbnail: "", tripDates: [] });
+    setForm({ name: "", duration: "", cruiseId: cruises[0]?.id || "", isOffer: false, adultPrice: "", adultOldPrice: "", childPrice: "", childOldPrice: "", thumbnail: "", tripDates: [], offerDayLabel: "", offerDateLabel: "" });
     setEditOpen(true);
   };
 
