@@ -347,11 +347,20 @@ app.put('/api/pages', authMiddleware, async (req, res) => {
   }
 });
 
-// ===== FILE UPLOAD =====
+// ===== FILE UPLOAD (supports multiple files) =====
 app.post('/api/upload', authMiddleware, upload.single('file'), (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
   const url = `${process.env.BACKEND_URL || `http://localhost:${PORT}`}/uploads/${req.file.filename}`;
   res.json({ url, filename: req.file.filename });
+});
+
+app.post('/api/upload/multiple', authMiddleware, upload.array('files', 20), (req, res) => {
+  if (!req.files || req.files.length === 0) return res.status(400).json({ error: 'No files uploaded' });
+  const results = req.files.map(file => ({
+    url: `${process.env.BACKEND_URL || `http://localhost:${PORT}`}/uploads/${file.filename}`,
+    filename: file.filename,
+  }));
+  res.json(results);
 });
 
 // ===== DASHBOARD STATS =====
