@@ -216,7 +216,7 @@ const defaultSettings: SiteSettings = {
   instagramUrl: "",
   footerText: "© Lucky Tours & Travels. All rights reserved.",
   footerTextBn: "© লাকি ট্যুরস অ্যান্ড ট্রাভেলস। সর্বস্বত্ব সংরক্ষিত।",
-  googleMapsUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d233668.38703692693!2d90.27923710646989!3d23.780573258035943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b087026b81%3A0x8fa563b5c6e9a1ab!2sDhaka!5e0!3m2!1sen!2sbd!4v1711871072",
+  googleMapsUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3685.123456!2d89.5403!3d22.8456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ff9015a2ed1e07%3A0xc1af89a67e2e1c4a!2sLucky%20Tours%20And%20Travels!5e0!3m2!1sen!2sbd!4v1710000000000",
   whatsappFloatEnabled: true,
   languageSwitcherEnabled: true,
   heroImages: [],
