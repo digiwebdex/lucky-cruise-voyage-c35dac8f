@@ -69,6 +69,7 @@ export default function PackagesManager() {
       childPrice: String(pkg.childPrice),
       childOldPrice: pkg.childOldPrice ? String(pkg.childOldPrice) : "",
       thumbnail: pkg.thumbnail || "",
+      tripDates: (pkg.tripDates || []).map((d: string) => new Date(d)),
     });
     setEditOpen(true);
   };
