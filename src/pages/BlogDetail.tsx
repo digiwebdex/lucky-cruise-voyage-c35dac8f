@@ -74,6 +74,20 @@ export default function BlogDetail() {
               </motion.div>
             )}
 
+            {embedUrl && (
+              <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ delay: 0.12 }} className="mb-8">
+                <div className="relative w-full rounded-xl overflow-hidden shadow-md" style={{ paddingBottom: "56.25%" }}>
+                  <iframe
+                    src={embedUrl}
+                    title={post.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full"
+                  />
+                </div>
+              </motion.div>
+            )}
+
             <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ delay: 0.15 }}>
               <p className="text-lg text-primary font-semibold mb-6 border-l-4 border-primary pl-4">{post.excerpt}</p>
             </motion.div>

@@ -191,6 +191,11 @@ export default function BlogManager() {
               {form.coverImage && <img src={form.coverImage} alt="" className="mt-2 h-32 w-full rounded-lg object-cover" />}
             </div>
             <div>
+              <Label>YouTube Video URL</Label>
+              <Input value={form.youtubeUrl || ""} onChange={e => setForm(f => ({ ...f, youtubeUrl: e.target.value }))} placeholder="https://www.youtube.com/watch?v=..." />
+              <p className="text-xs text-muted-foreground mt-1">ব্লগ পোস্টে YouTube ভিডিও এম্বেড করতে লিঙ্ক দিন</p>
+            </div>
+            <div>
               <Label>Excerpt *</Label>
               <Textarea value={form.excerpt} onChange={e => setForm(f => ({ ...f, excerpt: e.target.value }))} placeholder="Short summary..." rows={2} />
             </div>
