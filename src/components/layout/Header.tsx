@@ -214,17 +214,49 @@ export default function Header() {
                         {link.label}
                       </div>
                       <div className="ml-4 space-y-1">
-                        {cruiseSubLinks.map(sub => (
-                          <Link
-                            key={sub.to}
-                            to={sub.to}
-                            onClick={() => setMobileOpen(false)}
-                            className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium text-secondary-foreground/60 hover:bg-primary/5 hover:text-primary transition-all"
-                          >
+                        {/* Sundarban with expandable subcategories */}
+                        <button
+                          onClick={() => setMobileSundarbanOpen(!mobileSundarbanOpen)}
+                          className="flex items-center justify-between w-full rounded-xl px-4 py-2.5 text-sm font-medium text-secondary-foreground/60 hover:bg-primary/5 hover:text-primary transition-all"
+                        >
+                          <span className="flex items-center gap-2">
                             <ChevronRight className="h-3.5 w-3.5" />
-                            {sub.label}
-                          </Link>
-                        ))}
+                            {t.nav.sundarbanTour}
+                          </span>
+                          <ChevronDown className={`h-3.5 w-3.5 transition-transform ${mobileSundarbanOpen ? "rotate-180" : ""}`} />
+                        </button>
+                        {mobileSundarbanOpen && (
+                          <div className="ml-4 space-y-0.5">
+                            <Link
+                              to="/cruises?destination=sundarban"
+                              onClick={() => setMobileOpen(false)}
+                              className="flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-medium text-secondary-foreground/50 hover:bg-primary/5 hover:text-primary transition-all"
+                            >
+                              <ChevronRight className="h-3 w-3" />
+                              {lang === "bn" ? "সকল সুন্দরবন ক্রুজ" : "All Sundarban Cruises"}
+                            </Link>
+                            {sundarbanSubCategories.map(sc => (
+                              <Link
+                                key={sc.value}
+                                to={`/cruises?destination=sundarban&sub=${sc.value}`}
+                                onClick={() => setMobileOpen(false)}
+                                className="flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-medium text-secondary-foreground/50 hover:bg-primary/5 hover:text-primary transition-all"
+                              >
+                                <ChevronRight className="h-3 w-3" />
+                                {lang === "bn" ? sc.labelBn : sc.label}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                        {/* Tanguar Haor */}
+                        <Link
+                          to="/cruises?destination=tanguar-haor"
+                          onClick={() => setMobileOpen(false)}
+                          className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium text-secondary-foreground/60 hover:bg-primary/5 hover:text-primary transition-all"
+                        >
+                          <ChevronRight className="h-3.5 w-3.5" />
+                          {t.nav.tanguarHaorTour}
+                        </Link>
                       </div>
                     </div>
                   );
