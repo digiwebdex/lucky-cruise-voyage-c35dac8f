@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Ship, ExternalLink } from "lucide-react";
+import { Phone, Mail, MapPin, Ship, ExternalLink, Award } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getSettings } from "@/services/cmsStore";
+import toasCertificate from "@/assets/toas-certificate.jpg";
+import { useState } from "react";
 
 export default function Footer() {
   const { t, lang } = useLanguage();
   const settings = getSettings();
+  const [showCert, setShowCert] = useState(false);
   const address = lang === "bn" && settings.addressBn ? settings.addressBn : settings.address;
 
   const footerLinks = [
@@ -101,14 +104,38 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Hours */}
-            <div>
-              <h4 className="mb-5 font-display font-bold text-sm uppercase tracking-wider text-primary/80">{t.footer.businessHours}</h4>
-              <div className="rounded-xl border border-secondary-foreground/10 p-4">
-                <div className="flex justify-between text-sm">
-                  <span className="text-secondary-foreground/50">{(t.footer as Record<string, string>).everyday}</span>
-                  <span className="font-semibold text-primary">{(t.footer as Record<string, string>).alwaysOpen}</span>
+            {/* Hours & Certificate */}
+            <div className="space-y-5">
+              <div>
+                <h4 className="mb-5 font-display font-bold text-sm uppercase tracking-wider text-primary/80">{t.footer.businessHours}</h4>
+                <div className="rounded-xl border border-secondary-foreground/10 p-4">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-secondary-foreground/50">{(t.footer as Record<string, string>).everyday}</span>
+                    <span className="font-semibold text-primary">{(t.footer as Record<string, string>).alwaysOpen}</span>
+                  </div>
                 </div>
+              </div>
+
+              {/* TOAS Certificate */}
+              <div>
+                <h4 className="mb-3 font-display font-bold text-sm uppercase tracking-wider text-primary/80 flex items-center gap-2">
+                  <Award className="h-4 w-4" />
+                  TOAS Certified
+                </h4>
+                <button
+                  onClick={() => setShowCert(true)}
+                  className="group rounded-xl border border-secondary-foreground/10 overflow-hidden hover:border-primary/30 transition-colors"
+                >
+                  <img
+                    src={toasCertificate}
+                    alt="TOAS Certificate - Tour Operator Association of Sundarban"
+                    className="w-full h-auto object-cover rounded-xl group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </button>
+                <p className="mt-2 text-xs text-secondary-foreground/40">
+                  Member of Tour Operator Association of Sundarban
+                </p>
               </div>
             </div>
           </div>
@@ -121,6 +148,28 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      {/* Certificate Lightbox */}
+      {showCert && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+          onClick={() => setShowCert(false)}
+        >
+          <div className="relative max-w-2xl w-full animate-in fade-in zoom-in-95 duration-200">
+            <img
+              src={toasCertificate}
+              alt="TOAS Certificate"
+              className="w-full h-auto rounded-2xl shadow-2xl"
+            />
+            <button
+              onClick={() => setShowCert(false)}
+              className="absolute -top-3 -right-3 h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold hover:bg-primary/80 transition-colors"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
     </footer>
   );
 }
