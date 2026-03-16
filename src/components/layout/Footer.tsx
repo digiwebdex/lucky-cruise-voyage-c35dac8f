@@ -3,6 +3,7 @@ import { Phone, Mail, MapPin, Ship, ExternalLink, Award } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getSettings } from "@/services/cmsStore";
 import toasCertificate from "@/assets/toas-certificate.jpg";
+import logoImg from "@/assets/logo.png";
 import { useState } from "react";
 
 export default function Footer() {
