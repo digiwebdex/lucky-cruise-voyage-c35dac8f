@@ -20,6 +20,7 @@ import { getCruises, saveCruises, getCruiseById } from "@/services/cmsStore";
 import type { Cruise, ItineraryDay, sundarbanSubCategories } from "@/services/mockData";
 import { sundarbanSubCategories as subCatOptions } from "@/services/mockData";
 import { toast } from "@/hooks/use-toast";
+import { uploadImage, uploadImages } from "@/services/uploadHelper";
 
 const emptyCruise: Cruise = {
   id: "", name: "", subtitle: "", description: "", route: "", duration: "", capacity: "", cabins: "",
