@@ -128,6 +128,7 @@ const defaultSettings: SiteSettings = {
   whatsappFloatEnabled: true,
   languageSwitcherEnabled: true,
   heroImages: [],
+  featuredCruiseIds: [],
 };
 
 const defaultPages: CmsPage[] = [
