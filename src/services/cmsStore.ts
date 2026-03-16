@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { cruises as defaultCruises, testimonials as defaultTestimonials, teamMembers as defaultTeamMembers, type Cruise } from "./mockData";
+import { syncToApi, syncPostToApi, isApiMode } from "./apiSync";
 
 // ===== Types =====
 export interface SiteSettings {
