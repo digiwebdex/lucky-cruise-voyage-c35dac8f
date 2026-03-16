@@ -43,7 +43,7 @@ function PromoPackagesSection({ promoAds, cruises }: { promoAds: PromoAd[]; crui
                   {/* Clickable image - opens lightbox */}
                   <button
                     onClick={() => setLightboxAd(ad)}
-                    className="w-full aspect-[4/3] overflow-hidden relative block cursor-pointer"
+                    className="w-full aspect-square overflow-hidden relative block cursor-pointer"
                   >
                     <img
                       src={ad.image}
