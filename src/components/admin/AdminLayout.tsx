@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import { LayoutDashboard, Ship, Package, Image, FileText, Search, Users, Settings, LogOut, Menu, X, ExternalLink, MessageSquare, UserCheck, Flame, ClipboardList, Tag, CalendarDays, BookOpen, Star, Megaphone, ImageIcon, Crown, Grid3X3, Home, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { getAuthToken, apiLogout } from "@/services/apiSync";
 
 const sidebarLinks = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard },
@@ -32,6 +33,22 @@ export default function AdminLayout() {
   const location = useLocation();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Auth guard: redirect to login if not authenticated
+  useEffect(() => {
+    const token = getAuthToken();
+    const loggedIn = localStorage.getItem("admin_logged_in");
+    if (!token && !loggedIn) {
+      navigate("/admin/login", { replace: true });
+    }
+  }, [navigate]);
+
+  const handleLogout = () => {
+    apiLogout();
+    localStorage.removeItem("admin_logged_in");
+    localStorage.removeItem("admin_user");
+    navigate("/admin/login", { replace: true });
+  };
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -75,7 +92,7 @@ export default function AdminLayout() {
             <Link to="/" className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-secondary-foreground/50 hover:bg-secondary-foreground/8 hover:text-primary transition-colors">
               <ExternalLink className="h-4 w-4" /> View Website
             </Link>
-            <Button variant="ghost" className="w-full justify-start gap-3 text-secondary-foreground/50 hover:bg-destructive/10 hover:text-destructive rounded-xl px-4 py-3 h-auto font-medium" onClick={() => navigate("/admin/login")}>
+            <Button variant="ghost" className="w-full justify-start gap-3 text-secondary-foreground/50 hover:bg-destructive/10 hover:text-destructive rounded-xl px-4 py-3 h-auto font-medium" onClick={handleLogout}>
               <LogOut className="h-4 w-4" /> Logout
             </Button>
           </div>
