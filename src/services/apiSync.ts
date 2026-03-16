@@ -21,38 +21,76 @@ export function getAuthToken(): string | null {
 }
 
 // ===== Fetch Helpers =====
+async function parseApiError(res: Response, endpoint: string): Promise<Error> {
+  let message = `API ${endpoint}: ${res.status}`;
+
+  try {
+    const data = await res.json();
+    if (typeof data?.error === 'string' && data.error.trim()) {
+      message = data.error;
+    }
+  } catch {
+    // Ignore non-JSON error bodies
+  }
+
+  if (res.status === 401 && endpoint === '/api/auth/login') {
+    message = 'Invalid username or password';
+  }
+
+  return new Error(message);
+}
+
+function normalizeNetworkError(error: unknown): Error {
+  if (error instanceof TypeError) {
+    return new Error('API server unreachable. Please check DNS, internet connection, or API domain settings.');
+  }
+  return error instanceof Error ? error : new Error('Unexpected API error');
+}
+
 async function apiGet<T>(endpoint: string): Promise<T> {
-  const res = await fetch(`${API_BASE}${endpoint}`, {
-    headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
-  });
-  if (!res.ok) throw new Error(`API ${endpoint}: ${res.status}`);
-  return res.json();
+  try {
+    const res = await fetch(`${API_BASE}${endpoint}`, {
+      headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
+    });
+    if (!res.ok) throw await parseApiError(res, endpoint);
+    return res.json();
+  } catch (error) {
+    throw normalizeNetworkError(error);
+  }
 }
 
 async function apiPost<T>(endpoint: string, data: unknown): Promise<T> {
-  const res = await fetch(`${API_BASE}${endpoint}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
-    },
-    body: JSON.stringify(data),
-  });
-  if (!res.ok) throw new Error(`API ${endpoint}: ${res.status}`);
-  return res.json();
+  try {
+    const res = await fetch(`${API_BASE}${endpoint}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
+      },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) throw await parseApiError(res, endpoint);
+    return res.json();
+  } catch (error) {
+    throw normalizeNetworkError(error);
+  }
 }
 
 async function apiPut<T>(endpoint: string, data: unknown): Promise<T> {
-  const res = await fetch(`${API_BASE}${endpoint}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
-    },
-    body: JSON.stringify(data),
-  });
-  if (!res.ok) throw new Error(`API ${endpoint}: ${res.status}`);
-  return res.json();
+  try {
+    const res = await fetch(`${API_BASE}${endpoint}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
+      },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) throw await parseApiError(res, endpoint);
+    return res.json();
+  } catch (error) {
+    throw normalizeNetworkError(error);
+  }
 }
 
 // ===== Snake ↔ Camel Case Converters =====
