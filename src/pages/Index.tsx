@@ -248,9 +248,9 @@ export default function Index() {
             {/* Stats */}
             <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.5, delay: 0.3 }} className="mt-8 flex gap-8">
               {[
-                { value: "70+", label: t.hero.cruiseShips },
-                { value: "1,50,000+", label: t.hero.happyTravellers },
-                { value: "15+", label: t.hero.yearsExperience },
+                { value: hc.stat1Value, label: bn ? hc.stat1LabelBn : hc.stat1Label },
+                { value: hc.stat2Value, label: bn ? hc.stat2LabelBn : hc.stat2Label },
+                { value: hc.stat3Value, label: bn ? hc.stat3LabelBn : hc.stat3Label },
               ].map((stat, i) => (
                 <div key={i}>
                   <div className="text-xl sm:text-2xl font-display font-black text-primary">{stat.value}</div>
