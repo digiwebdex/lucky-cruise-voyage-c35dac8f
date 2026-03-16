@@ -72,6 +72,8 @@ export default function PackagesManager() {
       childOldPrice: pkg.childOldPrice ? String(pkg.childOldPrice) : "",
       thumbnail: pkg.thumbnail || "",
       tripDates: (pkg.tripDates || []).map((d: string) => new Date(d)),
+      offerDayLabel: pkg.offerDayLabel || "",
+      offerDateLabel: pkg.offerDateLabel || "",
     });
     setEditOpen(true);
   };
