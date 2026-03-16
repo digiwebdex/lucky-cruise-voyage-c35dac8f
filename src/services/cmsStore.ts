@@ -18,6 +18,7 @@ export interface SiteSettings {
   whatsappFloatEnabled: boolean;
   languageSwitcherEnabled: boolean;
   heroImages: (string | { image: string; title?: string })[];
+  featuredCruiseIds: string[];
 }
 
 export interface CmsPage {
@@ -127,6 +128,7 @@ const defaultSettings: SiteSettings = {
   whatsappFloatEnabled: true,
   languageSwitcherEnabled: true,
   heroImages: [],
+  featuredCruiseIds: [],
 };
 
 const defaultPages: CmsPage[] = [
@@ -161,7 +163,7 @@ const KEYS = {
   promoAds: "cms_promoAds",
 } as const;
 
-const DATA_VERSION = "v32";
+const DATA_VERSION = "v33";
 const VERSION_KEY = "cms_data_version";
 
 function initVersionCheck() {

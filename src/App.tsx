@@ -36,6 +36,7 @@ import BlogManager from "./pages/admin/BlogManager";
 import ReviewsManager from "./pages/admin/ReviewsManager";
 import PromoAdsManager from "./pages/admin/PromoAdsManager";
 import HeroImageManager from "./pages/admin/HeroImageManager";
+import FeaturedCruiseManager from "./pages/admin/FeaturedCruiseManager";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -75,6 +76,7 @@ const App = () => (
               <Route path="reviews" element={<ReviewsManager />} />
               <Route path="promo-ads" element={<PromoAdsManager />} />
               <Route path="hero-images" element={<HeroImageManager />} />
+              <Route path="featured-cruises" element={<FeaturedCruiseManager />} />
               <Route path="team" element={<TeamManager />} />
               <Route path="media" element={<MediaLibrary />} />
               

@@ -24,7 +24,14 @@ export default function Index() {
   const now = new Date().toISOString();
   const offers = getOffers().filter(o => o.isActive && (!o.expiryDate || o.expiryDate >= now));
   const promoAds = getPromoAds().filter(a => a.isActive).slice(0, 15);
-  const allCruises = cruises.slice(0, 6);
+  const allCruises = (() => {
+    const ids = settings.featuredCruiseIds;
+    if (ids && ids.length > 0) {
+      const ordered = ids.map(id => cruises.find(c => c.id === id)).filter(Boolean) as typeof cruises;
+      return ordered.slice(0, 6);
+    }
+    return cruises.slice(0, 6);
+  })();
 
   // Quick booking bar state
   const [selectedTour, setSelectedTour] = useState("");
