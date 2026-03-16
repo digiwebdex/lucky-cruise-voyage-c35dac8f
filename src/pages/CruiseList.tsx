@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { searchCruises } from "@/services/cmsStore";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { sundarbanSubCategories } from "@/services/mockData";
+import PageHeroBanner from "@/components/PageHeroBanner";
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 const scaleIn = { hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } };
