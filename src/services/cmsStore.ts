@@ -18,6 +18,7 @@ export interface SiteSettings {
   whatsappFloatEnabled: boolean;
   languageSwitcherEnabled: boolean;
   heroImages: (string | { image: string; title?: string })[];
+  featuredCruiseIds: string[];
 }
 
 export interface CmsPage {
