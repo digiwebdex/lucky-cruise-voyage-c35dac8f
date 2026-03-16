@@ -615,16 +615,16 @@ export default function Index() {
               <Shield className="h-3.5 w-3.5" /> {t.whyUs.sectionLabel}
             </span>
             <h2 className="mt-2 font-display text-2xl sm:text-3xl md:text-4xl font-black text-foreground">
-              {t.whyUs.title} <span className="text-primary">{t.whyUs.titleHighlight}</span>
+              {bn ? hc.whyUsTitleBn : hc.whyUsTitle} <span className="text-primary">{bn ? hc.whyUsHighlightBn : hc.whyUsHighlight}</span>
             </h2>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { icon: Ship, title: t.whyUs.premiumFleet, desc: t.whyUs.premiumFleetDesc },
-              { icon: Shield, title: t.whyUs.maxSafety, desc: t.whyUs.maxSafetyDesc },
-              { icon: Star, title: t.whyUs.allInclusive, desc: t.whyUs.allInclusiveDesc },
-              { icon: Clock, title: t.whyUs.support247, desc: t.whyUs.support247Desc },
+              { icon: Ship, title: bn ? hc.whyUs1TitleBn : hc.whyUs1Title, desc: bn ? hc.whyUs1DescBn : hc.whyUs1Desc },
+              { icon: Shield, title: bn ? hc.whyUs2TitleBn : hc.whyUs2Title, desc: bn ? hc.whyUs2DescBn : hc.whyUs2Desc },
+              { icon: Star, title: bn ? hc.whyUs3TitleBn : hc.whyUs3Title, desc: bn ? hc.whyUs3DescBn : hc.whyUs3Desc },
+              { icon: Clock, title: bn ? hc.whyUs4TitleBn : hc.whyUs4Title, desc: bn ? hc.whyUs4DescBn : hc.whyUs4Desc },
             ].map((item, i) => (
               <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: i * 0.08 }}>
                 <div className="rounded-xl border border-border bg-card p-5 text-center h-full">
