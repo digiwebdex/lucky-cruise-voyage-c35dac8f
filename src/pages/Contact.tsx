@@ -28,16 +28,12 @@ export default function Contact() {
 
   return (
     <div>
-      <section className="gradient-hero py-16 md:py-20 text-center relative overflow-hidden">
-        <div className="container relative">
-          <motion.div initial="hidden" animate="visible" variants={fadeUp}>
+      <PageHeroBanner page="contact">
             <h1 className="font-display text-4xl md:text-5xl font-black text-secondary-foreground">
               {t.contact.title} <span className="text-gradient">{t.contact.titleHighlight}</span>
             </h1>
             <p className="mt-3 text-secondary-foreground/60 max-w-md mx-auto">{t.contact.subtitle}</p>
-          </motion.div>
-        </div>
-      </section>
+      </PageHeroBanner>
 
       <section className="py-12 md:py-16">
         <div className="container">

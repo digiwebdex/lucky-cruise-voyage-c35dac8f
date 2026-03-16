@@ -23,10 +23,7 @@ export default function BlogList() {
 
   return (
     <div>
-      {/* Hero */}
-      <section className="bg-secondary py-12 sm:py-16">
-        <div className="container text-center">
-          <motion.div initial="hidden" animate="visible" variants={fadeUp}>
+      <PageHeroBanner page="blog">
             <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary mb-3">
               <BookOpen className="h-3.5 w-3.5" /> {lang === "bn" ? "ব্লগ" : "Blog"}
             </span>
@@ -37,9 +34,7 @@ export default function BlogList() {
             <p className="mt-3 text-secondary-foreground/60 text-sm max-w-md mx-auto">
               {lang === "bn" ? "সুন্দরবন ও টাঙ্গুয়ার হাওর সম্পর্কে আমাদের ভ্রমণ টিপস, গাইড ও গল্প পড়ুন" : "Read our travel tips, guides and stories about Sundarban & Tanguar Haor"}
             </p>
-          </motion.div>
-        </div>
-      </section>
+      </PageHeroBanner>
 
       {/* Filter & Grid */}
       <section className="py-10 md:py-14 bg-background">

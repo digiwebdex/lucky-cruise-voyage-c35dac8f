@@ -14,9 +14,7 @@ export default function About() {
 
   return (
     <div className="overflow-hidden">
-      <section className="gradient-hero py-20 md:py-28 text-center relative overflow-hidden">
-        <div className="container relative">
-          <motion.div initial="hidden" animate="visible" variants={fadeUp}>
+      <PageHeroBanner page="about">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary mb-6">
               <Compass className="h-4 w-4" /> {t.about.since}
             </span>
@@ -26,9 +24,7 @@ export default function About() {
             <p className="mx-auto mt-5 max-w-2xl text-lg text-secondary-foreground/60 leading-relaxed">
               {t.about.subtitle}
             </p>
-          </motion.div>
-        </div>
-      </section>
+      </PageHeroBanner>
 
       <section className="py-20">
         <div className="container">

@@ -30,15 +30,12 @@ export default function Gallery() {
 
   return (
     <div>
-      <section className="gradient-hero py-16 md:py-20 text-center relative overflow-hidden">
-        <div className="container relative">
-          <motion.div initial="hidden" animate="visible" variants={fadeUp}>
+      <PageHeroBanner page="gallery">
             <h1 className="font-display text-4xl md:text-5xl font-black text-secondary-foreground">
               {t.gallery.title} <span className="text-gradient">{t.gallery.titleHighlight}</span>
             </h1>
             <p className="mt-3 text-secondary-foreground/60 max-w-md mx-auto">{t.gallery.subtitle}</p>
-          </motion.div>
-        </div>
+      </PageHeroBanner>
       </section>
 
       {/* Cruise Filter Tabs */}
