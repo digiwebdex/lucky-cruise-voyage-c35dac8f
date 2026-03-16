@@ -22,12 +22,15 @@ const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 // ===== Promo Packages Section with Lightbox =====
 function PromoPackagesSection({ promoAds, cruises }: { promoAds: PromoAd[]; cruises: Cruise[] }) {
   const [lightboxAd, setLightboxAd] = useState<PromoAd | null>(null);
+  const hpc = getHomepageContent();
+  const { lang } = useLanguage();
+  const isBn = lang === "bn";
 
   return (
     <section className="py-8 md:py-12 bg-background">
       <div className="container">
-        <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground text-center mb-2">আমাদের প্যাকেজ সমূহ</h2>
-        <p className="text-center text-muted-foreground text-sm mb-8">আপকামিং ট্যুর প্যাকেজ ও অফার সমূহ</p>
+        <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground text-center mb-2">{isBn ? hpc.promoTitleBn : hpc.promoTitle}</h2>
+        <p className="text-center text-muted-foreground text-sm mb-8">{isBn ? hpc.promoSubtitleBn : hpc.promoSubtitle}</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {promoAds.map((ad, i) => {
             const cruise = cruises.find(c => c.id === ad.linkedCruiseId);
