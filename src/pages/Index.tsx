@@ -223,12 +223,12 @@ export default function Index() {
 
             <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 0.5, delay: 0.1 }}>
               <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black leading-tight text-secondary-foreground mb-3">
-                {t.hero.slides[0].title}
+                {bn ? hc.heroTitleBn : hc.heroTitle}
                 <br />
-                <span className="text-primary">{t.hero.slides[0].highlight}</span>
+                <span className="text-primary">{bn ? hc.heroHighlightBn : hc.heroHighlight}</span>
               </h1>
               <p className="text-sm sm:text-base text-secondary-foreground/70 max-w-md mb-6 leading-relaxed">
-                {t.hero.slides[0].subtitle}
+                {bn ? hc.heroSubtitleBn : hc.heroSubtitle}
               </p>
             </motion.div>
 
