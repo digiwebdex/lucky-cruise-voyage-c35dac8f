@@ -118,9 +118,7 @@ export default function CruiseList() {
                 ))}
               </div>
             )}
-          </motion.div>
-        </div>
-      </section>
+      </PageHeroBanner>
 
       <section className="py-10">
         <div className="container">
