@@ -20,8 +20,9 @@ export default function AdminLogin() {
       localStorage.setItem("admin_logged_in", "true");
       localStorage.setItem("admin_user", JSON.stringify(result.user));
       navigate("/admin");
-    } catch {
-      alert("Invalid username or password");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Login failed";
+      alert(message);
     } finally {
       setLoading(false);
     }
