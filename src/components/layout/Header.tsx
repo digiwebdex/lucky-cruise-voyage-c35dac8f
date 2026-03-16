@@ -92,18 +92,56 @@ export default function Header() {
                         initial={{ opacity: 0, y: -5 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -5 }}
-                        className="absolute top-full left-0 mt-1 w-56 rounded-xl border border-border/50 bg-card shadow-elevated overflow-hidden z-50"
+                        className="absolute top-full left-0 mt-1 w-64 rounded-xl border border-border/50 bg-card shadow-elevated overflow-hidden z-50"
                       >
-                        {cruiseSubLinks.map(sub => (
-                          <Link
-                            key={sub.to}
-                            to={sub.to}
-                            onClick={() => setCruiseDropdownOpen(false)}
-                            className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
+                        {/* Sundarban with subcategories */}
+                        <div>
+                          <button
+                            onClick={() => setSundarbanExpanded(!sundarbanExpanded)}
+                            className="flex items-center justify-between w-full px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
                           >
-                            {sub.label}
-                          </Link>
-                        ))}
+                            <span>{t.nav.sundarbanTour}</span>
+                            <ChevronDown className={`h-3.5 w-3.5 transition-transform ${sundarbanExpanded ? "rotate-180" : ""}`} />
+                          </button>
+                          <AnimatePresence>
+                            {sundarbanExpanded && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                className="overflow-hidden bg-muted/30"
+                              >
+                                <Link
+                                  to="/cruises?destination=sundarban"
+                                  onClick={() => { setCruiseDropdownOpen(false); setSundarbanExpanded(false); }}
+                                  className="flex items-center gap-2 px-6 py-2.5 text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
+                                >
+                                  <ChevronRight className="h-3 w-3" />
+                                  {lang === "bn" ? "সকল সুন্দরবন ক্রুজ" : "All Sundarban Cruises"}
+                                </Link>
+                                {sundarbanSubCategories.map(sc => (
+                                  <Link
+                                    key={sc.value}
+                                    to={`/cruises?destination=sundarban&sub=${sc.value}`}
+                                    onClick={() => { setCruiseDropdownOpen(false); setSundarbanExpanded(false); }}
+                                    className="flex items-center gap-2 px-6 py-2.5 text-xs font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
+                                  >
+                                    <ChevronRight className="h-3 w-3" />
+                                    {lang === "bn" ? sc.labelBn : sc.label}
+                                  </Link>
+                                ))}
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                        {/* Tanguar Haor */}
+                        <Link
+                          to="/cruises?destination=tanguar-haor"
+                          onClick={() => setCruiseDropdownOpen(false)}
+                          className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
+                        >
+                          {t.nav.tanguarHaorTour}
+                        </Link>
                       </motion.div>
                     )}
                   </AnimatePresence>
