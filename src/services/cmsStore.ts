@@ -482,7 +482,7 @@ const defaultPromoAds: PromoAd[] = [
 ];
 
 export const getPromoAds = (): PromoAd[] => getStore(KEYS.promoAds, defaultPromoAds);
-export const savePromoAds = (data: PromoAd[]) => setStore(KEYS.promoAds, data);
+export const savePromoAds = (data: PromoAd[]) => { setStore(KEYS.promoAds, data); syncToApi('/api/promo-ads', data); };
 
 // ===== Contact Inquiries =====
 export const getContactInquiries = (): ContactInquiry[] => getStore(KEYS.contactInquiries, []);
