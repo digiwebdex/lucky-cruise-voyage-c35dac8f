@@ -384,6 +384,42 @@ export default function Index() {
                   </Button>
                 </div>
               </div>
+
+              {/* Filtered Results */}
+              {(selectedTour || selectedSubCat) && (() => {
+                const filtered = cruises
+                  .filter(c => !selectedTour || c.destination === selectedTour)
+                  .filter(c => !selectedSubCat || selectedSubCat === "all" || c.subCategory === selectedSubCat);
+                if (filtered.length === 0) return null;
+                return (
+                  <div className="mt-4 pt-4 border-t border-border">
+                    <p className="text-xs font-semibold text-muted-foreground mb-3">
+                      {language === "bn" ? `${filtered.length}টি ক্রুজ পাওয়া গেছে` : `${filtered.length} cruises found`}
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                      {filtered.map(c => (
+                        <Link
+                          key={c.id}
+                          to={`/cruises/${c.id}`}
+                          className="flex items-center gap-3 p-2.5 rounded-lg border border-border hover:border-primary/40 hover:shadow-sm transition-all bg-background group"
+                        >
+                          <img
+                            src={c.images[c.featuredImageIndex ?? 0]}
+                            alt={c.name}
+                            className="h-14 w-14 rounded-lg object-cover flex-shrink-0"
+                          />
+                          <div className="min-w-0 flex-1">
+                            <p className="text-sm font-bold text-foreground truncate group-hover:text-primary transition-colors">{c.name}</p>
+                            <p className="text-xs text-muted-foreground truncate">{c.route}</p>
+                            <p className="text-xs font-bold text-primary mt-0.5">৳{c.price.toLocaleString()}</p>
+                          </div>
+                          <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0" />
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           </motion.div>
         </div>
