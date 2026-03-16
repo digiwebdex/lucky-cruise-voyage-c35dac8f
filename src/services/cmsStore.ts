@@ -377,7 +377,7 @@ export const getTestimonials = (): Testimonial[] => {
   const defaults = defaultTestimonials.map((t, i) => ({ ...t, id: `testimonial-${i}` }));
   return getStore(KEYS.testimonials, defaults);
 };
-export const saveTestimonials = (data: Testimonial[]) => setStore(KEYS.testimonials, data);
+export const saveTestimonials = (data: Testimonial[]) => { setStore(KEYS.testimonials, data); syncToApi('/api/testimonials', data); };
 
 export const getTeamMembers = (): TeamMember[] => {
   const defaults = defaultTeamMembers.map((m, i) => ({ ...m, id: `team-${i}` }));
