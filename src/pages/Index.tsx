@@ -138,6 +138,8 @@ export default function Index() {
   const cruises = getCruises();
   const testimonials = getTestimonials();
   const settings = getSettings();
+  const hc = getHomepageContent();
+  const bn = language === "bn";
   const now = new Date().toISOString();
   const offers = getOffers().filter(o => o.isActive && (!o.expiryDate || o.expiryDate >= now));
   const promoAds = getPromoAds().filter(a => a.isActive).slice(0, 15);
