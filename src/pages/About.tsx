@@ -3,6 +3,7 @@ import { Shield, Heart, Target, Users, Ship, Award, Globe, Compass } from "lucid
 import { Card, CardContent } from "@/components/ui/card";
 import { getTeamMembers } from "@/services/cmsStore";
 import { useLanguage } from "@/contexts/LanguageContext";
+import PageHeroBanner from "@/components/PageHeroBanner";
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 const scaleIn = { hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } };
