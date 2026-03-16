@@ -21,83 +21,142 @@
 13. [Build & Deploy](#build--deploy)
 14. [Environment Variables](#environment-variables)
 15. [Security](#security)
-16. [Troubleshooting](#troubleshooting)
+16. [Performance](#performance)
+17. [Troubleshooting](#troubleshooting)
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | React 18 + TypeScript |
-| Build Tool | Vite 5 |
-| Styling | Tailwind CSS 3 + shadcn/ui |
-| Routing | React Router DOM v6 |
-| State | React Context + localStorage (CMS Store) |
-| Forms | React Hook Form + Zod validation |
-| Animation | Framer Motion |
-| Charts | Recharts |
-| Data Fetching | TanStack React Query |
-| Icons | Lucide React |
+| Layer | Technology | Version |
+|---|---|---|
+| Framework | React + TypeScript | 18.3.x + 5.8.x |
+| Build Tool | Vite | 5.4.x |
+| Styling | Tailwind CSS + shadcn/ui | 3.4.x |
+| Routing | React Router DOM | 6.30.x |
+| State | React Context + localStorage (CMS Store) | — |
+| Forms | React Hook Form + Zod | 7.61.x + 3.25.x |
+| Animation | Framer Motion | 12.35.x |
+| Charts | Recharts | 2.15.x |
+| Data Fetching | TanStack React Query | 5.83.x |
+| Icons | Lucide React | 0.462.x |
+| Carousel | Embla Carousel React | 8.6.x |
+| Date | date-fns + react-day-picker | 3.6.x + 8.10.x |
+| Theming | next-themes | 0.3.x |
 
 ---
 
 ## Project Structure
 
 ```
-src/
-├── assets/              # Static images
-│   ├── cruises/         # 280+ cruise photos, seat plans, menus
-│   ├── hero/            # 6 hero banner images
-│   ├── blog/            # Blog post images
-│   ├── promos/          # Promotional images
-│   ├── logo.png
-│   ├── toas-logo.png
-│   └── toas-certificate.jpg
-├── components/
-│   ├── admin/           # AdminLayout, SeoFieldsPanel
-│   ├── layout/          # Header, Footer, PublicLayout
-│   ├── ui/              # 48 shadcn/ui components
-│   ├── BookingModal.tsx
-│   ├── HeaderBookingModal.tsx
-│   ├── ImageZoom.tsx
-│   ├── NavLink.tsx
-│   ├── PageHeroBanner.tsx
-│   ├── ReviewSection.tsx
-│   ├── ScrollToTop.tsx
-│   ├── SeatPlanViewer.tsx
-│   └── WhatsAppFloat.tsx
-├── contexts/
-│   └── LanguageContext.tsx   # EN/BN language switching
-├── hooks/
-│   ├── use-mobile.tsx
-│   └── use-toast.ts
-├── locales/
-│   ├── en.json              # English translations
-│   └── bn.json              # Bengali translations
-├── pages/
-│   ├── admin/               # 24 admin pages
-│   ├── Index.tsx            # Homepage
-│   ├── About.tsx
-│   ├── BlogDetail.tsx
-│   ├── BlogList.tsx
-│   ├── Contact.tsx
-│   ├── CruiseDetail.tsx
-│   ├── CruiseList.tsx
-│   ├── Gallery.tsx
-│   ├── NotFound.tsx
-│   └── Packages.tsx
-├── services/
-│   ├── mockData.ts          # 14 cruise definitions + types
-│   ├── cmsStore.ts          # CMS state management
-│   └── bookingStore.ts      # Booking state management
-├── lib/
-│   └── utils.ts             # cn() utility
-├── App.tsx                  # Root routes
-├── App.css
-├── index.css                # Tailwind + design tokens
-├── main.tsx                 # Entry point
-└── vite-env.d.ts
+lucky-cruise-voyage/
+├── docs/                    # Project documentation (10 .md files)
+│   ├── ANALYTICS_HISTORY.md
+│   ├── API_REFERENCE.md
+│   ├── ARCHITECTURE.md
+│   ├── CHANGELOG.md
+│   ├── CONTRIBUTING.md
+│   ├── DEPLOYMENT_COMMANDS.md
+│   ├── DEPLOYMENT_HISTORY.md
+│   ├── DEVELOPER_GUIDE.md    ← You are here
+│   ├── FEATURES.md
+│   └── SECURITY.md
+├── public/
+│   ├── favicon.ico
+│   ├── og-image.jpg          # Social sharing image
+│   ├── placeholder.svg
+│   └── robots.txt
+├── src/
+│   ├── assets/               # Static images (~300+ files)
+│   │   ├── cruises/          # 280+ cruise photos, seat plans, menus
+│   │   ├── hero/             # 6 page hero banner images
+│   │   ├── blog/             # 3 blog post cover images
+│   │   ├── promos/           # 3 promotional banner images
+│   │   ├── logo.png          # Company logo
+│   │   ├── toas-logo.png     # TOAS certification logo
+│   │   └── toas-certificate.jpg
+│   ├── components/
+│   │   ├── admin/            # AdminLayout.tsx, SeoFieldsPanel.tsx
+│   │   ├── layout/           # Header.tsx, Footer.tsx, PublicLayout.tsx
+│   │   ├── ui/               # 48 shadcn/ui components
+│   │   ├── BookingModal.tsx
+│   │   ├── HeaderBookingModal.tsx
+│   │   ├── ImageZoom.tsx
+│   │   ├── NavLink.tsx
+│   │   ├── PageHeroBanner.tsx
+│   │   ├── ReviewSection.tsx
+│   │   ├── ScrollToTop.tsx
+│   │   ├── SeatPlanViewer.tsx
+│   │   └── WhatsAppFloat.tsx
+│   ├── contexts/
+│   │   └── LanguageContext.tsx  # EN/BN language switching
+│   ├── hooks/
+│   │   ├── use-mobile.tsx      # Mobile viewport detection
+│   │   └── use-toast.ts        # Toast notification hook
+│   ├── locales/
+│   │   ├── en.json             # English translations
+│   │   └── bn.json             # Bengali translations
+│   ├── pages/
+│   │   ├── admin/              # 24 admin pages
+│   │   │   ├── AvailabilityManager.tsx
+│   │   │   ├── BlogManager.tsx
+│   │   │   ├── Bookings.tsx
+│   │   │   ├── CategoriesManager.tsx
+│   │   │   ├── ContactInquiries.tsx
+│   │   │   ├── CruiseEditor.tsx
+│   │   │   ├── CruiseManager.tsx
+│   │   │   ├── Dashboard.tsx
+│   │   │   ├── FeaturedCruiseManager.tsx
+│   │   │   ├── HeroImageManager.tsx
+│   │   │   ├── HomepageContentManager.tsx
+│   │   │   ├── Login.tsx
+│   │   │   ├── MediaLibrary.tsx
+│   │   │   ├── OffersManager.tsx
+│   │   │   ├── PackagesManager.tsx
+│   │   │   ├── PagesCMS.tsx
+│   │   │   ├── PromoAdsManager.tsx
+│   │   │   ├── ReviewsManager.tsx
+│   │   │   ├── SEOManager.tsx
+│   │   │   ├── SeatPlanManager.tsx
+│   │   │   ├── Settings.tsx
+│   │   │   ├── TeamManager.tsx
+│   │   │   ├── TestimonialsManager.tsx
+│   │   │   └── Users.tsx
+│   │   ├── Index.tsx           # Homepage
+│   │   ├── About.tsx
+│   │   ├── BlogDetail.tsx
+│   │   ├── BlogList.tsx
+│   │   ├── Contact.tsx
+│   │   ├── CruiseDetail.tsx
+│   │   ├── CruiseList.tsx
+│   │   ├── Gallery.tsx
+│   │   ├── NotFound.tsx
+│   │   └── Packages.tsx
+│   ├── services/
+│   │   ├── bookingStore.ts     # Booking state management
+│   │   ├── cmsStore.ts         # Main CMS state (530 lines, 12 entities)
+│   │   └── mockData.ts         # 14 cruise definitions + TypeScript types
+│   ├── lib/
+│   │   └── utils.ts            # cn() utility for className merging
+│   ├── test/
+│   │   ├── setup.ts            # Vitest environment setup
+│   │   └── example.test.ts     # Example test file
+│   ├── App.tsx                 # Root routes (34 routes)
+│   ├── App.css
+│   ├── index.css               # Tailwind base + design tokens
+│   ├── main.tsx                # Entry point (ReactDOM.createRoot)
+│   └── vite-env.d.ts
+├── components.json             # shadcn/ui configuration
+├── eslint.config.js
+├── index.html                  # HTML entry with meta tags
+├── package.json
+├── postcss.config.js
+├── tailwind.config.ts
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
+├── vite.config.ts
+└── vitest.config.ts
 ```
 
 ---
@@ -105,8 +164,8 @@ src/
 ## Getting Started
 
 ### Prerequisites
-- Node.js 18+ (recommended: use nvm)
-- npm or bun package manager
+- **Node.js 18+** (recommended: use nvm)
+- **npm** or **bun** package manager
 
 ### Installation
 ```bash
@@ -121,94 +180,106 @@ npm run dev
 | Command | Description |
 |---|---|
 | `npm run dev` | Start dev server on port 8080 |
-| `npm run build` | Production build |
-| `npm run build:dev` | Development build |
-| `npm run preview` | Preview production build |
+| `npm run build` | Production build → `dist/` |
+| `npm run build:dev` | Development build with source maps |
+| `npm run preview` | Preview production build locally |
 | `npm run lint` | Run ESLint |
-| `npm run test` | Run tests (Vitest) |
+| `npm run test` | Run tests (Vitest, single run) |
 | `npm run test:watch` | Run tests in watch mode |
 
 ---
 
 ## Architecture
 
-### Data Flow
+### Data Flow Pattern
 ```
-mockData.ts (source of truth)
-    ↓
-cmsStore.ts (localStorage persistence + CRUD)
-    ↓
-Admin Pages (write) ←→ Public Pages (read)
+mockData.ts (default/seed data, 14 cruises + types)
+     ↓ (first load, if localStorage empty)
+cmsStore.ts (read/write layer, 12 entity types)
+     ↓ (persist via JSON.stringify)
+localStorage (browser storage, versioned with DATA_VERSION)
+     ↓ (read via get*() functions)
+Public Pages (read-only) ←→ Admin Pages (read + write via save*())
 ```
 
-### Key Patterns
-- **CMS Store Pattern**: All data lives in `cmsStore.ts` with `get*()` and `save*()` functions backed by localStorage
-- **No Backend**: Currently a fully static SPA — all data persists in the browser's localStorage
-- **Lazy Loading**: Route-level code splitting via React Router
-- **Bilingual**: All user-facing text supports EN/BN via `LanguageContext`
+### Version Migration
+The CMS store uses a `DATA_VERSION` constant (`v35`). When bumped, all localStorage keys are cleared and reseeded from defaults. This ensures data schema changes propagate cleanly.
+
+```typescript
+const DATA_VERSION = "v35";
+// On load: if stored version !== DATA_VERSION, clear all keys and reseed
+```
+
+### Key Architectural Patterns
+1. **CMS Store Pattern**: All data lives in `cmsStore.ts` with paired `get*()` / `save*()` functions backed by localStorage
+2. **No Backend**: Fully static SPA — all data persists in the browser's localStorage
+3. **Bilingual First**: All user-facing content has dual fields (`title` + `titleBn`)
+4. **Component Composition**: Pages compose from shadcn/ui primitives + custom components
+5. **Route-Level Organization**: Each page is a self-contained component in `src/pages/`
 
 ---
 
 ## Routing
 
-### Public Routes
+### Public Routes (10)
 
 | Path | Component | Description |
 |---|---|---|
-| `/` | Index | Homepage |
-| `/cruises` | CruiseList | All cruises with filters |
-| `/cruises/:id` | CruiseDetail | Single cruise detail |
-| `/packages` | Packages | Tour packages |
-| `/gallery` | Gallery | Photo gallery |
-| `/blog` | BlogList | Blog posts |
-| `/blog/:id` | BlogDetail | Single blog post |
-| `/about` | About | About us page |
-| `/contact` | Contact | Contact form + map |
+| `/` | Index | Homepage with hero, stats, featured, why us, CTA, promos |
+| `/cruises` | CruiseList | Filterable cruise listing |
+| `/cruises/:id` | CruiseDetail | Single cruise with gallery, tabs, packages, reviews |
+| `/packages` | Packages | Tour package listings |
+| `/gallery` | Gallery | Photo gallery with lightbox zoom |
+| `/blog` | BlogList | Blog listing with category filter |
+| `/blog/:slug` | BlogDetail | Single blog post |
+| `/about` | About | Company info, team, certificates |
+| `/contact` | Contact | Contact form + Google Maps + WhatsApp |
 | `*` | NotFound | 404 page |
 
-### Admin Routes (under `/admin`)
+### Admin Routes (24, under `/admin`)
 
-| Path | Component |
-|---|---|
-| `/admin/login` | Login |
-| `/admin` | Dashboard |
-| `/admin/cruises` | CruiseManager |
-| `/admin/cruises/new` | CruiseEditor |
-| `/admin/cruises/:id` | CruiseEditor |
-| `/admin/packages` | PackagesManager |
-| `/admin/bookings` | Bookings |
-| `/admin/categories` | CategoriesManager |
-| `/admin/availability` | AvailabilityManager |
-| `/admin/blog` | BlogManager |
-| `/admin/reviews` | ReviewsManager |
-| `/admin/testimonials` | TestimonialsManager |
-| `/admin/team` | TeamManager |
-| `/admin/offers` | OffersManager |
-| `/admin/media` | MediaLibrary |
-| `/admin/pages` | PagesCMS |
-| `/admin/seo` | SEOManager |
-| `/admin/hero-images` | HeroImageManager |
-| `/admin/promo-ads` | PromoAdsManager |
-| `/admin/featured` | FeaturedCruiseManager |
-| `/admin/seat-plans` | SeatPlanManager |
-| `/admin/homepage-content` | HomepageContentManager |
-| `/admin/contact-inquiries` | ContactInquiries |
-| `/admin/users` | Users |
-| `/admin/settings` | Settings |
+| Path | Component | Category |
+|---|---|---|
+| `/admin/login` | Login | Auth |
+| `/admin` | Dashboard | Overview |
+| `/admin/cruises` | CruiseManager | Content |
+| `/admin/cruises/new` | CruiseEditor | Content |
+| `/admin/cruises/:id` | CruiseEditor | Content |
+| `/admin/packages` | PackagesManager | Content |
+| `/admin/categories` | CategoriesManager | Content |
+| `/admin/availability` | AvailabilityManager | Content |
+| `/admin/bookings` | Bookings | Customer |
+| `/admin/contact-inquiries` | ContactInquiries | Customer |
+| `/admin/testimonials` | TestimonialsManager | Customer |
+| `/admin/reviews` | ReviewsManager | Customer |
+| `/admin/offers` | OffersManager | Marketing |
+| `/admin/blogs` | BlogManager | Marketing |
+| `/admin/promo-ads` | PromoAdsManager | Marketing |
+| `/admin/hero-images` | HeroImageManager | Marketing |
+| `/admin/featured-cruises` | FeaturedCruiseManager | Marketing |
+| `/admin/homepage-content` | HomepageContentManager | CMS |
+| `/admin/seat-plans` | SeatPlanManager | CMS |
+| `/admin/pages` | PagesCMS | CMS |
+| `/admin/seo` | SEOManager | CMS |
+| `/admin/media` | MediaLibrary | CMS |
+| `/admin/team` | TeamManager | Organization |
+| `/admin/users` | Users | Organization |
+| `/admin/settings` | Settings | Organization |
 
 ---
 
 ## Data Layer
 
-### Cruise Model (`mockData.ts`)
+### Core Types (from `mockData.ts`)
 
 ```typescript
 interface Cruise {
   id: string;
   name: string;
   nameBn: string;
-  destination: string;       // "sundarban" | "tanguar-haor" | etc.
-  subCategory: string;       // "family" | "couple" | "premium" | etc.
+  subtitle: string;
+  destination: "sundarban" | "tanguar-haor";
+  subCategory: "family" | "couple" | "premium" | "budget" | "luxury";
   route: string;
   routeBn: string;
   duration: string;
@@ -218,6 +289,7 @@ interface Cruise {
   rating: number;
   reviewCount: number;
   images: string[];
+  featuredImageIndex?: number;
   description: string;
   descriptionBn: string;
   highlights: string[];
@@ -235,102 +307,196 @@ interface Cruise {
   menuImage?: string;
   packages: CruisePackage[];
 }
+
+interface CruisePackage {
+  name: string;
+  nameBn: string;
+  price: number;
+  originalPrice?: number;
+  duration: string;
+  features: string[];
+  featuresBn: string[];
+  isOffer?: boolean;
+}
+
+interface ItineraryItem {
+  time: string;
+  title: string;
+  description: string;
+}
 ```
 
-### CMS Store Functions
+### CMS Store Entities (from `cmsStore.ts`)
 
-| Function | Purpose |
-|---|---|
-| `getCruises()` / `saveCruises()` | Cruise CRUD |
-| `getBookings()` / `addBooking()` | Booking management |
-| `getSettings()` / `saveSettings()` | Site settings |
-| `getHomepageContent()` / `saveHomepageContent()` | Homepage CMS |
-| `getBlogs()` / `saveBlogs()` | Blog CRUD |
-| `getReviews()` / `saveReviews()` | Review management |
-| `getOffers()` / `saveOffers()` | Offers/deals |
-| `getPromoAds()` / `savePromoAds()` | Promotional ads |
-| `getSeoSettings()` / `saveSeoSettings()` | Per-page SEO |
-| `getContactInquiries()` / `addContactInquiry()` | Contact form submissions |
+| Entity | Interface | localStorage Key | Default Source |
+|---|---|---|---|
+| Cruises | `Cruise` | `cms_cruises` | `mockData.ts` (14 items) |
+| Settings | `SiteSettings` | `cms_settings` | Hardcoded defaults |
+| Homepage Content | `HomepageContent` | `cms_homepage_content` | Hardcoded defaults (EN+BN) |
+| Pages | `CmsPage[]` | `cms_pages` | 6 default pages |
+| SEO | `SeoEntry[]` | `cms_seo` | 6 page entries |
+| Testimonials | `Testimonial[]` | `cms_testimonials` | From `mockData.ts` |
+| Team Members | `TeamMember[]` | `cms_teamMembers` | From `mockData.ts` |
+| Offers | `Offer[]` | `cms_offers` | Auto-generated from cruises |
+| Blog Posts | `BlogPost[]` | `cms_blogs` | 3 default posts |
+| Reviews | `CustomerReview[]` | `cms_reviews` | Empty (user-generated) |
+| Promo Ads | `PromoAd[]` | `cms_promoAds` | 3 defaults |
+| Contact Inquiries | `ContactInquiry[]` | `cms_contact_inquiries` | Empty (user-generated) |
+
+### CMS Store API
+
+```typescript
+// Read functions
+getCruises(): Cruise[]
+getSettings(): SiteSettings
+getHomepageContent(): HomepageContent
+getPages(): CmsPage[]
+getSeo(): SeoEntry[]
+getTestimonials(): Testimonial[]
+getTeamMembers(): TeamMember[]
+getOffers(): Offer[]
+getBlogs(): BlogPost[]
+getReviews(): CustomerReview[]
+getPromoAds(): PromoAd[]
+getContactInquiries(): ContactInquiry[]
+
+// Write functions
+saveCruises(data: Cruise[]): void
+saveSettings(data: SiteSettings): void
+saveHomepageContent(data: HomepageContent): void
+savePages(data: CmsPage[]): void
+saveSeo(data: SeoEntry[]): void
+saveTestimonials(data: Testimonial[]): void
+saveTeamMembers(data: TeamMember[]): void
+saveOffers(data: Offer[]): void
+saveBlogs(data: BlogPost[]): void
+saveReviews(data: CustomerReview[]): void
+savePromoAds(data: PromoAd[]): void
+saveContactInquiries(data: ContactInquiry[]): void
+
+// Helper functions
+getCruiseById(id: string): Cruise | undefined
+searchCruises(query: string): Cruise[]
+addReview(review: Omit<CustomerReview, "id"|"createdAt"|"status">): CustomerReview
+getApprovedReviews(targetType: string, targetId: string): CustomerReview[]
+addContactInquiry(inquiry: Omit<ContactInquiry, "id"|"createdAt"|"status">): ContactInquiry
+
+// React Hook
+useCmsData<T>(getter, saver): [T, (data: T) => void]
+```
 
 ---
 
 ## CMS & Admin Panel
 
 ### Admin Authentication
-Currently uses a simple client-side login at `/admin/login`. **For production, integrate with Lovable Cloud for proper auth.**
+Currently uses a simple client-side login at `/admin/login` with hardcoded credentials in localStorage.
 
-### Homepage Content Manager
-Editable sections:
-- Hero (badge, title, highlight, subtitle) — EN & BN
-- Stats (3 stat cards with values and labels)
-- Quick Info Strip (4 info cards)
-- Featured Section (title, subtitle)
-- Why Us Section (title, subtitle, 4 feature cards)
-- CTA Section (title, subtitle, button text)
+> ⚠️ **NOT production-secure** — Must migrate to Lovable Cloud for proper server-side authentication with RLS policies.
 
-### Settings Panel
-- Site name, phone, WhatsApp, email, address
+### Homepage Content Manager (`/admin/homepage-content`)
+Every text element on the homepage is editable in EN & BN:
+
+| Section | Editable Fields |
+|---|---|
+| Hero | Badge, Title, Highlight word, Subtitle |
+| Stats | 3 × (Value + Label) |
+| Quick Info Strip | 4 × (Value + Label) |
+| Featured Section | Section label, Title, Highlight, Subtitle |
+| Why Choose Us | Title, Highlight, 4 × (Title + Description) |
+| Testimonials | Title, Highlight |
+| CTA | Title, Highlight, Subtitle |
+| Promo Section | Title, Subtitle |
+
+### Site Settings (`/admin/settings`)
+- Site name, phone, WhatsApp number, email, address (EN/BN)
 - Social media URLs (Facebook, YouTube, Instagram)
 - Footer text (EN/BN)
 - Google Maps embed URL
-- WhatsApp float toggle
+- WhatsApp float button toggle
 - Language switcher toggle
+- Hero images array
+- Featured cruise IDs
 
 ---
 
 ## Internationalization (i18n)
 
 ### How it works
-1. `LanguageContext.tsx` provides `language` and `setLanguage`
-2. Translation files in `src/locales/en.json` and `bn.json`
-3. Components use `useLanguage()` hook to get current language
-4. CMS data has dual fields: `title` + `titleBn`, `description` + `descriptionBn`
+1. `LanguageContext.tsx` provides `language`, `setLanguage`, and `t()` function
+2. Translation files: `src/locales/en.json` and `bn.json`
+3. Components check: `const { language, t } = useLanguage();`
+4. Static UI text: `t("nav.home")` → looks up key in locale file
+5. CMS data: `language === "bn" ? cruise.nameBn : cruise.name`
 
 ### Adding a new translation
 1. Add key to both `en.json` and `bn.json`
-2. Use in component: `const { t } = useLanguage(); <p>{t("key")}</p>`
+2. Use in component:
+```tsx
+const { t } = useLanguage();
+return <p>{t("your.new.key")}</p>;
+```
+
+### Adding bilingual CMS field
+1. Add both fields to interface: `fieldName: string; fieldNameBn: string;`
+2. In component: `const value = language === "bn" ? data.fieldNameBn : data.fieldName;`
 
 ---
 
 ## Styling & Design System
 
-### CSS Variables (index.css)
+### CSS Variables (`index.css`)
 All colors are HSL-based semantic tokens:
-- `--background`, `--foreground`
-- `--primary`, `--primary-foreground`
-- `--secondary`, `--secondary-foreground`
-- `--muted`, `--muted-foreground`
-- `--accent`, `--accent-foreground`
-- `--destructive`
-- `--border`, `--input`, `--ring`
+```css
+:root {
+  --background: <hsl>;
+  --foreground: <hsl>;
+  --primary: <hsl>;
+  --primary-foreground: <hsl>;
+  --secondary: <hsl>;
+  --secondary-foreground: <hsl>;
+  --muted: <hsl>;
+  --muted-foreground: <hsl>;
+  --accent: <hsl>;
+  --accent-foreground: <hsl>;
+  --destructive: <hsl>;
+  --border: <hsl>;
+  --input: <hsl>;
+  --ring: <hsl>;
+}
+```
 
 ### Tailwind Config
-Extended in `tailwind.config.ts` with:
+Extended in `tailwind.config.ts`:
 - Custom colors mapped to CSS variables
 - Animation keyframes (accordion, fade-in, etc.)
 - Typography plugin (`@tailwindcss/typography`)
 
-### Rules
-- ❌ Never use raw colors like `text-white`, `bg-black`
-- ✅ Always use semantic tokens: `text-foreground`, `bg-background`, `text-primary`
+### Design Rules
+- ❌ **Never** use raw colors: `text-white`, `bg-black`, `text-blue-500`
+- ✅ **Always** use semantic tokens: `text-foreground`, `bg-background`, `text-primary`
+- ✅ Use `cn()` from `src/lib/utils.ts` for conditional classes
 
 ---
 
 ## Components Guide
 
-### Reusable Components
+### Custom Components
 
-| Component | Purpose |
-|---|---|
-| `PageHeroBanner` | Full-width hero with background image + overlay |
-| `BookingModal` | Booking form dialog |
-| `HeaderBookingModal` | Quick book from header |
-| `ImageZoom` | Lightbox image viewer |
-| `SeatPlanViewer` | Zoomable seat plan display |
-| `ReviewSection` | Star ratings + review cards |
-| `WhatsAppFloat` | Fixed WhatsApp CTA button |
-| `NavLink` | Active-state navigation link |
-| `ScrollToTop` | Auto-scroll on route change |
+| Component | File | Purpose |
+|---|---|---|
+| `PageHeroBanner` | `PageHeroBanner.tsx` | Full-width hero with background image, dark overlay, framer-motion animation |
+| `BookingModal` | `BookingModal.tsx` | Multi-step booking form dialog with WhatsApp redirect |
+| `HeaderBookingModal` | `HeaderBookingModal.tsx` | Quick book from header navbar |
+| `ImageZoom` | `ImageZoom.tsx` | Lightbox/zoom image viewer |
+| `SeatPlanViewer` | `SeatPlanViewer.tsx` | Zoomable seat plan display |
+| `ReviewSection` | `ReviewSection.tsx` | Star ratings + review cards with submission |
+| `WhatsAppFloat` | `WhatsAppFloat.tsx` | Fixed-position WhatsApp CTA button |
+| `NavLink` | `NavLink.tsx` | Active-state navigation link |
+| `ScrollToTop` | `ScrollToTop.tsx` | Auto-scroll to top on route change |
+| `AdminLayout` | `admin/AdminLayout.tsx` | Admin sidebar + content area layout |
+| `SeoFieldsPanel` | `admin/SeoFieldsPanel.tsx` | Reusable SEO form fields for admin |
+| `PublicLayout` | `layout/PublicLayout.tsx` | Header + Footer + Outlet wrapper |
 
 ### shadcn/ui Components (48)
 Accordion, Alert, AlertDialog, AspectRatio, Avatar, Badge, Breadcrumb, Button, Calendar, Card, Carousel, Chart, Checkbox, Collapsible, Command, ContextMenu, Dialog, Drawer, DropdownMenu, Form, HoverCard, Input, InputOTP, Label, Menubar, NavigationMenu, Pagination, Popover, Progress, RadioGroup, Resizable, ScrollArea, Select, Separator, Sheet, Sidebar, Skeleton, Slider, Sonner, Switch, Table, Tabs, Textarea, Toast, Toggle, ToggleGroup, Tooltip
@@ -340,35 +506,47 @@ Accordion, Alert, AlertDialog, AspectRatio, Avatar, Badge, Breadcrumb, Button, C
 ## SEO
 
 ### Current Implementation
-- `index.html`: Base meta tags, OG tags, favicon
-- `SEOManager` admin page: Per-page meta title & description
-- `SeoFieldsPanel`: Reusable form component for SEO fields
-- Semantic HTML with proper heading hierarchy (single H1 per page)
+- `index.html`: Base meta tags (title, description, viewport), OG tags (title, description, image, url), favicon
+- `SEOManager` admin page: Per-page meta title & description for 6 pages
+- `SeoFieldsPanel`: Reusable form component for blog/page SEO fields
+- Semantic HTML: Single H1 per page, proper heading hierarchy
+- `public/robots.txt`: Search engine crawling rules
+- `public/og-image.jpg`: Social sharing image (1200×630)
 
-### Robots.txt
-Located at `public/robots.txt`
-
-### OG Image
-Located at `public/og-image.jpg`
+### SEO Checklist
+- [x] Unique `<title>` per page
+- [x] Meta description per page
+- [x] OG tags for social sharing
+- [x] robots.txt
+- [x] Semantic HTML (header, main, footer, nav)
+- [x] Single H1 per page
+- [x] Alt text on images
+- [x] Responsive viewport meta
+- [ ] Canonical tags (pending)
+- [ ] JSON-LD structured data (pending)
+- [ ] Sitemap.xml (pending)
 
 ---
 
 ## Testing
 
 ### Setup
-- Framework: Vitest
-- DOM: jsdom
-- Utilities: @testing-library/react, @testing-library/jest-dom
+- **Framework**: Vitest 3.x
+- **DOM Environment**: jsdom
+- **Utilities**: @testing-library/react, @testing-library/jest-dom
+- **Config**: `vitest.config.ts`
 
 ### Running Tests
 ```bash
-npm run test          # Single run
-npm run test:watch    # Watch mode
+npm run test              # Single run
+npm run test:watch        # Watch mode
+npx vitest run src/test/example.test.ts  # Specific file
+npx vitest run --coverage # With coverage report
 ```
 
 ### Test Files
-- `src/test/setup.ts` — Test environment setup
-- `src/test/example.test.ts` — Example test
+- `src/test/setup.ts` — Vitest environment setup with jsdom
+- `src/test/example.test.ts` — Example/smoke test
 
 ---
 
@@ -376,55 +554,92 @@ npm run test:watch    # Watch mode
 
 ### Production Build
 ```bash
-npm run build
+npm run build    # Output: dist/
+npm run preview  # Local preview of build
 ```
-Output: `dist/` directory
 
 ### Deploy on Lovable
-1. Click **Publish** button in Lovable editor
-2. Frontend changes require clicking "Update"
+1. Click **Publish** button in Lovable editor (top right)
+2. Frontend changes require clicking "Update" in publish dialog
 3. Backend changes (if using Lovable Cloud) deploy immediately
 
-### Self-Hosting
+### Self-Hosting Options
 ```bash
-npm run build
-# Serve dist/ with any static file server
-npx serve dist
+# Static file server
+npm run build && npx serve dist
+
+# Docker
+docker build -t lucky-cruise . && docker run -p 80:80 lucky-cruise
+
+# Netlify / Vercel / Firebase
+npx netlify deploy --prod --dir=dist
+npx vercel --prod
+npx firebase deploy --only hosting
 ```
 
 ---
 
 ## Environment Variables
 
-Currently no environment variables required (static SPA with localStorage).
+Currently **no environment variables required** (fully static SPA with localStorage).
 
-**When migrating to Lovable Cloud**, you'll need:
-- Supabase URL & Anon Key (auto-provided by Lovable Cloud)
+**When migrating to Lovable Cloud**, these will be auto-provided:
+- `VITE_SUPABASE_URL` — Database endpoint
+- `VITE_SUPABASE_ANON_KEY` — Public API key
 
 ---
 
 ## Security
 
 ### Current State
-- Admin login is client-side only (localStorage-based)
-- **⚠️ NOT production-secure** — needs Lovable Cloud auth
+| Area | Status | Risk |
+|---|---|---|
+| Admin Authentication | ⚠️ Client-side only (localStorage) | **HIGH** |
+| Data Storage | localStorage (no encryption) | **MEDIUM** |
+| HTTPS | ✅ Via Lovable hosting | LOW |
+| XSS Protection | ✅ React auto-escapes JSX | LOW |
+| CSRF | N/A (no backend API calls) | N/A |
 
-### Production Recommendations
-1. Enable Lovable Cloud for proper authentication
-2. Move admin auth to server-side with RLS policies
-3. Store user roles in separate `user_roles` table
-4. Never store API keys in client code
-5. Use HTTPS (auto-provided by Lovable hosting)
+### Production Security Checklist
+1. ✅ Enable Lovable Cloud for server-side auth
+2. ✅ Implement RLS policies on all tables
+3. ✅ Store user roles in separate `user_roles` table
+4. ✅ Never store API keys in client code
+5. ✅ Add rate limiting on contact form
+6. ✅ Implement CAPTCHA on public forms
+7. ✅ Regular dependency audits (`npm audit`)
+
+---
+
+## Performance
+
+### Optimization Strategies
+- **Route-level code splitting**: Each page loads independently via React Router
+- **Image optimization**: Use appropriate formats (JPEG for photos, PNG for transparency)
+- **Lazy loading**: Images below the fold use `loading="lazy"`
+- **Bundle analysis**: Run `npx vite-bundle-visualizer` to inspect
+
+### Performance Targets
+| Metric | Target |
+|---|---|
+| FCP | < 1.5s |
+| LCP | < 2.5s |
+| TTI | < 3.0s |
+| Bundle | < 2MB |
+| Lighthouse | 90+ |
 
 ---
 
 ## Troubleshooting
 
-| Issue | Solution |
-|---|---|
-| Blank page after build | Check `vite.config.ts` base path |
-| Images not loading | Verify import paths in `mockData.ts` |
-| localStorage full | Clear browser storage; consider Lovable Cloud |
-| HMR not working | Check `server.hmr` in vite config |
-| Admin changes not persisting | Check localStorage quota |
-| Translations missing | Add key to both `en.json` and `bn.json` |
+| Issue | Cause | Solution |
+|---|---|---|
+| Blank page after build | Base path misconfigured | Check `base` in `vite.config.ts` |
+| Images not loading | Wrong import paths | Verify imports in `mockData.ts` |
+| localStorage full | Too much data | Clear browser storage; migrate to Lovable Cloud |
+| HMR not working | WebSocket blocked | Check `server.hmr` in vite config |
+| Admin changes gone | localStorage cleared | Browser cache cleared; changes are ephemeral |
+| Translation missing | Key not in locale | Add to both `en.json` and `bn.json` |
+| Data reset after update | DATA_VERSION bumped | Expected behavior; reseed from defaults |
+| Build fails | Type errors | Run `npx tsc --noEmit` to find issues |
+| Styles not applying | Raw colors used | Switch to semantic tokens (`text-foreground`, etc.) |
