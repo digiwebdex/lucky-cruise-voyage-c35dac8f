@@ -44,7 +44,7 @@ const storage = multer.diskStorage({
     cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
-const upload = multer({ storage, limits: { fileSize: 10 * 1024 * 1024 } });
+const upload = multer({ storage, limits: { fileSize: 20 * 1024 * 1024 } });
 
 // ===== Auth Middleware =====
 const JWT_SECRET = process.env.JWT_SECRET || 'change-this-secret-in-production';
