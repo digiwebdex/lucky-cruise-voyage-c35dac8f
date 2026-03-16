@@ -486,7 +486,7 @@ export const savePromoAds = (data: PromoAd[]) => { setStore(KEYS.promoAds, data)
 
 // ===== Contact Inquiries =====
 export const getContactInquiries = (): ContactInquiry[] => getStore(KEYS.contactInquiries, []);
-export const saveContactInquiries = (data: ContactInquiry[]) => setStore(KEYS.contactInquiries, data);
+export const saveContactInquiries = (data: ContactInquiry[]) => { setStore(KEYS.contactInquiries, data); syncToApi('/api/inquiries', data); };
 
 export function addContactInquiry(inquiry: Omit<ContactInquiry, "id" | "createdAt" | "status">): ContactInquiry {
   const inquiries = getContactInquiries();
