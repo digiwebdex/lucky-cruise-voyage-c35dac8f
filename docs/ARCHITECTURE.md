@@ -1,0 +1,70 @@
+# 🏗️ Architecture — Lucky Cruise Voyage
+
+---
+
+## System Architecture
+
+```
+┌─────────────────────────────────────────────┐
+│                  Browser                     │
+│                                             │
+│  ┌──────────┐   ┌──────────┐   ┌─────────┐ │
+│  │  Public   │   │  Admin   │   │  Shared │ │
+│  │  Pages    │   │  Panel   │   │  UI     │ │
+│  │  (10)     │   │  (24)    │   │  (48)   │ │
+│  └────┬─────┘   └────┬─────┘   └────┬────┘ │
+│       │              │              │       │
+│  ┌────┴──────────────┴──────────────┴────┐  │
+│  │          React Router v6              │  │
+│  └────────────────┬──────────────────────┘  │
+│                   │                         │
+│  ┌────────────────┴──────────────────────┐  │
+│  │          CMS Store (cmsStore.ts)      │  │
+│  │     mockData.ts → localStorage        │  │
+│  └────────────────┬──────────────────────┘  │
+│                   │                         │
+│  ┌────────────────┴──────────────────────┐  │
+│  │           localStorage                │  │
+│  └───────────────────────────────────────┘  │
+└─────────────────────────────────────────────┘
+```
+
+## Component Hierarchy
+
+```
+App.tsx
+├── PublicLayout
+│   ├── Header (nav + language switcher + booking CTA)
+│   ├── <Outlet /> (page content)
+│   ├── Footer
+│   └── WhatsAppFloat
+└── AdminLayout
+    ├── Sidebar (navigation)
+    └── <Outlet /> (admin page content)
+```
+
+## Data Flow
+
+```
+mockData.ts (default data)
+     ↓ (first load)
+cmsStore.ts (read/write layer)
+     ↓ (persist)
+localStorage (browser storage)
+     ↓ (read)
+Public Pages ← CMS data → Admin Pages (write)
+```
+
+## Future Architecture (with Lovable Cloud)
+
+```
+┌─────────────┐     ┌──────────────┐     ┌─────────────┐
+│   Frontend   │────▶│  Edge Funcs   │────▶│  PostgreSQL │
+│   (React)    │◀────│  (Auth/API)   │◀────│  (Supabase) │
+└─────────────┘     └──────────────┘     └─────────────┘
+                           │
+                    ┌──────┴──────┐
+                    │   Storage   │
+                    │  (Images)   │
+                    └─────────────┘
+```
