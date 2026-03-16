@@ -27,7 +27,7 @@ function PackageCard({ pkg, i }: { pkg: any; i: number }) {
       <Card className={`border-border/50 hover:shadow-elevated transition-all duration-500 hover:-translate-y-2 h-full bg-card relative overflow-hidden ${pkg.isOffer ? "ring-2 ring-primary shadow-glow" : ""}`}>
         {/* Thumbnail */}
         {thumbSrc && (
-          <div className="relative w-full aspect-[16/9] overflow-hidden">
+          <div className="relative w-full aspect-square overflow-hidden">
             <img src={thumbSrc} alt={pkg.name} className="w-full h-full object-cover" />
             {/* Discount Badge */}
             {mainDiscount > 0 && (
