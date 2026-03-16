@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import {
   ArrowLeft, Clock, MapPin, Check, Users, DoorOpen, Ship,
   UtensilsCrossed, Shield, TreePine, Backpack, Calendar,
-  ChevronRight, Phone, Banknote, MapPinned, ChevronLeft, ZoomIn
+  ChevronRight, Phone, Banknote, MapPinned, ChevronLeft, ZoomIn, FileText, Landmark
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
