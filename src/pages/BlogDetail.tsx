@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Calendar, User, BookOpen, Tag } from "lucide-react";
+import { ArrowLeft, Calendar, User, BookOpen, Tag, Play } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -30,6 +30,13 @@ export default function BlogDetail() {
   }
 
   const relatedPosts = blogs.filter(b => b.id !== post.id && b.category === post.category).slice(0, 3);
+
+  const getYoutubeEmbedUrl = (url: string) => {
+    const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+    return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+  };
+
+  const embedUrl = post.youtubeUrl ? getYoutubeEmbedUrl(post.youtubeUrl) : null;
 
   return (
     <div>
@@ -64,6 +71,20 @@ export default function BlogDetail() {
             {post.coverImage && (
               <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ delay: 0.1 }}>
                 <img src={post.coverImage} alt={post.title} className="w-full rounded-xl mb-8 shadow-md" />
+              </motion.div>
+            )}
+
+            {embedUrl && (
+              <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ delay: 0.12 }} className="mb-8">
+                <div className="relative w-full rounded-xl overflow-hidden shadow-md" style={{ paddingBottom: "56.25%" }}>
+                  <iframe
+                    src={embedUrl}
+                    title={post.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full"
+                  />
+                </div>
               </motion.div>
             )}
 
