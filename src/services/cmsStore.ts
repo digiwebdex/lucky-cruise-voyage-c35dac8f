@@ -383,7 +383,7 @@ export const getTeamMembers = (): TeamMember[] => {
   const defaults = defaultTeamMembers.map((m, i) => ({ ...m, id: `team-${i}` }));
   return getStore(KEYS.teamMembers, defaults);
 };
-export const saveTeamMembers = (data: TeamMember[]) => setStore(KEYS.teamMembers, data);
+export const saveTeamMembers = (data: TeamMember[]) => { setStore(KEYS.teamMembers, data); syncToApi('/api/team', data); };
 
 // Seed default offers from cruises with isOffer packages
 function buildDefaultOffers(): Offer[] {
