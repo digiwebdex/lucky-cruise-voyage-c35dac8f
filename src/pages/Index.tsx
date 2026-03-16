@@ -264,13 +264,13 @@ export default function Index() {
         <div className="container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <div className="rounded-xl bg-card border border-border shadow-md p-4 sm:p-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 items-end">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-3 items-end">
                 {/* Tour Select */}
                 <div className="lg:col-span-1">
                   <label className="text-xs font-semibold text-muted-foreground mb-1 block">
                     {language === "bn" ? "ট্যুর নির্বাচন করুন" : "Select Tour"}
                   </label>
-                  <Select value={selectedTour} onValueChange={v => { setSelectedTour(v); setSelectedCruise(""); }}>
+                  <Select value={selectedTour} onValueChange={v => { setSelectedTour(v); setSelectedSubCat(""); setSelectedCruise(""); }}>
                     <SelectTrigger className="h-10 rounded-lg">
                       <SelectValue placeholder={language === "bn" ? "ট্যুর বাছুন" : "Choose tour"} />
                     </SelectTrigger>
@@ -281,7 +281,29 @@ export default function Index() {
                   </Select>
                 </div>
 
-                {/* Cruise Select (filtered by tour) */}
+                {/* Subcategory Select (only for Sundarban) */}
+                <div className="lg:col-span-1">
+                  <label className="text-xs font-semibold text-muted-foreground mb-1 block">
+                    {language === "bn" ? "ক্যাটাগরি" : "Category"}
+                  </label>
+                  <Select
+                    value={selectedSubCat}
+                    onValueChange={v => { setSelectedSubCat(v); setSelectedCruise(""); }}
+                    disabled={selectedTour !== "sundarban"}
+                  >
+                    <SelectTrigger className="h-10 rounded-lg">
+                      <SelectValue placeholder={language === "bn" ? "ক্যাটাগরি বাছুন" : "Choose category"} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">{language === "bn" ? "সকল" : "All"}</SelectItem>
+                      {sundarbanSubCategories.map(sc => (
+                        <SelectItem key={sc.value} value={sc.value}>{language === "bn" ? sc.labelBn : sc.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Cruise Select (filtered by tour + subcategory) */}
                 <div className="lg:col-span-1">
                   <label className="text-xs font-semibold text-muted-foreground mb-1 block">
                     {language === "bn" ? "ক্রুজ নির্বাচন করুন" : "Select Cruise"}
@@ -291,9 +313,12 @@ export default function Index() {
                       <SelectValue placeholder={language === "bn" ? "ক্রুজ বাছুন" : "Choose cruise"} />
                     </SelectTrigger>
                     <SelectContent>
-                      {(selectedTour ? cruises.filter(c => c.destination === selectedTour) : cruises).map(c => (
-                        <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
-                      ))}
+                      {cruises
+                        .filter(c => !selectedTour || c.destination === selectedTour)
+                        .filter(c => !selectedSubCat || selectedSubCat === "all" || c.subCategory === selectedSubCat)
+                        .map(c => (
+                          <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
+                        ))}
                     </SelectContent>
                   </Select>
                 </div>
