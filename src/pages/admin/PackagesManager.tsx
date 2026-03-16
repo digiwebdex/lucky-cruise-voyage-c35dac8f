@@ -112,6 +112,8 @@ export default function PackagesManager() {
       isOffer: form.isOffer,
       thumbnail: form.thumbnail || undefined,
       tripDates: form.tripDates.length > 0 ? form.tripDates.map(d => d.toISOString().split("T")[0]) : undefined,
+      offerDayLabel: form.offerDayLabel.trim() || undefined,
+      offerDateLabel: form.offerDateLabel.trim() || undefined,
     };
 
     const updated = cruises.map(c => {
