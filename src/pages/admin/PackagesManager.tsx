@@ -1,4 +1,6 @@
 import { useState, useRef } from "react";
+import { format } from "date-fns";
+import { bn } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -8,10 +10,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Pencil, Trash2, Save, Flame, Package, Percent, Upload, X } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Plus, Pencil, Trash2, Save, Flame, Package, Percent, Upload, X, CalendarDays } from "lucide-react";
 import { useCmsData, getCruises, saveCruises } from "@/services/cmsStore";
 import type { Cruise, Package as PackageType } from "@/services/mockData";
 import { toast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
 interface PackageRow extends PackageType {
   cruiseId: string;
