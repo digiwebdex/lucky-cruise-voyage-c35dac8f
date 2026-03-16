@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Ship, Package, Image, FileText, Search, Users, Settings, LogOut, Menu, X, ExternalLink, MessageSquare, UserCheck, Flame, ClipboardList, Tag, CalendarDays, BookOpen, Star, Megaphone, ImageIcon, Crown } from "lucide-react";
+import { LayoutDashboard, Ship, Package, Image, FileText, Search, Users, Settings, LogOut, Menu, X, ExternalLink, MessageSquare, UserCheck, Flame, ClipboardList, Tag, CalendarDays, BookOpen, Star, Megaphone, ImageIcon, Crown, Grid3X3, Home, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const sidebarLinks = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { to: "/admin/bookings", label: "Bookings", icon: ClipboardList },
+  { to: "/admin/contact-inquiries", label: "Contact Messages", icon: Mail },
   { to: "/admin/cruises", label: "Cruises", icon: Ship },
   { to: "/admin/packages", label: "Packages", icon: Package },
   { to: "/admin/categories", label: "Categories", icon: Tag },
@@ -18,8 +19,9 @@ const sidebarLinks = [
   { to: "/admin/team", label: "Team Members", icon: UserCheck },
   { to: "/admin/hero-images", label: "Hero Images", icon: ImageIcon },
   { to: "/admin/featured-cruises", label: "ফিচার্ড ক্রুজ", icon: Star },
+  { to: "/admin/homepage-content", label: "হোমপেজ কন্টেন্ট", icon: Home },
+  { to: "/admin/seat-plans", label: "Seat Plans", icon: Grid3X3 },
   { to: "/admin/media", label: "Gallery", icon: Image },
-  
   { to: "/admin/pages", label: "Pages CMS", icon: FileText },
   { to: "/admin/seo", label: "SEO Manager", icon: Search },
   { to: "/admin/users", label: "Users", icon: Users },
