@@ -39,6 +39,8 @@ export default function PackagesManager() {
     childPrice: "", childOldPrice: "",
     thumbnail: "",
     tripDates: [] as Date[],
+    offerDayLabel: "",
+    offerDateLabel: "",
   });
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -53,7 +55,7 @@ export default function PackagesManager() {
 
   const openNew = () => {
     setEditingPkg(null);
-    setForm({ name: "", duration: "", cruiseId: cruises[0]?.id || "", isOffer: false, adultPrice: "", adultOldPrice: "", childPrice: "", childOldPrice: "", thumbnail: "", tripDates: [] });
+    setForm({ name: "", duration: "", cruiseId: cruises[0]?.id || "", isOffer: false, adultPrice: "", adultOldPrice: "", childPrice: "", childOldPrice: "", thumbnail: "", tripDates: [], offerDayLabel: "", offerDateLabel: "" });
     setEditOpen(true);
   };
 
@@ -70,6 +72,8 @@ export default function PackagesManager() {
       childOldPrice: pkg.childOldPrice ? String(pkg.childOldPrice) : "",
       thumbnail: pkg.thumbnail || "",
       tripDates: (pkg.tripDates || []).map((d: string) => new Date(d)),
+      offerDayLabel: pkg.offerDayLabel || "",
+      offerDateLabel: pkg.offerDateLabel || "",
     });
     setEditOpen(true);
   };
@@ -108,6 +112,8 @@ export default function PackagesManager() {
       isOffer: form.isOffer,
       thumbnail: form.thumbnail || undefined,
       tripDates: form.tripDates.length > 0 ? form.tripDates.map(d => d.toISOString().split("T")[0]) : undefined,
+      offerDayLabel: form.offerDayLabel.trim() || undefined,
+      offerDateLabel: form.offerDateLabel.trim() || undefined,
     };
 
     const updated = cruises.map(c => {
@@ -375,10 +381,24 @@ export default function PackagesManager() {
               )}
             </div>
 
-            <div className="flex items-center gap-3">
-              <Switch checked={form.isOffer} onCheckedChange={v => setForm({ ...form, isOffer: v })} />
-              <Label>Mark as Offer</Label>
-              {form.isOffer && <Badge variant="destructive" className="gap-1 text-xs"><Flame className="h-3 w-3" /> Offer</Badge>}
+            {/* Offer Day & Date Labels */}
+            <div className="rounded-xl border border-border p-4 space-y-3">
+              <p className="font-display font-bold text-sm text-foreground flex items-center gap-2">
+                <Flame className="h-4 w-4 text-primary" /> অফার ও তারিখ সেটিংস
+              </p>
+              <div className="flex items-center gap-3">
+                <Switch checked={form.isOffer} onCheckedChange={v => setForm({ ...form, isOffer: v })} />
+                <Label>Mark as Offer</Label>
+                {form.isOffer && <Badge variant="destructive" className="gap-1 text-xs"><Flame className="h-3 w-3" /> Offer</Badge>}
+              </div>
+              <div className="space-y-1">
+                <Label className="text-xs">বার লেবেল (যেমন: শুক্র-শনি-রবি)</Label>
+                <Input value={form.offerDayLabel} onChange={e => setForm({ ...form, offerDayLabel: e.target.value })} placeholder="শুক্র-শনি-রবি" />
+              </div>
+              <div className="space-y-1">
+                <Label className="text-xs">তারিখ লেবেল (যেমন: ৪-৫-৬ এপ্রিল ২০২৬)</Label>
+                <Input value={form.offerDateLabel} onChange={e => setForm({ ...form, offerDateLabel: e.target.value })} placeholder="৪-৫-৬ এপ্রিল ২০২৬" />
+              </div>
             </div>
             <Button onClick={save} className="w-full gap-2"><Save className="h-4 w-4" /> {editingPkg ? "Update" : "Add"} Package</Button>
           </div>
