@@ -3,6 +3,7 @@ import { Phone, Mail, MapPin, Ship, ExternalLink, Award } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getSettings } from "@/services/cmsStore";
 import toasCertificate from "@/assets/toas-certificate.jpg";
+import logoImg from "@/assets/logo.png";
 import { useState } from "react";
 
 export default function Footer() {
@@ -30,11 +31,7 @@ export default function Footer() {
             {/* Brand */}
             <div className="lg:col-span-1">
               <div className="flex items-center gap-2 mb-4">
-                <Ship className="h-8 w-8 text-primary" />
-                <div>
-                  <h3 className="text-xl font-display font-bold text-primary">Lucky Tours</h3>
-                  <p className="text-xs text-secondary-foreground/50 font-medium -mt-0.5">& Travels</p>
-                </div>
+                <img src={logoImg} alt="Lucky Tours & Travels" className="h-12 w-auto" />
               </div>
               <p className="text-sm text-secondary-foreground/60 leading-relaxed">
                 {t.footer.tagline}
