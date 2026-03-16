@@ -751,11 +751,11 @@ export default function Index() {
         <div className="container text-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-secondary-foreground mb-4">
-              {t.cta.title}{" "}
-              <span className="text-primary">{t.cta.titleHighlight}</span>
+              {bn ? hc.ctaTitleBn : hc.ctaTitle}{" "}
+              <span className="text-primary">{bn ? hc.ctaHighlightBn : hc.ctaHighlight}</span>
             </h2>
             <p className="mx-auto max-w-lg text-sm sm:text-base text-secondary-foreground/60 mb-8">
-              {t.cta.subtitle}
+              {bn ? hc.ctaSubtitleBn : hc.ctaSubtitle}
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer">
