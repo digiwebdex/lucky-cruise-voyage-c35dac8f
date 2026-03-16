@@ -71,6 +71,7 @@ export interface BlogPost {
   excerpt: string;
   body: string;
   coverImage: string;
+  youtubeUrl?: string;
   author: string;
   publishedAt: string;
   isPublished: boolean;
