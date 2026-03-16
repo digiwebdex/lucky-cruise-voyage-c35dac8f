@@ -16,7 +16,7 @@ export default function PromoAdsManager() {
   const [cruises] = useCmsData(getCruises, saveCruises);
   const [editOpen, setEditOpen] = useState(false);
   const [editing, setEditing] = useState<PromoAd | null>(null);
-  const [form, setForm] = useState({ title: "", subtitle: "", image: "", linkedCruiseId: "", isActive: true });
+  const [form, setForm] = useState({ title: "", subtitle: "", dateLabel: "", image: "", linkedCruiseId: "", isActive: true });
 
   const openNew = () => {
     setEditing(null);

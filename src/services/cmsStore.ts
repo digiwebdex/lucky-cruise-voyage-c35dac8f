@@ -106,6 +106,7 @@ export interface PromoAd {
   id: string;
   title: string;
   subtitle?: string;
+  dateLabel?: string;
   image: string;
   linkedCruiseId: string;
   isActive: boolean;

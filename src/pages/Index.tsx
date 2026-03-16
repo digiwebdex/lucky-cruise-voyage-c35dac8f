@@ -270,50 +270,9 @@ export default function Index() {
         </div>
       </section>
 
-      {/* ============ PROMO ADS BANNER ============ */}
+      {/* ============ PROMO ADS / PACKAGES ============ */}
       {promoAds.length > 0 && (
-        <section className="py-6 md:py-10 bg-background">
-          <div className="container">
-            <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground text-center mb-6">প্রিমিয়াম অফার</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {promoAds.map((ad, i) => (
-                <motion.div
-                  key={ad.id}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={fadeUp}
-                  transition={{ delay: i * 0.1 }}
-                >
-                  <Link to={`/cruises/${ad.linkedCruiseId}`} className="group block">
-                    <div className="relative aspect-square overflow-hidden rounded-2xl border border-border shadow-sm hover:shadow-lg transition-all duration-300">
-                      <img
-                        src={ad.image}
-                        alt={ad.title}
-                        loading="lazy"
-                        draggable={false}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                      <div className="absolute top-3 left-3">
-                        <span className="bg-primary text-primary-foreground text-xs font-bold px-2.5 py-1 rounded-full shadow-md">
-                          {ad.title}
-                        </span>
-                      </div>
-                      {ad.subtitle && (
-                        <div className="absolute bottom-3 left-3 right-3">
-                          <p className="text-white text-sm font-semibold drop-shadow-lg leading-tight">
-                            {ad.subtitle}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <PromoPackagesSection promoAds={promoAds} cruises={cruises} />
       )}
 
       {/* ============ FEATURED CRUISES ============ */}
