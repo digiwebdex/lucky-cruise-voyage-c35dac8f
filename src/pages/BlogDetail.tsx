@@ -31,6 +31,13 @@ export default function BlogDetail() {
 
   const relatedPosts = blogs.filter(b => b.id !== post.id && b.category === post.category).slice(0, 3);
 
+  const getYoutubeEmbedUrl = (url: string) => {
+    const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+    return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+  };
+
+  const embedUrl = post.youtubeUrl ? getYoutubeEmbedUrl(post.youtubeUrl) : null;
+
   return (
     <div>
       {/* Hero */}
