@@ -52,12 +52,15 @@ export default function BlogManager() {
     setEditOpen(true);
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => setForm(f => ({ ...f, coverImage: reader.result as string }));
-    reader.readAsDataURL(file);
+    try {
+      const url = await uploadImage(file);
+      setForm(f => ({ ...f, coverImage: url }));
+    } catch (err) {
+      toast.error("Image upload failed");
+    }
   };
 
   const generateSlug = (title: string) =>
