@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getBlogs } from "@/services/cmsStore";
 import { useLanguage } from "@/contexts/LanguageContext";
+import PageHeroBanner from "@/components/PageHeroBanner";
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
