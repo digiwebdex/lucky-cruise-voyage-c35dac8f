@@ -10,7 +10,6 @@ export default function Footer() {
   const settings = getSettings();
   const [showCert, setShowCert] = useState(false);
   const address = lang === "bn" && settings.addressBn ? settings.addressBn : settings.address;
-  const address = lang === "bn" && settings.addressBn ? settings.addressBn : settings.address;
 
   const footerLinks = [
     { to: "/", label: t.footer.home },
