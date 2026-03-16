@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Plus, Trash2, Edit2, Save, X, Upload, Flame } from "lucide-react";
 import { useCmsData, getOffers, saveOffers, getCruises, type Offer } from "@/services/cmsStore";
 import { toast } from "@/hooks/use-toast";
+import { uploadImage } from "@/services/uploadHelper";
 
 export default function OffersManager() {
   const [offers, setOffers] = useCmsData(getOffers, saveOffers);
