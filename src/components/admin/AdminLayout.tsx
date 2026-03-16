@@ -17,6 +17,7 @@ const sidebarLinks = [
   { to: "/admin/testimonials", label: "Testimonials", icon: MessageSquare },
   { to: "/admin/team", label: "Team Members", icon: UserCheck },
   { to: "/admin/hero-images", label: "Hero Images", icon: ImageIcon },
+  { to: "/admin/featured-cruises", label: "ফিচার্ড ক্রুজ", icon: Star },
   { to: "/admin/media", label: "Gallery", icon: Image },
   
   { to: "/admin/pages", label: "Pages CMS", icon: FileText },
