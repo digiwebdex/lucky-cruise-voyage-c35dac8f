@@ -452,7 +452,7 @@ export const saveBlogs = (data: BlogPost[]) => { setStore(KEYS.blogs, data); syn
 
 // ===== Reviews =====
 export const getReviews = (): CustomerReview[] => getStore(KEYS.reviews, []);
-export const saveReviews = (data: CustomerReview[]) => setStore(KEYS.reviews, data);
+export const saveReviews = (data: CustomerReview[]) => { setStore(KEYS.reviews, data); syncToApi('/api/reviews', data); };
 
 export function addReview(review: Omit<CustomerReview, "id" | "createdAt" | "status">): CustomerReview {
   const reviews = getReviews();
