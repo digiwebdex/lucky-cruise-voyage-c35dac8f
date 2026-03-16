@@ -21,6 +21,7 @@ const emptyPost: Omit<BlogPost, "id"> = {
   excerpt: "",
   body: "",
   coverImage: "",
+  youtubeUrl: "",
   author: "Lucky Tours",
   publishedAt: new Date().toISOString(),
   isPublished: true,
