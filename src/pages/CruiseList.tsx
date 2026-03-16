@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { searchCruises } from "@/services/cmsStore";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { sundarbanSubCategories } from "@/services/mockData";
+import PageHeroBanner from "@/components/PageHeroBanner";
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 const scaleIn = { hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } };
@@ -50,10 +51,7 @@ export default function CruiseList() {
 
   return (
     <div>
-      <section className="gradient-hero py-16 md:py-20 text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyem0wLTRWMjhIMjR2MmgxMnptLTQtMjh2MmgtNHYtMmg0em0wIDR2MmgtNHYtMmg0em0tOCA4djJoLTR2LTJoNHptMCA0djJoLTR2LTJoNHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-50" />
-        <div className="container relative">
-          <motion.div initial="hidden" animate="visible" variants={fadeUp}>
+      <PageHeroBanner page="cruises">
             <h1 className="font-display text-4xl md:text-5xl font-black text-secondary-foreground">
               {destination === "all" ? (
                 <>{t.cruiseList.title} <span className="text-gradient">{t.cruiseList.titleHighlight}</span></>
@@ -120,9 +118,7 @@ export default function CruiseList() {
                 ))}
               </div>
             )}
-          </motion.div>
-        </div>
-      </section>
+      </PageHeroBanner>
 
       <section className="py-10">
         <div className="container">

@@ -6,6 +6,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { getCruises } from "@/services/cmsStore";
 import { useLanguage } from "@/contexts/LanguageContext";
+import PageHeroBanner from "@/components/PageHeroBanner";
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
@@ -29,16 +30,12 @@ export default function Gallery() {
 
   return (
     <div>
-      <section className="gradient-hero py-16 md:py-20 text-center relative overflow-hidden">
-        <div className="container relative">
-          <motion.div initial="hidden" animate="visible" variants={fadeUp}>
+      <PageHeroBanner page="gallery">
             <h1 className="font-display text-4xl md:text-5xl font-black text-secondary-foreground">
               {t.gallery.title} <span className="text-gradient">{t.gallery.titleHighlight}</span>
             </h1>
             <p className="mt-3 text-secondary-foreground/60 max-w-md mx-auto">{t.gallery.subtitle}</p>
-          </motion.div>
-        </div>
-      </section>
+      </PageHeroBanner>
 
       {/* Cruise Filter Tabs */}
       <section className="py-4 sm:py-6 border-b border-border sticky top-16 z-30 bg-background/95 backdrop-blur-md">
