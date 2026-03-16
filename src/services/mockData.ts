@@ -359,6 +359,8 @@ export interface Package {
   categoryId?: string;
   thumbnail?: string;
   tripDates?: string[]; // ISO date strings e.g. ["2026-04-02","2026-04-03","2026-04-04"]
+  offerDayLabel?: string; // e.g. "শুক্র-শনি-রবি"
+  offerDateLabel?: string; // e.g. "৪-৫-৬ এপ্রিল ২০২৬"
 }
 
 export type CruiseDestination = "sundarban" | "tanguar-haor";
