@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { cruises as defaultCruises, testimonials as defaultTestimonials, teamMembers as defaultTeamMembers, type Cruise } from "./mockData";
+import { syncToApi, syncPostToApi, isApiMode } from "./apiSync";
 
 // ===== Types =====
 export interface SiteSettings {
@@ -358,31 +359,31 @@ function setStore<T>(key: string, data: T): void {
 
 // ===== Public API =====
 export const getCruises = (): Cruise[] => getStore(KEYS.cruises, defaultCruises);
-export const saveCruises = (data: Cruise[]) => setStore(KEYS.cruises, data);
+export const saveCruises = (data: Cruise[]) => { setStore(KEYS.cruises, data); syncToApi('/api/cruises', data); };
 
 export const getSettings = (): SiteSettings => getStore(KEYS.settings, defaultSettings);
-export const saveSettings = (data: SiteSettings) => setStore(KEYS.settings, data);
+export const saveSettings = (data: SiteSettings) => { setStore(KEYS.settings, data); syncToApi('/api/settings', data); };
 
 export const getPages = (): CmsPage[] => getStore(KEYS.pages, defaultPages);
-export const savePages = (data: CmsPage[]) => setStore(KEYS.pages, data);
+export const savePages = (data: CmsPage[]) => { setStore(KEYS.pages, data); syncToApi('/api/pages', data); };
 
 export const getSeo = (): SeoEntry[] => getStore(KEYS.seo, defaultSeo);
-export const saveSeo = (data: SeoEntry[]) => setStore(KEYS.seo, data);
+export const saveSeo = (data: SeoEntry[]) => { setStore(KEYS.seo, data); syncToApi('/api/seo', data); };
 
 export const getHomepageContent = (): HomepageContent => getStore(KEYS.homepageContent, defaultHomepageContent);
-export const saveHomepageContent = (data: HomepageContent) => setStore(KEYS.homepageContent, data);
+export const saveHomepageContent = (data: HomepageContent) => { setStore(KEYS.homepageContent, data); syncToApi('/api/homepage-content', data); };
 
 export const getTestimonials = (): Testimonial[] => {
   const defaults = defaultTestimonials.map((t, i) => ({ ...t, id: `testimonial-${i}` }));
   return getStore(KEYS.testimonials, defaults);
 };
-export const saveTestimonials = (data: Testimonial[]) => setStore(KEYS.testimonials, data);
+export const saveTestimonials = (data: Testimonial[]) => { setStore(KEYS.testimonials, data); syncToApi('/api/testimonials', data); };
 
 export const getTeamMembers = (): TeamMember[] => {
   const defaults = defaultTeamMembers.map((m, i) => ({ ...m, id: `team-${i}` }));
   return getStore(KEYS.teamMembers, defaults);
 };
-export const saveTeamMembers = (data: TeamMember[]) => setStore(KEYS.teamMembers, data);
+export const saveTeamMembers = (data: TeamMember[]) => { setStore(KEYS.teamMembers, data); syncToApi('/api/team', data); };
 
 // Seed default offers from cruises with isOffer packages
 function buildDefaultOffers(): Offer[] {
@@ -400,7 +401,7 @@ function buildDefaultOffers(): Offer[] {
 }
 
 export const getOffers = (): Offer[] => getStore(KEYS.offers, buildDefaultOffers());
-export const saveOffers = (data: Offer[]) => setStore(KEYS.offers, data);
+export const saveOffers = (data: Offer[]) => { setStore(KEYS.offers, data); syncToApi('/api/offers', data); };
 
 // ===== Blog =====
 import blogTiger from "@/assets/blog/blog-tiger-sundarban.jpg";
@@ -447,11 +448,11 @@ const defaultBlogs: BlogPost[] = [
 ];
 
 export const getBlogs = (): BlogPost[] => getStore(KEYS.blogs, defaultBlogs);
-export const saveBlogs = (data: BlogPost[]) => setStore(KEYS.blogs, data);
+export const saveBlogs = (data: BlogPost[]) => { setStore(KEYS.blogs, data); syncToApi('/api/blogs', data); };
 
 // ===== Reviews =====
 export const getReviews = (): CustomerReview[] => getStore(KEYS.reviews, []);
-export const saveReviews = (data: CustomerReview[]) => setStore(KEYS.reviews, data);
+export const saveReviews = (data: CustomerReview[]) => { setStore(KEYS.reviews, data); syncToApi('/api/reviews', data); };
 
 export function addReview(review: Omit<CustomerReview, "id" | "createdAt" | "status">): CustomerReview {
   const reviews = getReviews();
@@ -481,11 +482,11 @@ const defaultPromoAds: PromoAd[] = [
 ];
 
 export const getPromoAds = (): PromoAd[] => getStore(KEYS.promoAds, defaultPromoAds);
-export const savePromoAds = (data: PromoAd[]) => setStore(KEYS.promoAds, data);
+export const savePromoAds = (data: PromoAd[]) => { setStore(KEYS.promoAds, data); syncToApi('/api/promo-ads', data); };
 
 // ===== Contact Inquiries =====
 export const getContactInquiries = (): ContactInquiry[] => getStore(KEYS.contactInquiries, []);
-export const saveContactInquiries = (data: ContactInquiry[]) => setStore(KEYS.contactInquiries, data);
+export const saveContactInquiries = (data: ContactInquiry[]) => { setStore(KEYS.contactInquiries, data); syncToApi('/api/inquiries', data); };
 
 export function addContactInquiry(inquiry: Omit<ContactInquiry, "id" | "createdAt" | "status">): ContactInquiry {
   const inquiries = getContactInquiries();

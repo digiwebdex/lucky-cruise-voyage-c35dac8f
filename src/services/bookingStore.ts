@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { syncToApi } from "./apiSync";
 
 // ===== Types =====
 export interface PackageCategory {
@@ -62,10 +63,10 @@ function setStore<T>(key: string, data: T): void {
 
 // ===== Public API =====
 export const getCategories = (): PackageCategory[] => getStore(KEYS.categories, defaultCategories);
-export const saveCategories = (data: PackageCategory[]) => setStore(KEYS.categories, data);
+export const saveCategories = (data: PackageCategory[]) => { setStore(KEYS.categories, data); syncToApi('/api/categories', data); };
 
 export const getAvailability = (): ShipAvailability[] => getStore(KEYS.availability, []);
-export const saveAvailability = (data: ShipAvailability[]) => setStore(KEYS.availability, data);
+export const saveAvailability = (data: ShipAvailability[]) => { setStore(KEYS.availability, data); syncToApi('/api/availability', data); };
 
 export const getAvailabilityForCruise = (cruiseId: string): string[] => {
   const all = getAvailability();
@@ -76,7 +77,7 @@ export const getAvailabilityForCruise = (cruiseId: string): string[] => {
 };
 
 export const getBookings = (): Booking[] => getStore(KEYS.bookings, []);
-export const saveBookings = (data: Booking[]) => setStore(KEYS.bookings, data);
+export const saveBookings = (data: Booking[]) => { setStore(KEYS.bookings, data); syncToApi('/api/bookings', data); };
 
 export const addBooking = (booking: Omit<Booking, "id" | "createdAt" | "status">): Booking => {
   const bookings = getBookings();
