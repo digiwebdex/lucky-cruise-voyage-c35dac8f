@@ -152,6 +152,7 @@ export default function Index() {
 
   // Quick booking bar state
   const [selectedTour, setSelectedTour] = useState("");
+  const [selectedSubCat, setSelectedSubCat] = useState("");
   const [selectedCruise, setSelectedCruise] = useState("");
   const [travelDate, setTravelDate] = useState<Date>();
   const [guests, setGuests] = useState("2");
