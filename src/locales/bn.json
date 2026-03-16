@@ -111,7 +111,18 @@
     "thingsToCarry": "যা সাথে নেবেন",
     "menuNote": "📝 গুরুত্বপূর্ণ তথ্য",
     "menuNoteText": "কর্পোরেট গ্রুপ বা বড় দল চাইলে মেনু কাস্টমাইজ করতে পারবেন। মৌসুম ও প্রাপ্যতা অনুযায়ী মেনু পরিবর্তন হতে পারে। বুকিংয়ের সময় মেনু নিশ্চিত করুন।",
-    "cruiseNotFound": "ক্রুজ পাওয়া যায়নি"
+    "cruiseNotFound": "ক্রুজ পাওয়া যায়নি",
+    "bookingPolicy": "বুকিং পলিসি",
+    "depositPayment": "ডিপোজিট ও পেমেন্ট",
+    "bkashMerchant": "বিকাশ মার্চেন্ট",
+    "accountName": "অ্যাকাউন্ট নাম",
+    "accountNo": "অ্যাকাউন্ট নং",
+    "branch": "শাখা",
+    "routingNumber": "রাউটিং নম্বর",
+    "cancellationPolicy": "বাতিলকরণ নীতিমালা",
+    "whenCancelled": "কখন বাতিল",
+    "individualBooking": "একক বুকিং",
+    "groupBooking": "গ্রুপ"
   },
   "packages": {
     "title": "ট্যুর",

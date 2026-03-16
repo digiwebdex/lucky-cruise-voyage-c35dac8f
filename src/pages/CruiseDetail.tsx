@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import {
   ArrowLeft, Clock, MapPin, Check, Users, DoorOpen, Ship,
   UtensilsCrossed, Shield, TreePine, Backpack, Calendar,
-  ChevronRight, Phone, Banknote, MapPinned, ChevronLeft, ZoomIn
+  ChevronRight, Phone, Banknote, MapPinned, ChevronLeft, ZoomIn, FileText, Landmark
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -115,11 +115,12 @@ export default function CruiseDetail() {
             )}
 
             <Tabs defaultValue="itinerary" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 bg-muted/50 rounded-xl h-10 sm:h-12 p-1">
+            <TabsList className="grid w-full grid-cols-5 bg-muted/50 rounded-xl h-10 sm:h-12 p-1">
                 <TabsTrigger value="itinerary" className="gap-1 sm:gap-1.5 text-[10px] sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4 hidden xs:block" /> {t.cruiseDetail.itinerary}</TabsTrigger>
                 <TabsTrigger value="menu" className="gap-1 sm:gap-1.5 text-[10px] sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><UtensilsCrossed className="h-3.5 w-3.5 sm:h-4 sm:w-4 hidden xs:block" /> {t.cruiseDetail.menu}</TabsTrigger>
                 <TabsTrigger value="safety" className="gap-1 sm:gap-1.5 text-[10px] sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><Shield className="h-3.5 w-3.5 sm:h-4 sm:w-4 hidden xs:block" /> {t.cruiseDetail.safety}</TabsTrigger>
                 <TabsTrigger value="tips" className="gap-1 sm:gap-1.5 text-[10px] sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><Backpack className="h-3.5 w-3.5 sm:h-4 sm:w-4 hidden xs:block" /> {t.cruiseDetail.tips}</TabsTrigger>
+                <TabsTrigger value="booking-policy" className="gap-1 sm:gap-1.5 text-[10px] sm:text-sm rounded-lg font-semibold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground"><FileText className="h-3.5 w-3.5 sm:h-4 sm:w-4 hidden xs:block" /> {t.cruiseDetail.bookingPolicy}</TabsTrigger>
               </TabsList>
 
               <TabsContent value="itinerary" className="mt-6 space-y-6">
@@ -222,6 +223,91 @@ export default function CruiseDetail() {
                     </CardContent>
                   </Card>
                 )}
+              </TabsContent>
+
+              <TabsContent value="booking-policy" className="mt-6 space-y-6">
+                {/* Deposit & Payment */}
+                <Card className="border-l-4 border-l-primary border-border/50 bg-card">
+                  <CardContent className="p-4 sm:p-6">
+                    <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                      <Banknote className="h-5 w-5 text-primary" /> {t.cruiseDetail.depositPayment}
+                    </h3>
+                    <div className="space-y-4">
+                      {/* Bkash */}
+                      <div className="rounded-xl bg-primary/5 border border-primary/15 p-4">
+                        <p className="font-display font-bold text-sm text-primary mb-1">📱 {t.cruiseDetail.bkashMerchant}</p>
+                        <p className="text-sm text-foreground font-semibold">+8801711-871072</p>
+                      </div>
+                      {/* Pubali Bank */}
+                      <div className="rounded-xl bg-muted/30 border border-border/30 p-4 space-y-1.5">
+                        <p className="font-display font-bold text-sm text-foreground flex items-center gap-2"><Landmark className="h-4 w-4 text-primary" /> Pubali Bank</p>
+                        <div className="grid grid-cols-2 gap-1 text-xs text-muted-foreground">
+                          <span>{t.cruiseDetail.accountName}:</span><span className="text-foreground font-medium">Lucky Tours And Travels</span>
+                          <span>{t.cruiseDetail.accountNo}:</span><span className="text-foreground font-medium">2852901036540</span>
+                          <span>{t.cruiseDetail.branch}:</span><span className="text-foreground font-medium">Sekh para Branch, Khulna</span>
+                          <span>{t.cruiseDetail.routingNumber}:</span><span className="text-foreground font-medium">175472471</span>
+                        </div>
+                      </div>
+                      {/* City Bank */}
+                      <div className="rounded-xl bg-muted/30 border border-border/30 p-4 space-y-1.5">
+                        <p className="font-display font-bold text-sm text-foreground flex items-center gap-2"><Landmark className="h-4 w-4 text-primary" /> City Bank</p>
+                        <div className="grid grid-cols-2 gap-1 text-xs text-muted-foreground">
+                          <span>{t.cruiseDetail.accountName}:</span><span className="text-foreground font-medium">Lucky Tours and Travels</span>
+                          <span>{t.cruiseDetail.accountNo}:</span><span className="text-foreground font-medium">1503089168001</span>
+                          <span>{t.cruiseDetail.branch}:</span><span className="text-foreground font-medium">Khulna</span>
+                          <span>{t.cruiseDetail.routingNumber}:</span><span className="text-foreground font-medium">225471548</span>
+                        </div>
+                      </div>
+                      {/* Bank Asia */}
+                      <div className="rounded-xl bg-muted/30 border border-border/30 p-4 space-y-1.5">
+                        <p className="font-display font-bold text-sm text-foreground flex items-center gap-2"><Landmark className="h-4 w-4 text-primary" /> Bank Asia</p>
+                        <div className="grid grid-cols-2 gap-1 text-xs text-muted-foreground">
+                          <span>{t.cruiseDetail.accountName}:</span><span className="text-foreground font-medium">Lucky Marine And Hardware Store</span>
+                          <span>{t.cruiseDetail.accountNo}:</span><span className="text-foreground font-medium">02533002831</span>
+                          <span>{t.cruiseDetail.branch}:</span><span className="text-foreground font-medium">Khulna Branch</span>
+                          <span>{t.cruiseDetail.routingNumber}:</span><span className="text-foreground font-medium">070471548</span>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Cancellation Policy */}
+                <Card className="border-l-4 border-l-destructive border-border/50 bg-card">
+                  <CardContent className="p-4 sm:p-6">
+                    <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                      <FileText className="h-5 w-5 text-destructive" /> {t.cruiseDetail.cancellationPolicy}
+                    </h3>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-sm">
+                        <thead>
+                          <tr className="border-b border-border">
+                            <th className="text-left py-2.5 px-3 text-xs font-bold text-foreground uppercase tracking-wider">{t.cruiseDetail.whenCancelled}</th>
+                            <th className="text-center py-2.5 px-3 text-xs font-bold text-foreground uppercase tracking-wider">{t.cruiseDetail.individualBooking}</th>
+                            <th className="text-center py-2.5 px-3 text-xs font-bold text-foreground uppercase tracking-wider">{t.cruiseDetail.groupBooking}</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-border/50">
+                          {[
+                            { period: "4 Weeks Before Tour Day", individual: "35%", group: "—" },
+                            { period: "3 Weeks Before Tour Day", individual: "50%", group: "50%" },
+                            { period: "2 Weeks Before Tour Day", individual: "70%", group: "80%" },
+                            { period: "1 Week Before Tour Day", individual: "80%", group: "90%" },
+                            { period: "3 Days Before Tour Day", individual: "90%", group: "100%" },
+                            { period: "48 Hours Before Tour Day", individual: "100%", group: "100%" },
+                            { period: "Less than 24 Hours", individual: "100%", group: "100%" },
+                          ].map((row, i) => (
+                            <tr key={i} className="hover:bg-muted/30 transition-colors">
+                              <td className="py-2.5 px-3 text-muted-foreground text-xs sm:text-sm">{row.period}</td>
+                              <td className="py-2.5 px-3 text-center font-semibold text-foreground">{row.individual}</td>
+                              <td className="py-2.5 px-3 text-center font-semibold text-foreground">{row.group}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </CardContent>
+                </Card>
               </TabsContent>
             </Tabs>
 

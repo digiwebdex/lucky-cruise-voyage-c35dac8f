@@ -111,7 +111,18 @@
     "thingsToCarry": "Things to Carry",
     "menuNote": "📝 Important Note",
     "menuNoteText": "Corporate groups or large parties can customize the menu. Menu items may change based on season and availability. Please confirm the menu during booking.",
-    "cruiseNotFound": "Cruise not found"
+    "cruiseNotFound": "Cruise not found",
+    "bookingPolicy": "Booking Policy",
+    "depositPayment": "Deposit & Payment",
+    "bkashMerchant": "Bkash Merchant",
+    "accountName": "Account Name",
+    "accountNo": "Account No",
+    "branch": "Branch",
+    "routingNumber": "Routing Number",
+    "cancellationPolicy": "Cancellation Policy",
+    "whenCancelled": "When Cancelled",
+    "individualBooking": "Individual",
+    "groupBooking": "Group"
   },
   "packages": {
     "title": "Tour",
