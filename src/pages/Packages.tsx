@@ -27,7 +27,7 @@ function PackageCard({ pkg, i }: { pkg: any; i: number }) {
       <Card className={`border-border/50 hover:shadow-elevated transition-all duration-500 hover:-translate-y-2 h-full bg-card relative overflow-hidden ${pkg.isOffer ? "ring-2 ring-primary shadow-glow" : ""}`}>
         {/* Thumbnail */}
         {thumbSrc && (
-          <div className="relative w-full aspect-[16/9] overflow-hidden">
+          <div className="relative w-full aspect-square overflow-hidden">
             <img src={thumbSrc} alt={pkg.name} className="w-full h-full object-cover" />
             {/* Discount Badge */}
             {mainDiscount > 0 && (
@@ -65,35 +65,12 @@ function PackageCard({ pkg, i }: { pkg: any; i: number }) {
           <h3 className="mt-3 font-display text-xl font-bold text-foreground">{pkg.name}</h3>
           <p className="mt-1 text-sm text-muted-foreground">{pkg.duration}</p>
 
-          <div className="mt-6 border-t border-border/50 pt-5 space-y-3">
-            {/* Adult Price */}
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Adult</span>
-              <div className="text-right">
-                {pkg.adultOldPrice && pkg.adultOldPrice > pkg.adultPrice && (
-                  <span className="text-sm font-medium text-muted-foreground line-through mr-2">৳{pkg.adultOldPrice.toLocaleString()}</span>
-                )}
-                <span className="text-xl font-display font-black text-primary">৳{pkg.adultPrice.toLocaleString()}</span>
-              </div>
-            </div>
-            {/* Child Price */}
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Child</span>
-              <div className="text-right">
-                {pkg.childOldPrice && pkg.childOldPrice > pkg.childPrice && (
-                  <span className="text-sm font-medium text-muted-foreground line-through mr-2">৳{pkg.childOldPrice.toLocaleString()}</span>
-                )}
-                <span className="text-xl font-display font-black text-primary">৳{pkg.childPrice.toLocaleString()}</span>
-              </div>
-            </div>
-
-            <div className="pt-3">
-              <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer">
-                <Button className="w-full gradient-primary text-primary-foreground font-bold rounded-xl gap-1">
-                  {t.packages.book} <ArrowRight className="h-4 w-4" />
-                </Button>
-              </a>
-            </div>
+          <div className="mt-6 border-t border-border/50 pt-5">
+            <Link to={`/cruises/${pkg.cruiseId}`}>
+              <Button className="w-full gradient-primary text-primary-foreground font-bold rounded-xl gap-1">
+                বিস্তারিত <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </CardContent>
       </Card>
