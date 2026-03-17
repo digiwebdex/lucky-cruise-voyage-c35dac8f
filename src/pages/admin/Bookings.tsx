@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ClipboardList, Users, Baby, Phone, Calendar, CheckCircle, XCircle, Clock, StickyNote, Eye } from "lucide-react";
+import { ClipboardList, Users, Baby, Phone, Calendar, CheckCircle, XCircle, Clock, StickyNote, Eye, Printer, Search, Filter } from "lucide-react";
 import { useBookingStore, getBookings, saveBookings, type Booking } from "@/services/bookingStore";
 import { format } from "date-fns";
 
@@ -14,46 +16,141 @@ const statusConfig = {
   cancelled: { label: "Cancelled", icon: XCircle, className: "bg-red-100 text-red-800 border-red-300" },
 };
 
+function printBookingsPDF(bookings: Booking[], title: string) {
+  const win = window.open("", "_blank");
+  if (!win) return;
+  const rows = bookings.map((b, i) => `
+    <tr>
+      <td>${i + 1}</td>
+      <td>${b.name}<br/><small>${b.phone}</small></td>
+      <td>${b.cruiseName}<br/><small>${b.packageName || "-"}</small></td>
+      <td>${b.travelDate}</td>
+      <td>${b.adults} Adult, ${b.children} Child</td>
+      <td>${b.status.charAt(0).toUpperCase() + b.status.slice(1)}</td>
+      <td>${format(new Date(b.createdAt), "MMM dd, yyyy HH:mm")}</td>
+    </tr>
+  `).join("");
+
+  win.document.write(`<!DOCTYPE html><html><head><title>${title}</title>
+    <style>
+      body{font-family:Arial,sans-serif;padding:20px;font-size:12px}
+      h2{color:#333;margin-bottom:4px}
+      .meta{color:#888;font-size:11px;margin-bottom:16px}
+      table{width:100%;border-collapse:collapse}
+      th,td{border:1px solid #ddd;padding:6px 8px;text-align:left}
+      th{background:#f5f5f5;font-weight:600}
+      small{color:#888}
+      @media print{body{padding:0}}
+    </style>
+  </head><body>
+    <h2>Lucky Tours & Travels — ${title}</h2>
+    <p class="meta">Generated: ${format(new Date(), "MMM dd, yyyy HH:mm")} | Total: ${bookings.length}</p>
+    <table>
+      <thead><tr><th>#</th><th>Customer</th><th>Cruise/Package</th><th>Travel Date</th><th>Guests</th><th>Status</th><th>Submitted</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  </body></html>`);
+  win.document.close();
+  setTimeout(() => win.print(), 300);
+}
+
 export default function Bookings() {
   const [bookings, setBookings] = useBookingStore(getBookings, saveBookings);
   const [filter, setFilter] = useState<string>("all");
+  const [search, setSearch] = useState("");
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
+  const [cruiseFilter, setCruiseFilter] = useState("all");
   const [selected, setSelected] = useState<Booking | null>(null);
 
-  const filtered = filter === "all" ? bookings : bookings.filter(b => b.status === filter);
+  const cruiseNames = useMemo(() => {
+    const names = new Set(bookings.map(b => b.cruiseName));
+    return Array.from(names).sort();
+  }, [bookings]);
+
+  const filtered = useMemo(() => {
+    let list = bookings;
+    if (filter !== "all") list = list.filter(b => b.status === filter);
+    if (cruiseFilter !== "all") list = list.filter(b => b.cruiseName === cruiseFilter);
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      list = list.filter(b => b.name.toLowerCase().includes(q) || b.phone.includes(q));
+    }
+    if (dateFrom) list = list.filter(b => b.travelDate >= dateFrom);
+    if (dateTo) list = list.filter(b => b.travelDate <= dateTo);
+    return list;
+  }, [bookings, filter, cruiseFilter, search, dateFrom, dateTo]);
 
   const updateStatus = (id: string, status: Booking["status"]) => {
     setBookings(bookings.map(b => b.id === id ? { ...b, status } : b));
     if (selected?.id === id) setSelected(prev => prev ? { ...prev, status } : null);
   };
 
+  const filterLabel = filter === "all" ? "All Bookings" : `${filter.charAt(0).toUpperCase() + filter.slice(1)} Bookings`;
+
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between flex-wrap gap-3">
+      <div className="mb-4 flex items-center justify-between flex-wrap gap-3">
         <h1 className="text-2xl font-bold text-secondary flex items-center gap-2">
           <ClipboardList className="h-6 w-6 text-primary" /> Bookings
         </h1>
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-muted-foreground">Filter:</span>
-          <Select value={filter} onValueChange={setFilter}>
-            <SelectTrigger className="w-[140px]">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All ({bookings.length})</SelectItem>
-              <SelectItem value="pending">Pending</SelectItem>
-              <SelectItem value="confirmed">Confirmed</SelectItem>
-              <SelectItem value="cancelled">Cancelled</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+        <Button variant="outline" size="sm" onClick={() => printBookingsPDF(filtered, filterLabel)} disabled={filtered.length === 0}>
+          <Printer className="h-4 w-4 mr-1" /> Print PDF
+        </Button>
       </div>
+
+      {/* Filters */}
+      <Card className="border-border mb-4">
+        <CardContent className="p-3">
+          <div className="flex flex-wrap items-end gap-3">
+            <div className="flex-1 min-w-[180px]">
+              <label className="text-xs text-muted-foreground mb-1 block"><Search className="h-3 w-3 inline mr-1" />Search</label>
+              <Input placeholder="Name or phone..." value={search} onChange={e => setSearch(e.target.value)} className="h-8 text-sm" />
+            </div>
+            <div className="min-w-[130px]">
+              <label className="text-xs text-muted-foreground mb-1 block"><Filter className="h-3 w-3 inline mr-1" />Status</label>
+              <Select value={filter} onValueChange={setFilter}>
+                <SelectTrigger className="h-8 text-sm"><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All ({bookings.length})</SelectItem>
+                  <SelectItem value="pending">Pending</SelectItem>
+                  <SelectItem value="confirmed">Confirmed</SelectItem>
+                  <SelectItem value="cancelled">Cancelled</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="min-w-[150px]">
+              <label className="text-xs text-muted-foreground mb-1 block">Cruise</label>
+              <Select value={cruiseFilter} onValueChange={setCruiseFilter}>
+                <SelectTrigger className="h-8 text-sm"><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Cruises</SelectItem>
+                  {cruiseNames.map(n => <SelectItem key={n} value={n}>{n}</SelectItem>)}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="min-w-[130px]">
+              <label className="text-xs text-muted-foreground mb-1 block">Date From</label>
+              <Input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} className="h-8 text-sm" />
+            </div>
+            <div className="min-w-[130px]">
+              <label className="text-xs text-muted-foreground mb-1 block">Date To</label>
+              <Input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} className="h-8 text-sm" />
+            </div>
+            {(search || filter !== "all" || cruiseFilter !== "all" || dateFrom || dateTo) && (
+              <Button variant="ghost" size="sm" className="h-8 text-xs" onClick={() => { setSearch(""); setFilter("all"); setCruiseFilter("all"); setDateFrom(""); setDateTo(""); }}>
+                Clear
+              </Button>
+            )}
+          </div>
+        </CardContent>
+      </Card>
 
       {filtered.length === 0 ? (
         <Card className="border-border">
           <CardContent className="p-8 text-center text-muted-foreground">
             <ClipboardList className="h-12 w-12 mx-auto mb-3 text-muted-foreground/40" />
-            <p>No bookings {filter !== "all" ? `with status "${filter}"` : "yet"}.</p>
-            <p className="text-sm mt-1">Bookings will appear here once customers submit the booking form.</p>
+            <p>No bookings found.</p>
           </CardContent>
         </Card>
       ) : (
@@ -129,6 +226,7 @@ export default function Bookings() {
 
       {bookings.length > 0 && (
         <div className="mt-4 flex gap-4 text-sm text-muted-foreground">
+          <span>Showing: {filtered.length}</span>
           <span>Total: {bookings.length}</span>
           <span>Pending: {bookings.filter(b => b.status === "pending").length}</span>
           <span>Confirmed: {bookings.filter(b => b.status === "confirmed").length}</span>
