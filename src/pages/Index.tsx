@@ -719,7 +719,7 @@ export default function Index() {
                           )}
                           <div className="absolute top-3 left-3">
                             <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold ${post.category === "tanguar-haor" ? "bg-emerald text-emerald-foreground" : "bg-primary text-primary-foreground"}`}>
-                              {post.category === "tanguar-haor" ? (language === "bn" ? "টাঙ্গুয়ার হাওর" : "Tanguar Haor") : (language === "bn" ? "সুন্দরবন" : "Sundarban")}
+                              {post.category === "tanguar-haor" ? t.blog.tanguarHaor : t.blog.sundarban}
                             </span>
                           </div>
                         </div>
