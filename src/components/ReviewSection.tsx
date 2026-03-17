@@ -151,7 +151,7 @@ export default function ReviewSection({ targetType, targetId, targetName }: Revi
               </div>
               <div className="flex gap-2">
                 <Button type="submit" disabled={submitting} className="gap-2 bg-primary text-primary-foreground">
-                  <Send className="h-4 w-4" /> Submit Review
+                  <Send className="h-4 w-4" /> {submitting ? t.review.submitting : t.review.submit}
                 </Button>
                 <Button type="button" variant="outline" onClick={() => setShowForm(false)}>Cancel</Button>
               </div>
