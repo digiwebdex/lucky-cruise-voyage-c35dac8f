@@ -481,12 +481,24 @@ export default function CruiseEditor() {
                   <Button variant="ghost" size="sm" className="text-xs gap-1 h-6 text-primary" onClick={() => updateField("packageIncludes", [...(form.packageIncludes || []), ""])}><Plus className="h-3 w-3" /> Add</Button>
                 </div>
 
-                {/* Info badges */}
+                {/* Info fields - Editable */}
                 <div className="pt-3 border-t border-border/30 space-y-2.5">
-                  <div className="flex items-center gap-2.5 text-xs text-muted-foreground"><MapPin className="h-4 w-4 text-primary" /> {form.route || "Route"}</div>
-                  <div className="flex items-center gap-2.5 text-xs text-muted-foreground"><Clock className="h-4 w-4 text-primary" /> {form.duration || "Duration"}</div>
-                  <div className="flex items-center gap-2.5 text-xs text-muted-foreground"><Users className="h-4 w-4 text-primary" /> {form.capacity || "Capacity"}</div>
-                  <div className="flex items-center gap-2.5 text-xs text-muted-foreground"><DoorOpen className="h-4 w-4 text-primary" /> {form.cabins || "Cabins"}</div>
+                  <div className="flex items-center gap-2.5 text-xs text-muted-foreground">
+                    <MapPin className="h-4 w-4 text-primary flex-shrink-0" />
+                    <Input value={form.route} onChange={e => updateField("route", e.target.value)} placeholder="Route (e.g. Khulna → Sundarban)" className="h-7 text-xs border-dashed" />
+                  </div>
+                  <div className="flex items-center gap-2.5 text-xs text-muted-foreground">
+                    <Clock className="h-4 w-4 text-primary flex-shrink-0" />
+                    <Input value={form.duration} onChange={e => updateField("duration", e.target.value)} placeholder="Duration (e.g. 3 Days / 2 Nights)" className="h-7 text-xs border-dashed" />
+                  </div>
+                  <div className="flex items-center gap-2.5 text-xs text-muted-foreground">
+                    <Users className="h-4 w-4 text-primary flex-shrink-0" />
+                    <Input value={form.capacity} onChange={e => updateField("capacity", e.target.value)} placeholder="Capacity (e.g. 40 Passengers)" className="h-7 text-xs border-dashed" />
+                  </div>
+                  <div className="flex items-center gap-2.5 text-xs text-muted-foreground">
+                    <DoorOpen className="h-4 w-4 text-primary flex-shrink-0" />
+                    <Input value={form.cabins} onChange={e => updateField("cabins", e.target.value)} placeholder="Cabins (e.g. 10 AC Cabins)" className="h-7 text-xs border-dashed" />
+                  </div>
                 </div>
               </CardContent>
             </Card>
