@@ -356,7 +356,7 @@ export default function Index() {
                 <div className="lg:col-span-1">
                   <label className="text-xs font-semibold text-muted-foreground mb-1 block">
                     <Users className="h-3 w-3 inline mr-1" />
-                    {language === "bn" ? "অতিথি" : "Guests"}
+                    {t.booking.guests}
                   </label>
                   <Input
                     type="number"
