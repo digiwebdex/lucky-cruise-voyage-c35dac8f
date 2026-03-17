@@ -399,7 +399,7 @@ export default function Index() {
                 return (
                   <div className="mt-4 pt-4 border-t border-border">
                     <p className="text-xs font-semibold text-muted-foreground mb-3">
-                      {language === "bn" ? `${filtered.length}টি ক্রুজ পাওয়া গেছে` : `${filtered.length} cruises found`}
+                      {filtered.length} {t.booking.cruisesFoundCount}
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                       {filtered.map(c => (
