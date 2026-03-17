@@ -69,7 +69,7 @@ export default function BlogList() {
                         )}
                         <div className="absolute top-3 left-3">
                           <Badge className={post.category === "tanguar-haor" ? "bg-emerald text-emerald-foreground" : "bg-primary text-primary-foreground"}>
-                            {post.category === "tanguar-haor" ? (lang === "bn" ? "টাঙ্গুয়ার হাওর" : "Tanguar Haor") : (lang === "bn" ? "সুন্দরবন" : "Sundarban")}
+                            {post.category === "tanguar-haor" ? t.blog.tanguarHaor : t.blog.sundarban}
                           </Badge>
                         </div>
                       </div>

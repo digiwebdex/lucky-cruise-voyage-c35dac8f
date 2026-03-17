@@ -122,7 +122,7 @@ export default function BlogDetail() {
             <div className="mt-14 max-w-3xl mx-auto">
               <h3 className="font-display font-bold text-xl text-foreground mb-6 flex items-center gap-2">
                 <BookOpen className="h-5 w-5 text-primary" />
-                {lang === "bn" ? "সম্পর্কিত পোস্ট" : "Related Posts"}
+                {t.blog.relatedPosts}
               </h3>
               <div className="grid gap-4 sm:grid-cols-3">
                 {relatedPosts.map(rp => (
