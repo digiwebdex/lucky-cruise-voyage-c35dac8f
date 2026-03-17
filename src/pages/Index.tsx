@@ -697,7 +697,7 @@ export default function Index() {
                   <BookOpen className="h-3.5 w-3.5" /> {t.blog.label}
                 </span>
                 <h2 className="mt-2 font-display text-2xl sm:text-3xl md:text-4xl font-black text-foreground">
-                  {language === "bn" ? "ভ্রমণ গল্প ও " : "Travel Stories & "}<span className="text-primary">{language === "bn" ? "গাইড" : "Guides"}</span>
+                   {t.blog.title}<span className="text-primary">{t.blog.titleHighlight}</span>
                 </h2>
                 <p className="mt-2 text-muted-foreground text-sm max-w-md mx-auto">
                   {language === "bn" ? "আমাদের সর্বশেষ ভ্রমণ টিপস এবং গাইড পড়ুন" : "Read our latest travel tips and guides"}
