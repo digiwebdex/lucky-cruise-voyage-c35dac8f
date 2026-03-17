@@ -331,7 +331,7 @@ export default function Index() {
                 {/* Date */}
                 <div className="lg:col-span-1">
                   <label className="text-xs font-semibold text-muted-foreground mb-1 block">
-                    {language === "bn" ? "তারিখ" : "Travel Date"}
+                    {t.booking.travelDateLabel}
                   </label>
                   <Popover>
                     <PopoverTrigger asChild>
