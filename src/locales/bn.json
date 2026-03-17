@@ -87,7 +87,8 @@
     "priceLowHigh": "মূল্য: কম → বেশি",
     "priceHighLow": "মূল্য: বেশি → কম",
     "name": "নাম",
-    "cruisesFound": "টি ক্রুজ পাওয়া গেছে"
+    "cruisesFound": "টি ক্রুজ পাওয়া গেছে",
+    "allSubCat": "সকল"
   },
   "cruiseDetail": {
     "backToCruises": "ক্রুজে ফিরুন",
@@ -122,7 +123,16 @@
     "cancellationPolicy": "বাতিলকরণ নীতিমালা",
     "whenCancelled": "কখন বাতিল",
     "individualBooking": "একক বুকিং",
-    "groupBooking": "গ্রুপ"
+    "groupBooking": "গ্রুপ",
+    "adult": "প্রাপ্তবয়স্ক",
+    "child": "শিশু",
+    "cancel4Weeks": "ট্যুরের ৪ সপ্তাহ আগে",
+    "cancel3Weeks": "ট্যুরের ৩ সপ্তাহ আগে",
+    "cancel2Weeks": "ট্যুরের ২ সপ্তাহ আগে",
+    "cancel1Week": "ট্যুরের ১ সপ্তাহ আগে",
+    "cancel3Days": "ট্যুরের ৩ দিন আগে",
+    "cancel48Hours": "ট্যুরের ৪৮ ঘন্টা আগে",
+    "cancelLess24": "২৪ ঘন্টার কম"
   },
   "packages": {
     "title": "ট্যুর",
@@ -133,12 +143,22 @@
     "requestPackage": "প্যাকেজ অনুরোধ",
     "viewCruises": "ক্রুজ দেখুন",
     "book": "বুক",
-    "perPerson": "প্রতি জন"
+    "perPerson": "প্রতি জন",
+    "offerBadge": "অফার",
+    "weeklyOffer": "সাপ্তাহিক অফার প্যাকেজ",
+    "runningOffers": "চলমান",
+    "runningOffersHighlight": "অফারসমূহ",
+    "limitedTimeOffer": "সীমিত সময়ের জন্য বিশেষ ছাড়ে আমাদের প্যাকেজ বুক করুন",
+    "allPackages": "সকল",
+    "allPackagesHighlight": "প্যাকেজ",
+    "viewDetails": "বিস্তারিত"
   },
   "gallery": {
     "title": "ফটো",
     "titleHighlight": "গ্যালারি",
-    "subtitle": "আমাদের সুন্দরবন অ্যাডভেঞ্চার থেকে ধরা মুহূর্ত"
+    "subtitle": "আমাদের সুন্দরবন অ্যাডভেঞ্চার থেকে ধরা মুহূর্ত",
+    "allCruises": "সব ক্রুজ",
+    "photos": "টি ছবি"
   },
   "about": {
     "since": "২০১০ সাল থেকে",
@@ -181,7 +201,8 @@
     "yourEmail": "আপনার ইমেইল",
     "messageLabel": "মেসেজ",
     "messagePlaceholder": "আপনার স্বপ্নের সুন্দরবন ট্রিপ সম্পর্কে বলুন...",
-    "sendViaWhatsApp": "হোয়াটসঅ্যাপে পাঠান"
+    "sendViaWhatsApp": "হোয়াটসঅ্যাপে পাঠান",
+    "messageSent": "আপনার মেসেজ পাঠানো হয়েছে!"
   },
   "booking": {
     "bookCruise": "বুক করুন:",
@@ -198,7 +219,20 @@
     "selectSeatType": "সিটের ধরন বেছে নিন",
     "ac": "এসি",
     "nonAc": "নন এসি",
-    "submitBook": "জমা দিন ও হোয়াটসঅ্যাপে বুক করুন"
+    "submitBook": "জমা দিন ও হোয়াটসঅ্যাপে বুক করুন",
+    "selectTour": "ট্যুর নির্বাচন করুন",
+    "chooseTour": "ট্যুর বাছুন",
+    "category": "ক্যাটাগরি",
+    "chooseCategory": "ক্যাটাগরি বাছুন",
+    "all": "সকল",
+    "selectCruise": "ক্রুজ নির্বাচন করুন",
+    "chooseCruise": "ক্রুজ বাছুন",
+    "travelDateLabel": "তারিখ",
+    "pickDateShort": "তারিখ বাছুন",
+    "guests": "অতিথি",
+    "cruisesFoundCount": "টি ক্রুজ পাওয়া গেছে",
+    "bookNowBtn": "বুক করুন",
+    "whatsappInquiry": "আমি ক্রুজ সম্পর্কে জানতে চাই"
   },
   "footer": {
     "tagline": "বাংলাদেশে আপনার বিশ্বস্ত ক্রুজ ট্যুর সঙ্গী। নদী, উপকূল এবং মহিমান্বিত সুন্দরবন অন্বেষণ করুন আমাদের সাথে।",
@@ -214,7 +248,9 @@
     "everyday": "প্রতিদিন",
     "alwaysOpen": "২৪/৭ খোলা",
     "allRights": "সকল স্বত্ব সংরক্ষিত।",
-    "designBy": "ডিজাইন ও ডেভেলপড"
+    "designBy": "ডিজাইন ও ডেভেলপড",
+    "toasCertified": "TOAS সার্টিফাইড",
+    "toasMember": "টুর অপারেটর অ্যাসোসিয়েশন অফ সুন্দরবন এর সদস্য"
   },
   "common": {
     "perPerson": "প্রতি জন"
@@ -225,5 +261,43 @@
     "titleHighlight": "অফারসমূহ",
     "subtitle": "আমাদের সর্বশেষ ক্রুজ ডিল এবং বিশেষ প্যাকেজ মিস করবেন না",
     "offerBadge": "অফার"
+  },
+  "blog": {
+    "label": "ব্লগ",
+    "title": "ভ্রমণ গল্প ও ",
+    "titleHighlight": "গাইড",
+    "subtitle": "সুন্দরবন ও টাঙ্গুয়ার হাওর সম্পর্কে আমাদের ভ্রমণ টিপস, গাইড ও গল্প পড়ুন",
+    "all": "সব",
+    "sundarban": "সুন্দরবন",
+    "tanguarHaor": "টাঙ্গুয়ার হাওর",
+    "noPostsFound": "কোনো ব্লগ পোস্ট পাওয়া যায়নি",
+    "postNotFound": "পোস্ট পাওয়া যায়নি",
+    "backToBlog": "ব্লগে ফিরুন",
+    "allBlogs": "সব ব্লগ",
+    "wantToGo": "এই ভ্রমণে যেতে চান?",
+    "contactAndBook": "আমাদের সাথে যোগাযোগ করুন এবং আজই বুকিং করুন",
+    "exploreCruises": "ক্রুজ দেখুন",
+    "whatsappUs": "হোয়াটসঅ্যাপে মেসেজ করুন",
+    "relatedPosts": "সম্পর্কিত পোস্ট",
+    "readLatest": "আমাদের সর্বশেষ ভ্রমণ টিপস এবং গাইড পড়ুন",
+    "viewAll": "সব ব্লগ দেখুন"
+  },
+  "review": {
+    "customerReviews": "গ্রাহক রিভিউ",
+    "reviews": "টি রিভিউ",
+    "noReviews": "এখনও কোনো রিভিউ নেই। প্রথম রিভিউ দিন!",
+    "writeReview": "রিভিউ লিখুন",
+    "yourName": "আপনার নাম",
+    "yourEmail": "আপনার ইমেইল (ঐচ্ছিক)",
+    "yourReview": "আপনার রিভিউ লিখুন...",
+    "submit": "রিভিউ জমা দিন",
+    "submitting": "জমা দেওয়া হচ্ছে...",
+    "thankYou": "রিভিউয়ের জন্য ধন্যবাদ! অনুমোদনের পর দেখানো হবে।",
+    "nameRequired": "নাম ও রিভিউ আবশ্যক",
+    "inputTooLong": "ইনপুট খুব বড়",
+    "verified": "যাচাইকৃত"
+  },
+  "whatsapp": {
+    "tooltip": "হোয়াটসঅ্যাপে যোগাযোগ করুন"
   }
 }

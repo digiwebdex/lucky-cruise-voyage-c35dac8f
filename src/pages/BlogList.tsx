@@ -12,7 +12,7 @@ import PageHeroBanner from "@/components/PageHeroBanner";
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
 export default function BlogList() {
-  const { lang } = useLanguage();
+  const { lang, t } = useLanguage();
   const allBlogs = getBlogs().filter(b => b.isPublished);
   const [filter, setFilter] = useState<"all" | "sundarban" | "tanguar-haor">("all");
 
@@ -25,14 +25,14 @@ export default function BlogList() {
     <div>
       <PageHeroBanner page="blog">
             <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary mb-3">
-              <BookOpen className="h-3.5 w-3.5" /> {lang === "bn" ? "ব্লগ" : "Blog"}
+               <BookOpen className="h-3.5 w-3.5" /> {t.blog.label}
             </span>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-secondary-foreground">
-              {lang === "bn" ? "ভ্রমণ গল্প ও " : "Travel Stories & "}
-              <span className="text-primary">{lang === "bn" ? "গাইড" : "Guides"}</span>
+              {t.blog.title}
+              <span className="text-primary">{t.blog.titleHighlight}</span>
             </h1>
             <p className="mt-3 text-secondary-foreground/60 text-sm max-w-md mx-auto">
-              {lang === "bn" ? "সুন্দরবন ও টাঙ্গুয়ার হাওর সম্পর্কে আমাদের ভ্রমণ টিপস, গাইড ও গল্প পড়ুন" : "Read our travel tips, guides and stories about Sundarban & Tanguar Haor"}
+              {t.blog.subtitle}
             </p>
       </PageHeroBanner>
 
@@ -42,16 +42,16 @@ export default function BlogList() {
           <div className="flex justify-center mb-8">
             <Tabs value={filter} onValueChange={v => setFilter(v as typeof filter)}>
               <TabsList className="bg-muted/50">
-                <TabsTrigger value="all" className="gap-1.5"><Filter className="h-3 w-3" /> {lang === "bn" ? "সব" : "All"}</TabsTrigger>
-                <TabsTrigger value="sundarban">{lang === "bn" ? "সুন্দরবন" : "Sundarban"}</TabsTrigger>
-                <TabsTrigger value="tanguar-haor">{lang === "bn" ? "টাঙ্গুয়ার হাওর" : "Tanguar Haor"}</TabsTrigger>
+                <TabsTrigger value="all" className="gap-1.5"><Filter className="h-3 w-3" /> {t.blog.all}</TabsTrigger>
+                <TabsTrigger value="sundarban">{t.blog.sundarban}</TabsTrigger>
+                <TabsTrigger value="tanguar-haor">{t.blog.tanguarHaor}</TabsTrigger>
               </TabsList>
             </Tabs>
           </div>
 
           {filtered.length === 0 ? (
             <p className="text-center text-muted-foreground py-12">
-              {lang === "bn" ? "কোনো ব্লগ পোস্ট পাওয়া যায়নি" : "No blog posts found"}
+              {t.blog.noPostsFound}
             </p>
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -69,7 +69,7 @@ export default function BlogList() {
                         )}
                         <div className="absolute top-3 left-3">
                           <Badge className={post.category === "tanguar-haor" ? "bg-emerald text-emerald-foreground" : "bg-primary text-primary-foreground"}>
-                            {post.category === "tanguar-haor" ? (lang === "bn" ? "টাঙ্গুয়ার হাওর" : "Tanguar Haor") : (lang === "bn" ? "সুন্দরবন" : "Sundarban")}
+                            {post.category === "tanguar-haor" ? t.blog.tanguarHaor : t.blog.sundarban}
                           </Badge>
                         </div>
                       </div>

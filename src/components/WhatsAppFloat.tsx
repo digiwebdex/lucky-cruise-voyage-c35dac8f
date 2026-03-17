@@ -1,8 +1,10 @@
 import { MessageCircle, ArrowUp } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function WhatsAppFloat() {
   const [showTop, setShowTop] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const onScroll = () => setShowTop(window.scrollY > 400);
@@ -12,7 +14,6 @@ export default function WhatsAppFloat() {
 
   return (
     <>
-      {/* WhatsApp - Left side */}
       <a
         href="https://wa.me/8801711871072"
         target="_blank"
@@ -23,11 +24,9 @@ export default function WhatsAppFloat() {
       >
         <MessageCircle className="h-7 w-7 text-white" />
         <span className="absolute left-[72px] whitespace-nowrap rounded-lg bg-[#25D366] px-3 py-2 text-sm font-semibold text-white shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-          Please contact with WhatsApp
+          {t.whatsapp.tooltip}
         </span>
       </a>
-
-      {/* Back to Top - Right side */}
       {showTop && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}

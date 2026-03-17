@@ -15,7 +15,7 @@ const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 const scaleIn = { hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } };
 
 export default function CruiseList() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [searchParams, setSearchParams] = useSearchParams();
   const destination = searchParams.get("destination") || "all";
   const [query, setQuery] = useState("");
@@ -101,7 +101,7 @@ export default function CruiseList() {
                       : "bg-secondary-foreground/5 text-secondary-foreground/60 hover:bg-secondary-foreground/10 border border-transparent"
                   }`}
                 >
-                  সকল
+                  {t.cruiseList.allSubCat}
                 </button>
                 {sundarbanSubCategories.map(sc => (
                   <button
@@ -113,7 +113,7 @@ export default function CruiseList() {
                         : "bg-secondary-foreground/5 text-secondary-foreground/60 hover:bg-secondary-foreground/10 border border-transparent"
                     }`}
                   >
-                    {sc.labelBn}
+                    {lang === "bn" ? sc.labelBn : sc.label}
                   </button>
                 ))}
               </div>
@@ -189,7 +189,7 @@ export default function CruiseList() {
                         </div>
                       </div>
                       <a
-                        href={`https://wa.me/8801711871072?text=${encodeURIComponent(`আমি ${cruise.name} সম্পর্কে জানতে চাই`)}`}
+                        href={`https://wa.me/8801711871072?text=${encodeURIComponent(`${t.booking?.whatsappInquiry || "I want to book a cruise"} - ${cruise.name}`)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}

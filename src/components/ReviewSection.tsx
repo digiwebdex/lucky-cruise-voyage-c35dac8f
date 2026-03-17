@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { addReview, getApprovedReviews, type CustomerReview } from "@/services/cmsStore";
 import { toast } from "sonner";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ReviewSectionProps {
   targetType: "cruise" | "blog";
@@ -36,6 +37,7 @@ function StarRating({ rating, onChange, size = "md" }: { rating: number; onChang
 }
 
 export default function ReviewSection({ targetType, targetId, targetName }: ReviewSectionProps) {
+  const { t, lang } = useLanguage();
   const [reviews, setReviews] = useState(() => getApprovedReviews(targetType, targetId));
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", rating: 5, comment: "" });
@@ -48,11 +50,11 @@ export default function ReviewSection({ targetType, targetId, targetName }: Revi
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name.trim() || !form.comment.trim()) {
-      toast.error("Name and comment are required");
+      toast.error(t.review.nameRequired);
       return;
     }
     if (form.name.length > 100 || form.comment.length > 1000) {
-      toast.error("Input too long");
+      toast.error(t.review.inputTooLong);
       return;
     }
 
@@ -70,7 +72,7 @@ export default function ReviewSection({ targetType, targetId, targetName }: Revi
     setForm({ name: "", email: "", rating: 5, comment: "" });
     setShowForm(false);
     setSubmitting(false);
-    toast.success("Thank you! Your review is pending approval.");
+    toast.success(t.review.thankYou);
   };
 
   return (
@@ -79,13 +81,13 @@ export default function ReviewSection({ targetType, targetId, targetName }: Revi
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <h3 className="font-display text-xl font-bold text-foreground flex items-center gap-2">
-            <Star className="h-5 w-5 text-amber-400 fill-amber-400" /> Customer Reviews
+            <Star className="h-5 w-5 text-amber-400 fill-amber-400" /> {t.review.customerReviews}
           </h3>
           {reviews.length > 0 && (
             <div className="flex items-center gap-2 mt-1">
               <StarRating rating={Math.round(Number(avgRating))} size="sm" />
               <span className="text-sm font-bold text-foreground">{avgRating}</span>
-              <span className="text-sm text-muted-foreground">({reviews.length} review{reviews.length !== 1 ? "s" : ""})</span>
+              <span className="text-sm text-muted-foreground">({reviews.length} {t.review.reviews})</span>
             </div>
           )}
         </div>
@@ -93,7 +95,7 @@ export default function ReviewSection({ targetType, targetId, targetName }: Revi
           onClick={() => setShowForm(!showForm)}
           className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90"
         >
-          <Star className="h-4 w-4" /> Write a Review
+          <Star className="h-4 w-4" /> {t.review.writeReview}
         </Button>
       </div>
 
@@ -108,34 +110,34 @@ export default function ReviewSection({ targetType, targetId, targetName }: Revi
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-foreground">Name *</label>
+                  <label className="text-sm font-medium text-foreground">{t.review.yourName} *</label>
                   <Input
                     value={form.name}
                     onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                    placeholder="Your name"
+                    placeholder={t.review.yourName}
                     maxLength={100}
                     required
                     className="bg-background"
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-foreground">Email (optional)</label>
+                  <label className="text-sm font-medium text-foreground">{t.review.yourEmail}</label>
                   <Input
                     type="email"
                     value={form.email}
                     onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                    placeholder="your@email.com"
+                    placeholder={t.review.yourEmail}
                     maxLength={255}
                     className="bg-background"
                   />
                 </div>
               </div>
               <div className="space-y-1.5">
-                <label className="text-sm font-medium text-foreground">Your Review *</label>
+                <label className="text-sm font-medium text-foreground">{t.review.yourReview} *</label>
                 <Textarea
                   value={form.comment}
                   onChange={e => setForm(f => ({ ...f, comment: e.target.value }))}
-                  placeholder="Share your experience..."
+                  placeholder={t.review.yourReview}
                   rows={4}
                   maxLength={1000}
                   required
@@ -145,7 +147,7 @@ export default function ReviewSection({ targetType, targetId, targetName }: Revi
               </div>
               <div className="flex gap-2">
                 <Button type="submit" disabled={submitting} className="gap-2 bg-primary text-primary-foreground">
-                  <Send className="h-4 w-4" /> Submit Review
+                  <Send className="h-4 w-4" /> {submitting ? t.review.submitting : t.review.submit}
                 </Button>
                 <Button type="button" variant="outline" onClick={() => setShowForm(false)}>Cancel</Button>
               </div>
@@ -171,7 +173,7 @@ export default function ReviewSection({ targetType, targetId, targetName }: Revi
                       <StarRating rating={review.rating} size="sm" />
                     </div>
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      {new Date(review.createdAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+                      {new Date(review.createdAt).toLocaleDateString(lang === "bn" ? "bn-BD" : "en-US", { year: "numeric", month: "long", day: "numeric" })}
                     </p>
                     <p className="mt-2 text-sm text-foreground/80 leading-relaxed">{review.comment}</p>
                   </div>
@@ -184,7 +186,7 @@ export default function ReviewSection({ targetType, targetId, targetName }: Revi
         !showForm && (
           <div className="text-center py-8 rounded-xl border border-dashed border-border bg-muted/30">
             <Star className="h-8 w-8 mx-auto mb-2 text-muted-foreground/30" />
-            <p className="text-muted-foreground">No reviews yet. Be the first to review!</p>
+            <p className="text-muted-foreground">{t.review.noReviews}</p>
           </div>
         )
       )}

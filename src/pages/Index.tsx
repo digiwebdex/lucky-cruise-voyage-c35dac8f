@@ -23,7 +23,7 @@ const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 function PromoPackagesSection({ promoAds, cruises }: { promoAds: PromoAd[]; cruises: Cruise[] }) {
   const [lightboxAd, setLightboxAd] = useState<PromoAd | null>(null);
   const hpc = getHomepageContent();
-  const { lang } = useLanguage();
+  const { lang, t } = useLanguage();
   const isBn = lang === "bn";
 
   return (
@@ -92,7 +92,7 @@ function PromoPackagesSection({ promoAds, cruises }: { promoAds: PromoAd[]; crui
                       to={`/cruises/${ad.linkedCruiseId}`}
                       className="text-xs font-bold text-primary hover:underline flex items-center gap-1"
                     >
-                      বিস্তারিত <ArrowRight className="h-3 w-3" />
+                      {t.packages.viewDetails} <ArrowRight className="h-3 w-3" />
                     </Link>
                   </div>
                 </div>
@@ -126,7 +126,7 @@ function PromoPackagesSection({ promoAds, cruises }: { promoAds: PromoAd[]; crui
                 className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold px-6 py-3 rounded-xl hover:bg-primary/90 transition-colors"
                 onClick={() => setLightboxAd(null)}
               >
-                বিস্তারিত দেখুন <ArrowRight className="h-4 w-4" />
+                {t.packages.viewDetails} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
@@ -273,15 +273,15 @@ export default function Index() {
                 {/* Tour Select */}
                 <div className="lg:col-span-1">
                   <label className="text-xs font-semibold text-muted-foreground mb-1 block">
-                    {language === "bn" ? "ট্যুর নির্বাচন করুন" : "Select Tour"}
+                    {t.booking.selectTour}
                   </label>
                   <Select value={selectedTour} onValueChange={v => { setSelectedTour(v); setSelectedSubCat(""); setSelectedCruise(""); }}>
                     <SelectTrigger className="h-10 rounded-lg">
-                      <SelectValue placeholder={language === "bn" ? "ট্যুর বাছুন" : "Choose tour"} />
+                      <SelectValue placeholder={t.booking.chooseTour} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="sundarban">{language === "bn" ? "সুন্দরবন ভ্রমণ" : "Sundarban Tour"}</SelectItem>
-                      <SelectItem value="tanguar-haor">{language === "bn" ? "টাঙ্গুয়ার হাওর ভ্রমণ" : "Tanguar Haor Tour"}</SelectItem>
+                      <SelectItem value="sundarban">{t.nav.sundarbanTour}</SelectItem>
+                      <SelectItem value="tanguar-haor">{t.nav.tanguarHaorTour}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -289,7 +289,7 @@ export default function Index() {
                 {/* Subcategory Select (only for Sundarban) */}
                 <div className="lg:col-span-1">
                   <label className="text-xs font-semibold text-muted-foreground mb-1 block">
-                    {language === "bn" ? "ক্যাটাগরি" : "Category"}
+                    {t.booking.category}
                   </label>
                   <Select
                     value={selectedSubCat}
@@ -297,12 +297,12 @@ export default function Index() {
                     disabled={selectedTour !== "sundarban"}
                   >
                     <SelectTrigger className="h-10 rounded-lg">
-                      <SelectValue placeholder={language === "bn" ? "ক্যাটাগরি বাছুন" : "Choose category"} />
+                      <SelectValue placeholder={t.booking.chooseCategory} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">{language === "bn" ? "সকল" : "All"}</SelectItem>
+                      <SelectItem value="all">{t.booking.all}</SelectItem>
                       {sundarbanSubCategories.map(sc => (
-                        <SelectItem key={sc.value} value={sc.value}>{language === "bn" ? sc.labelBn : sc.label}</SelectItem>
+                        <SelectItem key={sc.value} value={sc.value}>{bn ? sc.labelBn : sc.label}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -311,11 +311,11 @@ export default function Index() {
                 {/* Cruise Select (filtered by tour + subcategory) */}
                 <div className="lg:col-span-1">
                   <label className="text-xs font-semibold text-muted-foreground mb-1 block">
-                    {language === "bn" ? "ক্রুজ নির্বাচন করুন" : "Select Cruise"}
+                    {t.booking.selectCruise}
                   </label>
                   <Select value={selectedCruise} onValueChange={setSelectedCruise}>
                     <SelectTrigger className="h-10 rounded-lg">
-                      <SelectValue placeholder={language === "bn" ? "ক্রুজ বাছুন" : "Choose cruise"} />
+                      <SelectValue placeholder={t.booking.chooseCruise} />
                     </SelectTrigger>
                     <SelectContent>
                       {cruises
@@ -331,12 +331,12 @@ export default function Index() {
                 {/* Date */}
                 <div className="lg:col-span-1">
                   <label className="text-xs font-semibold text-muted-foreground mb-1 block">
-                    {language === "bn" ? "তারিখ" : "Travel Date"}
+                    {t.booking.travelDateLabel}
                   </label>
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button variant="outline" className={cn("w-full h-10 justify-start text-left font-normal rounded-lg", !travelDate && "text-muted-foreground")}>
-                        {travelDate ? format(travelDate, "dd MMM yyyy") : (language === "bn" ? "তারিখ বাছুন" : "Pick date")}
+                        {travelDate ? format(travelDate, "dd MMM yyyy") : t.booking.pickDateShort}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0" align="start">
@@ -356,7 +356,7 @@ export default function Index() {
                 <div className="lg:col-span-1">
                   <label className="text-xs font-semibold text-muted-foreground mb-1 block">
                     <Users className="h-3 w-3 inline mr-1" />
-                    {language === "bn" ? "অতিথি" : "Guests"}
+                    {t.booking.guests}
                   </label>
                   <Input
                     type="number"
@@ -371,7 +371,7 @@ export default function Index() {
                 {/* WhatsApp */}
                 <div className="lg:col-span-1">
                   <a
-                    href={`https://wa.me/8801711871072?text=${encodeURIComponent(language === "bn" ? "আমি ক্রুজ সম্পর্কে জানতে চাই" : "I want to book a cruise")}`}
+                    href={`https://wa.me/8801711871072?text=${encodeURIComponent(t.booking.whatsappInquiry)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block"
@@ -385,7 +385,7 @@ export default function Index() {
                 {/* Search/Book */}
                 <div className="lg:col-span-1">
                   <Button onClick={handleQuickBook} className="w-full h-10 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 font-bold gap-2">
-                    <Search className="h-4 w-4" /> {language === "bn" ? "বুক করুন" : "Book Now"}
+                    <Search className="h-4 w-4" /> {t.booking.bookNowBtn}
                   </Button>
                 </div>
               </div>
@@ -399,7 +399,7 @@ export default function Index() {
                 return (
                   <div className="mt-4 pt-4 border-t border-border">
                     <p className="text-xs font-semibold text-muted-foreground mb-3">
-                      {language === "bn" ? `${filtered.length}টি ক্রুজ পাওয়া গেছে` : `${filtered.length} cruises found`}
+                      {filtered.length} {t.booking.cruisesFoundCount}
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                       {filtered.map(c => (
@@ -487,7 +487,7 @@ export default function Index() {
                         )}
                         {cruise.packages?.some(p => p.isOffer) && (
                           <span className="inline-flex items-center gap-1 rounded-full bg-destructive px-2.5 py-0.5 text-xs font-bold text-destructive-foreground">
-                            🔥 অফার
+                            🔥 {t.packages.offerBadge}
                           </span>
                         )}
                       </div>
@@ -518,7 +518,7 @@ export default function Index() {
                         </div>
                       </div>
                       <a
-                        href={`https://wa.me/8801711871072?text=${encodeURIComponent(`আমি ${cruise.name} ক্রুজ সম্পর্কে জানতে চাই`)}`}
+                        href={`https://wa.me/8801711871072?text=${encodeURIComponent(`${t.booking.whatsappInquiry} - ${cruise.name}`)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
@@ -694,13 +694,13 @@ export default function Index() {
             <div className="container">
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-10">
                 <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary">
-                  <BookOpen className="h-3.5 w-3.5" /> {language === "bn" ? "ব্লগ" : "Blog"}
+                  <BookOpen className="h-3.5 w-3.5" /> {t.blog.label}
                 </span>
                 <h2 className="mt-2 font-display text-2xl sm:text-3xl md:text-4xl font-black text-foreground">
-                  {language === "bn" ? "ভ্রমণ গল্প ও " : "Travel Stories & "}<span className="text-primary">{language === "bn" ? "গাইড" : "Guides"}</span>
+                   {t.blog.title}<span className="text-primary">{t.blog.titleHighlight}</span>
                 </h2>
                 <p className="mt-2 text-muted-foreground text-sm max-w-md mx-auto">
-                  {language === "bn" ? "আমাদের সর্বশেষ ভ্রমণ টিপস এবং গাইড পড়ুন" : "Read our latest travel tips and guides"}
+                  {t.blog.readLatest}
                 </p>
               </motion.div>
 
@@ -719,7 +719,7 @@ export default function Index() {
                           )}
                           <div className="absolute top-3 left-3">
                             <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold ${post.category === "tanguar-haor" ? "bg-emerald text-emerald-foreground" : "bg-primary text-primary-foreground"}`}>
-                              {post.category === "tanguar-haor" ? (language === "bn" ? "টাঙ্গুয়ার হাওর" : "Tanguar Haor") : (language === "bn" ? "সুন্দরবন" : "Sundarban")}
+                              {post.category === "tanguar-haor" ? t.blog.tanguarHaor : t.blog.sundarban}
                             </span>
                           </div>
                         </div>
@@ -728,7 +728,7 @@ export default function Index() {
                           <p className="text-xs text-muted-foreground line-clamp-2 mb-3">{post.excerpt}</p>
                           <div className="flex items-center gap-3 text-[10px] text-muted-foreground border-t border-border pt-2.5">
                             <span className="flex items-center gap-1"><UserIcon2 className="h-3 w-3" />{post.author}</span>
-                            <span className="flex items-center gap-1"><CalendarIcon2 className="h-3 w-3" />{new Date(post.publishedAt).toLocaleDateString(language === "bn" ? "bn-BD" : "en-US", { day: "numeric", month: "short" })}</span>
+                            <span className="flex items-center gap-1"><CalendarIcon2 className="h-3 w-3" />{new Date(post.publishedAt).toLocaleDateString(bn ? "bn-BD" : "en-US", { day: "numeric", month: "short" })}</span>
                           </div>
                         </CardContent>
                       </Card>
@@ -740,7 +740,7 @@ export default function Index() {
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mt-8 text-center">
                 <Link to="/blog">
                   <Button variant="outline" size="lg" className="rounded-xl border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground font-bold gap-2 px-6">
-                    {language === "bn" ? "সব ব্লগ দেখুন" : "View All Posts"} <ChevronRight className="h-4 w-4" />
+                    {t.blog.viewAll} <ChevronRight className="h-4 w-4" />
                   </Button>
                 </Link>
               </motion.div>

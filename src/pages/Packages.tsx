@@ -54,7 +54,7 @@ function PackageCard({ pkg, i }: { pkg: any; i: number }) {
             {pkg.isOffer && (
               <div className="absolute top-0 right-0">
                 <Badge className="rounded-none rounded-bl-xl gradient-primary text-primary-foreground font-bold border-0 px-3 py-1.5 gap-1">
-                  <Flame className="h-3.5 w-3.5" /> অফার
+                   <Flame className="h-3.5 w-3.5" /> {t.packages.offerBadge}
                 </Badge>
               </div>
             )}
@@ -70,7 +70,7 @@ function PackageCard({ pkg, i }: { pkg: any; i: number }) {
         {!thumbSrc && pkg.isOffer && (
           <div className="absolute top-0 right-0">
             <Badge className="rounded-none rounded-bl-xl gradient-primary text-primary-foreground font-bold border-0 px-3 py-1.5 gap-1">
-              <Flame className="h-3.5 w-3.5" /> অফার
+              <Flame className="h-3.5 w-3.5" /> {t.packages.offerBadge}
             </Badge>
           </div>
         )}
@@ -106,7 +106,7 @@ function PackageCard({ pkg, i }: { pkg: any; i: number }) {
           <div className="mt-6 border-t border-border/50 pt-5">
             <Link to={`/cruises/${pkg.cruiseId}`}>
               <Button className="w-full gradient-primary text-primary-foreground font-bold rounded-xl gap-1">
-                বিস্তারিত <ArrowRight className="h-4 w-4" />
+                {t.packages.viewDetails} <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
           </div>
@@ -146,12 +146,12 @@ export default function Packages() {
             <motion.div initial="hidden" animate="visible" variants={fadeUp} className="mb-8 text-center">
               <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 mb-4">
                 <Flame className="h-5 w-5 text-primary" />
-                <span className="font-display font-bold text-primary">সাপ্তাহিক অফার প্যাকেজ</span>
+                <span className="font-display font-bold text-primary">{t.packages.weeklyOffer}</span>
               </div>
               <h2 className="font-display text-3xl md:text-4xl font-black text-foreground">
-                চলমান <span className="text-gradient">অফারসমূহ</span>
+                {t.packages.runningOffers} <span className="text-gradient">{t.packages.runningOffersHighlight}</span>
               </h2>
-              <p className="mt-2 text-muted-foreground max-w-md mx-auto">সীমিত সময়ের জন্য বিশেষ ছাড়ে আমাদের প্যাকেজ বুক করুন</p>
+              <p className="mt-2 text-muted-foreground max-w-md mx-auto">{t.packages.limitedTimeOffer}</p>
             </motion.div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {offerPackages.map((pkg, i) => (
@@ -183,9 +183,9 @@ export default function Packages() {
           ) : (
             <>
               {offerPackages.length > 0 && (
-                <motion.div initial="hidden" animate="visible" variants={fadeUp} className="mb-8 text-center">
+              <motion.div initial="hidden" animate="visible" variants={fadeUp} className="mb-8 text-center">
                   <h2 className="font-display text-3xl md:text-4xl font-black text-foreground">
-                    সকল <span className="text-gradient">প্যাকেজ</span>
+                    {t.packages.allPackages} <span className="text-gradient">{t.packages.allPackagesHighlight}</span>
                   </h2>
                 </motion.div>
               )}

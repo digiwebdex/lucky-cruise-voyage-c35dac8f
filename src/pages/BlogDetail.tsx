@@ -12,7 +12,7 @@ const fadeUp = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } };
 
 export default function BlogDetail() {
   const { slug } = useParams();
-  const { lang } = useLanguage();
+  const { lang, t } = useLanguage();
   const blogs = getBlogs().filter(b => b.isPublished);
   const post = blogs.find(b => b.slug === slug);
 
@@ -20,10 +20,10 @@ export default function BlogDetail() {
     return (
       <div className="container py-20 text-center">
         <h1 className="font-display text-2xl font-bold text-foreground mb-4">
-          {lang === "bn" ? "পোস্ট পাওয়া যায়নি" : "Post Not Found"}
+          {t.blog.postNotFound}
         </h1>
         <Link to="/blog">
-          <Button variant="outline" className="gap-2"><ArrowLeft className="h-4 w-4" /> {lang === "bn" ? "ব্লগে ফিরুন" : "Back to Blog"}</Button>
+          <Button variant="outline" className="gap-2"><ArrowLeft className="h-4 w-4" /> {t.blog.backToBlog}</Button>
         </Link>
       </div>
     );
@@ -45,12 +45,12 @@ export default function BlogDetail() {
         <div className="container">
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
             <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-primary font-semibold mb-4 hover:underline">
-              <ArrowLeft className="h-4 w-4" /> {lang === "bn" ? "সব ব্লগ" : "All Blogs"}
+              <ArrowLeft className="h-4 w-4" /> {t.blog.allBlogs}
             </Link>
             <div className="flex items-center gap-2 mb-3">
               <Badge className={post.category === "tanguar-haor" ? "bg-emerald text-emerald-foreground" : "bg-primary text-primary-foreground"}>
                 <Tag className="h-3 w-3 mr-1" />
-                {post.category === "tanguar-haor" ? (lang === "bn" ? "টাঙ্গুয়ার হাওর" : "Tanguar Haor") : (lang === "bn" ? "সুন্দরবন" : "Sundarban")}
+                {post.category === "tanguar-haor" ? t.blog.tanguarHaor : t.blog.sundarban}
               </Badge>
             </div>
             <h1 className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-secondary-foreground max-w-3xl leading-tight">
@@ -101,17 +101,17 @@ export default function BlogDetail() {
             {/* CTA */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mt-10 p-6 rounded-xl bg-primary/5 border border-primary/20 text-center">
               <h3 className="font-display font-bold text-lg text-foreground mb-2">
-                {lang === "bn" ? "এই ভ্রমণে যেতে চান?" : "Want to go on this trip?"}
+                {t.blog.wantToGo}
               </h3>
               <p className="text-sm text-muted-foreground mb-4">
-                {lang === "bn" ? "আমাদের সাথে যোগাযোগ করুন এবং আজই বুকিং করুন" : "Contact us and book your trip today"}
+                {t.blog.contactAndBook}
               </p>
               <div className="flex flex-wrap justify-center gap-3">
                 <Link to="/cruises">
-                  <Button className="bg-primary text-primary-foreground gap-2">{lang === "bn" ? "ক্রুজ দেখুন" : "Explore Cruises"}</Button>
+                  <Button className="bg-primary text-primary-foreground gap-2">{t.blog.exploreCruises}</Button>
                 </Link>
                 <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" className="border-primary/30 text-primary gap-2">{lang === "bn" ? "হোয়াটসঅ্যাপে মেসেজ করুন" : "WhatsApp Us"}</Button>
+                  <Button variant="outline" className="border-primary/30 text-primary gap-2">{t.blog.whatsappUs}</Button>
                 </a>
               </div>
             </motion.div>
@@ -122,7 +122,7 @@ export default function BlogDetail() {
             <div className="mt-14 max-w-3xl mx-auto">
               <h3 className="font-display font-bold text-xl text-foreground mb-6 flex items-center gap-2">
                 <BookOpen className="h-5 w-5 text-primary" />
-                {lang === "bn" ? "সম্পর্কিত পোস্ট" : "Related Posts"}
+                {t.blog.relatedPosts}
               </h3>
               <div className="grid gap-4 sm:grid-cols-3">
                 {relatedPosts.map(rp => (
