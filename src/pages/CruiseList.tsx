@@ -15,7 +15,7 @@ const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 const scaleIn = { hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } };
 
 export default function CruiseList() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [searchParams, setSearchParams] = useSearchParams();
   const destination = searchParams.get("destination") || "all";
   const [query, setQuery] = useState("");
