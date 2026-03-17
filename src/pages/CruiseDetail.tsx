@@ -341,7 +341,7 @@ export default function CruiseDetail() {
                         </span>
                       )}
                       <div className="flex items-center justify-between text-sm text-primary-foreground/90">
-                        <span className="font-medium">Adult</span>
+                        <span className="font-medium">{t.cruiseDetail.adult}</span>
                         <div>
                           {pkg.adultOldPrice && pkg.adultOldPrice > pkg.adultPrice && (
                             <span className="line-through text-primary-foreground/50 mr-1.5 text-xs">৳{pkg.adultOldPrice.toLocaleString()}</span>
