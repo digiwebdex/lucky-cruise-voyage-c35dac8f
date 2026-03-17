@@ -113,7 +113,7 @@ export default function CruiseList() {
                         : "bg-secondary-foreground/5 text-secondary-foreground/60 hover:bg-secondary-foreground/10 border border-transparent"
                     }`}
                   >
-                    {sc.labelBn}
+                    {lang === "bn" ? sc.labelBn : sc.label}
                   </button>
                 ))}
               </div>
