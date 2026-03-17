@@ -297,10 +297,10 @@ export default function Index() {
                     disabled={selectedTour !== "sundarban"}
                   >
                     <SelectTrigger className="h-10 rounded-lg">
-                      <SelectValue placeholder={language === "bn" ? "ক্যাটাগরি বাছুন" : "Choose category"} />
+                      <SelectValue placeholder={t.booking.chooseCategory} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">{language === "bn" ? "সকল" : "All"}</SelectItem>
+                      <SelectItem value="all">{t.booking.all}</SelectItem>
                       {sundarbanSubCategories.map(sc => (
                         <SelectItem key={sc.value} value={sc.value}>{language === "bn" ? sc.labelBn : sc.label}</SelectItem>
                       ))}
