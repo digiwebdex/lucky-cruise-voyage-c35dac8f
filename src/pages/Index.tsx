@@ -302,7 +302,7 @@ export default function Index() {
                     <SelectContent>
                       <SelectItem value="all">{t.booking.all}</SelectItem>
                       {sundarbanSubCategories.map(sc => (
-                        <SelectItem key={sc.value} value={sc.value}>{language === "bn" ? sc.labelBn : sc.label}</SelectItem>
+                        <SelectItem key={sc.value} value={sc.value}>{bn ? sc.labelBn : sc.label}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
