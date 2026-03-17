@@ -385,7 +385,7 @@ export default function Index() {
                 {/* Search/Book */}
                 <div className="lg:col-span-1">
                   <Button onClick={handleQuickBook} className="w-full h-10 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 font-bold gap-2">
-                    <Search className="h-4 w-4" /> {language === "bn" ? "বুক করুন" : "Book Now"}
+                    <Search className="h-4 w-4" /> {t.booking.bookNowBtn}
                   </Button>
                 </div>
               </div>
