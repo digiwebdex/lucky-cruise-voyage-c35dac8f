@@ -12,7 +12,7 @@ import PageHeroBanner from "@/components/PageHeroBanner";
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
 export default function BlogList() {
-  const { lang } = useLanguage();
+  const { lang, t } = useLanguage();
   const allBlogs = getBlogs().filter(b => b.isPublished);
   const [filter, setFilter] = useState<"all" | "sundarban" | "tanguar-haor">("all");
 
