@@ -405,7 +405,7 @@ export default function CruiseEditor() {
                     </CardContent>
                   </Card>
                 ))}
-                <Button variant="outline" className="gap-1 border-dashed" onClick={() => updateField("packages", [...form.packages, { id: `pkg-${Date.now()}`, name: "", price: 0, duration: "", isOffer: false }])}><Plus className="h-4 w-4" /> Add Package</Button>
+                <Button variant="outline" className="gap-1 border-dashed" onClick={() => updateField("packages", [...form.packages, { id: `pkg-${Date.now()}`, name: "", price: 0, adultPrice: 0, childPrice: 0, duration: "", isOffer: false }])}><Plus className="h-4 w-4" /> Add Package</Button>
               </div>
             </div>
 
