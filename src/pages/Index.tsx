@@ -694,7 +694,7 @@ export default function Index() {
             <div className="container">
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-10">
                 <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary">
-                  <BookOpen className="h-3.5 w-3.5" /> {language === "bn" ? "ব্লগ" : "Blog"}
+                  <BookOpen className="h-3.5 w-3.5" /> {t.blog.label}
                 </span>
                 <h2 className="mt-2 font-display text-2xl sm:text-3xl md:text-4xl font-black text-foreground">
                   {language === "bn" ? "ভ্রমণ গল্প ও " : "Travel Stories & "}<span className="text-primary">{language === "bn" ? "গাইড" : "Guides"}</span>
