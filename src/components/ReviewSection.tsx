@@ -91,7 +91,7 @@ export default function ReviewSection({ targetType, targetId, targetName }: Revi
             <div className="flex items-center gap-2 mt-1">
               <StarRating rating={Math.round(Number(avgRating))} size="sm" />
               <span className="text-sm font-bold text-foreground">{avgRating}</span>
-              <span className="text-sm text-muted-foreground">({reviews.length} review{reviews.length !== 1 ? "s" : ""})</span>
+              <span className="text-sm text-muted-foreground">({reviews.length} {t.review.reviews})</span>
             </div>
           )}
         </div>
