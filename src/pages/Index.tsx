@@ -273,7 +273,7 @@ export default function Index() {
                 {/* Tour Select */}
                 <div className="lg:col-span-1">
                   <label className="text-xs font-semibold text-muted-foreground mb-1 block">
-                    {language === "bn" ? "ট্যুর নির্বাচন করুন" : "Select Tour"}
+                    {t.booking.selectTour}
                   </label>
                   <Select value={selectedTour} onValueChange={v => { setSelectedTour(v); setSelectedSubCat(""); setSelectedCruise(""); }}>
                     <SelectTrigger className="h-10 rounded-lg">
