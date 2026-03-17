@@ -50,7 +50,7 @@ export default function BlogDetail() {
             <div className="flex items-center gap-2 mb-3">
               <Badge className={post.category === "tanguar-haor" ? "bg-emerald text-emerald-foreground" : "bg-primary text-primary-foreground"}>
                 <Tag className="h-3 w-3 mr-1" />
-                {post.category === "tanguar-haor" ? (lang === "bn" ? "টাঙ্গুয়ার হাওর" : "Tanguar Haor") : (lang === "bn" ? "সুন্দরবন" : "Sundarban")}
+                {post.category === "tanguar-haor" ? t.blog.tanguarHaor : t.blog.sundarban}
               </Badge>
             </div>
             <h1 className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-secondary-foreground max-w-3xl leading-tight">
