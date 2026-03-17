@@ -371,7 +371,7 @@ export default function Index() {
                 {/* WhatsApp */}
                 <div className="lg:col-span-1">
                   <a
-                    href={`https://wa.me/8801711871072?text=${encodeURIComponent(language === "bn" ? "আমি ক্রুজ সম্পর্কে জানতে চাই" : "I want to book a cruise")}`}
+                    href={`https://wa.me/8801711871072?text=${encodeURIComponent(t.booking.whatsappInquiry)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block"
