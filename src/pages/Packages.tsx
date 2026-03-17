@@ -146,12 +146,12 @@ export default function Packages() {
             <motion.div initial="hidden" animate="visible" variants={fadeUp} className="mb-8 text-center">
               <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 mb-4">
                 <Flame className="h-5 w-5 text-primary" />
-                <span className="font-display font-bold text-primary">সাপ্তাহিক অফার প্যাকেজ</span>
+                <span className="font-display font-bold text-primary">{t.packages.weeklyOffer}</span>
               </div>
               <h2 className="font-display text-3xl md:text-4xl font-black text-foreground">
-                চলমান <span className="text-gradient">অফারসমূহ</span>
+                {t.packages.runningOffers} <span className="text-gradient">{t.packages.runningOffersHighlight}</span>
               </h2>
-              <p className="mt-2 text-muted-foreground max-w-md mx-auto">সীমিত সময়ের জন্য বিশেষ ছাড়ে আমাদের প্যাকেজ বুক করুন</p>
+              <p className="mt-2 text-muted-foreground max-w-md mx-auto">{t.packages.limitedTimeOffer}</p>
             </motion.div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {offerPackages.map((pkg, i) => (
