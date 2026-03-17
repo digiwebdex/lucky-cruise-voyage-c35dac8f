@@ -23,7 +23,7 @@ const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 function PromoPackagesSection({ promoAds, cruises }: { promoAds: PromoAd[]; cruises: Cruise[] }) {
   const [lightboxAd, setLightboxAd] = useState<PromoAd | null>(null);
   const hpc = getHomepageContent();
-  const { lang } = useLanguage();
+  const { lang, t } = useLanguage();
   const isBn = lang === "bn";
 
   return (
