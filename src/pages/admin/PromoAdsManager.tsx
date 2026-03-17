@@ -187,7 +187,7 @@ export default function PromoAdsManager() {
               <Switch checked={form.isActive} onCheckedChange={v => setForm(f => ({ ...f, isActive: v }))} />
               <Label>{form.isActive ? "Active" : "Hidden"}</Label>
             </div>
-            <Button onClick={handleSave} className="w-full gap-2 bg-primary text-primary-foreground">
+            <Button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleSave(); }} className="w-full gap-2 bg-primary text-primary-foreground">
               <Save className="h-4 w-4" /> {editing ? "আপডেট করুন" : "যোগ করুন"}
             </Button>
           </div>
