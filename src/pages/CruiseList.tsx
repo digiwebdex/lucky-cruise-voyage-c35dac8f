@@ -101,7 +101,7 @@ export default function CruiseList() {
                       : "bg-secondary-foreground/5 text-secondary-foreground/60 hover:bg-secondary-foreground/10 border border-transparent"
                   }`}
                 >
-                  সকল
+                  {t.cruiseList.allSubCat}
                 </button>
                 {sundarbanSubCategories.map(sc => (
                   <button
