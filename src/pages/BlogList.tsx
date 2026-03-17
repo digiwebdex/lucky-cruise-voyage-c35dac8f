@@ -42,9 +42,9 @@ export default function BlogList() {
           <div className="flex justify-center mb-8">
             <Tabs value={filter} onValueChange={v => setFilter(v as typeof filter)}>
               <TabsList className="bg-muted/50">
-                <TabsTrigger value="all" className="gap-1.5"><Filter className="h-3 w-3" /> {lang === "bn" ? "সব" : "All"}</TabsTrigger>
-                <TabsTrigger value="sundarban">{lang === "bn" ? "সুন্দরবন" : "Sundarban"}</TabsTrigger>
-                <TabsTrigger value="tanguar-haor">{lang === "bn" ? "টাঙ্গুয়ার হাওর" : "Tanguar Haor"}</TabsTrigger>
+                <TabsTrigger value="all" className="gap-1.5"><Filter className="h-3 w-3" /> {t.blog.all}</TabsTrigger>
+                <TabsTrigger value="sundarban">{t.blog.sundarban}</TabsTrigger>
+                <TabsTrigger value="tanguar-haor">{t.blog.tanguarHaor}</TabsTrigger>
               </TabsList>
             </Tabs>
           </div>
