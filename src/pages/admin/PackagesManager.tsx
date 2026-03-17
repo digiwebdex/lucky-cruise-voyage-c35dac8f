@@ -401,7 +401,7 @@ export default function PackagesManager() {
                 <Input value={form.offerDateLabel} onChange={e => setForm({ ...form, offerDateLabel: e.target.value })} placeholder="৪-৫-৬ এপ্রিল ২০২৬" />
               </div>
             </div>
-            <Button onClick={save} className="w-full gap-2"><Save className="h-4 w-4" /> {editingPkg ? "Update" : "Add"} Package</Button>
+            <Button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); save(); }} className="w-full gap-2"><Save className="h-4 w-4" /> {editingPkg ? "Update" : "Add"} Package</Button>
           </div>
         </DialogContent>
       </Dialog>
