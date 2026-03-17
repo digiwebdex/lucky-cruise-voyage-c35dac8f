@@ -190,7 +190,7 @@ export default function ReviewSection({ targetType, targetId, targetName }: Revi
         !showForm && (
           <div className="text-center py-8 rounded-xl border border-dashed border-border bg-muted/30">
             <Star className="h-8 w-8 mx-auto mb-2 text-muted-foreground/30" />
-            <p className="text-muted-foreground">No reviews yet. Be the first to review!</p>
+            <p className="text-muted-foreground">{t.review.noReviews}</p>
           </div>
         )
       )}
