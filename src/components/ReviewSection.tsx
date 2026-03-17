@@ -54,11 +54,11 @@ export default function ReviewSection({ targetType, targetId, targetName }: Revi
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name.trim() || !form.comment.trim()) {
-      toast.error("Name and comment are required");
+      toast.error(t.review.nameRequired);
       return;
     }
     if (form.name.length > 100 || form.comment.length > 1000) {
-      toast.error("Input too long");
+      toast.error(t.review.inputTooLong);
       return;
     }
 
