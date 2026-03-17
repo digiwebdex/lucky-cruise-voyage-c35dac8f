@@ -128,7 +128,7 @@ export default function CruiseEditor() {
             <Switch checked={form.featured} onCheckedChange={v => updateField("featured", v)} />
             <Label className="text-sm flex items-center gap-1"><Star className="h-4 w-4" /> Featured</Label>
           </div>
-          <Button onClick={save} className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
+          <Button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); save(); }} className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
             <Save className="h-4 w-4" /> Save Cruise
           </Button>
         </div>
