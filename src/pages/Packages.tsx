@@ -183,9 +183,9 @@ export default function Packages() {
           ) : (
             <>
               {offerPackages.length > 0 && (
-                <motion.div initial="hidden" animate="visible" variants={fadeUp} className="mb-8 text-center">
+              <motion.div initial="hidden" animate="visible" variants={fadeUp} className="mb-8 text-center">
                   <h2 className="font-display text-3xl md:text-4xl font-black text-foreground">
-                    সকল <span className="text-gradient">প্যাকেজ</span>
+                    {t.packages.allPackages} <span className="text-gradient">{t.packages.allPackagesHighlight}</span>
                   </h2>
                 </motion.div>
               )}

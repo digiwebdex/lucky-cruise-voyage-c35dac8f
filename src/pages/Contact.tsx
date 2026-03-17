@@ -36,7 +36,7 @@ export default function Contact() {
     );
     window.open(`https://wa.me/${settings.whatsapp}?text=${msg}`, "_blank");
 
-    toast.success(lang === "bn" ? "আপনার মেসেজ পাঠানো হয়েছে!" : "Your message has been sent!");
+    toast.success(t.contact.messageSent);
     form.reset();
   };
 

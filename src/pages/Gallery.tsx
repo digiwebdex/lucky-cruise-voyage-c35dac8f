@@ -87,7 +87,7 @@ export default function Gallery() {
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">
                   {cruise.name}
                 </h2>
-                <span className="text-sm text-muted-foreground">({cruise.images.length} photos)</span>
+                <span className="text-sm text-muted-foreground">({cruise.images.length} {t.gallery.photos})</span>
                 <div className="ml-auto flex h-7 w-7 items-center justify-center rounded-full border border-border">
                   {expandedSections.has(cruise.id) ? <Minus className="h-4 w-4 text-muted-foreground" /> : <Plus className="h-4 w-4 text-primary" />}
                 </div>

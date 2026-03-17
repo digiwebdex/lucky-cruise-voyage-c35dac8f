@@ -140,7 +140,7 @@ export default function Footer() {
                   />
                 </button>
                 <p className="mt-2 text-xs text-secondary-foreground/40">
-                  Member of Tour Operator Association of Sundarban
+                  {t.footer.toasMember}
                 </p>
               </div>
             </div>

@@ -190,7 +190,7 @@ export default function CruiseList() {
                         </div>
                       </div>
                       <a
-                        href={`https://wa.me/8801711871072?text=${encodeURIComponent(`আমি ${cruise.name} সম্পর্কে জানতে চাই`)}`}
+                        href={`https://wa.me/8801711871072?text=${encodeURIComponent(`${t.booking?.whatsappInquiry || "I want to book a cruise"} - ${cruise.name}`)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}

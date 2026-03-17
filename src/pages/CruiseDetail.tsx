@@ -350,7 +350,7 @@ export default function CruiseDetail() {
                         </div>
                       </div>
                       <div className="flex items-center justify-between text-sm text-primary-foreground/90">
-                        <span className="font-medium">Child</span>
+                        <span className="font-medium">{t.cruiseDetail.child}</span>
                         <div>
                           {pkg.childOldPrice && pkg.childOldPrice > pkg.childPrice && (
                             <span className="line-through text-primary-foreground/50 mr-1.5 text-xs">৳{pkg.childOldPrice.toLocaleString()}</span>
