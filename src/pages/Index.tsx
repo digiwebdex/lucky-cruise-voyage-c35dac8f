@@ -315,7 +315,7 @@ export default function Index() {
                   </label>
                   <Select value={selectedCruise} onValueChange={setSelectedCruise}>
                     <SelectTrigger className="h-10 rounded-lg">
-                      <SelectValue placeholder={language === "bn" ? "ক্রুজ বাছুন" : "Choose cruise"} />
+                      <SelectValue placeholder={t.booking.chooseCruise} />
                     </SelectTrigger>
                     <SelectContent>
                       {cruises
