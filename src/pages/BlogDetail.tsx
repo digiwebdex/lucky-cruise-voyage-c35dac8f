@@ -101,17 +101,17 @@ export default function BlogDetail() {
             {/* CTA */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mt-10 p-6 rounded-xl bg-primary/5 border border-primary/20 text-center">
               <h3 className="font-display font-bold text-lg text-foreground mb-2">
-                {lang === "bn" ? "এই ভ্রমণে যেতে চান?" : "Want to go on this trip?"}
+                {t.blog.wantToGo}
               </h3>
               <p className="text-sm text-muted-foreground mb-4">
-                {lang === "bn" ? "আমাদের সাথে যোগাযোগ করুন এবং আজই বুকিং করুন" : "Contact us and book your trip today"}
+                {t.blog.contactAndBook}
               </p>
               <div className="flex flex-wrap justify-center gap-3">
                 <Link to="/cruises">
-                  <Button className="bg-primary text-primary-foreground gap-2">{lang === "bn" ? "ক্রুজ দেখুন" : "Explore Cruises"}</Button>
+                  <Button className="bg-primary text-primary-foreground gap-2">{t.blog.exploreCruises}</Button>
                 </Link>
                 <a href="https://wa.me/8801711871072" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" className="border-primary/30 text-primary gap-2">{lang === "bn" ? "হোয়াটসঅ্যাপে মেসেজ করুন" : "WhatsApp Us"}</Button>
+                  <Button variant="outline" className="border-primary/30 text-primary gap-2">{t.blog.whatsappUs}</Button>
                 </a>
               </div>
             </motion.div>
