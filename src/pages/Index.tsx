@@ -289,7 +289,7 @@ export default function Index() {
                 {/* Subcategory Select (only for Sundarban) */}
                 <div className="lg:col-span-1">
                   <label className="text-xs font-semibold text-muted-foreground mb-1 block">
-                    {language === "bn" ? "ক্যাটাগরি" : "Category"}
+                    {t.booking.category}
                   </label>
                   <Select
                     value={selectedSubCat}
