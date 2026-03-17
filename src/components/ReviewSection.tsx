@@ -7,6 +7,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { addReview, getApprovedReviews, type CustomerReview } from "@/services/cmsStore";
 import { toast } from "sonner";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { addReview, getApprovedReviews, type CustomerReview } from "@/services/cmsStore";
+import { toast } from "sonner";
 
 interface ReviewSectionProps {
   targetType: "cruise" | "blog";
