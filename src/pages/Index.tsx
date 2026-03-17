@@ -740,7 +740,7 @@ export default function Index() {
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mt-8 text-center">
                 <Link to="/blog">
                   <Button variant="outline" size="lg" className="rounded-xl border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground font-bold gap-2 px-6">
-                    {language === "bn" ? "সব ব্লগ দেখুন" : "View All Posts"} <ChevronRight className="h-4 w-4" />
+                    {t.blog.viewAll} <ChevronRight className="h-4 w-4" />
                   </Button>
                 </Link>
               </motion.div>
