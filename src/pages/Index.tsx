@@ -311,7 +311,7 @@ export default function Index() {
                 {/* Cruise Select (filtered by tour + subcategory) */}
                 <div className="lg:col-span-1">
                   <label className="text-xs font-semibold text-muted-foreground mb-1 block">
-                    {language === "bn" ? "ক্রুজ নির্বাচন করুন" : "Select Cruise"}
+                    {t.booking.selectCruise}
                   </label>
                   <Select value={selectedCruise} onValueChange={setSelectedCruise}>
                     <SelectTrigger className="h-10 rounded-lg">
