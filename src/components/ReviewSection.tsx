@@ -137,11 +137,11 @@ export default function ReviewSection({ targetType, targetId, targetName }: Revi
                 </div>
               </div>
               <div className="space-y-1.5">
-                <label className="text-sm font-medium text-foreground">Your Review *</label>
+                <label className="text-sm font-medium text-foreground">{t.review.yourReview} *</label>
                 <Textarea
                   value={form.comment}
                   onChange={e => setForm(f => ({ ...f, comment: e.target.value }))}
-                  placeholder="Share your experience..."
+                  placeholder={t.review.yourReview}
                   rows={4}
                   maxLength={1000}
                   required
