@@ -728,7 +728,7 @@ export default function Index() {
                           <p className="text-xs text-muted-foreground line-clamp-2 mb-3">{post.excerpt}</p>
                           <div className="flex items-center gap-3 text-[10px] text-muted-foreground border-t border-border pt-2.5">
                             <span className="flex items-center gap-1"><UserIcon2 className="h-3 w-3" />{post.author}</span>
-                            <span className="flex items-center gap-1"><CalendarIcon2 className="h-3 w-3" />{new Date(post.publishedAt).toLocaleDateString(language === "bn" ? "bn-BD" : "en-US", { day: "numeric", month: "short" })}</span>
+                            <span className="flex items-center gap-1"><CalendarIcon2 className="h-3 w-3" />{new Date(post.publishedAt).toLocaleDateString(bn ? "bn-BD" : "en-US", { day: "numeric", month: "short" })}</span>
                           </div>
                         </CardContent>
                       </Card>
