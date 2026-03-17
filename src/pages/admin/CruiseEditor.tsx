@@ -361,7 +361,7 @@ export default function CruiseEditor() {
                         </Badge>
                       </div>
                     )}
-                    <CardContent className="p-5">
+                    <CardContent className="p-5 space-y-3">
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 items-center">
                         <EditableText value={pkg.name} onChange={v => { const arr = [...form.packages]; arr[i] = { ...arr[i], name: v }; updateField("packages", arr); }} placeholder="Package name" />
                         <EditableText value={pkg.duration} onChange={v => { const arr = [...form.packages]; arr[i] = { ...arr[i], duration: v }; updateField("packages", arr); }} placeholder="Duration" />
@@ -381,6 +381,25 @@ export default function CruiseEditor() {
                             <Label className="text-xs">Offer</Label>
                           </div>
                           <button onClick={() => updateField("packages", form.packages.filter((_, j) => j !== i))} className="opacity-0 group-hover:opacity-100 ml-auto"><Trash2 className="h-4 w-4 text-destructive" /></button>
+                        </div>
+                      </div>
+                      {/* Adult & Child Pricing */}
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 items-center border-t border-border/30 pt-3">
+                        <div>
+                          <Label className="text-xs text-muted-foreground">প্রাপ্তবয়স্ক মূল্য</Label>
+                          <Input type="number" value={pkg.adultPrice || ""} onChange={e => { const arr = [...form.packages]; arr[i] = { ...arr[i], adultPrice: Number(e.target.value) }; updateField("packages", arr); }} placeholder="Adult ৳" className="h-8 text-sm border-dashed font-bold" />
+                        </div>
+                        <div>
+                          <Label className="text-xs text-muted-foreground">প্রাপ্তবয়স্ক পুরাতন মূল্য</Label>
+                          <Input type="number" value={pkg.adultOldPrice || ""} onChange={e => { const arr = [...form.packages]; arr[i] = { ...arr[i], adultOldPrice: e.target.value ? Number(e.target.value) : undefined }; updateField("packages", arr); }} placeholder="Old Adult ৳" className="h-8 text-sm border-dashed" />
+                        </div>
+                        <div>
+                          <Label className="text-xs text-muted-foreground">শিশু মূল্য</Label>
+                          <Input type="number" value={pkg.childPrice || ""} onChange={e => { const arr = [...form.packages]; arr[i] = { ...arr[i], childPrice: Number(e.target.value) }; updateField("packages", arr); }} placeholder="Child ৳" className="h-8 text-sm border-dashed font-bold" />
+                        </div>
+                        <div>
+                          <Label className="text-xs text-muted-foreground">শিশু পুরাতন মূল্য</Label>
+                          <Input type="number" value={pkg.childOldPrice || ""} onChange={e => { const arr = [...form.packages]; arr[i] = { ...arr[i], childOldPrice: e.target.value ? Number(e.target.value) : undefined }; updateField("packages", arr); }} placeholder="Old Child ৳" className="h-8 text-sm border-dashed" />
                         </div>
                       </div>
                     </CardContent>
