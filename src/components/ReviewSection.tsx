@@ -114,11 +114,11 @@ export default function ReviewSection({ targetType, targetId, targetName }: Revi
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-foreground">Name *</label>
+                  <label className="text-sm font-medium text-foreground">{t.review.yourName} *</label>
                   <Input
                     value={form.name}
                     onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                    placeholder="Your name"
+                    placeholder={t.review.yourName}
                     maxLength={100}
                     required
                     className="bg-background"
