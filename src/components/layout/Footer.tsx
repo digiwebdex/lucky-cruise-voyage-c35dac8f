@@ -126,7 +126,7 @@ export default function Footer() {
               <div>
                 <h4 className="mb-3 font-display font-bold text-sm uppercase tracking-wider text-primary/80 flex items-center gap-2">
                   <Award className="h-4 w-4" />
-                  TOAS Certified
+                  {t.footer.toasCertified}
                 </h4>
                 <button
                   onClick={() => setShowCert(true)}
