@@ -87,7 +87,8 @@
     "priceLowHigh": "Price: Low → High",
     "priceHighLow": "Price: High → Low",
     "name": "Name",
-    "cruisesFound": "cruise(s) found"
+    "cruisesFound": "cruise(s) found",
+    "allSubCat": "All"
   },
   "cruiseDetail": {
     "backToCruises": "Back to Cruises",
@@ -122,7 +123,16 @@
     "cancellationPolicy": "Cancellation Policy",
     "whenCancelled": "When Cancelled",
     "individualBooking": "Individual",
-    "groupBooking": "Group"
+    "groupBooking": "Group",
+    "adult": "Adult",
+    "child": "Child",
+    "cancel4Weeks": "4 Weeks Before Tour Day",
+    "cancel3Weeks": "3 Weeks Before Tour Day",
+    "cancel2Weeks": "2 Weeks Before Tour Day",
+    "cancel1Week": "1 Week Before Tour Day",
+    "cancel3Days": "3 Days Before Tour Day",
+    "cancel48Hours": "48 Hours Before Tour Day",
+    "cancelLess24": "Less than 24 Hours"
   },
   "packages": {
     "title": "Tour",
@@ -133,12 +143,22 @@
     "requestPackage": "Request Package",
     "viewCruises": "View Cruises",
     "book": "Book",
-    "perPerson": "per person"
+    "perPerson": "per person",
+    "offerBadge": "Offer",
+    "weeklyOffer": "Weekly Offer Packages",
+    "runningOffers": "Running",
+    "runningOffersHighlight": "Offers",
+    "limitedTimeOffer": "Book our packages at special discounts for a limited time",
+    "allPackages": "All",
+    "allPackagesHighlight": "Packages",
+    "viewDetails": "Details"
   },
   "gallery": {
     "title": "Photo",
     "titleHighlight": "Gallery",
-    "subtitle": "Moments captured from our Sundarban adventures"
+    "subtitle": "Moments captured from our Sundarban adventures",
+    "allCruises": "All Cruises",
+    "photos": "photos"
   },
   "about": {
     "since": "Since 2010",
@@ -181,7 +201,8 @@
     "yourEmail": "your@email.com",
     "messageLabel": "Message",
     "messagePlaceholder": "Tell us about your dream Sundarban trip...",
-    "sendViaWhatsApp": "Send via WhatsApp"
+    "sendViaWhatsApp": "Send via WhatsApp",
+    "messageSent": "Your message has been sent!"
   },
   "booking": {
     "bookCruise": "Book:",
@@ -198,7 +219,20 @@
     "selectSeatType": "Select seat type",
     "ac": "AC",
     "nonAc": "Non-AC",
-    "submitBook": "Submit & Book via WhatsApp"
+    "submitBook": "Submit & Book via WhatsApp",
+    "selectTour": "Select Tour",
+    "chooseTour": "Choose tour",
+    "category": "Category",
+    "chooseCategory": "Choose category",
+    "all": "All",
+    "selectCruise": "Select Cruise",
+    "chooseCruise": "Choose cruise",
+    "travelDateLabel": "Travel Date",
+    "pickDateShort": "Pick date",
+    "guests": "Guests",
+    "cruisesFoundCount": "cruises found",
+    "bookNowBtn": "Book Now",
+    "whatsappInquiry": "I want to book a cruise"
   },
   "footer": {
     "tagline": "Your trusted cruise tour partner in Bangladesh. Explore rivers, coasts, and the majestic Sundarbans with us.",
@@ -214,7 +248,9 @@
     "everyday": "Everyday",
     "alwaysOpen": "24/7 Open",
     "allRights": "All rights reserved.",
-    "designBy": "Design & Developed by"
+    "designBy": "Design & Developed by",
+    "toasCertified": "TOAS Certified",
+    "toasMember": "Member of Tour Operator Association of Sundarban"
   },
   "common": {
     "perPerson": "per person"
@@ -225,5 +261,43 @@
     "titleHighlight": "Offers",
     "subtitle": "Don't miss our latest cruise deals and special packages",
     "offerBadge": "Offer"
+  },
+  "blog": {
+    "label": "Blog",
+    "title": "Travel Stories & ",
+    "titleHighlight": "Guides",
+    "subtitle": "Read our travel tips, guides and stories about Sundarban & Tanguar Haor",
+    "all": "All",
+    "sundarban": "Sundarban",
+    "tanguarHaor": "Tanguar Haor",
+    "noPostsFound": "No blog posts found",
+    "postNotFound": "Post Not Found",
+    "backToBlog": "Back to Blog",
+    "allBlogs": "All Blogs",
+    "wantToGo": "Want to go on this trip?",
+    "contactAndBook": "Contact us and book your trip today",
+    "exploreCruises": "Explore Cruises",
+    "whatsappUs": "WhatsApp Us",
+    "relatedPosts": "Related Posts",
+    "readLatest": "Read our latest travel tips and guides",
+    "viewAll": "View All Posts"
+  },
+  "review": {
+    "customerReviews": "Customer Reviews",
+    "reviews": "reviews",
+    "noReviews": "No reviews yet. Be the first to review!",
+    "writeReview": "Write a Review",
+    "yourName": "Your name",
+    "yourEmail": "Your email (optional)",
+    "yourReview": "Write your review...",
+    "submit": "Submit Review",
+    "submitting": "Submitting...",
+    "thankYou": "Thank you for your review! It will be displayed after approval.",
+    "nameRequired": "Name and comment are required",
+    "inputTooLong": "Input too long",
+    "verified": "Verified"
+  },
+  "whatsapp": {
+    "tooltip": "Contact us on WhatsApp"
   }
 }
