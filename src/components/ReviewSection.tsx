@@ -85,7 +85,7 @@ export default function ReviewSection({ targetType, targetId, targetName }: Revi
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <h3 className="font-display text-xl font-bold text-foreground flex items-center gap-2">
-            <Star className="h-5 w-5 text-amber-400 fill-amber-400" /> Customer Reviews
+            <Star className="h-5 w-5 text-amber-400 fill-amber-400" /> {t.review.customerReviews}
           </h3>
           {reviews.length > 0 && (
             <div className="flex items-center gap-2 mt-1">
