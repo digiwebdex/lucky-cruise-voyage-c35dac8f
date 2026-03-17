@@ -76,7 +76,7 @@ export default function ReviewSection({ targetType, targetId, targetName }: Revi
     setForm({ name: "", email: "", rating: 5, comment: "" });
     setShowForm(false);
     setSubmitting(false);
-    toast.success("Thank you! Your review is pending approval.");
+    toast.success(t.review.thankYou);
   };
 
   return (
