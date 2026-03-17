@@ -700,7 +700,7 @@ export default function Index() {
                    {t.blog.title}<span className="text-primary">{t.blog.titleHighlight}</span>
                 </h2>
                 <p className="mt-2 text-muted-foreground text-sm max-w-md mx-auto">
-                  {language === "bn" ? "আমাদের সর্বশেষ ভ্রমণ টিপস এবং গাইড পড়ুন" : "Read our latest travel tips and guides"}
+                  {t.blog.readLatest}
                 </p>
               </motion.div>
 
