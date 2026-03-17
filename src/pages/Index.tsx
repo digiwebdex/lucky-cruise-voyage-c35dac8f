@@ -487,7 +487,7 @@ export default function Index() {
                         )}
                         {cruise.packages?.some(p => p.isOffer) && (
                           <span className="inline-flex items-center gap-1 rounded-full bg-destructive px-2.5 py-0.5 text-xs font-bold text-destructive-foreground">
-                            🔥 অফার
+                            🔥 {t.packages.offerBadge}
                           </span>
                         )}
                       </div>
