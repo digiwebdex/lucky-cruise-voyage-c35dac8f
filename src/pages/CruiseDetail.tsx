@@ -289,13 +289,13 @@ export default function CruiseDetail() {
                         </thead>
                         <tbody className="divide-y divide-border/50">
                           {[
-                            { period: "4 Weeks Before Tour Day", individual: "35%", group: "—" },
-                            { period: "3 Weeks Before Tour Day", individual: "50%", group: "50%" },
-                            { period: "2 Weeks Before Tour Day", individual: "70%", group: "80%" },
-                            { period: "1 Week Before Tour Day", individual: "80%", group: "90%" },
-                            { period: "3 Days Before Tour Day", individual: "90%", group: "100%" },
-                            { period: "48 Hours Before Tour Day", individual: "100%", group: "100%" },
-                            { period: "Less than 24 Hours", individual: "100%", group: "100%" },
+                            { period: t.cruiseDetail.cancel4Weeks, individual: "35%", group: "—" },
+                            { period: t.cruiseDetail.cancel3Weeks, individual: "50%", group: "50%" },
+                            { period: t.cruiseDetail.cancel2Weeks, individual: "70%", group: "80%" },
+                            { period: t.cruiseDetail.cancel1Week, individual: "80%", group: "90%" },
+                            { period: t.cruiseDetail.cancel3Days, individual: "90%", group: "100%" },
+                            { period: t.cruiseDetail.cancel48Hours, individual: "100%", group: "100%" },
+                            { period: t.cruiseDetail.cancelLess24, individual: "100%", group: "100%" },
                           ].map((row, i) => (
                             <tr key={i} className="hover:bg-muted/30 transition-colors">
                               <td className="py-2.5 px-3 text-muted-foreground text-xs sm:text-sm">{row.period}</td>
