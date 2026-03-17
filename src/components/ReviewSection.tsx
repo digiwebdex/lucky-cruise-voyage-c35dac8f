@@ -125,12 +125,12 @@ export default function ReviewSection({ targetType, targetId, targetName }: Revi
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-foreground">Email (optional)</label>
+                  <label className="text-sm font-medium text-foreground">{t.review.yourEmail}</label>
                   <Input
                     type="email"
                     value={form.email}
                     onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                    placeholder="your@email.com"
+                    placeholder={t.review.yourEmail}
                     maxLength={255}
                     className="bg-background"
                   />
