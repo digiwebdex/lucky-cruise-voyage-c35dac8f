@@ -41,6 +41,7 @@ function StarRating({ rating, onChange, size = "md" }: { rating: number; onChang
 }
 
 export default function ReviewSection({ targetType, targetId, targetName }: ReviewSectionProps) {
+  const { t, lang } = useLanguage();
   const [reviews, setReviews] = useState(() => getApprovedReviews(targetType, targetId));
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", rating: 5, comment: "" });
