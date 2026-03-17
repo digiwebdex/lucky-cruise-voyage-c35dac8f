@@ -518,7 +518,7 @@ export default function Index() {
                         </div>
                       </div>
                       <a
-                        href={`https://wa.me/8801711871072?text=${encodeURIComponent(`আমি ${cruise.name} ক্রুজ সম্পর্কে জানতে চাই`)}`}
+                        href={`https://wa.me/8801711871072?text=${encodeURIComponent(`${t.booking.whatsappInquiry} - ${cruise.name}`)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
