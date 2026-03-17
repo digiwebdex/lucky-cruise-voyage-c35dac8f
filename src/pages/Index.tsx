@@ -336,7 +336,7 @@ export default function Index() {
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button variant="outline" className={cn("w-full h-10 justify-start text-left font-normal rounded-lg", !travelDate && "text-muted-foreground")}>
-                        {travelDate ? format(travelDate, "dd MMM yyyy") : (language === "bn" ? "তারিখ বাছুন" : "Pick date")}
+                        {travelDate ? format(travelDate, "dd MMM yyyy") : t.booking.pickDateShort}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0" align="start">
