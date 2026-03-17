@@ -92,7 +92,7 @@ function PromoPackagesSection({ promoAds, cruises }: { promoAds: PromoAd[]; crui
                       to={`/cruises/${ad.linkedCruiseId}`}
                       className="text-xs font-bold text-primary hover:underline flex items-center gap-1"
                     >
-                      বিস্তারিত <ArrowRight className="h-3 w-3" />
+                      {t.packages.viewDetails} <ArrowRight className="h-3 w-3" />
                     </Link>
                   </div>
                 </div>
