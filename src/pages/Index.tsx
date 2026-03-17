@@ -126,7 +126,7 @@ function PromoPackagesSection({ promoAds, cruises }: { promoAds: PromoAd[]; crui
                 className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold px-6 py-3 rounded-xl hover:bg-primary/90 transition-colors"
                 onClick={() => setLightboxAd(null)}
               >
-                বিস্তারিত দেখুন <ArrowRight className="h-4 w-4" />
+                {t.packages.viewDetails} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
