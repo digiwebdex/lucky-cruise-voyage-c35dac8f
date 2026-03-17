@@ -25,14 +25,14 @@ export default function BlogList() {
     <div>
       <PageHeroBanner page="blog">
             <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary mb-3">
-              <BookOpen className="h-3.5 w-3.5" /> {lang === "bn" ? "ব্লগ" : "Blog"}
+               <BookOpen className="h-3.5 w-3.5" /> {t.blog.label}
             </span>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-secondary-foreground">
-              {lang === "bn" ? "ভ্রমণ গল্প ও " : "Travel Stories & "}
-              <span className="text-primary">{lang === "bn" ? "গাইড" : "Guides"}</span>
+              {t.blog.title}
+              <span className="text-primary">{t.blog.titleHighlight}</span>
             </h1>
             <p className="mt-3 text-secondary-foreground/60 text-sm max-w-md mx-auto">
-              {lang === "bn" ? "সুন্দরবন ও টাঙ্গুয়ার হাওর সম্পর্কে আমাদের ভ্রমণ টিপস, গাইড ও গল্প পড়ুন" : "Read our travel tips, guides and stories about Sundarban & Tanguar Haor"}
+              {t.blog.subtitle}
             </p>
       </PageHeroBanner>
 
