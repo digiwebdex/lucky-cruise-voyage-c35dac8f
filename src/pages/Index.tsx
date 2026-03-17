@@ -277,11 +277,11 @@ export default function Index() {
                   </label>
                   <Select value={selectedTour} onValueChange={v => { setSelectedTour(v); setSelectedSubCat(""); setSelectedCruise(""); }}>
                     <SelectTrigger className="h-10 rounded-lg">
-                      <SelectValue placeholder={language === "bn" ? "ট্যুর বাছুন" : "Choose tour"} />
+                      <SelectValue placeholder={t.booking.chooseTour} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="sundarban">{language === "bn" ? "সুন্দরবন ভ্রমণ" : "Sundarban Tour"}</SelectItem>
-                      <SelectItem value="tanguar-haor">{language === "bn" ? "টাঙ্গুয়ার হাওর ভ্রমণ" : "Tanguar Haor Tour"}</SelectItem>
+                      <SelectItem value="sundarban">{t.nav.sundarbanTour}</SelectItem>
+                      <SelectItem value="tanguar-haor">{t.nav.tanguarHaorTour}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
