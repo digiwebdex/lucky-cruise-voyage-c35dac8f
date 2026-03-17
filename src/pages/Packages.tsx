@@ -54,7 +54,7 @@ function PackageCard({ pkg, i }: { pkg: any; i: number }) {
             {pkg.isOffer && (
               <div className="absolute top-0 right-0">
                 <Badge className="rounded-none rounded-bl-xl gradient-primary text-primary-foreground font-bold border-0 px-3 py-1.5 gap-1">
-                  <Flame className="h-3.5 w-3.5" /> অফার
+                   <Flame className="h-3.5 w-3.5" /> {t.packages.offerBadge}
                 </Badge>
               </div>
             )}
