@@ -48,7 +48,7 @@ export default function Gallery() {
               className="gap-1.5"
             >
               <Ship className="h-4 w-4" />
-              সব ক্রুজ
+              {t.gallery.allCruises}
             </Button>
             {cruises.map(c => (
               <Button
