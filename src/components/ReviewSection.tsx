@@ -177,7 +177,7 @@ export default function ReviewSection({ targetType, targetId, targetName }: Revi
                       <StarRating rating={review.rating} size="sm" />
                     </div>
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      {new Date(review.createdAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+                      {new Date(review.createdAt).toLocaleDateString(lang === "bn" ? "bn-BD" : "en-US", { year: "numeric", month: "long", day: "numeric" })}
                     </p>
                     <p className="mt-2 text-sm text-foreground/80 leading-relaxed">{review.comment}</p>
                   </div>
