@@ -8,7 +8,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { searchCruises } from "@/services/cmsStore";
 import { useLanguage } from "@/contexts/LanguageContext";
-const useLang = () => { const ctx = useLanguage(); return { ...ctx, lang: ctx.lang }; };
 import { sundarbanSubCategories } from "@/services/mockData";
 import PageHeroBanner from "@/components/PageHeroBanner";
 
