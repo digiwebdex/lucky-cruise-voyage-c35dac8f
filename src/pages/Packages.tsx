@@ -106,7 +106,7 @@ function PackageCard({ pkg, i }: { pkg: any; i: number }) {
           <div className="mt-6 border-t border-border/50 pt-5">
             <Link to={`/cruises/${pkg.cruiseId}`}>
               <Button className="w-full gradient-primary text-primary-foreground font-bold rounded-xl gap-1">
-                বিস্তারিত <ArrowRight className="h-4 w-4" />
+                {t.packages.viewDetails} <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
           </div>
