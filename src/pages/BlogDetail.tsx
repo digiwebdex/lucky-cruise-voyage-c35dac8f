@@ -45,7 +45,7 @@ export default function BlogDetail() {
         <div className="container">
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
             <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-primary font-semibold mb-4 hover:underline">
-              <ArrowLeft className="h-4 w-4" /> {lang === "bn" ? "সব ব্লগ" : "All Blogs"}
+              <ArrowLeft className="h-4 w-4" /> {t.blog.allBlogs}
             </Link>
             <div className="flex items-center gap-2 mb-3">
               <Badge className={post.category === "tanguar-haor" ? "bg-emerald text-emerald-foreground" : "bg-primary text-primary-foreground"}>
