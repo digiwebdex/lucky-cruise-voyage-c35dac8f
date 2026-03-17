@@ -12,7 +12,7 @@ const fadeUp = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } };
 
 export default function BlogDetail() {
   const { slug } = useParams();
-  const { lang } = useLanguage();
+  const { lang, t } = useLanguage();
   const blogs = getBlogs().filter(b => b.isPublished);
   const post = blogs.find(b => b.slug === slug);
 
