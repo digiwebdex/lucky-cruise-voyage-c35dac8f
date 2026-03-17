@@ -20,10 +20,10 @@ export default function BlogDetail() {
     return (
       <div className="container py-20 text-center">
         <h1 className="font-display text-2xl font-bold text-foreground mb-4">
-          {lang === "bn" ? "পোস্ট পাওয়া যায়নি" : "Post Not Found"}
+          {t.blog.postNotFound}
         </h1>
         <Link to="/blog">
-          <Button variant="outline" className="gap-2"><ArrowLeft className="h-4 w-4" /> {lang === "bn" ? "ব্লগে ফিরুন" : "Back to Blog"}</Button>
+          <Button variant="outline" className="gap-2"><ArrowLeft className="h-4 w-4" /> {t.blog.backToBlog}</Button>
         </Link>
       </div>
     );
